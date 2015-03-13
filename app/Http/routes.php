@@ -27,3 +27,4 @@ Route::get('/', [
 ]);
 
 Route::controller('index', 'IndexController');
+Route::controller('users', 'UsersController');
