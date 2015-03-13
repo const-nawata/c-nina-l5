@@ -15,10 +15,10 @@
 
 // Route::get('home', 'HomeController@index');
 
-Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
-]);
+// Route::controllers([
+// 	'auth' => 'Auth\AuthController',
+// 	'password' => 'Auth\PasswordController',
+// ]);
 
 
 Route::get('/', [
@@ -28,3 +28,4 @@ Route::get('/', [
 
 Route::controller('index', 'IndexController');
 Route::controller('users', 'UsersController');
+Route::controller('dashboard', 'DashboardController');

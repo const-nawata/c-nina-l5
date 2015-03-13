@@ -25,7 +25,7 @@ class LoginFormRequest extends FormRequest{
         // (default is to just redirect to initial page with errors)
         //
         // Can return a response, a view, a redirect, or whatever else
-        return Response::make('Permission denied foo!', 403);
+        return Response::make('Permission denied!', 403);
     }
 
     // OPTIONAL OVERRIDE

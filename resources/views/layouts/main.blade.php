@@ -3,7 +3,7 @@
  * Main layout
  */
 ?>
-@include('layouts/blocks/header')
+@include('blocks/header')
 
 <div class="header-page-line">
 	<div class="container">
@@ -19,26 +19,7 @@
 	<div class="container">
 		<div class="row">
 
-			<div class="col-sm-6">
-				<div class="btn-group btn-group-justified" aria-label="Header-buttons" role="group">
-					<div class="btn-group" role="group">
-						<a type="button" class="btn btn-default" href="/">{{ @trans('prompts.home') }}</a>
-					</div>
-					<div class="btn-group" role="group">
-						<a type="button" class="btn btn-default" href="/index/about">{{ @trans('prompts.about_us') }}</a>
-					</div>
-					<div class="btn-group" role="group">
-						<a type="button" class="btn btn-default" href="/index/contacts">{{ @trans('prompts.contacts') }}</a>
-					</div>
-
-@if( Auth::check() && Auth::user()->role == 'admin' )
-					<div class="btn-group" role="group">
-						<a type="button" class="btn btn-default" href="/index/dashboard">{{ @trans('prompts.dashboard') }}</a>
-					</div>
-@endif
-
-				</div>
-			</div>
+			@yield('buttons')
 
 			<div class="col-sm-6">
 				<ul class="nav navbar-nav navbar-right">
@@ -65,4 +46,4 @@
 @yield('main_container')
 </div>
 
-@include('layouts/blocks/footer')
+@include('blocks/footer')

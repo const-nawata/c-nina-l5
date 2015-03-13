@@ -5,6 +5,10 @@
 ?>
 @extends('layouts.main')
 
+@section('buttons')
+	@yield('buttons')
+@stop
+
 @section('main_container')
 <div class="row">
 	<div id="a_sidebar" class="col-md-3">

@@ -4,6 +4,10 @@
 {{ @trans('prompts.contacts') }}
 @stop
 
+@section('buttons')
+	@include('blocks/buttons')
+@stop
+
 @section('sidebar')
 <div>left side bar</div>
 @stop
