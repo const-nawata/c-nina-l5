@@ -10,11 +10,11 @@
 		</div>
 
 		<div class="btn-group" role="group">
-			<a type="button" class="btn btn-default" href="/dashboard/categories">{{ @trans('prompts.goods') }}</a>
+			<a type="button" class="btn btn-default" href="/dashboard/goods">{{ @trans('prompts.goods') }}</a>
 		</div>
 
 		<div class="btn-group" role="group">
-			<a type="button" class="btn btn-default" href="/dashboard/categories">{{ @trans('prompts.users') }}</a>
+			<a type="button" class="btn btn-default" href="/dashboard/users">{{ @trans('prompts.users') }}</a>
 		</div>
 
 	</div>

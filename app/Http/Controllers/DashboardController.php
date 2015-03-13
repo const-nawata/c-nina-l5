@@ -1,13 +1,19 @@
 <?php namespace App\Http\Controllers;
 
-// use App\Http\Controllers\Controller;
-
-
 class DashboardController extends MainController{
-// class IndexController extends Controller{
 
     public function getCategories(){
     	return view( 'dashboard/categories' );
+    }
+//______________________________________________________________________________
+
+    public function getGoods(){
+    	return view( 'dashboard/goods' );
+    }
+//______________________________________________________________________________
+
+    public function getUsers(){
+    	return view( 'dashboard/users' );
     }
 //______________________________________________________________________________
 
