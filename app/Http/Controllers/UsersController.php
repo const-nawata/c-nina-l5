@@ -20,20 +20,18 @@ class UsersController extends MainController {
 	    ];
 
 	    if( Auth::attempt($creds, $request->has('remember'))){
-	    	Log::info( trans( 'messages.login_success', ['username'=>$creds['username']] ) );	//Doesn't work
+	    	Log::info( trans( 'messages.login_success', ['username'=>$creds['username']] ) );
 	    	return redirect()->intended();
 	    }
 
-	    Log::alert( trans( 'messages.login_wrong', ['username'=>$creds['username']] ) );	//Doesn't work
+	    Log::alert( trans( 'messages.login_wrong', ['username'=>$creds['username']] ) );
 
 	    return redirect()->back()->withErrors( [trans('messages.login_wrong')] );
-
 	}
 //______________________________________________________________________________
 
 	public function getLogout() {
 		Auth::logout();
-
 		return redirect()->to('/');
 	}
 //______________________________________________________________________________

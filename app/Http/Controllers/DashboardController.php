@@ -1,9 +1,14 @@
 <?php namespace App\Http\Controllers;
 
+use App\Category;
+
 class DashboardController extends MainController{
 
     public function getCategories(){
-    	return view( 'dashboard/categories' );
+    	$tree	= Category::getTree();
+
+
+    	return view( 'dashboard/categories', ['tree' => $tree ] );
     }
 //______________________________________________________________________________
 
