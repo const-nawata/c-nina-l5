@@ -6,3 +6,4 @@
 .project
 .settings/
 composer.lock
+config/database.php
