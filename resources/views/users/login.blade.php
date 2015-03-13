@@ -4,15 +4,19 @@
 {{ @trans('prompts.login') }}
 @stop
 
+@section('buttons')
+	@include('blocks/buttons')
+@stop
+
 @section('content')
 
-	@if( count($errors->all()) > 0 )
-	<div class="alert alert-danger">
-	    @foreach ($errors->all() as $error)
-	        <p class="error">{{ $error }}</p>
-	    @endforeach
-	</div>
-	@endif
+@if( count($errors->all()) > 0 )
+<div class="alert alert-danger">
+    @foreach ($errors->all() as $error)
+        <p class="error">{{ $error }}</p>
+    @endforeach
+</div>
+@endif
 
 
 <form class="form-signin" role="form" method="post">
