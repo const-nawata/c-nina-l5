@@ -4,19 +4,16 @@
 {{ @trans('prompts.login') }}
 @stop
 
-@section('headExtra')
-@stop
-
 @section('content')
 
+	@if( count($errors->all()) > 0 )
+	<div class="alert alert-danger">
+	    @foreach ($errors->all() as $error)
+	        <p class="error">{{ $error }}</p>
+	    @endforeach
+	</div>
+	@endif
 
-@if(count($errors->all()))
-<div class="alert alert-danger">
-    @foreach ($errors->all() as $error)
-        <p class="error">{{ $error }}</p>
-    @endforeach
-</div>
-@endif
 
 <form class="form-signin" role="form" method="post">
 	<h2 class="form-signin-heading">{{ @trans('prompts.your_login_data') }}</h2>

@@ -1,8 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-// use App\Http\Controllers\Controller;
 use App;
-use Session;
 
 class MainController extends Controller {
 
@@ -21,11 +19,11 @@ class MainController extends Controller {
 			$lang	= $_GET['lang'];
 
 		else{
-			$sess_lang	= Session::get('lang');
-			$lang		= $sess_lang ? $sess_lang :  App::getLocale();
+			$sess_lang	= session('lang');
+			$lang		= $sess_lang ? $sess_lang : App::getLocale();
 		}
 
-		Session::put('lang', $lang);
+		session(['lang'=>$lang]);
 		App::setLocale( $lang );
 	}
 //______________________________________________________________________________

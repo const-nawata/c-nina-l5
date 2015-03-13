@@ -3,6 +3,8 @@
 <head>
 	<title>@yield('title') — {{ @trans('prompts.brand') }}</title>
 
+	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+
 	<meta content="text/html; charset=utf-8" http-equiv="content-type">
 	<meta name="keywords" content="магазин,контейтер,764,Нина,калиновский,базар,черновцы,чернівці">
 	<meta name="description" content="Контейнер 764. Продажа тапочек оптом и в розницу.">
@@ -24,8 +26,8 @@
 	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	<![endif]-->
 
-	<script src="/js/c-nina.js"></script>
 	<link rel="stylesheet" href="/css/c-nina-main.css">
+	<script src="/js/c-nina.js"></script>
 
 @yield('headExtra')
 </head>

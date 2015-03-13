@@ -7,8 +7,8 @@ class LoginFormRequest extends FormRequest{
 
     public function rules(){
         return [
-           'username' => 'required|alpha_num',
-            'password' => 'required'
+           'username' => 'required|alpha_num'
+//             ,'password' => 'required'
         ];
     }
 

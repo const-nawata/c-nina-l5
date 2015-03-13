@@ -1,14 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginFormRequest;
-// use Illuminate\Routing\Controller;
-use Response;
-use View;
-
-// use Illuminate\Http\Request;
-
-// use Request;
-// use Auth;
+use Log, Auth;
 
 class UsersController extends MainController {
 
@@ -19,58 +12,29 @@ class UsersController extends MainController {
 
 	public function postLogin( LoginFormRequest $request ){
 
+		$username	=
+	    $creds = [
+			'username' => $request->input('username'),
+	        'password' => $request->input('password'),
+	        'isActive'  => 1
+	    ];
 
+	    if( Auth::attempt($creds, $request->has('remember'))){
+// 	    	Log::info( trans( 'messages.login_success', ['username'=>$creds['username']] ) );	//Doesn't work
+	    	return redirect()->intended();
+	    }
 
+// 	    Log::alert( trans( 'messages.login_wrong', ['username'=>$creds['username']] ) );	//Doesn't work
 
-		return Response::make('Login processed!');
-
-
-
-
-
-
-
-
-// 	    $creds = [
-// 	        'password' => Input::get('password'),
-// 	        'isActive'  => 1, // Only activated users can authorise
-// 	    ];
-// echo '<pre>'.print_r( $creds ,1).'</pre>';
-// 	    $username 		= Input::get('username');
-
-// 	    $creds['username']	= $username;
-
-
-// 	    $creds = [
-// 	    	'username' => 'admin',
-// 	        'password' => 'admin',
-// // 	        'isActive'  => 1, // Only activated users can authorise
-// 	    ];
-
-// echo "KKKKKKKKKKKKKKKKKKKKKKKK JJJ";exit;
-
-// 	    $result	= Auth::attempt($creds, Input::has('remember'));
-
-// 	    $result	= Auth::attempt($creds);
-
-	    // Try to authorise user
-// 	    if (Auth::attempt($creds, Input::has('remember'))) {
-// 	        Log::info( trans( 'messages.login_success', ['username'=>$username] ) );
-// 	        return Redirect::intended();
-// 	    }
-
-// 	    Log::info( trans( 'messages.login_failed', ['username'=>$username] ) );
-
-// 	    return Redirect::back()->withAlert( trans('messages.login_wrong') );
-
-// 		return view('users/login');
+	    return redirect()->back()->withErrors( [trans('messages.login_wrong')] );
 
 	}
 //______________________________________________________________________________
 
 	public function getLogout() {
-	    Auth::logout();
-	    return Redirect::to('/');
+		Auth::logout();
+
+		return redirect()->to('/');
 	}
 //______________________________________________________________________________
 

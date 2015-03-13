@@ -1,0 +1,29 @@
+@CHARSET "UTF-8";
+
+body {
+    padding-bottom: 20px;
+}
+
+.upper-page-line{
+	height: 45px;
+	background-color: #454073;
+	
+	
+/*	color: #3c7568;4*/
+}
+
+.header-page-line{
+	background-color: #c4bfe6;
+}
+.j-header{
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+.tabs-container{
+	margin-top: 6px;
+}
+
+.user-welcome{
+	font-weight: bold;
+}
