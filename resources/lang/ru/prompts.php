@@ -17,5 +17,7 @@ return [
 	'english'	=> 'Английский',
 	'welcome'	=> 'Добро пожаловать',
 	'dashboard'	=> 'Админка',
-	'categories'	=> 'Категории'
+	'categories'	=> 'Категории',
+	'users'	=> 'Пользователи',
+	'goods'	=> 'Товары'
 ];

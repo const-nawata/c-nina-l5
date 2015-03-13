@@ -18,5 +18,7 @@ return [
 	'english'	=> 'English',
 	'welcome'	=> 'Welcome',
 	'dashboard'	=> 'Dashboard',
-	'categories'	=> 'Categories'
+	'categories'	=> 'Categories',
+	'users'	=> 'Users',
+	'goods'	=> 'Goods'
 ];
