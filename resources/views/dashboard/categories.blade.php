@@ -8,11 +8,6 @@
 	@include('dashboard/blocks/buttons')
 @stop
 
-
-
-<pre>{{ print_r( $tree ,1) }}</pre>
-
-
 @section('sidebar')
 <div>Left side bar of Categories</div>
 @stop
