@@ -11,10 +11,10 @@
 
 @section('main_container')
 <div class="row">
-	<div id="sidebar" class="col-md-3">
+	<div id="sidebar" class="col-md-4">
 		@yield('sidebar')
 	</div>
-	<div id="content" class="col-md-9">
+	<div id="content" class="col-md-8">
 		@yield('content')
 	</div>
 </div>

@@ -133,18 +133,32 @@
 
 
         <div class="panel-group" id="accordion1">
-	        <div class="panel panel-default">
-	            <div class="panel-heading">
-	                <h4 class="panel-title">
-	                    <a data-toggle="collapse" data-parent="#accordion1" href="#collapseTwo_1">2. What is Bootstrap?</a>
-	                </h4>
-	            </div>
-	            <div id="collapseTwo_1" class="panel-collapse collapse">
-	                <div class="panel-body">
-	                    <p>Bootstrap is a powerful front-end framework for faster and easier web development. It is a collection of CSS and HTML conventions. <a href="http://www.tutorialrepublic.com/twitter-bootstrap-tutorial/" target="_blank">Learn more.</a></p>
-	                </div>
-	            </div>
-	        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion1" href="#collapseTwo_1">2. What is Bootstrap?</a>
+                </h4>
+            </div>
+            <div id="collapseTwo_1" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <p>Bootstrap is a powerful front-end framework for faster and easier web development. It is a collection of CSS and HTML conventions. <a href="http://www.tutorialrepublic.com/twitter-bootstrap-tutorial/" target="_blank">Learn more.</a></p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title" data-toggle="collapse" data-parent="#accordion1" href="#collapseTwo_2">Noe a-reference</h4>
+            </div>
+            <div id="collapseTwo_2" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <p>Bootstrap is a powerful front-end framework for faster and easier web development. It is a collection of CSS and HTML conventions. <a href="http://www.tutorialrepublic.com/twitter-bootstrap-tutorial/" target="_blank">Learn more.</a></p>
+                </div>
+            </div>
+        </div>
+
 		</div>
 
 
