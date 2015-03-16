@@ -20,5 +20,8 @@ return [
 	'dashboard'	=> 'Dashboard',
 	'categories'	=> 'Categories',
 	'users'	=> 'Users',
-	'goods'	=> 'Goods'
+	'goods'	=> 'Goods',
+	'edit'	=> 'Edit',
+	'delete'	=> 'Delete',
+	'expand'	=> 'Expand'
 ];
