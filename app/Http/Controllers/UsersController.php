@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginFormRequest;
-use Log, Auth;
+use Auth;
 
 class UsersController extends MainController {
 
@@ -20,11 +20,11 @@ class UsersController extends MainController {
 	    ];
 
 	    if( Auth::attempt($creds, $request->has('remember'))){
-	    	Log::info( trans( 'messages.login_success', ['username'=>$creds['username']] ) );
+	    	info(trans( 'messages.login_success', ['username'=>$creds['username']] ));
 	    	return redirect()->intended();
 	    }
 
-	    Log::alert( trans( 'messages.login_wrong', ['username'=>$creds['username']] ) );
+	    info(trans( 'messages.login_wrong', ['username'=>$creds['username']] ));
 
 	    return redirect()->back()->withErrors( [trans('messages.login_wrong')] );
 	}
