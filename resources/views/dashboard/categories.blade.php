@@ -1,5 +1,5 @@
 <?php
-function createCatLine( $cat, $suff, $level=-1 ){
+function createCatLine( $cat, $suff, $level=-1 ){//
 	$bullet	= ++$level ? '&#8226; ' : '';
 
 	$general_buttons	=
