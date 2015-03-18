@@ -23,5 +23,6 @@ return [
 	'goods'	=> 'Goods',
 	'edit'	=> 'Edit',
 	'delete'	=> 'Delete',
-	'expand'	=> 'Expand'
+	'expand'	=> 'Expand',
+	'wrap'	=> 'Wrap'
 ];
