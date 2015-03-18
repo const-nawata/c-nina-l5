@@ -2,7 +2,7 @@
 function createCatListItem( $cat, $parentId, $level=-1 ){
 	$bullet	= ++$level ? '&#8226; ' : '';
 
-	$general_buttons	=
+	$buttons	=
 				'<button type="button" class="btn glyphicon glyphicon-pencil tree-branch-btn" title="'.trans('prompts.edit').'"></button>'.
 				'<button type="button" class="btn glyphicon glyphicon-remove tree-branch-btn shadow-left" title="'.trans('prompts.delete').'"></button>';
 
@@ -17,7 +17,7 @@ function createCatListItem( $cat, $parentId, $level=-1 ){
 		'<div class="">'.
 			$bullet.$cat['name'].
 			'<div class="btn-group btn-group-xs categories-btn-group" role="group">'.
-				$general_buttons.
+				$buttons.
 				'<button type="button" onclick="isVisible( \''.$maw_id.'\', $(this) );" class="btn glyphicon glyphicon-eject tree-branch-btn shadow-left" '.
 					'data-toggle="collapse" data-parent="#'.$parentId.'" data-target="#'.$maw_id.'" title="'.trans('prompts.expand').'">'.
 				'</button>'.
@@ -27,22 +27,19 @@ function createCatListItem( $cat, $parentId, $level=-1 ){
 		'<div id="'.$maw_id.'" class="panel-collapse collapse">'.
 			'<div class="panel-group" id="'.$this_parent_id.'">';
 
-
-
 		foreach($cat['children'] as $child )
 			$html	.= createCatListItem( $child, $this_parent_id, $level );
 
 		$html	.=
 			'</div>'.
 		'</div>'.
-
 		'';
 	}else
 		$html	.=
 
 		$bullet.$cat['name'].
 		'<div class="btn-group btn-group-xs categories-btn-group" role="group">'.
-			$general_buttons.
+			$buttons.
 		'</div>'.
 	'';
 
@@ -51,6 +48,7 @@ function createCatListItem( $cat, $parentId, $level=-1 ){
 
 	return $html;
 }
+$main_id	= 'acc-main';
 ?>
 @extends('layouts.left')
 
@@ -63,9 +61,9 @@ function createCatListItem( $cat, $parentId, $level=-1 ){
 @stop
 
 @section('sidebar')
-	<div class="panel-group" id="acc-main">
+	<div class="panel-group" id="{{ $main_id }}">
 	@foreach( $tree as $cat )
-		{!! createCatListItem( $cat, 'acc-main' ) !!}
+		{!! createCatListItem( $cat, $main_id ) !!}
 	@endforeach
 	</div>
 @stop
