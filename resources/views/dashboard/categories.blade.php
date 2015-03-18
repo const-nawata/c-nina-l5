@@ -1,5 +1,5 @@
 <?php
-function createCatListItem( $cat, $parentId, $level=-1 ){
+function createCatListItem( $cat, $parentId, $level=-1 ){//
 	$bullet	= ++$level ? '&#8226; ' : '';
 
 	$buttons	=
