@@ -1,7 +1,7 @@
 <?php
 /**
  * creates recursive categories list
- * @param array $cat
+ * @param array $cat - category data
  * @param integer $parentId
  * @param integer $level
  * @return string - HTML content
