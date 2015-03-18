@@ -1,4 +1,11 @@
 <?php
+/**
+ * creates recursive categories list
+ * @param array $cat
+ * @param integer $parentId
+ * @param integer $level
+ * @return string - HTML content
+ */
 function createCatListItem( $cat, $parentId, $level=-1 ){
 	$bullet	= ++$level ? '&#8226; ' : '';
 
