@@ -1,11 +1,10 @@
 <?php
-function createCatListItem( $cat, $parentId, $level=-1 ){//
+function createCatListItem( $cat, $parentId, $level=-1 ){
 	$bullet	= ++$level ? '&#8226; ' : '';
 
 	$buttons	=
 				'<button type="button" class="btn glyphicon glyphicon-pencil tree-branch-btn" title="'.trans('prompts.edit').'"></button>'.
 				'<button type="button" class="btn glyphicon glyphicon-remove tree-branch-btn shadow-left" title="'.trans('prompts.delete').'"></button>';
-
 	$html	=
 	'<div class="panel" style="padding-left:'.($level*3).'px;">';
 
