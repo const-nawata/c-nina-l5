@@ -3,7 +3,7 @@
  * creates recursive categories list
  * @param array $cat - category data
  * @param integer $parentId - HTML id for parent element.
- * @param integer $level
+ * @param integer $level- level of HTML element
  * @return string - HTML content
  */
 function createCatListItem( $cat, $parentId, $level=-1 ){
