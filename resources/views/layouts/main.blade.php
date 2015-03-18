@@ -47,11 +47,3 @@
 </div>
 
 @include('blocks/footer')
-
-<script>
-var prompts	= {
-	"expand":"<?php echo trans('prompts.expand'); ?>",
-	"wrap":"<?php echo trans('prompts.wrap'); ?>"
-};
-
-</script>
