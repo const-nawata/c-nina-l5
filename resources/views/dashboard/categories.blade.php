@@ -7,13 +7,11 @@
  * @return string - HTML content
  */
 function createCatListItem( $cat, $parentId, $level=-1 ){
-	$bullet	= ++$level ? '&#8226; ' : '';
-
 	$buttons	=
-				'<button type="button" class="btn glyphicon glyphicon-pencil tree-branch-btn" title="'.trans('prompts.edit').'"></button>'.
-				'<button type="button" class="btn glyphicon glyphicon-remove tree-branch-btn shadow-left" title="'.trans('prompts.delete').'"></button>';
+				'<button type="button" class="btn glyphicon glyphicon-remove tree-branch-btn" title="'.trans('prompts.delete').'"></button>'.
+				'';
 	$html	=
-	'<div class="panel" style="padding-left:'.($level*3).'px;">';
+	'<div class="panel cats-list">';
 
 	if( count($cat['children']) > 0 ){
 		$this_parent_id	= 'acc-'.$cat['id'];
@@ -21,17 +19,17 @@ function createCatListItem( $cat, $parentId, $level=-1 ){
 
 		$html	.=
 		'<div class="">'.
-			$bullet.$cat['name'].
+			'<div class="btn-group btn-group-xs categories-btn-group" role="group">'.
+				'<button type="button" class="btn glyphicon glyphicon-expand tree-expand-btn" data-toggle="collapse" data-parent="#'.$parentId.'" data-target="#'.$maw_id.'"></button>'.
+			'</div>'.
+			$cat['name'].
 			'<div class="btn-group btn-group-xs categories-btn-group" role="group">'.
 				$buttons.
-				'<button type="button" onclick="isVisible( \''.$maw_id.'\', $(this) );" class="btn glyphicon glyphicon-eject tree-branch-btn shadow-left" '.
-					'data-toggle="collapse" data-parent="#'.$parentId.'" data-target="#'.$maw_id.'" title="'.trans('prompts.expand').'">'.
-				'</button>'.
 			'</div>'.
 		'</div>'.
 
 		'<div id="'.$maw_id.'" class="panel-collapse collapse">'.
-			'<div class="panel-group" id="'.$this_parent_id.'">';
+			'<div class="panel-group cats-list" id="'.$this_parent_id.'">';
 
 		foreach($cat['children'] as $child )
 			$html	.= createCatListItem( $child, $this_parent_id, $level );
@@ -43,7 +41,8 @@ function createCatListItem( $cat, $parentId, $level=-1 ){
 	}else
 		$html	.=
 
-		$bullet.$cat['name'].
+// 		$bullet.$cat['name'].
+		$cat['name'].
 		'<div class="btn-group btn-group-xs categories-btn-group" role="group">'.
 			$buttons.
 		'</div>'.

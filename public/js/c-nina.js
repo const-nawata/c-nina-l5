@@ -9,9 +9,9 @@ function changeLang(lang){
 }
 //______________________________________________________________________________
 
-function isVisible( id, owner ){
-	($('#'+id).is(':visible'))
-		? owner.prop( 'title', prompts.expand )
-		: owner.prop( 'title', prompts.wrap );
-}
+//function isVisible( id, owner ){
+//	($('#'+id).is(':visible'))
+//		? owner.prop( 'title', prompts.expand )
+//		: owner.prop( 'title', prompts.wrap );
+//}
 //______________________________________________________________________________
