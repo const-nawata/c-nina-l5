@@ -22,10 +22,9 @@ class DashboardController extends MainController{
     }
 //______________________________________________________________________________
 
-    public function getCategory($id){
-
-
-    	return 'Category Content for ajax / '.$id;
+    public function getCategory( $id ){
+    	$cat = Category::find( $id );
+    	return view( 'dashboard/cat_content', ['cat'=>$cat] );
     }
 //______________________________________________________________________________
 
