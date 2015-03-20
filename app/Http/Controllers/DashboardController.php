@@ -22,4 +22,11 @@ class DashboardController extends MainController{
     }
 //______________________________________________________________________________
 
+    public function getCategory($id){
+
+
+    	return 'Category Content for ajax / '.$id;
+    }
+//______________________________________________________________________________
+
 }//	Class end

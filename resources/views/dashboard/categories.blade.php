@@ -24,7 +24,7 @@ function createCatListItem( $cat, $parentId, $level=-1 ){
 			'<div class="btn-group btn-group-xs categories-btn-group" role="group">'.
 				'<button type="button" class="btn glyphicon glyphicon-play tree-expand-btn" data-toggle="collapse" data-parent="#'.$parentId.'" data-target="#'.$maw_id.'"></button>'.
 			'</div>'.
-			'<span class="cat-name">'.$cat['name'].'</span>'.
+			'<span id="cat-'.$cat['id'].'" class="cat-name">'.$cat['name'].'</span>'.
 			'<div class="btn-group btn-group-xs categories-btn-group" role="group">'.$buttons.'</div>'.
 		'</div>'.
 
@@ -41,7 +41,7 @@ function createCatListItem( $cat, $parentId, $level=-1 ){
 	}else
 		$html	.=
 
-		'<span class="cat-name cat-name-single">'.$cat['name'].'</span>'.
+		'<span id="cat-'.$cat['id'].'" class="cat-name cat-name-single">'.$cat['name'].'</span>'.
 		'<div class="btn-group btn-group-xs categories-btn-group" role="group">'.$buttons.'</div>'.
 	'';
 
@@ -71,13 +71,30 @@ $main_id	= 'acc-main';
 @stop
 
 @section('content')
-<div>Categories content</div>
+<div id="cat_content">Categories content</div>
 @stop
 
 @section('js_extra')
 <script type="text/javascript">
+
 $(document).ready(function(){
-// 	alert(555);
+	$('.cat-name').click(function(){
+		var cat	= $(this).attr('id').split("-");
+
+		$.ajax({
+			url: "category/"+cat[1],
+
+			success: function(result){
+            	$("#cat_content").html(result);
+        	},
+
+        	error: function(){
+				alert( "Ajax Error" );
+			}
+        });
+
+	});
 });
+
 </script>
 @stop
