@@ -73,3 +73,11 @@ $main_id	= 'acc-main';
 @section('content')
 <div>Categories content</div>
 @stop
+
+@section('js_extra')
+<script type="text/javascript">
+$(document).ready(function(){
+// 	alert(555);
+});
+</script>
+@stop

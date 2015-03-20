@@ -1,6 +1,6 @@
 <?php
 /**
- * Main layout
+ * Main Footer layout
  */
 ?>
 
@@ -12,4 +12,5 @@
 
 </body>
 
+@yield('js_extra')
 </html>
