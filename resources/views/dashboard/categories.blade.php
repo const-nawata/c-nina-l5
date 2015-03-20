@@ -7,29 +7,29 @@
  * @return string - HTML content
  */
 function createCatListItem( $cat, $parentId, $level=-1 ){
+	$level++;
+
 	$buttons	=
 				'<button type="button" class="btn glyphicon glyphicon-remove tree-branch-btn" title="'.trans('prompts.delete').'"></button>'.
 				'';
 	$html	=
-	'<div class="panel cats-list">';
+	'<div class="panel" style="padding-left:'.(5*$level).'px;">';
 
 	if( count($cat['children']) > 0 ){
 		$this_parent_id	= 'acc-'.$cat['id'];
 		$maw_id	= 'maw-'.$cat['id'];
 
 		$html	.=
-		'<div class="">'.
+		'<div>'.
 			'<div class="btn-group btn-group-xs categories-btn-group" role="group">'.
-				'<button type="button" class="btn glyphicon glyphicon-expand tree-expand-btn" data-toggle="collapse" data-parent="#'.$parentId.'" data-target="#'.$maw_id.'"></button>'.
+				'<button type="button" class="btn glyphicon glyphicon-play tree-expand-btn" data-toggle="collapse" data-parent="#'.$parentId.'" data-target="#'.$maw_id.'"></button>'.
 			'</div>'.
-			$cat['name'].
-			'<div class="btn-group btn-group-xs categories-btn-group" role="group">'.
-				$buttons.
-			'</div>'.
+			'<span class="cat-name">'.$cat['name'].'</span>'.
+			'<div class="btn-group btn-group-xs categories-btn-group" role="group">'.$buttons.'</div>'.
 		'</div>'.
 
 		'<div id="'.$maw_id.'" class="panel-collapse collapse">'.
-			'<div class="panel-group cats-list" id="'.$this_parent_id.'">';
+			'<div class="panel-group" id="'.$this_parent_id.'">';
 
 		foreach($cat['children'] as $child )
 			$html	.= createCatListItem( $child, $this_parent_id, $level );
@@ -41,11 +41,8 @@ function createCatListItem( $cat, $parentId, $level=-1 ){
 	}else
 		$html	.=
 
-// 		$bullet.$cat['name'].
-		$cat['name'].
-		'<div class="btn-group btn-group-xs categories-btn-group" role="group">'.
-			$buttons.
-		'</div>'.
+		'<span class="cat-name cat-name-single">'.$cat['name'].'</span>'.
+		'<div class="btn-group btn-group-xs categories-btn-group" role="group">'.$buttons.'</div>'.
 	'';
 
 	$html	.=
