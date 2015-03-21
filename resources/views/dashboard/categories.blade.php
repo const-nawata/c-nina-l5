@@ -71,7 +71,7 @@ $main_id	= 'acc-main';
 @stop
 
 @section('content')
-<div id="cat_content">Categories content</div>
+<div id="cat_content"></div>
 @stop
 
 @section('js_extra')
