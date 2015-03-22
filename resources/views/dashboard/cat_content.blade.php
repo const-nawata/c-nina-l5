@@ -1,20 +1,18 @@
-<div class="form-group">
-
-<div class="raw">
-
-{{ Form::open(array('url'=>action('DashboardController@postCategory'), 'method'=>'post', 'role'=>'form', 'class'=>'form-horizontal')) }}
 
 
+{!! Form::open(['url'=>action('DashboardController@postCategory'), 'method'=>'post', 'role'=>'form', 'class'=>'form-horizontal','id'=>'cat-form']) !!}
+
+<?php /* ?>
 	<input type="hidden" value="{{ $cat->id }}">
+	<label for="name" class="control-label">{{ @trans('prompts.name') }}</label>
+<?php */ ?>
 
-	<div class="col-sm-3">
-    	<label for="sector" class="control-label">{{ @trans('prompts.name') }}</label>
-    </div>
+
+<div class="form-group">
+    {!! Form::label('name',@trans('prompts.name'),['class'=>'control-label col-sm-3'] ) !!}
     <div class="col-sm-9">
-		<input type="text" class="form-control" value="{{ $cat->name }}">
+		{!! Form::text('name', $cat->name, ['id'=>'name','class'=>'form-control']) !!}
     </div>
-
-{{ Form::close() }}
 </div>
+{!! Form::close() !!}
 
-</div>
