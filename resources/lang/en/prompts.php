@@ -25,5 +25,6 @@ return [
 	'delete'	=> 'Delete',
 	'expand'	=> 'Expand',
 	'wrap'	=> 'Wrap',
-	'name'	=> 'Name'
+	'name'	=> 'Name',
+	'save'	=> 'Save'
 ];

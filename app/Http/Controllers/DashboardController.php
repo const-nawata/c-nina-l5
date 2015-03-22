@@ -13,7 +13,7 @@ class DashboardController extends MainController{
     	$tree	= Category::getTree();
 
 
-    	return view( 'dashboard/categories', ['tree' => $tree ] );
+    	return view( 'dashboard/categories/list', ['tree' => $tree ] );
     }
 //______________________________________________________________________________
 
@@ -29,7 +29,7 @@ class DashboardController extends MainController{
 
     public function getCategory( $id ){
     	$cat = Category::find( $id );
-    	return view( 'dashboard/cat_content', ['cat'=>$cat] );
+    	return view( 'dashboard/categories/form', ['cat'=>$cat] );
     }
 //______________________________________________________________________________
 

@@ -71,7 +71,7 @@ $main_id	= 'acc-main';
 @stop
 
 @section('content')
-<div id="cat_content"></div>
+<div id="edit-form"></div>
 @stop
 
 @section('js_extra')
@@ -85,11 +85,11 @@ $(document).ready(function(){
 			url: "category/"+cat[1],
 
 			success: function(result){
-            	$("#cat_content").html(result);
+            	$("#edit-form").html(result);
         	},
 
         	error: function(){
-				alert( "Ajax Error" );
+				alert( "Internal Error" );
 			}
         });
 

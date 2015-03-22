@@ -27,7 +27,8 @@ body {
 }
 
 
-/* Categories tree*/
+/* Categories list*/
+
 #acc-main .tree-expand-btn{
 	border-radius: 0px;
 	padding: 0;
@@ -73,7 +74,7 @@ body {
 #acc-main .cat-name-single{
 	padding-left: 17px;
 }
-/* Categories tree (end)*/
+/* Categories list (end)*/
 
 
 
