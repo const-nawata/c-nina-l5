@@ -82,7 +82,7 @@ $(document).ready(function(){
 		var cat	= $(this).attr('id').split("-");
 
 		$.ajax({
-			url: "category/"+cat[1],
+			url: "/dashboard/category/"+cat[1],
 
 			success: function(result){
             	$("#edit-form").html(result);
