@@ -9,7 +9,7 @@
 <div class="form-group">
     {!! Form::label('parent_id',@trans('prompts.parent'),['class'=>'control-label col-sm-3'] ) !!}
     <div class="col-sm-9">
-		{!! Form::select('parent_id', ['L' => 'Large', 'S' => 'Small'],NULL,['id'=>'parent_id','class'=>'form-control']) !!}
+		{!! Form::select('parent_id', $parents,$parent_id,['id'=>'parent_id','class'=>'form-control']) !!}
     </div>
 </div>
 

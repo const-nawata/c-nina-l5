@@ -2,8 +2,32 @@
 
 use App\Category;
 use Request;
+use League\Flysystem\Adapter\NullAdapter;
 
 class DashboardController extends MainController{
+
+	private $_cats_tree = NULL;
+
+
+	private static function getCatsSelBoxItem( $parentsArr, $cat, $level=-1 ){
+		$level++;
+
+		$name	= '';
+		for( $i=0; $i<$level; $i++){
+			$name	.= "&#8226; ";
+		}
+
+		$name	.= $cat['name'];
+
+		$parentsArr[$cat['id']]	= $name;
+
+		foreach($cat['children'] as $child ){
+			$parentsArr	= self::getCatsSelBoxItem( $parentsArr, $child, $level );
+		}
+
+		return $parentsArr;
+	}
+//______________________________________________________________________________
 
 /**
  * shows categories tree and seleceted category (if it was selected)
@@ -11,24 +35,31 @@ class DashboardController extends MainController{
  * @return \Illuminate\View\View - HTML content
  */
     public function getCategories( $selCatId=NUll ){
-    	$tree	= Category::getTree();
-    	return view( 'dashboard/categories/list', ['tree' => $tree, 'sel_cat_id'=>$selCatId ] );
-    }
-//______________________________________________________________________________
 
-    public function getGoods(){
-    	return view( 'dashboard/goods' );
-    }
-//______________________________________________________________________________
+    	$this->_cats_tree	= $this->_cats_tree == NULL
+    		? Category::getTree()
+    		: $this->_cats_tree;
 
-    public function getUsers(){
-    	return view( 'dashboard/users' );
+    	return view( 'dashboard/categories/list', ['tree' => $this->_cats_tree, 'sel_cat_id'=>$selCatId ] );
     }
 //______________________________________________________________________________
 
     public function getCategory( $id ){
-    	$cat = Category::find( $id );
-    	return view( 'dashboard/categories/form', ['cat'=>$cat] );
+    	$cat_sel = Category::find( $id );
+
+
+    	$this->_cats_tree	= $this->_cats_tree == NULL
+    		? Category::getTree()
+    		: $this->_cats_tree;
+
+    	$parents_arr	= [];
+    	foreach( $this->_cats_tree as $cat )
+    		$parents_arr	= self::getCatsSelBoxItem( $parents_arr, $cat );
+
+
+//TODO: In parent selec box set correctly parent selection for top categories (with no parent).
+
+    	return view( 'dashboard/categories/form', ['cat'=>$cat_sel, 'parents' => $parents_arr,'parent_id'=>$cat_sel['parent_id'] ] );
     }
 //______________________________________________________________________________
 
@@ -40,6 +71,16 @@ class DashboardController extends MainController{
 	    $_id = $cat->save();
 
     	return redirect('/dashboard/categories/'.$id);
+    }
+//______________________________________________________________________________
+
+    public function getGoods(){
+    	return view( 'dashboard/goods' );
+    }
+//______________________________________________________________________________
+
+    public function getUsers(){
+    	return view( 'dashboard/users' );
     }
 //______________________________________________________________________________
 
