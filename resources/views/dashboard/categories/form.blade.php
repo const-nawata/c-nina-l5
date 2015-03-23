@@ -6,6 +6,13 @@
     </div>
 </div>
 
+<div class="form-group">
+    {!! Form::label('parent_id',@trans('prompts.parent'),['class'=>'control-label col-sm-3'] ) !!}
+    <div class="col-sm-9">
+		{!! Form::select('parent_id', ['L' => 'Large', 'S' => 'Small'],NULL,['id'=>'parent_id','class'=>'form-control']) !!}
+    </div>
+</div>
+
 <div class="btn-group">
 	{!! Form::submit(@trans('prompts.save'),['class'=>'btn btn-primary form-control']) !!}
 </div>
