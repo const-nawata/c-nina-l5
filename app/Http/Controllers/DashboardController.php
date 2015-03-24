@@ -52,14 +52,11 @@ class DashboardController extends MainController{
     		? Category::getTree()
     		: $this->_cats_tree;
 
-    	$parents_arr	= [];
+    	$parents	= [ -1=>'- '.trans('prompts.select').' -'];
     	foreach( $this->_cats_tree as $cat )
-    		$parents_arr	= self::getCatsSelBoxItem( $parents_arr, $cat );
+    		$parents	= self::getCatsSelBoxItem( $parents, $cat );
 
-
-//TODO: In parent selec box set correctly parent selection for top categories (with no parent).
-
-    	return view( 'dashboard/categories/form', ['cat'=>$cat_sel, 'parents' => $parents_arr,'parent_id'=>$cat_sel['parent_id'] ] );
+    	return view( 'dashboard/categories/form', ['cat'=>$cat_sel, 'parents'=>$parents ] );
     }
 //______________________________________________________________________________
 

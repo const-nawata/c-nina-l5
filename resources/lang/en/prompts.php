@@ -26,5 +26,7 @@ return [
 	'expand'	=> 'Expand',
 	'wrap'	=> 'Wrap',
 	'name'	=> 'Name',
-	'save'	=> 'Save'
+	'save'	=> 'Save',
+	'parent'=> 'Parent',
+	'select'=> 'Select'
 ];
