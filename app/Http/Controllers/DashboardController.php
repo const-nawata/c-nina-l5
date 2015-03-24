@@ -52,7 +52,7 @@ class DashboardController extends MainController{
     		? Category::getTree()
     		: $this->_cats_tree;
 
-    	$parents	= [ -1=>'- '.trans('prompts.select').' -'];
+    	$parents	= [ -1=>'- '.trans('prompts.root_cat').' -'];
     	foreach( $this->_cats_tree as $cat )
     		$parents	= self::getCatsSelBoxItem( $parents, $cat );
 
@@ -62,6 +62,7 @@ class DashboardController extends MainController{
 
     public function postCategory( $id ){
     	$cat_data	= Request::all();
+    	$cat_data['parent_id']	= $cat_data['parent_id'] < 0 ? NULL : $cat_data['parent_id'];
 
     	$cat	= Category::find( $id );
     	$cat	= $cat->fill( $cat_data );

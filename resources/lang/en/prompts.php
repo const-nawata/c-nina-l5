@@ -28,5 +28,5 @@ return [
 	'name'	=> 'Name',
 	'save'	=> 'Save',
 	'parent'=> 'Parent',
-	'select'=> 'Select'
+	'root_cat'=> 'Root'
 ];
