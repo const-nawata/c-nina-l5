@@ -13,18 +13,27 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- jQuery & jQuery UI -->
-	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
-<!--
-	<link href="//jqueryui.com/jquery-wp-content/themes/jquery/css/base.css?v=1" rel="stylesheet">
+<?php /* ?>
 
+//TODO: Delete if sure
+
+	<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+	<link href="//jqueryui.com/jquery-wp-content/themes/jquery/css/base.css?v=1" rel="stylesheet">
 	<link href="//jqueryui.com/jquery-wp-content/themes/jqueryui.com/style.css" rel="stylesheet">
- -->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<?php */ ?>
+
+
+
 
 	<!-- Bootstrap -->
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+	<script src="http://code.jquery.com/jquery-2.1.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
 
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>

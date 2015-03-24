@@ -21,13 +21,14 @@ function createCatListItem( $cat, $parentId, $level=-1 ){
 	if( count($cat['children']) > 0 ){
 		$this_parent_id	= 'acc-'.$cat['id'];
 		$maw_id	= 'maw-'.$cat['id'];
-
+//	ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-dialog-titlebar-close
+//
 		$html	.=
 		'<div>'.
 			'<div class="btn-group btn-group-xs categories-btn-group" role="group">'.
 				'<button type="button" class="btn glyphicon glyphicon-play tree-expand-btn" data-toggle="collapse" data-parent="#'.$parentId.'" data-target="#'.$maw_id.'"></button>'.
 			'</div>'.
-			'<span id="cat-'.$cat['id'].'" class="cat-name">'.$cat['name'].'</span>'.$del_btn.
+			'<span id="cat-'.$cat['id'].'" class="cat-name" role="button">'.$cat['name'].'</span>'.$del_btn.
 
 		'</div>'.
 
@@ -43,7 +44,7 @@ function createCatListItem( $cat, $parentId, $level=-1 ){
 		'';
 	}else
 		$html	.=
-		'<span id="cat-'.$cat['id'].'" class="cat-name cat-name-single">'.$cat['name'].'</span>'.$del_btn.
+		'<span id="cat-'.$cat['id'].'" class="cat-name cat-name-single" role="button">'.$cat['name'].'</span>'.$del_btn.
 	'';
 
 	$html	.=
@@ -75,7 +76,7 @@ $main_id	= 'acc-main';
 <div id="edit-form"></div>
 
 
-<div id="conf_div" class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-front ui-dialog-buttons ui-draggable">
+<div id="conf_div" class="" title="Basic dialog">
   Are you sure about this?
 </div>
 
@@ -85,7 +86,7 @@ $main_id	= 'acc-main';
 <script type="text/javascript">
 
 $(document).ready(function(){
-	$('.cat-name').click(function(){
+	$('.cat-name').on("click", function(e) {
 		var cat	= $(this).attr('id').split("-");
 
 		$.ajax({
@@ -114,7 +115,7 @@ $(document).ready(function(){
 
 	$("#conf_div").dialog({
 	   autoOpen: false,
-	   modal: true,
+// 	   modal: true,
 	   buttons : {
 	        "Confirm" : function() {
 	            alert("You have confirmed!");
@@ -126,7 +127,7 @@ $(document).ready(function(){
 	    });
 
 	$(".glyphicon-remove").on("click", function(e) {
-	    e.preventDefault();
+// 	    e.preventDefault();
 	    $("#conf_div").dialog("open");
 	});
 
