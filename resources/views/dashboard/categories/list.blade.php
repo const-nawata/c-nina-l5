@@ -9,9 +9,12 @@
 function createCatListItem( $cat, $parentId, $level=-1 ){
 	$level++;
 
-	$buttons	=
-				'<button type="button" class="btn glyphicon glyphicon-remove tree-branch-btn" title="'.trans('prompts.delete').'"></button>'.
-				'';
+	$del_btn	=
+'<div class="btn-group btn-group-xs categories-btn-group" role="group">'.
+	'<button id="remove_btn-'.$cat['id'].'" type="button" class="btn glyphicon glyphicon-remove tree-branch-btn" title="'.trans('prompts.delete').'"></button>'.
+'</div>'.
+'';
+
 	$html	=
 	'<div class="panel" style="padding-left:'.(5*$level).'px;">';
 
@@ -24,8 +27,8 @@ function createCatListItem( $cat, $parentId, $level=-1 ){
 			'<div class="btn-group btn-group-xs categories-btn-group" role="group">'.
 				'<button type="button" class="btn glyphicon glyphicon-play tree-expand-btn" data-toggle="collapse" data-parent="#'.$parentId.'" data-target="#'.$maw_id.'"></button>'.
 			'</div>'.
-			'<span id="cat-'.$cat['id'].'" class="cat-name">'.$cat['name'].'</span>'.
-			'<div class="btn-group btn-group-xs categories-btn-group" role="group">'.$buttons.'</div>'.
+			'<span id="cat-'.$cat['id'].'" class="cat-name">'.$cat['name'].'</span>'.$del_btn.
+
 		'</div>'.
 
 		'<div id="'.$maw_id.'" class="panel-collapse collapse">'.
@@ -40,9 +43,7 @@ function createCatListItem( $cat, $parentId, $level=-1 ){
 		'';
 	}else
 		$html	.=
-
-		'<span id="cat-'.$cat['id'].'" class="cat-name cat-name-single">'.$cat['name'].'</span>'.
-		'<div class="btn-group btn-group-xs categories-btn-group" role="group">'.$buttons.'</div>'.
+		'<span id="cat-'.$cat['id'].'" class="cat-name cat-name-single">'.$cat['name'].'</span>'.$del_btn.
 	'';
 
 	$html	.=
@@ -72,6 +73,12 @@ $main_id	= 'acc-main';
 
 @section('content')
 <div id="edit-form"></div>
+
+
+<div id="conf_div" class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-front ui-dialog-buttons ui-draggable">
+  Are you sure about this?
+</div>
+
 @stop
 
 @section('js_extra')
@@ -94,6 +101,55 @@ $(document).ready(function(){
         });
 
 	});
+
+// 	$('.glyphicon-remove').click(function(){
+// 		var cat;
+
+// 		if(confirm("{{ @trans('messages.confirm') }}")){
+// 			cat	= $(this).attr('id').split("-");
+// 			window.location.href = '/category/remove/'+cat[1];
+// 		}
+
+// 	});
+
+	$("#conf_div").dialog({
+	   autoOpen: false,
+	   modal: true,
+	   buttons : {
+	        "Confirm" : function() {
+	            alert("You have confirmed!");
+	        },
+	        "Cancel" : function() {
+	          $(this).dialog("close");
+	        }
+	      }
+	    });
+
+	$(".glyphicon-remove").on("click", function(e) {
+	    e.preventDefault();
+	    $("#conf_div").dialog("open");
+	});
+
+
+// $(function() {
+// 	 $( "#dialog-confirm" ).dialog({
+// 		 autoOpen: false,
+// 	 resizable: false,
+// 	 height:140,
+// 	 modal: true,
+// 	 buttons: {
+// 	 "Delete all items": function() {
+// 	 $( this ).dialog( "close" );
+// 	 },
+// 	 Cancel: function() {
+// 	 $( this ).dialog( "close" );
+// 	 }
+// 	 }
+// 	 });
+// });
+
+
+
 });
 
 </script>

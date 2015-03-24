@@ -15,6 +15,12 @@
 	<!-- jQuery & jQuery UI -->
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+<!--
+	<link href="//jqueryui.com/jquery-wp-content/themes/jquery/css/base.css?v=1" rel="stylesheet">
+
+	<link href="//jqueryui.com/jquery-wp-content/themes/jqueryui.com/style.css" rel="stylesheet">
+ -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
 	<!-- Bootstrap -->
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>

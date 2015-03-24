@@ -29,3 +29,4 @@ Route::get('/', [
 Route::controller('index', 'IndexController');
 Route::controller('users', 'UsersController');
 Route::controller('dashboard', 'DashboardController');
+Route::get('category/remove/{id}', 'DashboardController@removeCategory');

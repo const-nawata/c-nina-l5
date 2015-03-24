@@ -44,6 +44,13 @@ class DashboardController extends MainController{
     }
 //______________________________________________________________________________
 
+    public function removeCategory( $id ){
+		$cat = Category::find( $id );
+		$cat->delete();
+    	return redirect('/dashboard/categories/'.$id);
+    }
+//______________________________________________________________________________
+
     public function getCategory( $id ){
     	$cat_sel = Category::find( $id );
 
