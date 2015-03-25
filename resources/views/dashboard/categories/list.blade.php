@@ -11,7 +11,8 @@ function createCatListItem( $cat, $parentId, $level=-1 ){
 
 	$del_btn	=
 '<div class="btn-group btn-group-xs categories-btn-group" role="group">'.
-	'<button id="remove_btn-'.$cat['id'].'" type="button" class="btn glyphicon glyphicon-remove tree-branch-btn" title="'.trans('prompts.delete').'"></button>'.
+// 	'<button id="remove_btn-'.$cat['id'].'" type="button" class="remove_btn ui-button-icon-primary ui-corner-all ui-icon ui-icon-closethick tree-branch-btn" title="'.trans('prompts.delete').'"></button>'.
+	'<span id="remove_btn-'.$cat['id'].'" type="button" class="remove_btn" title="'.trans('prompts.delete').'"></span>'.
 '</div>'.
 '';
 
@@ -21,8 +22,7 @@ function createCatListItem( $cat, $parentId, $level=-1 ){
 	if( count($cat['children']) > 0 ){
 		$this_parent_id	= 'acc-'.$cat['id'];
 		$maw_id	= 'maw-'.$cat['id'];
-//	ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-dialog-titlebar-close
-//
+
 		$html	.=
 		'<div>'.
 			'<div class="btn-group btn-group-xs categories-btn-group" role="group">'.
@@ -113,9 +113,15 @@ $(document).ready(function(){
 
 // 	});
 
+
+
+
+
+
+
 	$("#conf_div").dialog({
 	   autoOpen: false,
-// 	   modal: true,
+	   modal: true,
 	   buttons : {
 	        "Confirm" : function() {
 	            alert("You have confirmed!");
@@ -126,10 +132,22 @@ $(document).ready(function(){
 	      }
 	    });
 
-	$(".glyphicon-remove").on("click", function(e) {
-// 	    e.preventDefault();
+
+	$( ".remove_btn" ).button({
+		icons: { primary: "ui-icon-closethick" },
+		text: false
+	});
+
+	$(".remove_btn").on("click", function(e) {
+	    e.preventDefault();
 	    $("#conf_div").dialog("open");
 	});
+
+
+
+
+
+
 
 
 // $(function() {

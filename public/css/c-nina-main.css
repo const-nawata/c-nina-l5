@@ -40,9 +40,6 @@ body {
 }
 
 #acc-main .tree-branch-btn{
-	border-radius: 1px;
-	font-size: 7px;
-	padding: 1px 4px;
 	border: none;
 	margin: 0;
 	padding: 3px 5px 3px 5px;
@@ -57,7 +54,7 @@ body {
 }
 
 #acc-main .categories-btn-group{
-	padding-left: 5px;
+/*	padding-left: 5px;*/
 }
 
 #acc-main .panel-group{
@@ -66,6 +63,7 @@ body {
 
 #acc-main .cat-name{
 	cursor: pointer;
+	padding-right: 5px;
 }
 #acc-main .cat-name:hover{
 	background-color: #caced9;
