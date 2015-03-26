@@ -33,6 +33,10 @@ body {
 #acc-main button.ui-button-icon-only{
 	width: 16px;
 }
+
+
+
+
 /* Categories list*/
 
 #acc-main .tree-expand-btn{
@@ -67,7 +71,7 @@ margin-bottom: 4px;
 }
 
 #acc-main .cat-name-single{
-	padding-left: 17px;
+	padding-left: 11px;
 }
 /* Categories list (end)*/
 
