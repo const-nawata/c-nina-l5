@@ -74,17 +74,14 @@ $main_id	= 'acc-main';
 @section('content')
 <div id="edit-form"></div>
 
-
-<div id="is-del-cat-dialog" class="" title="Basic dialog">
-  Are you sure about this?
-</div>
-
 @stop
 
 @section('js_extra')
 <script type="text/javascript">
 
+
 $(document).ready(function(){
+
 	$('.cat-name').on("click", function(e) {
 		var cat	= $(this).attr('id').split("-");
 
@@ -102,30 +99,47 @@ $(document).ready(function(){
 
 	});
 
-	$("#is-del-cat-dialog").dialog({
-	   autoOpen: false,
-	   dialogClass: "no-close",
-	   modal: true,
-	   buttons : {
-	        "Confirm" : function() {
-	            alert("You have confirmed!");
-	        },
-	        "Cancel" : function() {
-	          $(this).dialog("close");
-	        }
-	      }
-	    });
-
 
 	$( "button[id^='del_btn']" ).button({
 		icons: { primary: "ui-icon-closethick" },
 		text: false
 	});
 
-	$("button[id^='del_btn']").on("click", function(e) {
+	$("button[id^='del_btn']").on("click", function(e){
 	    e.preventDefault();
-	    $("#is-del-cat-dialog").dialog("open");
+
+	    var cat_name
+	    ,message = "{!! @trans( 'messages.del_cat' ) !!}"
+	    ,cat	= $(this).attr('id').split("-");
+
+	    cat_name	= $("#cat-"+cat[1]).html();
+
+	    message	= message.replace(":name", '<i>"'+cat_name+'"</i>' );
+
+		$("#is-del-dialog").dialog( "option", "width", "400px" );
+	    $("#is-del-dialog").html( message );
+	    $("#is-del-dialog" ).dialog( "option", "title", "{{ @trans( 'prompts.del_cat' ) }}" );
+	    $("#is-del-dialog").dialog("open");
+
+		$( "#is-del-dialog" ).dialog( "option", "buttons",[
+			{
+				text: "{{ @trans( 'prompts.yes' ) }}",
+				click: function() {
+					alert("You have confirmed!");
+				}
+
+			},
+
+			{
+				text: "{{ @trans( 'prompts.no' ) }}",
+				click: function() {
+					$(this).dialog("close");
+				}
+			}
+		]);
+
 	});
+
 	$("button[id^='del_btn']").addClass( "del-btn" );
 
 

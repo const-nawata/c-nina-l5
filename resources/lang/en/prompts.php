@@ -28,5 +28,8 @@ return [
 	'name'	=> 'Name',
 	'save'	=> 'Save',
 	'parent'=> 'Parent',
-	'root_cat'=> 'Root'
+	'root_cat'=> 'Root',
+	'del_cat'	=> 'Category deletion',
+	'yes'=> 'Yes',
+	'no'=> 'No'
 ];
