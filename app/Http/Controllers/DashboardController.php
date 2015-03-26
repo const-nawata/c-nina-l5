@@ -8,7 +8,6 @@ class DashboardController extends MainController{
 
 	private $_cats_tree = NULL;
 
-
 	private static function getCatsSelBoxItem( $parentsArr, $cat, $level=-1 ){
 		$level++;
 
@@ -47,13 +46,14 @@ class DashboardController extends MainController{
     public function removeCategory( $id ){
 		$cat = Category::find( $id );
 		$cat->delete();
-    	return redirect('/dashboard/categories/'.$id);
+    	return redirect('/dashboard/categories');
     }
 //______________________________________________________________________________
 
     public function getCategory( $id ){
     	$cat_sel = Category::find( $id );
 
+		$count = Category::where('parent_id', '=', $id )->count();
 
     	$this->_cats_tree	= $this->_cats_tree == NULL
     		? Category::getTree()
@@ -63,7 +63,7 @@ class DashboardController extends MainController{
     	foreach( $this->_cats_tree as $cat )
     		$parents	= self::getCatsSelBoxItem( $parents, $cat );
 
-    	return view( 'dashboard/categories/form', ['cat'=>$cat_sel, 'parents'=>$parents ] );
+    	return view( 'dashboard/categories/form', ['cat'=>$cat_sel, 'parents'=>$parents, 'is_has_chilren' => ($count > 0) ] );
     }
 //______________________________________________________________________________
 

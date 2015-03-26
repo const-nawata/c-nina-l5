@@ -11,12 +11,6 @@ function createCatListItem( $cat, $parentId, $level=-1 ){
 
 	$count_children	= count($cat['children']);
 
-// 	$del_btn	=
-// '<div class="btn-group btn-group-xs list-left-btn-group" role="group">'.
-// 	'<button id="del_btn-'.$cat['id'].'" type="button" class="" title="'.trans('prompts.delete').'"></button>'.
-// '</div>'.
-// '';
-
 	$html	=
 	'<div class="panel" style="padding-left:'.(5*$level).'px;">';
 
@@ -29,8 +23,7 @@ function createCatListItem( $cat, $parentId, $level=-1 ){
 			'<div class="btn-group btn-group-xs" role="group">'.
 				'<button type="button" class="btn glyphicon glyphicon-play tree-expand-btn" data-toggle="collapse" data-parent="#'.$parentId.'" data-target="#'.$maw_id.'"></button>'.
 			'</div>'.
-			'<span id="cat-'.$cat['id'].'" class="cat-name" role="button">'.$cat['name'].'</span>'.//$del_btn.
-
+			'<span id="cat-'.$cat['id'].'" class="cat-name" role="button">'.$cat['name'].'</span>'.
 		'</div>'.
 
 		'<div id="'.$maw_id.'" class="panel-collapse collapse">'.
@@ -45,7 +38,7 @@ function createCatListItem( $cat, $parentId, $level=-1 ){
 		'';
 	}else
 		$html	.=
-		'<span id="cat-'.$cat['id'].'" class="cat-name cat-name-single" role="button">'.$cat['name'].'</span>'.//$del_btn.
+		'<span id="cat-'.$cat['id'].'" class="cat-name cat-name-single" role="button">'.$cat['name'].'</span>'.
 		'<div class="btn-group btn-group-xs list-left-btn-group" role="group">'.
 			'<button id="del_btn-'.$cat['id'].'" type="button" class="" title="'.trans('prompts.delete').'"></button>'.
 		'</div>'.
