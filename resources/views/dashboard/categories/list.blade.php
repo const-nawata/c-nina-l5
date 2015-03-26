@@ -10,9 +10,8 @@ function createCatListItem( $cat, $parentId, $level=-1 ){
 	$level++;
 
 	$del_btn	=
-'<div class="btn-group btn-group-xs categories-btn-group" role="group">'.
-// 	'<button id="remove_btn-'.$cat['id'].'" type="button" class="remove_btn ui-button-icon-primary ui-corner-all ui-icon ui-icon-closethick tree-branch-btn" title="'.trans('prompts.delete').'"></button>'.
-	'<span id="remove_btn-'.$cat['id'].'" type="button" class="remove_btn" title="'.trans('prompts.delete').'"></span>'.
+'<div class="btn-group btn-group-xs list-left-btn-group" role="group">'.
+	'<button id="del_btn-'.$cat['id'].'" type="button" class="" title="'.trans('prompts.delete').'"></button>'.
 '</div>'.
 '';
 
@@ -25,7 +24,7 @@ function createCatListItem( $cat, $parentId, $level=-1 ){
 
 		$html	.=
 		'<div>'.
-			'<div class="btn-group btn-group-xs categories-btn-group" role="group">'.
+			'<div class="btn-group btn-group-xs" role="group">'.
 				'<button type="button" class="btn glyphicon glyphicon-play tree-expand-btn" data-toggle="collapse" data-parent="#'.$parentId.'" data-target="#'.$maw_id.'"></button>'.
 			'</div>'.
 			'<span id="cat-'.$cat['id'].'" class="cat-name" role="button">'.$cat['name'].'</span>'.$del_btn.
@@ -76,7 +75,7 @@ $main_id	= 'acc-main';
 <div id="edit-form"></div>
 
 
-<div id="conf_div" class="" title="Basic dialog">
+<div id="is-del-cat-dialog" class="" title="Basic dialog">
   Are you sure about this?
 </div>
 
@@ -103,24 +102,9 @@ $(document).ready(function(){
 
 	});
 
-// 	$('.glyphicon-remove').click(function(){
-// 		var cat;
-
-// 		if(confirm("{{ @trans('messages.confirm') }}")){
-// 			cat	= $(this).attr('id').split("-");
-// 			window.location.href = '/category/remove/'+cat[1];
-// 		}
-
-// 	});
-
-
-
-
-
-
-
-	$("#conf_div").dialog({
+	$("#is-del-cat-dialog").dialog({
 	   autoOpen: false,
+	   dialogClass: "no-close",
 	   modal: true,
 	   buttons : {
 	        "Confirm" : function() {
@@ -133,40 +117,16 @@ $(document).ready(function(){
 	    });
 
 
-	$( ".remove_btn" ).button({
+	$( "button[id^='del_btn']" ).button({
 		icons: { primary: "ui-icon-closethick" },
 		text: false
 	});
 
-	$(".remove_btn").on("click", function(e) {
+	$("button[id^='del_btn']").on("click", function(e) {
 	    e.preventDefault();
-	    $("#conf_div").dialog("open");
+	    $("#is-del-cat-dialog").dialog("open");
 	});
-
-
-
-
-
-
-
-
-// $(function() {
-// 	 $( "#dialog-confirm" ).dialog({
-// 		 autoOpen: false,
-// 	 resizable: false,
-// 	 height:140,
-// 	 modal: true,
-// 	 buttons: {
-// 	 "Delete all items": function() {
-// 	 $( this ).dialog( "close" );
-// 	 },
-// 	 Cancel: function() {
-// 	 $( this ).dialog( "close" );
-// 	 }
-// 	 }
-// 	 });
-// });
-
+	$("button[id^='del_btn']").addClass( "del-btn" );
 
 
 });
