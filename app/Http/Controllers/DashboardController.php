@@ -50,32 +50,38 @@ class DashboardController extends MainController{
     }
 //______________________________________________________________________________
 
-    public function getCategory( $id ){
-    	$cat_sel = Category::find( $id );
-
-		$count = Category::where('parent_id', '=', $id )->count();
+    public function getCategory( $id=NULL ){
+		if($id == NULL){
+			$cat_sel	= new Category();
+			$count_children	= 0;
+			$cat_url	= '';
+		}else{
+			$cat_sel	= Category::find( $id );
+			$count_children = Category::where('parent_id', '=', $id )->count();
+			$cat_url	= '/'.$id;
+		}
 
     	$this->_cats_tree	= $this->_cats_tree == NULL
     		? Category::getTree()
     		: $this->_cats_tree;
 
-    	$parents	= [ -1=>'- '.trans('prompts.root_cat').' -'];
+    	$cats_names	= [ -1=>'- '.trans('prompts.root_cat').' -'];
     	foreach( $this->_cats_tree as $cat )
-    		$parents	= self::getCatsSelBoxItem( $parents, $cat );
+    		$cats_names	= self::getCatsSelBoxItem( $cats_names, $cat );
 
-    	return view( 'dashboard/categories/form', ['cat'=>$cat_sel, 'parents'=>$parents, 'is_has_chilren' => ($count > 0) ] );
+    	return view( 'dashboard/categories/form', ['cat'=>$cat_sel, 'cats_names'=>$cats_names, 'is_has_chilren' => ($count_children > 0), 'cat_url'=>$cat_url ] );
     }
 //______________________________________________________________________________
 
-    public function postCategory( $id ){
+    public function postCategory( $id=NULL ){
     	$cat_data	= Request::all();
     	$cat_data['parent_id']	= $cat_data['parent_id'] < 0 ? NULL : $cat_data['parent_id'];
 
-    	$cat	= Category::find( $id );
+    	$cat	= $id != NULL ? Category::find( $id ) : new Category();
     	$cat	= $cat->fill( $cat_data );
-	    $_id = $cat->save();
+	    $res 	= $cat->save();
 
-    	return redirect('/dashboard/categories/'.$id);
+    	return redirect('/dashboard/categories/'.$cat->id);
     }
 //______________________________________________________________________________
 

@@ -1,5 +1,4 @@
-{!! Form::open(['url'=>action('DashboardController@postCategory').'/'.$cat->id, 'method'=>'post', 'role'=>'form', 'class'=>'form-horizontal','id'=>'cat-form']) !!}
-
+{!! Form::open(['url'=>action('DashboardController@postCategory').$cat_url, 'method'=>'post', 'role'=>'form', 'class'=>'form-horizontal','id'=>'cat-form']) !!}
 <div class="form-group">
     {!! Form::label('name',@trans('prompts.name'),['class'=>'control-label col-sm-3'] ) !!}
     <div class="col-sm-9">
@@ -10,14 +9,14 @@
 <div class="form-group">
     {!! Form::label('parent_id',@trans('prompts.parent'),['class'=>'control-label col-sm-3'] ) !!}
     <div class="col-sm-9">
-		{!! Form::select('parent_id', $parents, $cat->parent_id,['id'=>'parent_id','class'=>'form-control']) !!}
+		{!! Form::select('parent_id', $cats_names, $cat->parent_id,['id'=>'parent_id','class'=>'form-control']) !!}
     </div>
 </div>
 
 <div class="btn-group">
 	{!! Form::submit(@trans('prompts.save'),['class'=>'btn btn-default']) !!}
 
-@if(!$is_has_chilren)
+@if(!$is_has_chilren && $cat->id != NULL)
 	{!! Form::button(@trans('prompts.delete'),['class'=>'btn btn-default','id'=>'del_from_btn']) !!}
 @endif
 </div>
@@ -25,7 +24,7 @@
 {!! Form::close() !!}
 
 <script type="text/javascript">
-
+///
 $(document).ready(function(){
 
 	$('#del_from_btn').on("click", function(e) {
