@@ -46,8 +46,6 @@ function createCatListItem( $cat, $level=-1 ){
 
 	return $html;
 }
-// $main_id	= 'acc-main';   <span id="" class="add-item" role="button">-- {{ @trans('prompts.add') }} --</span>
-//
 ?>
 @extends('layouts.left')
 
@@ -76,10 +74,7 @@ function createCatListItem( $cat, $level=-1 ){
 	</div>
 @stop
 
-
-
 @section('content')
-
 <div id="edit-form"></div>
 @stop
 
@@ -91,17 +86,30 @@ $(document).ready(function(){
 
 	$( "#add_btn" ).button({
 		icons: { primary: "ui-icon-plusthick" },
-
 	});
+
+	$( "#add_btn" ).on("click", function(e){
+
+		$.ajax({
+			url: "/dashboard/category",
+
+			success: function(result){
+            	$("#edit-form").html(result);
+        	},
+
+        	error: function(){
+				alert( "Internal Error" );
+			}
+        });
+});
 //-----------------------------------
 
 	$( ".btn-toggle-cat" ).button({
 		icons: { primary: "ui-icon-triangle-1-e" },
 		text: false
 	});
-//-----------------------------------
 
-	$( ".btn-toggle-cat" ).on("click", function(e) {
+	$( ".btn-toggle-cat" ).on("click", function(e){
 		var	el = $( this ).children('span').first();
 
 		if(el.hasClass( "ui-icon-triangle-1-e" )){
@@ -134,7 +142,7 @@ $(document).ready(function(){
         });
 
 	});
-
+//-----------------------------------
 
 	$( "button[id^='del_btn']" ).button({
 		icons: { primary: "ui-icon-closethick" },
