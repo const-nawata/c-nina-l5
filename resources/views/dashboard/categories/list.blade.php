@@ -37,7 +37,7 @@ function createCatListItem( $cat, $level=-1 ){
 		$html	.=
 		'<span id="cat-'.$cat['id'].'" class="cat-name cat-name-single" role="button">'.$cat['name'].'</span>'.
 		'<div class="btn-group btn-group-xs list-left-btn-group" role="group">'.
-			'<button id="del_btn-'.$cat['id'].'" type="button" class="" title="'.trans('prompts.delete').'"></button>'.
+			'<button id="del_btn-'.$cat['id'].'" type="button" title="'.trans('prompts.delete').'"></button>'.
 		'</div>'.
 		'';
 
@@ -88,13 +88,17 @@ $(document).ready(function(){
 		var	el = $( this ).children('span').first();
 
 		if(el.hasClass( "ui-icon-triangle-1-e" )){
+			$(this).attr("title", "{{ @trans('prompts.wrap') }}");
 			el.removeClass("ui-icon-triangle-1-e");
 			el.addClass("ui-icon-triangle-1-se");
 		}else{
+			$(this).attr("title", "{{ @trans('prompts.expand') }}");
 			el.removeClass("ui-icon-triangle-1-se");
 			el.addClass("ui-icon-triangle-1-e");
 		}
 	});
+
+	$('.btn-toggle-cat').attr("title", "{{ @trans( 'prompts.expand' ) }}");
 //-----------------------------------
 
 	$('.cat-name').on("click", function(e) {
