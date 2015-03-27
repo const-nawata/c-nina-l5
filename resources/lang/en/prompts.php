@@ -31,5 +31,7 @@ return [
 	'root_cat'=> 'Root',
 	'del_cat'	=> 'Category deletion',
 	'yes'=> 'Yes',
-	'no'=> 'No'
+	'no'=> 'No',
+	'add'=> 'Add',
+	'cats_manage'=> 'Cateries managing'
 ];

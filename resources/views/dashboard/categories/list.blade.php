@@ -58,22 +58,32 @@ $main_id	= 'acc-main';
 	@include('dashboard/blocks/buttons')
 @stop
 
+@section('screen_title')
+	<center><h3>{{ @trans('prompts.cats_manage') }}</h3></center>
+@stop
+
+
 @section('sidebar')
 	<div class="panel-group cat-tree">
+		<div class="panel">
+			<span id="" class="add-item" role="button">-- {{ @trans('prompts.add') }} --</span>
+		</div>
+
 	@foreach( $tree as $cat )
 		{!! createCatListItem( $cat ) !!}
 	@endforeach
 	</div>
 @stop
 
-@section('content')
-<div id="edit-form"></div>
 
+
+@section('content')
+
+<div id="edit-form"></div>
 @stop
 
 @section('js_extra')
 <script type="text/javascript">
-
 
 $(document).ready(function(){
 

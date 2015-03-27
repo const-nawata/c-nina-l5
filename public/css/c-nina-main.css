@@ -32,6 +32,12 @@ body {
 
 
 /* Categories list*/
+.cat-tree .add-item{
+	background-color: #efefe7;
+	text-align: center;
+	padding: 0 10px;
+	cursor: pointer;
+}
 
 .cat-tree button.ui-button-icon-only{
 	width: 16px;

@@ -42,6 +42,8 @@
 	</div>
 </nav>
 
+@yield('screen_title')
+
 <div id="main_container" class="container">
 @yield('main_container')
 </div>

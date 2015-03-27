@@ -9,6 +9,10 @@
 	@yield('buttons')
 @stop
 
+@section('screen_title')
+	@yield('screen_title')
+@stop
+
 @section('main_container')
 <div class="row">
 	<div id="sidebar" class="col-md-3">
