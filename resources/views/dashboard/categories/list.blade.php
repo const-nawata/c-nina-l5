@@ -46,7 +46,8 @@ function createCatListItem( $cat, $level=-1 ){
 
 	return $html;
 }
-$main_id	= 'acc-main';
+// $main_id	= 'acc-main';   <span id="" class="add-item" role="button">-- {{ @trans('prompts.add') }} --</span>
+//
 ?>
 @extends('layouts.left')
 
@@ -65,8 +66,8 @@ $main_id	= 'acc-main';
 
 @section('sidebar')
 	<div class="panel-group cat-tree">
-		<div class="panel">
-			<span id="" class="add-item" role="button">-- {{ @trans('prompts.add') }} --</span>
+		<div class="add-item">
+			<button id="add_btn">{{ @trans('prompts.add') }}</button>
 		</div>
 
 	@foreach( $tree as $cat )
@@ -87,6 +88,12 @@ $main_id	= 'acc-main';
 
 $(document).ready(function(){
 
+
+	$( "#add_btn" ).button({
+		icons: { primary: "ui-icon-plusthick" },
+
+	});
+//-----------------------------------
 
 	$( ".btn-toggle-cat" ).button({
 		icons: { primary: "ui-icon-triangle-1-e" },
