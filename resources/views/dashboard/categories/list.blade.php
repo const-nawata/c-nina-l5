@@ -6,31 +6,28 @@
  * @param integer $level- level of HTML element
  * @return string - HTML content
  */
-function createCatListItem( $cat, $parentId, $level=-1 ){
+function createCatListItem( $cat, $level=-1 ){
 	$level++;
-
-	$count_children	= count($cat['children']);
 
 	$html	=
 	'<div class="panel" style="padding-left:'.(5*$level).'px;">';
 
-	if( $count_children > 0 ){
-		$this_parent_id	= 'acc-'.$cat['id'];
+	if( count($cat['children']) > 0 ){
 		$maw_id	= 'maw-'.$cat['id'];
 
 		$html	.=
 		'<div>'.
 			'<div class="btn-group btn-group-xs" role="group">'.
-				'<button type="button" class="btn glyphicon glyphicon-play tree-expand-btn" data-toggle="collapse" data-parent="#'.$parentId.'" data-target="#'.$maw_id.'"></button>'.
+				'<button type="button" class="btn-toggle-cat" data-toggle="collapse" data-target="#'.$maw_id.'"></button>'.
 			'</div>'.
 			'<span id="cat-'.$cat['id'].'" class="cat-name" role="button">'.$cat['name'].'</span>'.
 		'</div>'.
 
 		'<div id="'.$maw_id.'" class="panel-collapse collapse">'.
-			'<div class="panel-group" id="'.$this_parent_id.'">';
+			'<div class="panel-group">';
 
 		foreach($cat['children'] as $child )
-			$html	.= createCatListItem( $child, $this_parent_id, $level );
+			$html	.= createCatListItem( $child, $level );
 
 		$html	.=
 			'</div>'.
@@ -62,9 +59,9 @@ $main_id	= 'acc-main';
 @stop
 
 @section('sidebar')
-	<div class="panel-group" id="{{ $main_id }}">
+	<div class="panel-group cat-tree">
 	@foreach( $tree as $cat )
-		{!! createCatListItem( $cat, $main_id ) !!}
+		{!! createCatListItem( $cat ) !!}
 	@endforeach
 	</div>
 @stop
@@ -79,6 +76,26 @@ $main_id	= 'acc-main';
 
 
 $(document).ready(function(){
+
+
+	$( ".btn-toggle-cat" ).button({
+		icons: { primary: "ui-icon-triangle-1-e" },
+		text: false
+	});
+//-----------------------------------
+
+	$( ".btn-toggle-cat" ).on("click", function(e) {
+		var	el = $( this ).children('span').first();
+
+		if(el.hasClass( "ui-icon-triangle-1-e" )){
+			el.removeClass("ui-icon-triangle-1-e");
+			el.addClass("ui-icon-triangle-1-se");
+		}else{
+			el.removeClass("ui-icon-triangle-1-se");
+			el.addClass("ui-icon-triangle-1-e");
+		}
+	});
+//-----------------------------------
 
 	$('.cat-name').on("click", function(e) {
 		var cat	= $(this).attr('id').split("-");

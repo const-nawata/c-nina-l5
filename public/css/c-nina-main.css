@@ -30,48 +30,46 @@ body {
   display: none;
 }
 
-#acc-main button.ui-button-icon-only{
+
+/* Categories list*/
+
+.cat-tree button.ui-button-icon-only{
 	width: 16px;
 }
 
 
-
-
-/* Categories list*/
-
-#acc-main .tree-expand-btn{
-	border-radius: 0px;
-	padding: 0;
-	margin: 0 3px 6px 0;
-	border: 0;
-	line-height: 8px;
-	font-size: 8px;
-	background-color:transparent;
+.cat-tree button.btn-toggle-cat{
+	width: 16px;
+	 border-radius:0;
+	 border: 0;
+	 vertical-align: unset;
+	 background-color: transparent;
+	 background: transparent;
 }
 
-#acc-main .panel{
+.cat-tree .panel{
 	box-shadow:none;
 	margin: 0;
 }
 
-#acc-main .del-btn{
-margin-bottom: 4px;
+.cat-tree .del-btn{
+	margin-bottom: 4px;
 }
 
-#acc-main .panel-group{
+.cat-tree .panel-group{
 	margin: 2px;
 }
 
-#acc-main .cat-name{
+.cat-tree .cat-name{
 	cursor: pointer;
 	padding-right: 5px;
 }
-#acc-main .cat-name:hover{
+.cat-tree .cat-name:hover{
 	background-color: #caced9;
 }
 
-#acc-main .cat-name-single{
-	padding-left: 11px;
+.cat-tree .cat-name-single{
+	padding-left: 18px;
 }
 /* Categories list (end)*/
 
