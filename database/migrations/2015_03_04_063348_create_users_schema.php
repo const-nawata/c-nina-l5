@@ -27,7 +27,7 @@ class CreateUsersSchema extends Migration {
 			$uTable->string( 'phone', 20 )->nullable();
 
 
-			$uTable->enum( 'role', ['admin','client','guest','seller','woker'] );
+			$uTable->enum( 'role', ['admin','client','guest','seller','worker'] );
 
 			$uTable->boolean('isActive')->default(FALSE);
 			$uTable->string('activationCode')->nullable();
@@ -58,7 +58,7 @@ class CreateUsersSchema extends Migration {
 	private function createRootAdmin(){
 		$user_data	= [
 			'username'	=> 'admin'
-			,'password'	=> Hash::make( 'admin' )
+			,'password'	=> Hash::make( '111qqq' )
 			,'email'	=> 'nawataster@gmail.com'
 			,'surname'	=> 'Root'
 			,'name'	=> 'Admin'
