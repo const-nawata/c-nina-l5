@@ -17,6 +17,7 @@ return [
 	'goods'	=> 'Goods',
 	'home'	=> 'Home',
 	'lang'	=> 'Lang',
+	'list_order'	=> 'Order in list',
 	'login'	=> 'Login',
 	'logout'	=> 'Logout',
 	'name'	=> 'Name',

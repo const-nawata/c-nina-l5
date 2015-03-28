@@ -1,4 +1,5 @@
 {!! Form::open(['url'=>action('DashboardController@postCategory').$cat_url, 'method'=>'post', 'role'=>'form', 'class'=>'form-horizontal','id'=>'cat-form']) !!}
+
 <div class="form-group">
     {!! Form::label('name',@trans('prompts.name'),['class'=>'control-label col-sm-3'] ) !!}
     <div class="col-sm-9">
@@ -10,6 +11,13 @@
     {!! Form::label('parent_id',@trans('prompts.parent'),['class'=>'control-label col-sm-3'] ) !!}
     <div class="col-sm-9">
 		{!! Form::select('parent_id', $cats_names, $cat->parent_id,['id'=>'parent_id','class'=>'form-control']) !!}
+    </div>
+</div>
+
+<div class="form-group">
+    {!! Form::label('rank',@trans('prompts.list_order'),['class'=>'control-label col-sm-3'] ) !!}
+    <div class="col-sm-9">
+		{!! Form::text('rank', $cat->rank, ['id'=>'rank','class'=>'form-control']) !!}
     </div>
 </div>
 
