@@ -89,7 +89,6 @@ $(document).ready(function(){
 	});
 
 	$( "#add_btn" ).on("click", function(e){
-
 		$.ajax({
 			url: "/dashboard/category",
 
@@ -101,12 +100,21 @@ $(document).ready(function(){
 				alert( "Internal Error" );
 			}
         });
-});
+	});
 //-----------------------------------
 
-	$( ".btn-toggle-cat" ).button({
-		icons: { primary: "ui-icon-triangle-1-e" },
-		text: false
+	$( ".btn-toggle-cat" ).each(function(){
+		var btn_css
+		,maw_id	= "#"+$(this).attr("data-target").substring(1);
+
+		btn_css	= ($(maw_id).hasClass("in"))
+			? "ui-icon-triangle-1-se"
+			: "ui-icon-triangle-1-e";
+
+		$(this).button({
+			icons: { primary: btn_css },
+			text: false
+		});
 	});
 
 	$( ".btn-toggle-cat" ).on("click", function(e){
