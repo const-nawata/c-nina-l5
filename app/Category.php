@@ -11,33 +11,54 @@ class Category extends Model{
 		,'parent_id'
 	];
 
-	private static function getChildren( $catId ){
-		$cats	= self::whereRaw('parent_id IS NOT NULL AND parent_id = ?', [$catId] )->get();
+	private static function isChildrenHasExpand( $children, $selCatId ){
 
-		$children	= [];
-		foreach( $cats as $cat ){
-			$children[]	= [
-				'id'	=> $cat->id,
-				'name'	=> $cat->name,
-				'children'	=> self::getChildren( $cat->id )
-			];
-		}
+		foreach( $children as $child )
+			if( $child['expand'] )
+				return TRUE;
 
-		return $children;
+		return FALSE;
 	}
 //______________________________________________________________________________
 
-	public static function getTree(){
+	private static function getChildren( $catId, $selCatId ){
+		$cats	= self::whereRaw('parent_id IS NOT NULL AND parent_id = ?', [$catId] )->get();
+
+		$sub_tree	= [];
+		foreach( $cats as $cat ){
+			$children	= self::getChildren( $cat->id, $selCatId );
+
+			$sub_tree[]	= [
+				'id'	=> $cat->id,
+				'name'	=> $cat->name,
+				'expand'	=> $cat->id == $selCatId || self::isChildrenHasExpand( $children, $selCatId ),
+				'children'	=> $children
+			];
+		}
+
+		return $sub_tree;
+	}
+//______________________________________________________________________________
+
+/**
+ * gets category tree.
+ * @param integer $selCatId. This parameter must be NULL by default!!!
+ * @return array - categories tree
+ */
+	public static function getTree( $selCatId=NULL ){
 
 		$cats	= self::whereRaw('parent_id IS NULL')->get();
 
 		$tree	= [];
 
 		foreach( $cats as $cat ){
+			$children	= self::getChildren( $cat->id, $selCatId );
+
 			$tree[]	= [
 				'id'	=> $cat->id,
 				'name'	=> $cat->name,
-				'children'	=> self::getChildren( $cat->id )
+				'expand'	=> $cat->id == $selCatId || self::isChildrenHasExpand( $children, $selCatId ),
+				'children'	=> $children
 			];
 		}
 

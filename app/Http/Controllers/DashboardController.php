@@ -34,11 +34,7 @@ class DashboardController extends MainController{
  * @return \Illuminate\View\View - HTML content
  */
     public function getCategories( $selCatId=NUll ){
-
-    	$this->_cats_tree	= $this->_cats_tree == NULL
-    		? Category::getTree()
-    		: $this->_cats_tree;
-
+    	$this->_cats_tree	= Category::getTree( $selCatId );
     	return view( 'dashboard/categories/list', ['tree' => $this->_cats_tree, 'sel_cat_id'=>$selCatId ] );
     }
 //______________________________________________________________________________

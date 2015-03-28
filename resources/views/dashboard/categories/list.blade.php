@@ -1,6 +1,6 @@
 <?php
 /**
- * creates recursive categories list
+ * creates recursive categories list presentation
  * @param array $cat - category data
  * @param integer $parentId - HTML id for parent element.
  * @param integer $level- level of HTML element
@@ -23,7 +23,7 @@ function createCatListItem( $cat, $level=-1 ){
 			'<span id="cat-'.$cat['id'].'" class="cat-name" role="button">'.$cat['name'].'</span>'.
 		'</div>'.
 
-		'<div id="'.$maw_id.'" class="panel-collapse collapse">'.
+		'<div id="'.$maw_id.'" class="panel-collapse collapse'.($cat['expand']?' in':'').'">'.
 			'<div class="panel-group">';
 
 		foreach($cat['children'] as $child )
