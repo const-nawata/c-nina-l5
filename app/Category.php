@@ -23,7 +23,7 @@ class Category extends Model{
 //______________________________________________________________________________
 
 	private static function getChildren( $catId, $selCatId ){
-		$cats	= self::whereRaw('parent_id IS NOT NULL AND parent_id = ?', [$catId] )->orderBy('rank','desc')->orderBy('name')->get();
+		$cats	= self::whereRaw('parent_id IS NOT NULL AND parent_id = ?', [$catId] )->orderBy('rank')->orderBy('name')->get();
 
 		$sub_tree	= [];
 		foreach( $cats as $cat ){
@@ -48,7 +48,7 @@ class Category extends Model{
  */
 	public static function getTree( $selCatId=NULL ){
 
-		$cats	= self::whereRaw('parent_id IS NULL')->orderBy('rank','desc')->orderBy('name')->get();
+		$cats	= self::whereRaw('parent_id IS NULL')->orderBy('rank')->orderBy('name')->get();
 
 		$tree	= [];
 
