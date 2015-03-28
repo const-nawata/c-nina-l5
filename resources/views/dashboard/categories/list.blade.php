@@ -82,7 +82,21 @@ function createCatListItem( $cat, $level=-1 ){
 <script type="text/javascript">
 
 $(document).ready(function(){
+	var sel_cat_id	= {{ $sel_cat_id != NULL ? $sel_cat_id : 'null' }}
 
+	if( sel_cat_id != null ){
+		$.ajax({
+			url: "/dashboard/category/"+sel_cat_id,
+
+			success: function(result){
+            	$("#edit-form").html(result);
+        	},
+
+        	error: function(){
+				alert( "Internal Error" );
+			}
+        });
+	}
 
 	$( "#add_btn" ).button({
 		icons: { primary: "ui-icon-plusthick" },

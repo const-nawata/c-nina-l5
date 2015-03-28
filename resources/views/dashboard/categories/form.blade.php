@@ -17,7 +17,7 @@
 <div class="form-group">
     {!! Form::label('rank',@trans('prompts.list_order'),['class'=>'control-label col-sm-3'] ) !!}
     <div class="col-sm-9">
-		{!! Form::text('rank', $cat->rank, ['id'=>'rank','class'=>'form-control']) !!}
+		{!! Form::text('rank', ($cat->rank!=NULL?$cat->rank:0), ['id'=>'rank','class'=>'form-control']) !!}
     </div>
 </div>
 
