@@ -12,17 +12,15 @@ class DashboardController extends MainController{
 		$level++;
 
 		$name	= '';
-		for( $i=0; $i<$level; $i++){
+		for( $i=0; $i<$level; $i++)
 			$name	.= "&#8226; ";
-		}
 
 		$name	.= $cat['name'];
 
 		$parentsArr[$cat['id']]	= $name;
 
-		foreach($cat['children'] as $child ){
+		foreach($cat['children'] as $child )
 			$parentsArr	= self::getCatsSelBoxItem( $parentsArr, $child, $level );
-		}
 
 		return $parentsArr;
 	}

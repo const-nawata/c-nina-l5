@@ -24,7 +24,7 @@
 {!! Form::close() !!}
 
 <script type="text/javascript">
-///
+
 $(document).ready(function(){
 
 	$('#del_from_btn').on("click", function(e) {
@@ -56,7 +56,6 @@ $(document).ready(function(){
 			}
 		]);
 	});
-
 
 });
 
