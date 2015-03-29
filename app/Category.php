@@ -39,7 +39,7 @@ class Category extends Model{
 
 		return $sub_tree;
 	}
-//______________________________________________________________________________
+//______________________________________________________________________________ category edit/create
 
 /**
  * gets category tree.
@@ -67,4 +67,15 @@ class Category extends Model{
 	}
 //______________________________________________________________________________
 
+/**
+ * defines validation rules for planet creation.
+ * @return	array - validation rules
+ */
+	public static function getValidationRules() {
+		return [
+			'name'      => 'required',
+			'rank'     => 'integer|min:0'
+		];
+	}
+//______________________________________________________________________________
 }//	Class end

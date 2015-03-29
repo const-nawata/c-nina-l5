@@ -1,70 +1,41 @@
-{!! Form::open(['url'=>action('DashboardController@postCategory').$cat_url, 'method'=>'post', 'role'=>'form', 'class'=>'form-horizontal','id'=>'cat-form']) !!}
 
-<div class="form-group">
-    {!! Form::label('name',@trans('prompts.name'),['class'=>'control-label col-sm-3'] ) !!}
-    <div class="col-sm-9">
-		{!! Form::text('name', $cat->name, ['id'=>'name','class'=>'form-control']) !!}
-    </div>
-</div>
 
-<div class="form-group">
-    {!! Form::label('parent_id',@trans('prompts.parent'),['class'=>'control-label col-sm-3'] ) !!}
-    <div class="col-sm-9">
-		{!! Form::select('parent_id', $cats_names, $cat->parent_id,['id'=>'parent_id','class'=>'form-control']) !!}
-    </div>
-</div>
 
-<div class="form-group">
-    {!! Form::label('rank',@trans('prompts.list_order'),['class'=>'control-label col-sm-3'] ) !!}
-    <div class="col-sm-9">
-		{!! Form::text('rank', ($cat->rank!=NULL?$cat->rank:0), ['id'=>'rank','class'=>'form-control']) !!}
-    </div>
-</div>
+<script>
 
-<div class="btn-group">
-	{!! Form::submit(@trans('prompts.save'),['class'=>'btn btn-default']) !!}
 
-@if(!$is_has_chilren && $cat->id != NULL)
-	{!! Form::button(@trans('prompts.delete'),['class'=>'btn btn-default','id'=>'del_from_btn']) !!}
-@endif
-</div>
 
-{!! Form::close() !!}
+// 	$('#del_from_btn').on("click", function(e) {
+// 	    var message = "{!! @trans( 'messages.del_cat' ) !!}";
 
-<script type="text/javascript">
+// 	    e.preventDefault();
 
-$(document).ready(function(){
+// 	    message	= message.replace(":name", '<i>"{{ $cat->name }}"</i>' );
 
-	$('#del_from_btn').on("click", function(e) {
-	    var message = "{!! @trans( 'messages.del_cat' ) !!}";
+// 		$("#standard-dialog").dialog( "option", "width", "400px" );
+// 	    $("#standard-dialog").html( message );
+// 	    $("#standard-dialog" ).dialog( "option", "title", "{{ @trans( 'prompts.del_cat' ) }}" );
+// 	    $("#standard-dialog").dialog("open");
 
-	    e.preventDefault();
+// 		$( "#standard-dialog" ).dialog( "option", "buttons",[
+// 			{
+// 				text: "{{ @trans( 'prompts.yes' ) }}",
+// 				click: function() {
+// 					window.location.href = "/category/remove/{{ $cat->id }}";
+// 				}
 
-	    message	= message.replace(":name", '<i>"{{ $cat->name }}"</i>' );
+// 			},
 
-		$("#is-del-dialog").dialog( "option", "width", "400px" );
-	    $("#is-del-dialog").html( message );
-	    $("#is-del-dialog" ).dialog( "option", "title", "{{ @trans( 'prompts.del_cat' ) }}" );
-	    $("#is-del-dialog").dialog("open");
+// 			{
+// 				text: "{{ @trans( 'prompts.no' ) }}",
+// 				click: function() {
+// 					$(this).dialog("close");
+// 				}
+// 			}
+// 		]);
+// 	});
 
-		$( "#is-del-dialog" ).dialog( "option", "buttons",[
-			{
-				text: "{{ @trans( 'prompts.yes' ) }}",
-				click: function() {
-					window.location.href = "/category/remove/{{ $cat->id }}";
-				}
 
-			},
-
-			{
-				text: "{{ @trans( 'prompts.no' ) }}",
-				click: function() {
-					$(this).dialog("close");
-				}
-			}
-		]);
-	});
-
-});
 
 </script>
+

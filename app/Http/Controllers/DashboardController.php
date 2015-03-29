@@ -2,7 +2,9 @@
 
 use App\Category;
 use Request;
+use App\Http\Requests\CategoryFormRequest;
 use League\Flysystem\Adapter\NullAdapter;
+
 
 class DashboardController extends MainController{
 
@@ -33,7 +35,27 @@ class DashboardController extends MainController{
  */
     public function getCategories( $selCatId=NUll ){
     	$this->_cats_tree	= Category::getTree( $selCatId );
-    	return view( 'dashboard/categories/list', ['tree' => $this->_cats_tree, 'sel_cat_id'=>$selCatId ] );
+
+    	if($selCatId == NULL){
+			$cat_sel	= new Category();
+			$count_children	= 0;
+		}else{
+			$cat_sel	= Category::find( $selCatId );
+			$count_children = Category::where( 'parent_id', '=', $selCatId )->count();
+		}
+
+    	$cats_names	= [ -1=>'- '.trans('prompts.root_cat').' -'];
+    	foreach( $this->_cats_tree as $cat )
+    		$cats_names	= self::getCatsSelBoxItem( $cats_names, $cat );
+
+    	return view( 'dashboard/categories/list'
+    				,[
+    					'tree'		=> $this->_cats_tree
+    					,'sel_id'	=> ($selCatId!=NULL?$selCatId : 'null')
+    					, 'cats_names'=>$cats_names
+    					, 'count_children' => $count_children
+    				]
+    			);
     }
 //______________________________________________________________________________
 
@@ -45,30 +67,28 @@ class DashboardController extends MainController{
 //______________________________________________________________________________
 
     public function getCategory( $id=NULL ){
-		if($id == NULL){
-			$cat_sel	= new Category();
-			$count_children	= 0;
-			$cat_url	= '';
-		}else{
-			$cat_sel	= Category::find( $id );
-			$count_children = Category::where('parent_id', '=', $id )->count();
-			$cat_url	= '/'.$id;
-		}
 
-    	$this->_cats_tree	= $this->_cats_tree == NULL
-    		? Category::getTree()
-    		: $this->_cats_tree;
+		$cat	= $id != NULL ? Category::find( $id ) : new Category();
 
-    	$cats_names	= [ -1=>'- '.trans('prompts.root_cat').' -'];
-    	foreach( $this->_cats_tree as $cat )
-    		$cats_names	= self::getCatsSelBoxItem( $cats_names, $cat );
 
-    	return view( 'dashboard/categories/form', ['cat'=>$cat_sel, 'cats_names'=>$cats_names, 'is_has_chilren' => ($count_children > 0), 'cat_url'=>$cat_url ] );
+		$n_children = Category::where('parent_id', '=', $id )->count();
+
+		$json	=
+
+		 '{'.
+			'"id":'.($id != NULL?$id:'null').
+			',"name":"'.$cat->name.'"'.
+			',"parent_id":'.($cat->parent_id!=NULL?$cat->parent_id:'null').
+			',"rank":'.($cat->rank!=NULL?$cat->rank:0).
+		'}';
+
+		return $json;
     }
 //______________________________________________________________________________
 
-    public function postCategory( $id=NULL ){
-    	$cat_data	= Request::all();
+     public function postCategory( CategoryFormRequest $request, $id=NULL ){
+
+    	$cat_data	= $request->all();
     	$cat_data['parent_id']	= $cat_data['parent_id'] < 0 ? NULL : $cat_data['parent_id'];
 
     	$cat	= $id != NULL ? Category::find( $id ) : new Category();

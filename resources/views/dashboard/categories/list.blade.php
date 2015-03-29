@@ -61,62 +61,95 @@ function createCatListItem( $cat, $level=-1 ){
 	<center><h3>{{ @trans('prompts.cats_manage') }}</h3></center>
 @stop
 
-
 @section('sidebar')
-	<div class="panel-group cat-tree">
+<div class="panel-group cat-tree">
+<?php /* ?>
 		<div class="add-item">
 			<button id="add_btn">{{ @trans('prompts.add') }}</button>
 		</div>
-
+<?php */ ?>
 	@foreach( $tree as $cat )
 		{!! createCatListItem( $cat ) !!}
 	@endforeach
-	</div>
+
+</div>
 @stop
 
 @section('content')
-<div id="edit-form"></div>
+<div id="edit-form" >
+	{!! Form::open(['method'=>'post', 'role'=>'form', 'class'=>'form-horizontal']) !!}
+
+	<div class="form-group">
+	    {!! Form::label('name',@trans('prompts.name'),['class'=>'control-label col-sm-3'] ) !!}
+	    <div class="col-sm-9">
+			{!! Form::text('name', '', ['id'=>'name','class'=>'form-control']) !!}
+	    </div>
+	</div>
+
+	<div class="form-group">
+	    {!! Form::label('parent_id',@trans('prompts.parent'),['class'=>'control-label col-sm-3'] ) !!}
+	    <div class="col-sm-9">
+			{!! Form::select('parent_id', $cats_names, null,['id'=>'parent_id','class'=>'form-control']) !!}
+	    </div>
+	</div>
+
+	<div class="form-group">
+	    {!! Form::label('rank',@trans('prompts.list_order'),['class'=>'control-label col-sm-3'] ) !!}
+	    <div class="col-sm-9">
+			{!! Form::text('rank', '', ['id'=>'rank','class'=>'form-control']) !!}
+	    </div>
+	</div>
+
+	<div class="btn-group">
+		{!! Form::submit(@trans('prompts.save'),['class'=>'btn btn-default']) !!}
+
+	@if( $count_children < 1 )
+		{!! Form::button(@trans('prompts.delete'),['class'=>'btn btn-default','id'=>'del_from_btn']) !!}
+	@endif
+	</div>
+	{!! Form::close() !!}
+</div>
 @stop
 
 @section('js_extra')
 <script type="text/javascript">
 
+function fillCatForm( id ){
+
+	var url_cat	= id!=null?"/"+id:"";
+
+
+// alert("url_cat: "+url_cat);
+
+	$.ajax({
+		dataType: "json",
+		url: "/dashboard/category"+url_cat,
+
+		success: function(cat){
+			$("#name").val(cat.name);
+			$("#parent_id").val(cat.parent_id!=null?cat.parent_id:-1);
+			$("#rank").val(cat.rank);
+    	},
+
+    	error: function(){
+			alert( "Internal Error" );
+		}
+    });
+}
+
 $(document).ready(function(){
-	var sel_cat_id	= {{ $sel_cat_id != NULL ? $sel_cat_id : 'null' }}
 
-	if( sel_cat_id != null ){
-		$.ajax({
-			url: "/dashboard/category/"+sel_cat_id,
 
-			success: function(result){
-            	$("#edit-form").html(result);
-        	},
+	fillCatForm( {{ $sel_id }} );
 
-        	error: function(){
-				alert( "Internal Error" );
-			}
-        });
-	}
-
-	$( "#add_btn" ).button({
-		icons: { primary: "ui-icon-plusthick" },
+//-------------------------------------------	Edit
+	$('.cat-name').on("click", function(e) {
+		var cat	= $(this).attr('id').split("-");
+		fillCatForm( cat[1] );
 	});
 
-	$( "#add_btn" ).on("click", function(e){
-		$.ajax({
-			url: "/dashboard/category",
 
-			success: function(result){
-            	$("#edit-form").html(result);
-        	},
-
-        	error: function(){
-				alert( "Internal Error" );
-			}
-        });
-	});
-//-----------------------------------
-
+//-----------------------------------		Expand/Wrap category
 	$( ".btn-toggle-cat" ).each(function(){
 		var btn_css
 		,maw_id	= "#"+$(this).attr("data-target").substring(1);
@@ -146,25 +179,8 @@ $(document).ready(function(){
 	});
 
 	$('.btn-toggle-cat').attr("title", "{{ @trans( 'prompts.expand' ) }}");
-//-----------------------------------
 
-	$('.cat-name').on("click", function(e) {
-		var cat	= $(this).attr('id').split("-");
-
-		$.ajax({
-			url: "/dashboard/category/"+cat[1],
-
-			success: function(result){
-            	$("#edit-form").html(result);
-        	},
-
-        	error: function(){
-				alert( "Internal Error" );
-			}
-        });
-
-	});
-//-----------------------------------
+//-----------------------------------			Delete category
 
 	$( "button[id^='del_btn']" ).button({
 		icons: { primary: "ui-icon-closethick" },
@@ -182,12 +198,12 @@ $(document).ready(function(){
 
 	    message	= message.replace(":name", '<i>"'+cat_name+'"</i>' );
 
-		$("#is-del-dialog").dialog( "option", "width", "400px" );
-	    $("#is-del-dialog").html( message );
-	    $("#is-del-dialog" ).dialog( "option", "title", "{{ @trans( 'prompts.del_cat' ) }}" );
-	    $("#is-del-dialog").dialog("open");
+		$("#standard-dialog").dialog( "option", "width", "400px" );
+	    $("#standard-dialog").html( message );
+	    $("#standard-dialog" ).dialog( "option", "title", "{{ @trans( 'prompts.del_cat' ) }}" );
+	    $("#standard-dialog").dialog("open");
 
-		$( "#is-del-dialog" ).dialog( "option", "buttons",[
+		$( "#standard-dialog" ).dialog( "option", "buttons",[
 			{
 				text: "{{ @trans( 'prompts.yes' ) }}",
 				click: function() {
@@ -208,7 +224,7 @@ $(document).ready(function(){
 
 	$("button[id^='del_btn']").addClass( "del-btn" );
 
-});
 
+});
 </script>
 @stop

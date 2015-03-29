@@ -10,7 +10,7 @@
 	</div>
 </div>
 
-<div id="is-del-dialog"></div>
+<div id="standard-dialog"></div>
 
 
 </body>
@@ -19,7 +19,7 @@
 
 $(document).ready(function(){
 
-	$("#is-del-dialog").dialog({
+	$("#standard-dialog").dialog({
 		autoOpen: false,
 		dialogClass: "no-close",
 		modal: true
