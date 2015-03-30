@@ -77,7 +77,7 @@ function createCatListItem( $cat, $level=-1 ){
 
 @section('content')
 <div id="edit-form" >
-	{!! Form::open(['method'=>'post', 'role'=>'form', 'class'=>'form-horizontal']) !!}
+	{!! Form::open(['url'=>action('DashboardController@postCategory'),'method'=>'post', 'role'=>'form', 'class'=>'form-horizontal']) !!}
 
 	<div class="form-group">
 	    {!! Form::label('name',@trans('prompts.name'),['class'=>'control-label col-sm-3'] ) !!}
@@ -116,10 +116,7 @@ function createCatListItem( $cat, $level=-1 ){
 
 function fillCatForm( id ){
 
-	var url_cat	= id!=null?"/"+id:"";
-
-
-// alert("url_cat: "+url_cat);
+	var url_cat	= id != null ? "/"+id : "";
 
 	$.ajax({
 		dataType: "json",
@@ -129,6 +126,7 @@ function fillCatForm( id ){
 			$("#name").val(cat.name);
 			$("#parent_id").val(cat.parent_id!=null?cat.parent_id:-1);
 			$("#rank").val(cat.rank);
+			$('form').attr("action", "{!! action('DashboardController@postCategory') !!}"+url_cat);
     	},
 
     	error: function(){
