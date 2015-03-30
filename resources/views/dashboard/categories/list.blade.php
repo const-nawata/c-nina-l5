@@ -20,7 +20,7 @@ function createCatListItem( $cat, $level=-1 ){
 			'<div class="btn-group btn-group-xs" role="group">'.
 				'<button type="button" class="btn-toggle-cat" data-toggle="collapse" data-target="#'.$maw_id.'"></button>'.
 			'</div>'.
-			'<span id="cat-'.$cat['id'].'" class="cat-name" role="button">'.$cat['name'].'</span>'.
+			'<span id="cat-'.$cat['id'].'" class="cat-name" role="button" nchildren="'.count($cat['children']).'">'.$cat['name'].'</span>'.
 		'</div>'.
 
 		'<div id="'.$maw_id.'" class="panel-collapse collapse'.($cat['expand']?' in':'').'">'.
@@ -35,7 +35,7 @@ function createCatListItem( $cat, $level=-1 ){
 		'';
 	}else
 		$html	.=
-		'<span id="cat-'.$cat['id'].'" class="cat-name cat-name-single" role="button">'.$cat['name'].'</span>'.
+		'<span id="cat-'.$cat['id'].'" class="cat-name cat-name-single" role="button" nchildren="'.count($cat['children']).'">'.$cat['name'].'</span>'.
 		'<div class="btn-group btn-group-xs list-left-btn-group" role="group">'.
 			'<button id="del_btn-'.$cat['id'].'" type="button" title="'.trans('prompts.delete').'"></button>'.
 		'</div>'.
@@ -102,10 +102,7 @@ function createCatListItem( $cat, $level=-1 ){
 
 	<div class="btn-group">
 		{!! Form::submit(@trans('prompts.save'),['class'=>'btn btn-default']) !!}
-
-	@if( $count_children < 1 )
 		{!! Form::button(@trans('prompts.delete'),['class'=>'btn btn-default','id'=>'del_from_btn']) !!}
-	@endif
 	</div>
 	{!! Form::close() !!}
 </div>
@@ -142,8 +139,18 @@ $(document).ready(function(){
 
 //-------------------------------------------	Edit
 	$('.cat-name').on("click", function(e) {
-		var cat	= $(this).attr('id').split("-");
+		var cat;
+
+		cat	= $(this).attr('id').split("-");
+
 		fillCatForm( cat[1] );
+
+		($(this).attr('nchildren')>0)
+			? $("#del_from_btn").hide()
+			: $("#del_from_btn").show();
+
+
+// alert("nchildren: "+$(this).attr('nchildren'));
 	});
 
 
