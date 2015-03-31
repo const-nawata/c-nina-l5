@@ -28,6 +28,7 @@ return [
 	'parent'	=> 'Родитель',
 	'password'	=> 'Пароль',
 	'password_forgotten'	=> 'Пароль забыт?',
+	'rank'	=> 'Место в списке',
 	'registration'	=> 'Регистрация',
 	'remember_me'	=> 'Запомнить меня',
 	'root_cat'=> 'Основная',

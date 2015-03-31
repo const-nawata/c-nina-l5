@@ -156,8 +156,7 @@ function showDelCatDialog( id, name ){
 		{
 			text: "{{ @trans( 'prompts.yes' ) }}",
 			click: function() {
-				window.location.href =
-				"{!! action('DashboardController@removeCategory') !!}/"+id;
+				window.location.href = "{!! action('DashboardController@removeCategory') !!}/"+id;
 			}
 
 		},
@@ -173,10 +172,16 @@ function showDelCatDialog( id, name ){
 //------------------------------------------------------------------------------
 
 $(document).ready(function(){
+
+@if( !$errors->isEmpty() )
+	showAlert( "{{ @trans( 'prompts.error' ) }}", "{!! $errors->first($errors->keys()[0]) !!}", 500 );
+@endif
+
 	fillCatForm( {{ $sel_id }} );
 
 	$('#add_btn').on("click", function(e){
-		fillCatForm( null )
+// 		fillCatForm( null );
+		window.location.href = "{!! action('DashboardController@getCategories') !!}";
 	});
 
 //-------------------------------------------	Edit

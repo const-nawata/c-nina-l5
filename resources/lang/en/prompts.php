@@ -30,6 +30,7 @@ return [
 	'parent'=> 'Parent',
 	'password'	=> 'Password',
 	'password_forgotten'	=> 'Password forgotten?',
+	'rank'	=> 'Place in list',
 	'registration'	=> 'Registration',
 	'remember_me'	=> 'Remember me',
 	'root_cat'=> 'Root',

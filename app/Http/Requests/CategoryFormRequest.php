@@ -39,7 +39,16 @@ class CategoryFormRequest extends Request {
     public function response( array $errors){
 
 
-		$errors['name2']	= ['Anoter arror'];
+    	$new_arrors	= [];
+
+    	foreach( $errors as $field=>&$messages ){
+    		foreach( $messages as &$message ){
+    			$message	= str_replace($field,'\"'.trans( 'prompts.'.$field ).'\"', $message );
+    		}
+
+    	}
+
+// 		$errors['name2']	= ['Anoter arror'];
 
 
 // 		$errors	=[
