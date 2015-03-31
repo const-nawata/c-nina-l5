@@ -9,6 +9,8 @@
 function createCatListItem( $cat, $level=-1 ){
 	$level++;
 
+	$cat_name_span	= '<span id="cat-'.$cat['id'].'" class="cat-name %s" role="button">'.$cat['name'].'</span>';
+
 	$html	=
 	'<div class="panel" style="padding-left:'.(5*$level).'px;">';
 
@@ -20,26 +22,24 @@ function createCatListItem( $cat, $level=-1 ){
 			'<div class="btn-group btn-group-xs" role="group">'.
 				'<button type="button" class="btn-toggle-cat" data-toggle="collapse" data-target="#'.$maw_id.'"></button>'.
 			'</div>'.
-			'<span id="cat-'.$cat['id'].'" class="cat-name" role="button">'.$cat['name'].'</span>'.
+			sprintf($cat_name_span, '' ).
 		'</div>'.
 
 		'<div id="'.$maw_id.'" class="panel-collapse collapse'.($cat['expand']?' in':'').'">'.
 			'<div class="panel-group">';
 
-		foreach($cat['children'] as $child )
+		foreach( $cat['children'] as $child )
 			$html	.= createCatListItem( $child, $level );
 
 		$html	.=
 			'</div>'.
-		'</div>'.
-		'';
+		'</div>';
 	}else
 		$html	.=
-		'<span id="cat-'.$cat['id'].'" class="cat-name cat-name-single" role="button">'.$cat['name'].'</span>'.
+		sprintf($cat_name_span, 'cat-name-single' ).
 		'<div class="btn-group btn-group-xs list-left-btn-group" role="group">'.
 			'<button id="del_btn-'.$cat['id'].'" type="button" title="'.trans('prompts.delete').'"></button>'.
-		'</div>'.
-		'';
+		'</div>';
 
 	$html	.=
 	'</div>';
@@ -166,7 +166,7 @@ function showDelCatDialog( id, name ){
 
 		{
 			text: "{{ @trans( 'prompts.no' ) }}",
-			click: function() {
+			click: function(){
 				$(this).dialog("close");
 			}
 		}
@@ -175,8 +175,6 @@ function showDelCatDialog( id, name ){
 }
 
 $(document).ready(function(){
-
-
 	fillCatForm( {{ $sel_id }} );
 
 //-------------------------------------------	Edit
@@ -185,7 +183,6 @@ $(document).ready(function(){
 		cat	= $(this).attr('id').split("-");
 		fillCatForm( cat[1] );
 	});
-
 
 //-----------------------------------		Expand/Wrap category
 	$( ".btn-toggle-cat" ).each(function(){
@@ -219,7 +216,6 @@ $(document).ready(function(){
 	$('.btn-toggle-cat').attr("title", "{{ @trans( 'prompts.expand' ) }}");
 
 //-----------------------------------			Delete category (buttons on list)
-
 	$( "button[id^='del_btn']" ).button({
 		icons: { primary: "ui-icon-closethick" },
 		text: false
