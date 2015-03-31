@@ -100,9 +100,9 @@ function createCatListItem( $cat, $level=-1 ){
 	    </div>
 	</div>
 
-	<div class="btn-group">
+	<div class="btn-group" id="form_buttons">
 		{!! Form::submit(@trans('prompts.save'),['class'=>'btn btn-default']) !!}
-		{!! Form::button(@trans('prompts.delete'),['class'=>'btn btn-default','id'=>'del_from_btn']) !!}
+		{!! Form::button(@trans('prompts.delete'),['class'=>'btn btn-default','id'=>'del_form_btn']) !!}
 	</div>
 	{!! Form::close() !!}
 </div>
@@ -124,6 +124,17 @@ function fillCatForm( id ){
 			$("#parent_id").val(cat.parent_id!=null?cat.parent_id:-1);
 			$("#rank").val(cat.rank);
 			$('form').attr("action", "{!! action('DashboardController@postCategory') !!}"+url_cat);
+
+			if( cat.n_children > 0 ){
+				$("#del_form_btn").attr("disabled", true);
+				$("#del_form_btn").on("click","");
+			}else{
+				$("#del_form_btn").attr("disabled", false);
+
+				$("#del_form_btn").on("click", function(e){
+					showDelCatDialog( id, cat.name );
+				});
+			}
     	},
 
     	error: function(){
@@ -132,25 +143,47 @@ function fillCatForm( id ){
     });
 }
 
+
+function showDelCatDialog( id, name ){
+
+    var message = "{!! @trans( 'messages.del_cat' ) !!}";
+    message	= message.replace(":name", '<i>"'+name+'"</i>' );
+
+	$("#standard-dialog").dialog( "option", "width", "400px" );
+    $("#standard-dialog").html( message );
+    $("#standard-dialog" ).dialog( "option", "title", "{{ @trans( 'prompts.del_cat' ) }}" );
+    $("#standard-dialog").dialog("open");
+
+	$( "#standard-dialog" ).dialog( "option", "buttons",[
+		{
+			text: "{{ @trans( 'prompts.yes' ) }}",
+			click: function() {
+				window.location.href =
+				"{!! action('DashboardController@removeCategory') !!}/"+id;
+			}
+
+		},
+
+		{
+			text: "{{ @trans( 'prompts.no' ) }}",
+			click: function() {
+				$(this).dialog("close");
+			}
+		}
+	]);
+
+}
+
 $(document).ready(function(){
 
 
 	fillCatForm( {{ $sel_id }} );
 
 //-------------------------------------------	Edit
-	$('.cat-name').on("click", function(e) {
+	$('.cat-name').on("click", function(e){
 		var cat;
-
 		cat	= $(this).attr('id').split("-");
-
 		fillCatForm( cat[1] );
-
-		($(this).attr('nchildren')>0)
-			? $("#del_from_btn").hide()
-			: $("#del_from_btn").show();
-
-
-// alert("nchildren: "+$(this).attr('nchildren'));
 	});
 
 
@@ -185,46 +218,22 @@ $(document).ready(function(){
 
 	$('.btn-toggle-cat').attr("title", "{{ @trans( 'prompts.expand' ) }}");
 
-//-----------------------------------			Delete category
+//-----------------------------------			Delete category (buttons on list)
 
 	$( "button[id^='del_btn']" ).button({
 		icons: { primary: "ui-icon-closethick" },
 		text: false
 	});
 
+
 	$("button[id^='del_btn']").on("click", function(e){
 	    e.preventDefault();
 
 	    var cat_name
-	    ,message = "{!! @trans( 'messages.del_cat' ) !!}"
 	    ,cat	= $(this).attr('id').split("-");
 
 	    cat_name	= $("#cat-"+cat[1]).html();
-
-	    message	= message.replace(":name", '<i>"'+cat_name+'"</i>' );
-
-		$("#standard-dialog").dialog( "option", "width", "400px" );
-	    $("#standard-dialog").html( message );
-	    $("#standard-dialog" ).dialog( "option", "title", "{{ @trans( 'prompts.del_cat' ) }}" );
-	    $("#standard-dialog").dialog("open");
-
-		$( "#standard-dialog" ).dialog( "option", "buttons",[
-			{
-				text: "{{ @trans( 'prompts.yes' ) }}",
-				click: function() {
-					window.location.href = '/category/remove/'+cat[1];
-				}
-
-			},
-
-			{
-				text: "{{ @trans( 'prompts.no' ) }}",
-				click: function() {
-					$(this).dialog("close");
-				}
-			}
-		]);
-
+	    showDelCatDialog( cat[1], cat_name );
 	});
 
 	$("button[id^='del_btn']").addClass( "del-btn" );

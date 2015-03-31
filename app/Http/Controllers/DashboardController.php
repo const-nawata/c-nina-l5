@@ -66,6 +66,11 @@ class DashboardController extends MainController{
     }
 //______________________________________________________________________________
 
+/**
+ *
+ * @param string $id
+ * @return string
+ */
     public function getCategory( $id=NULL ){
 
 		$cat	= $id != NULL ? Category::find( $id ) : new Category();
@@ -80,6 +85,7 @@ class DashboardController extends MainController{
 			',"name":"'.$cat->name.'"'.
 			',"parent_id":'.($cat->parent_id!=NULL?$cat->parent_id:'null').
 			',"rank":'.($cat->rank!=NULL?$cat->rank:0).
+			',"n_children":'.$n_children.
 		'}';
 
 		return $json;

@@ -29,5 +29,5 @@ Route::get('/', [
 Route::controller('index', 'IndexController');
 Route::controller('users', 'UsersController');
 Route::controller('dashboard', 'DashboardController');
-Route::get('category/remove/{id}', 'DashboardController@removeCategory');
+Route::get('category/remove/{id?}', 'DashboardController@removeCategory');//TODO: Try to find possibility to remove qeation mark
 Route::post('category/save/{id?}', 'DashboardController@postCategory');
