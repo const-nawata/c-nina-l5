@@ -9,7 +9,8 @@
 function createCatListItem( $cat, $level=-1 ){
 	$level++;
 
-	$cat_name_span	= '<span id="cat-'.$cat['id'].'" class="cat-name %s" role="button">'.$cat['name'].'</span>';
+	$sel_css	= $cat['is_selected'] ? 'celected-cat' : '';
+	$cat_name_span	= '<span id="cat-'.$cat['id'].'" class="cat-name '.$sel_css.' %s" role="button">'.$cat['name'].'</span>';
 
 	$html	=
 	'<div class="panel" style="padding-left:'.(5*$level).'px;">';
@@ -142,10 +143,9 @@ function fillCatForm( id ){
 		}
     });
 }
-
+//------------------------------------------------------------------------------
 
 function showDelCatDialog( id, name ){
-
     var message = "{!! @trans( 'messages.del_cat' ) !!}";
     message	= message.replace(":name", '<i>"'+name+'"</i>' );
 
@@ -171,8 +171,8 @@ function showDelCatDialog( id, name ){
 			}
 		}
 	]);
-
 }
+//------------------------------------------------------------------------------
 
 $(document).ready(function(){
 	fillCatForm( {{ $sel_id }} );
@@ -182,6 +182,9 @@ $(document).ready(function(){
 		var cat;
 		cat	= $(this).attr('id').split("-");
 		fillCatForm( cat[1] );
+
+		$('.cat-name').removeClass( "celected-cat" );
+		$(this).addClass( "celected-cat" );
 	});
 
 //-----------------------------------		Expand/Wrap category

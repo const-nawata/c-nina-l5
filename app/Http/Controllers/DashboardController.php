@@ -39,8 +39,11 @@ class DashboardController extends MainController{
 			: Category::find( $selCatId );
 
     	$cats_names	= [ -1=>'- '.trans('prompts.root_cat').' -'];
-    	foreach( $tree as $cat )
+    	foreach( $tree as $cat ){
     		$cats_names	= self::getCatsSelBoxItem( $cats_names, $cat );
+
+
+    	}
 
     	return view( 'dashboard/categories/list'
     				,[

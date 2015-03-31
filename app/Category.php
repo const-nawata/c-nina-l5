@@ -33,7 +33,8 @@ class Category extends Model{
 				'id'	=> $cat->id,
 				'name'	=> $cat->name,
 				'expand'	=> $cat->id == $selCatId || self::isChildrenHasExpand( $children, $selCatId ),
-				'children'	=> $children
+				'children'	=> $children,
+				'is_selected'	=> $selCatId == $cat->id
 			];
 		}
 
@@ -59,7 +60,8 @@ class Category extends Model{
 				'id'	=> $cat->id,
 				'name'	=> $cat->name,
 				'expand'	=> $cat->id == $selCatId || self::isChildrenHasExpand( $children, $selCatId ),
-				'children'	=> $children
+				'children'	=> $children,
+				'is_selected'	=> $selCatId == $cat->id
 			];
 		}
 
