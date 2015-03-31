@@ -64,14 +64,6 @@ function createCatListItem( $cat, $level=-1 ){
 
 @section('sidebar')
 <div class="panel-group cat-tree">
-<?php /* ?>
-		<div class="add-item">
-			<button id="add_btn">{{ @trans('prompts.add') }}</button>
-		</div>
-<?php */ ?>
-
-
-
 
 {!! Form::button(@trans('prompts.add'),['class'=>'btn btn-default','id'=>'add_btn']) !!}
 
