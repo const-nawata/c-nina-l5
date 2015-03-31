@@ -8,8 +8,6 @@ use League\Flysystem\Adapter\NullAdapter;
 
 class DashboardController extends MainController{
 
-	private $_cats_tree = NULL;
-
 	private static function getCatsSelBoxItem( $parentsArr, $cat, $level=-1 ){
 		$level++;
 
@@ -34,26 +32,21 @@ class DashboardController extends MainController{
  * @return \Illuminate\View\View - HTML content
  */
     public function getCategories( $selCatId=NUll ){
-    	$this->_cats_tree	= Category::getTree( $selCatId );
+    	$tree	= Category::getTree( $selCatId );
 
-    	if($selCatId == NULL){
-			$cat_sel	= new Category();
-			$count_children	= 0;
-		}else{
-			$cat_sel	= Category::find( $selCatId );
-			$count_children = Category::where( 'parent_id', '=', $selCatId )->count();
-		}
+    	$cat_sel	= ($selCatId == NULL)
+			? new Category()
+			: Category::find( $selCatId );
 
     	$cats_names	= [ -1=>'- '.trans('prompts.root_cat').' -'];
-    	foreach( $this->_cats_tree as $cat )
+    	foreach( $tree as $cat )
     		$cats_names	= self::getCatsSelBoxItem( $cats_names, $cat );
 
     	return view( 'dashboard/categories/list'
     				,[
-    					'tree'		=> $this->_cats_tree
+    					'tree'		=> $tree
     					,'sel_id'	=> ($selCatId!=NULL?$selCatId : 'null')
     					, 'cats_names'=>$cats_names
-    					, 'count_children' => $count_children
     				]
     			);
     }
