@@ -23,6 +23,9 @@ return [
 	'login'	=> 'Login',
 	'logout'	=> 'Logout',
 	'name'	=> 'Name',
+	'new'	=>[
+		'f_i'	=>	'New'
+	],
 	'no'=> 'No',
 	'parent'=> 'Parent',
 	'password'	=> 'Password',

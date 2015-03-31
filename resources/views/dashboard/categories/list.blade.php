@@ -69,6 +69,12 @@ function createCatListItem( $cat, $level=-1 ){
 			<button id="add_btn">{{ @trans('prompts.add') }}</button>
 		</div>
 <?php */ ?>
+
+
+
+
+{!! Form::button(@trans('prompts.add'),['class'=>'btn btn-default','id'=>'add_btn']) !!}
+
 	@foreach( $tree as $cat )
 		{!! createCatListItem( $cat ) !!}
 	@endforeach
@@ -176,6 +182,10 @@ function showDelCatDialog( id, name ){
 
 $(document).ready(function(){
 	fillCatForm( {{ $sel_id }} );
+
+	$('#add_btn').on("click", function(e){
+		fillCatForm( null )
+	});
 
 //-------------------------------------------	Edit
 	$('.cat-name').on("click", function(e){
