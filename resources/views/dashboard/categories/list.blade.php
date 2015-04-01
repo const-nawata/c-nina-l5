@@ -175,9 +175,9 @@ $(document).ready(function(){
 
 @if( !$errors->isEmpty() )
 	showAlert( "{{ @trans( 'prompts.error' ) }}", "{!! $errors->first($errors->keys()[0]) !!}", 500 );
-@endif
-
+@else
 	fillCatForm( {{ $sel_id }} );
+@endif
 
 	$('#add_btn').on("click", function(e){
 // 		fillCatForm( null );
