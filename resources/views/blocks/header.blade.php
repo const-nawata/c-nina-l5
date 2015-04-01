@@ -12,26 +12,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-<?php /* ?>
-
-//TODO: Delete if sure
-
-<script src="http://code.jquery.com/jquery-2.1.3.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-
-
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
-	<link href="//jqueryui.com/jquery-wp-content/themes/jquery/css/base.css?v=1" rel="stylesheet">
-	<link href="//jqueryui.com/jquery-wp-content/themes/jqueryui.com/style.css" rel="stylesheet">
-<?php */ ?>
-
-
-
 	<!-- jQuery & jQuery UI -->
 	<script src="http://code.jquery.com/jquery-2.1.3.min.js" type="text/javascript" charset="utf-8"></script>
-
 
 	<!-- Bootstrap -->
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>

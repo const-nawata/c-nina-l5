@@ -30,6 +30,9 @@ body {
   display: none;
 }
 
+#screen_title .page-header{
+	margin-top: -15px;
+}
 
 /* Categories list*/
 .cat-tree .add-item{
@@ -37,7 +40,7 @@ body {
 }
 
 .cat-tree .celected-cat{
-	background-color: #ffebd7;
+	background-color: #e1e1e1;
 }
 
 .cat-tree button.ui-button-icon-only{

@@ -19,15 +19,21 @@
 	<div class="container">
 		<div class="row">
 
-			@yield('buttons')
+			<div class="col-sm-6">
+				<div class="btn-group btn-group-justified" aria-label="Header-buttons" role="group">
+					@yield('buttons')
+				</div>
+			</div>
 
 			<div class="col-sm-6">
 				<ul class="nav navbar-nav navbar-right">
-@if( !Auth::check() )
+
+				@if( !Auth::check() )
 					<li><a href="/users/login">{{ @trans('prompts.login') }}</a></li>
-@else
+				@else
 					<li><a href="/users/logout">{{ @trans('prompts.logout') }}</a></li>
-@endif
+				@endif
+
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ @trans('prompts.lang') }}<span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
@@ -42,7 +48,9 @@
 	</div>
 </nav>
 
+<div id="screen_title" class="container">
 @yield('screen_title')
+</div>
 
 <div id="main_container" class="container">
 @yield('main_container')

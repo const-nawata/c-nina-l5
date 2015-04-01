@@ -59,7 +59,14 @@ function createCatListItem( $cat, $level=-1 ){
 @stop
 
 @section('screen_title')
-	<center><h3>{{ @trans('prompts.cats_manage') }}</h3></center>
+	<div class="row">
+		<div class="col-md-2">
+			&nbsp;
+		</div>
+		<div class="col-md-10 page-header">
+			<h3>{{ @trans('prompts.cats_manage') }} <small id="mode"> - {{ $sel_id!='null' ? @trans('prompts.editing') : @trans('prompts.adding') }}</small></h3>
+		</div>
+	</div>
 @stop
 
 @section('sidebar')
@@ -122,7 +129,7 @@ function fillCatForm( id ){
 			$("#name").val(cat.name);
 			$("#parent_id").val(cat.parent_id!=null?cat.parent_id:-1);
 			$("#rank").val(cat.rank);
-			$('form').attr("action", "{!! action('DashboardController@postCategory') !!}"+url_cat);
+			$("form").attr("action", "{!! action('DashboardController@postCategory') !!}"+url_cat);
 
 			if( cat.n_children > 0 ){
 				$("#del_form_btn").attr("disabled", true);
@@ -180,7 +187,6 @@ $(document).ready(function(){
 @endif
 
 	$('#add_btn').on("click", function(e){
-// 		fillCatForm( null );
 		window.location.href = "{!! action('DashboardController@getCategories') !!}";
 	});
 
@@ -192,6 +198,8 @@ $(document).ready(function(){
 
 		$('.cat-name').removeClass( "celected-cat" );
 		$(this).addClass( "celected-cat" );
+
+		$('#mode').html(" - {{ @trans('prompts.editing') }}");
 	});
 
 //-----------------------------------		Expand/Wrap category
