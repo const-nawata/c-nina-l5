@@ -18,7 +18,7 @@ class GoodsTable extends Migration {
 			$table->increments( 'id' )->unsigned();
 
 			$table->string( 'name', 200 )->nullable();
-			$table->string( 'articul', 200 )->nullable();
+			$table->string( 'article', 200 )->nullable();
 			$table->decimal( 'r_price', 10, 3 )->default(0.000);
 			$table->decimal( 'w_price', 10, 3 )->default(0.000);
 			$table->integer( 'in_pack',FALSE, TRUE)->default(0);
