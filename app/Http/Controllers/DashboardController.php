@@ -109,12 +109,12 @@ class DashboardController extends MainController{
 
 
 
-// 	$output	= [
-// 		"sEcho" => intval($_GET['sEcho']),
+	$output	= [
+		"sEcho" => intval($_GET['sEcho']),
 // 		"iTotalRecords" => $iTotal,
 // 		"iTotalDisplayRecords" => $iFilteredTotal,
 // 		"aaData" => []
-// 	];
+	];
 
 
     	return
