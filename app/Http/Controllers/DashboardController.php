@@ -99,7 +99,7 @@ class DashboardController extends MainController{
 //______________________________________________________________________________
 
     public function getGoods(){
-    	return view( 'dashboard/goods' );
+    	return view( 'dashboard/goods/list' );
     }
 //______________________________________________________________________________
 

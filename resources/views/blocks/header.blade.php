@@ -22,6 +22,9 @@
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
 
+	<link rel="stylesheet" href="//cdn.datatables.net/1.10.6/css/jquery.dataTables.css">
+	<script src="//cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js" type="text/javascript" charset="utf-8"></script>
+
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
 	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
