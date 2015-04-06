@@ -103,6 +103,61 @@ class DashboardController extends MainController{
     }
 //______________________________________________________________________________
 
+    public function getGoodstable(){
+
+
+
+
+
+// 	$output	= [
+// 		"sEcho" => intval($_GET['sEcho']),
+// 		"iTotalRecords" => $iTotal,
+// 		"iTotalDisplayRecords" => $iFilteredTotal,
+// 		"aaData" => []
+// 	];
+
+
+    	return
+'{'.
+	'"sEcho": 1,'.
+	'"iTotalRecords": "3",'.
+	'"iTotalDisplayRecords": "3",'.
+	'"aaData":['.
+		'['.
+			'"F1-R1",'.
+			'"F2-R1",'.
+			'"F3-R1",'.
+			'"F4-R1",'.
+			'"F4-R1",'.
+			'"F4-R1",'.
+			'"F5-R1"'.
+		'],'.
+		'['.
+			'"F1-R2",'.
+			'"F2-R2",'.
+			'"F3-R2",'.
+			'"F4-R2",'.
+			'"F4-R1",'.
+			'"F4-R1",'.
+			'"F5-R2"'.
+		'],'.
+		'['.
+			'"F1-R3",'.
+			'"F2-R3",'.
+			'"F3-R3",'.
+			'"F4-R3",'.
+			'"F4-R1",'.
+			'"F4-R1",'.
+			'"F5-R3"'.
+		']'.
+	']'.
+'}'.
+
+
+    	'';
+    }
+//______________________________________________________________________________
+
     public function getUsers(){
     	return view( 'dashboard/users' );
     }
