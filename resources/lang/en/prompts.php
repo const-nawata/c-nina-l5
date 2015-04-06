@@ -45,4 +45,7 @@ return [
 	'wrap'	=> 'Wrap',
 	'yes'=> 'Yes',
 	'your_login_data'	=> 'Your login data'
+
+			//	Units
+	,'pcs'	=> 'pcs'
 ];

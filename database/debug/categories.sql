@@ -26,11 +26,11 @@ BEGIN
 		DELETE FROM `categories` WHERE `name` LIKE '%Debug cat%';
 
 
-		INSERT INTO `categories` (`name`,`parent_id`,created_at,updated_at)VALUES ('Debug cat 01',NULL,NOW(),NOW());SET v_cat01_id = LAST_INSERT_ID();
-		INSERT INTO `categories` (`name`,`parent_id`,created_at,updated_at)VALUES ('Debug cat 02',NULL,NOW(),NOW());SET v_cat02_id = LAST_INSERT_ID();
-		INSERT INTO `categories` (`name`,`parent_id`,created_at,updated_at)VALUES ('Debug cat 03',NULL,NOW(),NOW());SET v_cat03_id = LAST_INSERT_ID();
-		INSERT INTO `categories` (`name`,`parent_id`,created_at,updated_at)VALUES ('Debug cat 04',NULL,NOW(),NOW());SET v_cat04_id = LAST_INSERT_ID();
-		INSERT INTO `categories` (`name`,`parent_id`,created_at,updated_at)VALUES ('Debug cat 05',NULL,NOW(),NOW());SET v_cat05_id = LAST_INSERT_ID();
+		INSERT INTO `categories` (`name`,`parent_id`,rank,created_at,updated_at)VALUES ('Debug cat 01',NULL,10,NOW(),NOW());SET v_cat01_id = LAST_INSERT_ID();
+		INSERT INTO `categories` (`name`,`parent_id`,rank,created_at,updated_at)VALUES ('Debug cat 02',NULL,20,NOW(),NOW());SET v_cat02_id = LAST_INSERT_ID();
+		INSERT INTO `categories` (`name`,`parent_id`,rank,created_at,updated_at)VALUES ('Debug cat 03',NULL,30,NOW(),NOW());SET v_cat03_id = LAST_INSERT_ID();
+		INSERT INTO `categories` (`name`,`parent_id`,rank,created_at,updated_at)VALUES ('Debug cat 04',NULL,40,NOW(),NOW());SET v_cat04_id = LAST_INSERT_ID();
+		INSERT INTO `categories` (`name`,`parent_id`,rank,created_at,updated_at)VALUES ('Debug cat 05',NULL,50,NOW(),NOW());SET v_cat05_id = LAST_INSERT_ID();
 
 
 
