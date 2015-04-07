@@ -46,7 +46,6 @@ return [
 	'root_cat'=> 'Root',
 	'russian'	=> 'Russian',
 	'save'	=> 'Save',
-	'search'	=> 'Search',
 	'username'	=> 'Username',
 	'users'	=> 'Users',
 	'welcome'	=> 'Welcome',
@@ -57,4 +56,7 @@ return [
 
 			//	Units
 	,'pcs'	=> 'pcs'
+
+	//	DataTable ajax
+	,'search'	=> 'Search'
 ];

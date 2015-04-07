@@ -44,7 +44,6 @@ return [
 	'root_cat'=> 'Основная',
 	'russian'	=> 'Русский',
 	'save'	=> 'Сохранить',
-	'search'	=> 'Поиск',
 	'username'	=> 'Логин',
 	'users'	=> 'Пользователи',
 	'welcome'	=> 'Добро пожаловать',
@@ -55,4 +54,7 @@ return [
 
 			//	Units
 	,'pcs'	=> 'шт.'
+
+	//	DataTable ajax
+	,'search'	=> 'Поиск'
 ];
