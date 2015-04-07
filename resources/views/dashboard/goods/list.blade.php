@@ -19,8 +19,8 @@
 <table id="goods_table" border="1">
 	<thead>
 	<tr>
-		<th rowspan="2">{{ @trans('prompts.name') }}</th>
-		<th rowspan="2">{{ @trans('prompts.article') }}</th>
+		<th rowspan="2"><div>{{ @trans('prompts.name') }}</div><div><input class="field-search-input" type="text" placeholder="{{ @trans('prompts.search') }}" /></div></th>
+		<th rowspan="2"><div>{{ @trans('prompts.article') }}</div><div><input class="field-search-input" type="text" placeholder="{{ @trans('prompts.search') }}" /></div></th>
 		<th colspan="2">{{ @trans('prompts.price') }}</th>
 		<th colspan="3">{{ @trans('prompts.quantity') }}</th>
 	</tr>
@@ -55,6 +55,11 @@ $(document).ready(function(){
 	$('#goods_table').dataTable( {
 		"bProcessing": true,
 		"bServerSide": true,
+
+		"aoColumnDefs": [
+		                 { "bSearchable": false, "aTargets": [ 2,3,4,5,6 ] }
+		               ],
+
 		"sAjaxSource": "/dashboard/goodstable"
 	});
 

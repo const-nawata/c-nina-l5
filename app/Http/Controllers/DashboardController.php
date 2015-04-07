@@ -4,6 +4,7 @@ use App\Category;
 use Request;
 use App\Http\Requests\CategoryFormRequest;
 use League\Flysystem\Adapter\NullAdapter;
+use App\Good;
 
 
 class DashboardController extends MainController{
@@ -105,13 +106,14 @@ class DashboardController extends MainController{
 
     public function getGoodstable(){
 
+    	$iTotal	= Good::all()->count();
 
 
-
+// info(print_r( $_GET, 1 ));
 
 	$output	= [
 		"sEcho" => intval($_GET['sEcho']),
-// 		"iTotalRecords" => $iTotal,
+		"iTotalRecords" => $iTotal,
 // 		"iTotalDisplayRecords" => $iFilteredTotal,
 // 		"aaData" => []
 	];
@@ -119,37 +121,29 @@ class DashboardController extends MainController{
 
     	return
 '{'.
-	'"sEcho": 1,'.
-	'"iTotalRecords": "3",'.
-	'"iTotalDisplayRecords": "3",'.
+	'"sEcho": '.intval($_GET['sEcho']).','.
+	'"iTotalRecords": "'.$iTotal.'",'.
+	'"iTotalDisplayRecords": "10",'.
 	'"aaData":['.
-		'['.
-			'"F1-R1",'.
-			'"F2-R1",'.
-			'"F3-R1",'.
-			'"F4-R1",'.
-			'"F4-R1",'.
-			'"F4-R1",'.
-			'"F5-R1"'.
-		'],'.
-		'['.
-			'"F1-R2",'.
-			'"F2-R2",'.
-			'"F3-R2",'.
-			'"F4-R2",'.
-			'"F4-R1",'.
-			'"F4-R1",'.
-			'"F5-R2"'.
-		'],'.
-		'['.
-			'"F1-R3",'.
-			'"F2-R3",'.
-			'"F3-R3",'.
-			'"F4-R3",'.
-			'"F4-R1",'.
-			'"F4-R1",'.
-			'"F5-R3"'.
-		']'.
+
+		'["Test name of good item","Test article of good item","1000.55","2000.89","F4-R1","F4-R1","F5-R001"]'.
+		',["F1-R1","F2-R1","F3-R1","F4-R1","F4-R1","F4-R1","F5-R002"]'.
+		',["F1-R1","F2-R1","F3-R1","F4-R1","F4-R1","F4-R1","F5-R003"]'.
+		',["F1-R1","F2-R1","F3-R1","F4-R1","F4-R1","F4-R1","F5-R004"]'.
+		',["F1-R1","F2-R1","F3-R1","F4-R1","F4-R1","F4-R1","F5-R005"]'.
+		',["F1-R1","F2-R1","F3-R1","F4-R1","F4-R1","F4-R1","F5-R006"]'.
+		',["F1-R1","F2-R1","F3-R1","F4-R1","F4-R1","F4-R1","F5-R007"]'.
+		',["F1-R1","F2-R1","F3-R1","F4-R1","F4-R1","F4-R1","F5-R008"]'.
+		',["F1-R1","F2-R1","F3-R1","F4-R1","F4-R1","F4-R1","F5-R009"]'.
+		',["F1-R1","F2-R1","F3-R1","F4-R1","F4-R1","F4-R1","F5-R010"]'.
+
+// 		',["F1-R1","F2-R1","F3-R1","F4-R1","F4-R1","F4-R1","F5-R011"]'.
+// 		',["F1-R1","F2-R1","F3-R1","F4-R1","F4-R1","F4-R1","F5-R012"]'.
+// 		',["F1-R1","F2-R1","F3-R1","F4-R1","F4-R1","F4-R1","F5-R013"]'.
+// 		',["F1-R1","F2-R1","F3-R1","F4-R1","F4-R1","F4-R1","F5-R014"]'.
+// 		',["F1-R1","F2-R1","F3-R1","F4-R1","F4-R1","F4-R1","F5-R015"]'.
+
+
 	']'.
 '}'.
 
