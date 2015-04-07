@@ -19,8 +19,8 @@
 <table id="goods_table" border="1">
 	<thead>
 	<tr>
-		<th rowspan="2"><div>{{ @trans('prompts.name') }}</div><div><input class="field-search-input" type="text" placeholder="{{ @trans('prompts.search') }}" /></div></th>
-		<th rowspan="2"><div>{{ @trans('prompts.article') }}</div><div><input class="field-search-input" type="text" placeholder="{{ @trans('prompts.search') }}" /></div></th>
+		<th rowspan="2"><div>{{ @trans('prompts.name') }}</div><div><input class="form-control field-search-input" type="text" placeholder="{{ @trans('prompts.search') }}" /></div></th>
+		<th rowspan="2"><div>{{ @trans('prompts.article') }}</div><div><input class="form-control field-search-input" type="text" placeholder="{{ @trans('prompts.search') }}" /></div></th>
 		<th colspan="2">{{ @trans('prompts.price') }}</th>
 		<th colspan="3">{{ @trans('prompts.quantity') }}</th>
 	</tr>
@@ -43,7 +43,33 @@
 		<th>F5</th>
 	</tr>
 	</tfoot>
-<?php */ ?>
+
+
+{
+    "emptyTable":     "No data available in table",
+    "info":           "Showing _START_ to _END_ of _TOTAL_ entries",
+    "infoEmpty":      "Showing 0 to 0 of 0 entries",
+    "infoFiltered":   "(filtered from _MAX_ total entries)",
+    "infoPostFix":    "",
+    "thousands":      ",",
+    "lengthMenu":     "Show _MENU_ entries",
+    "loadingRecords": "Loading...",
+    "processing":     "Processing...",
+    "search":         "Search:",
+    "zeroRecords":    "No matching records found",
+    "paginate": {
+        "first":      "First",
+        "last":       "Last",
+        "next":       "Next",
+        "previous":   "Previous"
+    },
+    "aria": {
+        "sortAscending":  ": activate to sort column ascending",
+        "sortDescending": ": activate to sort column descending"
+    }
+}
+*/
+?>
 </table>
 
 @stop
@@ -57,8 +83,12 @@ $(document).ready(function(){
 		"bServerSide": true,
 
 		"aoColumnDefs": [
-		                 { "bSearchable": false, "aTargets": [ 2,3,4,5,6 ] }
-		               ],
+			{ "bSearchable": false, "aTargets": [ 2,3,4,5,6 ] }
+		],
+
+		"language":{
+			"search":"{{ @trans('prompts.search') }}"
+		},
 
 		"sAjaxSource": "/dashboard/goodstable"
 	});
