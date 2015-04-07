@@ -49,7 +49,7 @@ return [
 	'username'	=> 'Username',
 	'users'	=> 'Users',
 	'welcome'	=> 'Welcome',
-	'wholesale'	=> 'holesale',
+	'wholesale'	=> 'Wholesale',
 	'wrap'	=> 'Wrap',
 	'yes'=> 'Yes',
 	'your_login_data'	=> 'Your login data'
@@ -58,5 +58,21 @@ return [
 	,'pcs'	=> 'pcs'
 
 	//	DataTable ajax
+	,'empty_table'	=> 'No data available in table'
+	,'info_empty'	=> 'Showing 0 to 0 of 0 entry'
+
+	,'info'	=> 'Showing _START_ to _END_ of _TOTAL_ entries'
+	,'info_filtered'	=> '(filtered from _MAX_ total entries)'
+	,'length_menu'	=> 'Show&nbsp; _MENU_ entries'
+	,'loading_records'	=> 'Loading&#8230;'
+	,'processing'	=> 'Processing&#8230;'
 	,'search'	=> 'Search'
+	,'zero_records'	=> 'No matching records found'
+
+	,'paginate'	=> [
+		'first'=>'First',
+		'last'=>'Last',
+		'next'=>'Next &raquo;',
+		'previous'=>'&laquo; Previous'
+	]
 ];

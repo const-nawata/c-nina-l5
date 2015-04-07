@@ -56,5 +56,21 @@ return [
 	,'pcs'	=> 'шт.'
 
 	//	DataTable ajax
+	,'empty_table'	=> 'В таблице нет доступных данных'
+	,'info_empty'	=> 'Показано с 0 по 0 из 0 зап.'
+
+	,'info'	=> 'Показаны записи с _START_ по _END_ из _TOTAL_'
+	,'info_filtered'	=> '(всего в базе _MAX_)'
+	,'length_menu'	=> 'Показать по&nbsp; _MENU_ строк'
+	,'loading_records'	=> 'Загрузка&#8230;'
+	,'processing'	=> 'Обработка&#8230;'
 	,'search'	=> 'Поиск'
+	,'zero_records'	=> 'Для введённых условий записей не найдено'
+
+	,'paginate'	=> [
+		'first'=>'Перв.',
+		'last'=>'Посл.',
+		'next'=>'След. &raquo;',
+		'previous'=>'&laquo; Пред.'
+	]
 ];

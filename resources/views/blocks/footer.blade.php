@@ -14,8 +14,37 @@
 
 
 </body>
+<?php
+/*									//	Not translated prompts for DataTable ajax
+    "infoPostFix":    "",
+    "thousands":      ",",
 
+    "aria": {
+        "sortAscending":  ": activate to sort column ascending",
+        "sortDescending": ": activate to sort column descending"
+    }
+*/
+?>
 <script type="text/javascript">
+var tbl_prompts = {
+	"emptyTable":"{{ @trans('prompts.empty_table') }}"
+	,"infoEmpty":"{{ @trans('prompts.info_empty') }}"
+
+	,"info":"{{ @trans('prompts.info') }}"
+	,"infoFiltered":"{{ @trans('prompts.info_filtered') }}"
+	,"zeroRecords":"{{ @trans('prompts.zero_records') }}"
+	,"search":"{{ @trans('prompts.search') }}"
+	,"lengthMenu":"{{ @trans('prompts.length_menu') }}"
+	,"processing":"{{ @trans('prompts.processing') }}"
+	,"loadingRecords": "{{ @trans('prompts.loading_records') }}"
+
+    ,"paginate":{
+        "first":"{{ @trans('prompts.paginate.first') }}",
+        "last":"{{ @trans('prompts.paginate.last') }}",
+        "next":"{{ @trans('prompts.paginate.next') }}",
+        "previous":"{{ @trans('prompts.paginate.previous') }}"
+    }
+};
 
 function showAlert( title, message, width ){
 	var d_width	= width ? width : 400;

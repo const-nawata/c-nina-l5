@@ -123,7 +123,8 @@ class DashboardController extends MainController{
 '{'.
 	'"sEcho": '.intval($_GET['sEcho']).','.
 	'"iTotalRecords": "'.$iTotal.'",'.
-	'"iTotalDisplayRecords": "10",'.
+// 	'"iTotalRecords": "0",'.
+	'"iTotalDisplayRecords": "20",'.
 	'"aaData":['.
 
 		'["Test name of good item","Test article of good item","1000.55","2000.89","F4-R1","F4-R1","F5-R001"]'.
