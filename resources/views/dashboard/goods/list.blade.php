@@ -8,19 +8,18 @@
 	@include('dashboard/blocks/buttons')
 @stop
 
-@section('sidebar')
-<div>Left side bar of Goods</div>
-@stop
 
 @section('content')
 
 
-
-<table id="goods_table" border="1">
+<div class="jumbotron j-tbl">
+<table id="goods_table">
 	<thead>
 	<tr>
-		<th rowspan="2"><div>{{ @trans('prompts.name') }}</div><div><input class="form-control field-search-input" type="text" placeholder="{{ @trans('prompts.search') }}" /></div></th>
-		<th rowspan="2"><div>{{ @trans('prompts.article') }}</div><div><input class="form-control field-search-input" type="text" placeholder="{{ @trans('prompts.search') }}" /></div></th>
+
+		<th rowspan="2">{{ @trans('prompts.name') }}</th>
+		<th rowspan="2">{{ @trans('prompts.article') }}</th>
+
 		<th colspan="2">{{ @trans('prompts.price') }}</th>
 		<th colspan="3">{{ @trans('prompts.quantity') }}</th>
 	</tr>
@@ -33,26 +32,26 @@
 	</tr>
 	</thead>
 
-<?php /* ?>
 	<tfoot>
 	<tr>
-		<th>{{ @trans('prompts.name') }}</th>  retail
-		<th>{{ @trans('prompts.article') }}</th>
-		<th>F3</th>
-		<th>F4</th>
-		<th>F5</th>
+		<th><input class="form-control" type="text" placeholder="{{ @trans('prompts.search') }}" /></th>
+		<th><input class="form-control" type="text" placeholder="{{ @trans('prompts.search') }}" /></th>
+		<th colspan="5">&nbsp;</th>
 	</tr>
 	</tfoot>
 
-*/
-?>
 </table>
+</div>
 
 @stop
 
 @section('js_extra')
 <script type="text/javascript">
 $(document).ready(function(){
+	var goods_table;
+
+
+
 
 	$('#goods_table').dataTable( {
 		"bProcessing": true,
@@ -67,6 +66,24 @@ $(document).ready(function(){
 		"sAjaxSource": "/dashboard/goodstable"
 	});
 
+
+
+
+	goods_table = $('#goods_table').DataTable();
+
+	// Apply the search  control-label
+    goods_table.columns().every( function () {
+        var that = this;
+
+        $(  'input', this.footer()).on( 'keyup change', function () {
+            that
+                .search( this.value )
+                .draw();
+        } );
+    } );
+
+    $('div.dataTables_filter input').addClass('form-control');
+    $('div.dataTables_length select').addClass('form-control');
 });
 </script>
 @stop
