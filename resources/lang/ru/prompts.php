@@ -65,6 +65,7 @@ return [
 	,'loading_records'	=> 'Загрузка&#8230;'
 	,'processing'	=> 'Обработка&#8230;'
 	,'search'	=> 'Поиск'
+	,'column_search'	=> 'Поиск по колонке'
 	,'zero_records'	=> 'Для введённых условий записей не найдено'
 
 	,'paginate'	=> [

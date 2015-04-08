@@ -67,6 +67,7 @@ return [
 	,'loading_records'	=> 'Loading&#8230;'
 	,'processing'	=> 'Processing&#8230;'
 	,'search'	=> 'Search'
+	,'column_search'	=> 'Column search'
 	,'zero_records'	=> 'No matching records found'
 
 	,'paginate'	=> [

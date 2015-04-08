@@ -34,8 +34,8 @@
 
 	<tfoot>
 	<tr>
-		<th><input class="form-control" type="text" placeholder="{{ @trans('prompts.search') }}" /></th>
-		<th><input class="form-control" type="text" placeholder="{{ @trans('prompts.search') }}" /></th>
+		<th><input class="form-control" type="text" placeholder="{{ @trans('prompts.column_search') }}" /></th>
+		<th><input class="form-control" type="text" placeholder="{{ @trans('prompts.column_search') }}" /></th>
 		<th colspan="5">&nbsp;</th>
 	</tr>
 	</tfoot>
