@@ -126,6 +126,8 @@ class DashboardController extends MainController{
     	$page	= $_GET['start']/$_GET['length'] + 1;
     	$recs->forPage($page, $_GET['length']);
 
+//TODO: Imlement ordering (sorting)
+
     	$recs	= $recs->get();
 
     	$data	= [];
