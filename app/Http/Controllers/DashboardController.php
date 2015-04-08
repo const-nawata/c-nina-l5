@@ -105,51 +105,51 @@ class DashboardController extends MainController{
 //______________________________________________________________________________
 
     public function getGoodstable(){
+    	$cols	= $_GET['columns'];
 
     	$recs_total	= Good::all()->count();
 
+    	$recs	= Good::select();
 
-// info(print_r( $_GET, 1 ));
+    	foreach( $cols as $col )
+    		if( $col['search']['value'] != '' )
+    			$recs->where($col['name'],'like','%'.$col['search']['value'].'%');
+
+    	if($_GET['search']['value'] != '' )
+    		foreach( $cols as $col )
+    			if($col['searchable'] == 'true' )
+    				$recs->orWhere($col['name'],'like','%'.$_GET['search']['value'].'%');
+
+
+    	$n_filtered	= $recs->count();
+
+    	$page	= $_GET['start']/$_GET['length'] + 1;
+    	$recs->forPage($page, $_GET['length']);
+
+    	$recs	= $recs->get();
+
+    	$data	= [];
+    	foreach( $recs as $rec ){
+    		$data[]	= [
+    			$rec->name,
+    			$rec->article,
+    			$rec->w_price,
+    			$rec->r_price,
+    			$rec->in_pack,
+    			$rec->packs,
+    			$rec->assort
+			];
+    	}
+
 
 	$output	= [
 		"draw" => intval($_GET['draw']),
 		"recordsTotal" => $recs_total,
-// 		"recordsFiltered" => $iFilteredTotal,
-// 		"data" => []
+		"recordsFiltered" => $n_filtered,
+		"data" => $data
 	];
 
-
-    	return
-'{'.
-	'"draw": '.intval($_GET['draw']).','.
-	'"recordsTotal": "'.$recs_total.'",'.
-// 	'"iTotalRecords": "0",'.
-	'"recordsFiltered": "20",'.
-	'"data":['.
-
-		'["Test name of good item","Test article of good item","1000.55","2000.89","F4-R1","F4-R1","F5-R001"]'.
-		',["F1-R1","F2-R1","F3-R1","F4-R1","F4-R1","F4-R1","F5-R002"]'.
-		',["F1-R1","F2-R1","F3-R1","F4-R1","F4-R1","F4-R1","F5-R003"]'.
-		',["F1-R1","F2-R1","F3-R1","F4-R1","F4-R1","F4-R1","F5-R004"]'.
-		',["F1-R1","F2-R1","F3-R1","F4-R1","F4-R1","F4-R1","F5-R005"]'.
-		',["F1-R1","F2-R1","F3-R1","F4-R1","F4-R1","F4-R1","F5-R006"]'.
-		',["F1-R1","F2-R1","F3-R1","F4-R1","F4-R1","F4-R1","F5-R007"]'.
-		',["F1-R1","F2-R1","F3-R1","F4-R1","F4-R1","F4-R1","F5-R008"]'.
-		',["F1-R1","F2-R1","F3-R1","F4-R1","F4-R1","F4-R1","F5-R009"]'.
-		',["F1-R1","F2-R1","F3-R1","F4-R1","F4-R1","F4-R1","F5-R010"]'.
-
-// 		',["F1-R1","F2-R1","F3-R1","F4-R1","F4-R1","F4-R1","F5-R011"]'.
-// 		',["F1-R1","F2-R1","F3-R1","F4-R1","F4-R1","F4-R1","F5-R012"]'.
-// 		',["F1-R1","F2-R1","F3-R1","F4-R1","F4-R1","F4-R1","F5-R013"]'.
-// 		',["F1-R1","F2-R1","F3-R1","F4-R1","F4-R1","F4-R1","F5-R014"]'.
-// 		',["F1-R1","F2-R1","F3-R1","F4-R1","F4-R1","F4-R1","F5-R015"]'.
-
-
-	']'.
-'}'.
-
-
-    	'';
+	return json_encode($output);
     }
 //______________________________________________________________________________
 

@@ -23,7 +23,9 @@ class Category extends Model{
 //______________________________________________________________________________
 
 	private static function getChildren( $catId, $selCatId ){
-		$cats	= self::whereRaw('parent_id IS NOT NULL AND parent_id = ?', [$catId] )->orderBy('rank')->orderBy('name')->get();
+		$cats	= self::whereNotNull('parent_id')
+				->where('parent_id','=', $catId)
+				->orderBy('rank')->orderBy('name')->get();
 
 		$sub_tree	= [];
 		foreach( $cats as $cat ){
