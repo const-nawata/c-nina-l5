@@ -13,7 +13,8 @@
 
 
 <div class="jumbotron j-tbl">
-<table id="goods_table">
+<button type="button" id="sss">SSS</button>
+<table id="goodstable">
 	<thead>
 	<tr>
 
@@ -34,8 +35,8 @@
 
 	<tfoot>
 	<tr>
-		<th><input class="form-control" type="text" placeholder="{{ @trans('prompts.column_search') }}" /></th>
-		<th><input class="form-control" type="text" placeholder="{{ @trans('prompts.column_search') }}" /></th>
+		<th><input class="form-control f-inp" type="text" placeholder="{{ @trans('prompts.column_search') }}" /></th>
+		<th><input class="form-control f-inp" type="text" placeholder="{{ @trans('prompts.column_search') }}" /></th>
 		<th colspan="5">&nbsp;</th>
 	</tr>
 	</tfoot>
@@ -48,12 +49,11 @@
 @section('js_extra')
 <script type="text/javascript">
 $(document).ready(function(){
-	var goods_table;
+	var c_table,
 
+	goods_table=
 
-
-
-	$('#goods_table').dataTable( {
+	$('#goodstable').DataTable( {
 		"bProcessing": true,
 		"bServerSide": true,
 
@@ -62,6 +62,7 @@ $(document).ready(function(){
 		],
 
 		"language": tbl_prompts,
+// 		"iDeferLoading": 0,
 
 		"sAjaxSource": "/dashboard/goodstable"
 	});
@@ -69,10 +70,28 @@ $(document).ready(function(){
 
 
 
-	goods_table = $('#goods_table').DataTable();
 
-	// Apply the search  control-label
-    goods_table.columns().every( function () {
+
+// 	$('#goodstable_filter input').unbind();
+	$('div.dataTables_filter input').unbind();
+
+
+	$('div.dataTables_filter input').bind('keyup change', function(e) {
+		if(e.keyCode == 13) {
+	    	   goods_table.fnFilter(this.value);
+		}
+	});
+
+
+
+
+
+	c_table = $('#goodstable').DataTable();
+
+								// Apply the search  control-label
+
+
+    c_table.columns().every( function () {
         var that = this;
 
         $(  'input', this.footer()).on( 'keyup change', function () {
@@ -82,8 +101,12 @@ $(document).ready(function(){
         } );
     } );
 
+
     $('div.dataTables_filter input').addClass('form-control');
     $('div.dataTables_length select').addClass('form-control');
+
+
+
 });
 </script>
 @stop
