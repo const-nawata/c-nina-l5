@@ -13,7 +13,7 @@
 
 
 <div class="jumbotron j-tbl">
-<button type="button" id="sss">SSS</button>
+
 <table id="goodstable">
 	<thead>
 	<tr>
@@ -49,63 +49,52 @@
 @section('js_extra')
 <script type="text/javascript">
 $(document).ready(function(){
-	var c_table,
-
-	goods_table=
+	var	goods_table=
 
 	$('#goodstable').DataTable( {
-		"bProcessing": true,
-		"bServerSide": true,
+		"processing": true,
+		"serverSide": true,
 
-		"aoColumnDefs": [
-			{ "bSearchable": false, "aTargets": [ 2,3,4,5,6 ] }
+		"columnDefs": [
+			{ "searchable": false, "targets": [ 2,3,4,5,6 ] }
+		],
+
+		"columns":[
+		   {"name":"name"},
+		   {"name":"article"},
+		   {"name":"w_price"},
+		   {"name":"r_price"},
+		   {"name":"in_pack"},
+		   {"name":"packs"},
+		   {"name":"assort"}
 		],
 
 		"language": tbl_prompts,
-// 		"iDeferLoading": 0,
 
-		"sAjaxSource": "/dashboard/goodstable"
+		"ajax": "/dashboard/goodstable"
 	});
 
-
-
-
-
-
-// 	$('#goodstable_filter input').unbind();
 	$('div.dataTables_filter input').unbind();
 
+	$('div.dataTables_filter input').on('keyup change', function(e) {
 
-	$('div.dataTables_filter input').bind('keyup change', function(e) {
-		if(e.keyCode == 13) {
-	    	   goods_table.fnFilter(this.value);
-		}
+		(e.keyCode == 13)
+			? goods_table.search(this.value).draw():null;
 	});
 
-
-
-
-
-	c_table = $('#goodstable').DataTable();
-
-								// Apply the search  control-label
-
-
-    c_table.columns().every( function () {
+								// Apply individual colamn search
+    goods_table.columns().every( function () {
         var that = this;
 
-        $(  'input', this.footer()).on( 'keyup change', function () {
-            that
-                .search( this.value )
-                .draw();
-        } );
-    } );
+        $( 'input', this.footer()).on( 'keyup change', function(e){
+        	(e.keyCode == 13)
+            	? that.search( this.value ).draw():null;
+        });
+    });
 
 
     $('div.dataTables_filter input').addClass('form-control');
     $('div.dataTables_length select').addClass('form-control');
-
-
 
 });
 </script>

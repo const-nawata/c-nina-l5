@@ -106,26 +106,26 @@ class DashboardController extends MainController{
 
     public function getGoodstable(){
 
-    	$iTotal	= Good::all()->count();
+    	$recs_total	= Good::all()->count();
 
 
 // info(print_r( $_GET, 1 ));
 
 	$output	= [
-		"sEcho" => intval($_GET['sEcho']),
-		"iTotalRecords" => $iTotal,
-// 		"iTotalDisplayRecords" => $iFilteredTotal,
-// 		"aaData" => []
+		"draw" => intval($_GET['draw']),
+		"recordsTotal" => $recs_total,
+// 		"recordsFiltered" => $iFilteredTotal,
+// 		"data" => []
 	];
 
 
     	return
 '{'.
-	'"sEcho": '.intval($_GET['sEcho']).','.
-	'"iTotalRecords": "'.$iTotal.'",'.
+	'"draw": '.intval($_GET['draw']).','.
+	'"recordsTotal": "'.$recs_total.'",'.
 // 	'"iTotalRecords": "0",'.
-	'"iTotalDisplayRecords": "20",'.
-	'"aaData":['.
+	'"recordsFiltered": "20",'.
+	'"data":['.
 
 		'["Test name of good item","Test article of good item","1000.55","2000.89","F4-R1","F4-R1","F5-R001"]'.
 		',["F1-R1","F2-R1","F3-R1","F4-R1","F4-R1","F4-R1","F5-R002"]'.
