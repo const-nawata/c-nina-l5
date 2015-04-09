@@ -1,16 +1,16 @@
 <?php
+use App\Category;
 
 class Unit_01_Test extends TestCase {
 
-	/**
-	 * A basic functional test example.
-	 *
-	 * @return void
-	 */
-	public function testBasicExample(){
-		$response = $this->call('GET', '/');
-		$arr	= [200,300,400];
-		$this->assertEquals(200, 201);
+	public function test_Category_Tree(){
+// 		$response = $this->call('GET', '/');
+
+
+		$tree	= Category::getTree();
+
+// 		$arr	= [200,300,400];
+// 		$this->assertEquals(200, 201);
 	}
 
 }
