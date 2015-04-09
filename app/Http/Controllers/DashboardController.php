@@ -120,13 +120,14 @@ class DashboardController extends MainController{
     			if($col['searchable'] == 'true' )
     				$recs->orWhere($col['name'],'like','%'.$_GET['search']['value'].'%');
 
+    	foreach( $_GET['order'] as $ocol )
+    		$recs->orderBy( $cols[$ocol['column']]['name'], $ocol['dir'] );
+
 
     	$n_filtered	= $recs->count();
 
     	$page	= $_GET['start']/$_GET['length'] + 1;
     	$recs->forPage($page, $_GET['length']);
-
-//TODO: Imlement ordering (sorting)
 
     	$recs	= $recs->get();
 
@@ -143,15 +144,14 @@ class DashboardController extends MainController{
 			];
     	}
 
+		$output	= [
+			'draw' => intval($_GET['draw']),
+			'recordsTotal' => $recs_total,
+			'recordsFiltered' => $n_filtered,
+			'data' => $data
+		];
 
-	$output	= [
-		"draw" => intval($_GET['draw']),
-		"recordsTotal" => $recs_total,
-		"recordsFiltered" => $n_filtered,
-		"data" => $data
-	];
-
-	return json_encode($output);
+		return json_encode($output);
     }
 //______________________________________________________________________________
 
