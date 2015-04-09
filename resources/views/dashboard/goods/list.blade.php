@@ -74,15 +74,41 @@ $(document).ready(function(){
 		"ajax": "/dashboard/goodstable"
 	});
 
-	$('div.dataTables_filter input').unbind();
+								// Apply individual colamn search   ui-icon-search
 
-	$('div.dataTables_filter input').on('keyup change', function(e) {
+
+    $('#goodstable_filter input').addClass('form-control');
+    $('div.dataTables_length select').addClass('form-control');
+    $("#goodstable_filter input").attr("placeholder", "{{ @trans('prompts.search') }}");
+//     $("div.dataTables_filter label").append("<button type='button' onclick='alert(444);'></button>");
+
+
+    $("#goodstable_filter").prepend("<button id='search_btn'></button>");
+    $("#search_btn").button({
+		icons: { primary: "ui-icon-search" },
+		text: false
+	});
+
+	$('#search_btn').on('click', function(e) {
+		goods_table.search($('div.dataTables_filter input').val()).draw();
+	});
+
+
+
+
+
+	$('#goodstable_filter input').unbind();
+
+	$('#goodstable_filter input').on('keyup change', function(e) {
 
 		(e.keyCode == 13)
 			? goods_table.search(this.value).draw():null;
 	});
 
-								// Apply individual colamn search
+
+
+
+
     goods_table.columns().every( function () {
         var that = this;
 
@@ -91,10 +117,6 @@ $(document).ready(function(){
             	? that.search( this.value ).draw():null;
         });
     });
-
-
-    $('div.dataTables_filter input').addClass('form-control');
-    $('div.dataTables_length select').addClass('form-control');
 
 });
 </script>

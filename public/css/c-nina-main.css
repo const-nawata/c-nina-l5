@@ -125,4 +125,11 @@ input.field-search-input{
 	width: 80%;
 }
 												/* Tables*/
-
+.dataTables_wrapper .dataTables_filter input{
+	margin-left: 0;
+}
+.dataTables_wrapper .dataTables_filter button{
+	border: none;
+	width: 20px;
+	height: 20px;
+}

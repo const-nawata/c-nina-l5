@@ -21,6 +21,7 @@
 
     "aria": {
         "sortAscending":  ": activate to sort column ascending",
+        ,"search":"{{ @trans('prompts.search') }}"
         "sortDescending": ": activate to sort column descending"
     }
 */
@@ -33,7 +34,7 @@ var tbl_prompts = {
 	,"info":"{{ @trans('prompts.info') }}"
 	,"infoFiltered":"{{ @trans('prompts.info_filtered') }}"
 	,"zeroRecords":"{{ @trans('prompts.zero_records') }}"
-	,"search":"{{ @trans('prompts.search') }}"
+	,"search":""
 	,"lengthMenu":"{{ @trans('prompts.length_menu') }}"
 	,"processing":"{{ @trans('prompts.processing') }}"
 	,"loadingRecords": "{{ @trans('prompts.loading_records') }}"
