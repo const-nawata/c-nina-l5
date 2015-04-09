@@ -94,9 +94,6 @@ $(document).ready(function(){
 	});
 
 
-
-
-
 	$('#goodstable_filter input').unbind();
 
 	$('#goodstable_filter input').on('keyup change', function(e) {
@@ -104,10 +101,6 @@ $(document).ready(function(){
 		(e.keyCode == 13)
 			? goods_table.search(this.value).draw():null;
 	});
-
-
-
-
 
     goods_table.columns().every( function () {
         var that = this;
