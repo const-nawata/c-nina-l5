@@ -1,20 +1,20 @@
 <?php
  namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\BaseModel;
 
-class Good extends Model{
+class Good extends BaseModel{
 
 	protected $table = 'goods';
 
 	protected $fillable = [
-		'name'
-		,'article'
-		,'r_price'
-		,'w_price'
-		,'in_pack'
-		,'packs'
-		,'assort'
+		'name'		//200
+		,'article'	//200
+		,'r_price'	//0.000
+		,'w_price'	//0.000
+		,'in_pack'	//int
+		,'packs'	//int
+		,'assort'	//int
 	];
 
 }//	Class end
