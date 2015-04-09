@@ -105,53 +105,7 @@ class DashboardController extends MainController{
 //______________________________________________________________________________
 
     public function getGoodstable(){
-    	$cols	= $_GET['columns'];
-
-    	$recs_total	= Good::all()->count();
-
-    	$recs	= Good::select();
-
-    	foreach( $cols as $col )
-    		if( $col['search']['value'] != '' )
-    			$recs->where($col['name'],'like','%'.$col['search']['value'].'%');
-
-    	if($_GET['search']['value'] != '' )
-    		foreach( $cols as $col )
-    			if($col['searchable'] == 'true' )
-    				$recs->orWhere($col['name'],'like','%'.$_GET['search']['value'].'%');
-
-    	foreach( $_GET['order'] as $ocol )
-    		$recs->orderBy( $cols[$ocol['column']]['name'], $ocol['dir'] );
-
-
-    	$n_filtered	= $recs->count();
-
-    	$page	= $_GET['start']/$_GET['length'] + 1;
-    	$recs->forPage($page, $_GET['length']);
-
-    	$recs	= $recs->get();
-
-    	$data	= [];
-    	foreach( $recs as $rec ){
-    		$data[]	= [
-    			$rec->name,
-    			$rec->article,
-    			$rec->w_price,
-    			$rec->r_price,
-    			$rec->in_pack,
-    			$rec->packs,
-    			$rec->assort
-			];
-    	}
-
-		$output	= [
-			'draw' => intval($_GET['draw']),
-			'recordsTotal' => $recs_total,
-			'recordsFiltered' => $n_filtered,
-			'data' => $data
-		];
-
-		return json_encode($output);
+    	return Good::getTableData( $_GET, TRUE );
     }
 //______________________________________________________________________________
 
