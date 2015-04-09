@@ -74,34 +74,40 @@ $(document).ready(function(){
 		"ajax": "/dashboard/goodstable"
 	});
 
-								// Apply individual colamn search   ui-icon-search
-
-
+	//Set input CSS styles
     $('#goodstable_filter input').addClass('form-control');
-    $('div.dataTables_length select').addClass('form-control');
+    $('#goodstable_length select').addClass('form-control');
     $("#goodstable_filter input").attr("placeholder", "{{ @trans('prompts.search') }}");
-//     $("div.dataTables_filter label").append("<button type='button' onclick='alert(444);'></button>");
 
 
+    //Main search button
     $("#goodstable_filter").prepend("<button id='search_btn'></button>");
     $("#search_btn").button({
 		icons: { primary: "ui-icon-search" },
 		text: false
 	});
-
 	$('#search_btn').on('click', function(e) {
-		goods_table.search($('div.dataTables_filter input').val()).draw();
+		goods_table.search($('#goodstable_filter input').val()).draw();
 	});
 
+	//Main clean button
+	$("#goodstable_filter").append("<button id='clean_btn'></button>");
+    $("#clean_btn").button({
+		icons: { primary: "ui-icon-cancel" },
+		text: false
+	});
+	$('#clean_btn').on('click', function(e) {
+		$('#goodstable_filter input').val("");
+		goods_table.search($('#goodstable_filter input').val()).draw();
+	});
 
+	//Change main search input handler
 	$('#goodstable_filter input').unbind();
-
 	$('#goodstable_filter input').on('keyup change', function(e) {
-
-		(e.keyCode == 13)
-			? goods_table.search(this.value).draw():null;
+		(e.keyCode == 13) ? goods_table.search($(this).val()).draw():null;
 	});
 
+	//Set individual search inputs' handlers
     goods_table.columns().every( function () {
         var that = this;
 
