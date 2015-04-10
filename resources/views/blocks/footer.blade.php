@@ -27,8 +27,19 @@
 */
 ?>
 <script type="text/javascript">
-var tbl_prompts = {
-	"emptyTable":"{{ @trans('prompts.empty_table') }}"
+
+
+//TODO: Move all prompts from tbl_prompts to prompts and then move tbl_prompts to c-nina.js
+// And I think that it would be better to move var promts to the head of the layout.
+
+var prompts	= {
+	"close":"{{ @trans('prompts.close') }}"
+	,"empty_table":"{{ @trans('prompts.empty_table') }}"
+	,"search":"{{ @trans('prompts.search') }}"
+}
+
+,tbl_prompts = {
+	"emptyTable":prompts.empty_table	// And so on
 	,"infoEmpty":"{{ @trans('prompts.info_empty') }}"
 
 	,"info":"{{ @trans('prompts.info') }}"
@@ -46,24 +57,6 @@ var tbl_prompts = {
         "previous":"{{ @trans('prompts.paginate.previous') }}"
     }
 };
-
-function showAlert( title, message, width ){
-	var d_width	= width ? width : 400;
-
-	$("#standard-dialog").dialog( "option", "width", d_width+"px" );
-    $("#standard-dialog").html( message );
-    $("#standard-dialog" ).dialog( "option", "title", title );
-    $("#standard-dialog").dialog("open");
-
-	$( "#standard-dialog" ).dialog( "option", "buttons",[
-		{
-			text: "{{ @trans( 'prompts.close' ) }}",
-			click: function(){
-				$(this).dialog("close");
-			}
-		}
-	]);
-}
 
 $(document).ready(function(){
 
