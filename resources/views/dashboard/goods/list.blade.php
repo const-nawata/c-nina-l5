@@ -35,8 +35,8 @@
 
 	<tfoot>
 	<tr>
-		<th><input class="form-control f-inp" type="text" placeholder="{{ @trans('prompts.column_search') }}" /></th>
-		<th><input class="form-control f-inp" type="text" placeholder="{{ @trans('prompts.column_search') }}" /></th>
+		<th><button class="ind-search-btn"></button><input class="form-control f-inp" type="text" placeholder="{{ @trans('prompts.column_search') }}" /></th>
+		<th><button class="ind-search-btn"></button><input class="form-control f-inp" type="text" placeholder="{{ @trans('prompts.column_search') }}" /></th>
 		<th colspan="5">&nbsp;</th>
 	</tr>
 	</tfoot>
@@ -80,7 +80,7 @@ $(document).ready(function(){
     $("#goodstable_filter input").attr("placeholder", "{{ @trans('prompts.search') }}");
 
 
-    //Main search button
+	//Main search button
     $("#goodstable_filter").prepend("<button id='search_btn'></button>");
     $("#search_btn").button({
 		icons: { primary: "ui-icon-search" },
@@ -107,15 +107,31 @@ $(document).ready(function(){
 		(e.keyCode == 13) ? goods_table.search($(this).val()).draw():null;
 	});
 
-	//Set individual search inputs' handlers
-    goods_table.columns().every( function () {
-        var that = this;
 
-        $( 'input', this.footer()).on( 'keyup change', function(e){
+
+
+
+	//Set handlers for individual search inputs
+    goods_table.columns().every( function () {
+        var col_obj = this
+        ,inp_obj	= $( 'input', this.footer())
+        ;
+
+        inp_obj.on( 'keyup change', function(e){
         	(e.keyCode == 13)
-            	? that.search( this.value ).draw():null;
+            	? col_obj.search( $(this).val() ).draw():null;
+        });
+
+        $('.ind-search-btn', this.footer()).on( 'click', function(e){
+        	col_obj.search( inp_obj.val()).draw()
         });
     });
+
+	//Individual search buttons style
+    $(".ind-search-btn").button({
+		icons: { primary: "ui-icon-search" },
+		text: false
+	});
 
 });
 </script>
