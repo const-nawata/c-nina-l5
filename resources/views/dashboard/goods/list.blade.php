@@ -35,8 +35,8 @@
 
 	<tfoot>
 	<tr>
-		<th><button class="ind-search-btn"></button><input class="form-control f-inp" type="text" placeholder="{{ @trans('prompts.column_search') }}" /><button class="ind-clean-btn"></th>
-		<th><button class="ind-search-btn"></button><input class="form-control f-inp" type="text" placeholder="{{ @trans('prompts.column_search') }}" /><button class="ind-clean-btn"></th>
+		<th><button class="ind-search-btn"></button><input id="ind_search_inp_0" class="form-control f-inp" type="text" placeholder="{{ @trans('prompts.column_search') }}" /><button class="ind-clean-btn"></th>
+		<th><button class="ind-search-btn"></button><input id="ind_search_inp_1" class="form-control f-inp" type="text" placeholder="{{ @trans('prompts.column_search') }}" /><button class="ind-clean-btn"></th>
 		<th colspan="5">&nbsp;</th>
 	</tr>
 	</tfoot>
@@ -49,27 +49,23 @@
 @section('js_extra')
 <script type="text/javascript">
 
-//TODO:	Implement defining table's searchable columns (numbers) for individual search.
-
-//TODO: To ease select individual input object the every input object may have id with column number.
-//		In this case it won't be necessary to point footer in JS command. But for this case the previous TODO must be done.
-
-function applyTableSearch(table){
-	var
-	col_0=table.column(0)
-	,col_1=table.column(1);
-
+function applyTableSearch(table, sCols){
 	table.search($('div.dataTables_filter input').val());
 
-	col_0.search( $('input',col_0.footer()).val());
-	col_1.search( $('input',col_1.footer()).val());
+	if( sCols ){
+		for( var i in sCols ){
+			table.column(i).search( $('#ind_search_inp_'+i).val());
+		}
+	}
 
 	table.draw();
 }
 //--------------------------------------------------------------
 
 $(document).ready(function(){
-	var	goods_table=
+	var s_cols=[0,1]
+
+	,goods_table=
 
 	$('#goodstable').DataTable( {
 		"processing": true,
@@ -93,6 +89,7 @@ $(document).ready(function(){
 
 		"ajax": "/dashboard/goodstable"
 	});
+
 
 	//Set input CSS styles
     $('#goodstable_filter input').addClass('form-control');
@@ -118,13 +115,13 @@ $(document).ready(function(){
 	});
 	$('#clean_btn').on('click', function(e) {
 		$('#goodstable_filter input').val("");
-		applyTableSearch(goods_table);
+		applyTableSearch(goods_table,s_cols);
 	});
 
 	//Change main search input handler
 	$('#goodstable_filter input').unbind();
 	$('#goodstable_filter input').on('keyup change', function(e) {
-		(e.keyCode == 13) ? applyTableSearch(goods_table):null;
+		(e.keyCode == 13) ? applyTableSearch(goods_table,s_cols):null;
 	});
 
 
@@ -136,12 +133,12 @@ $(document).ready(function(){
 
         inp_obj.on( 'keyup change', function(e){
         	(e.keyCode == 13)
-            	 ? applyTableSearch(goods_table):null;
+            	 ? applyTableSearch(goods_table,s_cols):null;
         });
 
         $('.ind-clean-btn', this.footer()).on( 'click', function(e){
         	inp_obj.val("");
-        	applyTableSearch(goods_table)
+        	applyTableSearch(goods_table,s_cols)
         });
 	});
 
@@ -158,7 +155,7 @@ $(document).ready(function(){
 	});
 
     $(".ind-search-btn").on( 'click', function(e){
-		applyTableSearch(goods_table);
+		applyTableSearch(goods_table,s_cols);
     });
 
 });
