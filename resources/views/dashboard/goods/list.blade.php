@@ -35,8 +35,8 @@
 
 	<tfoot>
 	<tr>
-		<th><button class="ind-search-btn"></button><input class="form-control f-inp" type="text" placeholder="{{ @trans('prompts.column_search') }}" /></th>
-		<th><button class="ind-search-btn"></button><input class="form-control f-inp" type="text" placeholder="{{ @trans('prompts.column_search') }}" /></th>
+		<th><button class="ind-search-btn"></button><input class="form-control f-inp" type="text" placeholder="{{ @trans('prompts.column_search') }}" /><button class="ind-clean-btn"></th>
+		<th><button class="ind-search-btn"></button><input class="form-control f-inp" type="text" placeholder="{{ @trans('prompts.column_search') }}" /><button class="ind-clean-btn"></th>
 		<th colspan="5">&nbsp;</th>
 	</tr>
 	</tfoot>
@@ -108,9 +108,6 @@ $(document).ready(function(){
 	});
 
 
-
-
-
 	//Set handlers for individual search inputs
     goods_table.columns().every( function () {
         var col_obj = this
@@ -122,10 +119,11 @@ $(document).ready(function(){
             	? col_obj.search( $(this).val() ).draw():null;
         });
 
-        $('.ind-search-btn', this.footer()).on( 'click', function(e){
-        	col_obj.search( inp_obj.val()).draw()
+        $('.ind-clean-btn', this.footer()).on( 'click', function(e){
+        	inp_obj.val("");
+        	col_obj.search( inp_obj.val()).draw();
         });
-    });
+});
 
 	//Individual search buttons style
     $(".ind-search-btn").button({
@@ -133,6 +131,27 @@ $(document).ready(function(){
 		text: false
 	});
 
+	//Individual clean buttons style
+    $(".ind-clean-btn").button({
+		icons: { primary: "ui-icon-cancel" },
+		text: false
+	});
+
+
+
+    $(".ind-search-btn").on( 'click', function(e){
+		var
+			col_0=goods_table.column(0)
+			,col_1=goods_table.column(1);
+
+    	col_0.search( $('input',col_0.footer()).val());
+    	col_1.search( $('input',col_1.footer()).val());
+
+    	goods_table.draw();
+    });
+
 });
+
+
 </script>
 @stop
