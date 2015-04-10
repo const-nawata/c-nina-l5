@@ -97,8 +97,8 @@ $(document).ready(function(){
 
 
 	//Set input CSS styles
-    $('#goodstable_filter input').addClass('form-control');
-    $('#goodstable_length select').addClass('form-control');
+    $("#goodstable_filter input").addClass("form-control");
+    $("#goodstable_length select").addClass("form-control");
     $("#goodstable_filter input").attr("placeholder", "{{ @trans('prompts.search') }}");
 
 
@@ -108,7 +108,7 @@ $(document).ready(function(){
 		icons: { primary: "ui-icon-search" },
 		text: false
 	});
-	$('#search_btn').on('click', function(e) {
+	$("#search_btn").on("click", function(e) {
 		applyTableSearch(goods_table, s_cols)
 	});
 
@@ -118,28 +118,28 @@ $(document).ready(function(){
 		icons: { primary: "ui-icon-cancel" },
 		text: false
 	});
-	$('#clean_btn').on('click', function(e) {
-		$('#goodstable_filter input').val("");
+	$("#clean_btn").on("click", function(e) {
+		$("#goodstable_filter input").val("");
 		applyTableSearch(goods_table,s_cols);
 	});
 
 	//Change main search input handler
-	$('#goodstable_filter input').unbind();
-	$('#goodstable_filter input').on('keyup change', function(e) {
+	$("#goodstable_filter input").unbind();
+	$("#goodstable_filter input").on("keyup change", function(e) {
 		(e.keyCode == 13) ? applyTableSearch(goods_table,s_cols):null;
 	});
 
 
 	//Set handlers for individual search inputs
 	for(var cn in s_cols ){
-		var inp_obj	= $('input', goods_table.column(cn).footer())
-		,btn_indiv	= $('.ind-clean-btn', goods_table.column(cn).footer());
+		var inp_obj	= $("input", goods_table.column(cn).footer())
+		,btn_indiv	= $(".ind-clean-btn", goods_table.column(cn).footer());
 
-		inp_obj.attr('id', goods_table.pid+"_inp_"+cn);
-		btn_indiv.attr('id', goods_table.pid+"cleanbtn-"+cn);
+		inp_obj.attr("id", goods_table.pid+"_inp_"+cn);
+		btn_indiv.attr("id", goods_table.pid+"cleanbtn-"+cn);
 
-        btn_indiv.on( 'click', function(e){
-			idd	= $(this).attr('id').split("-");
+        btn_indiv.on( "click", function(e){
+			idd	= $(this).attr("id").split("-");
 			$("#"+goods_table.pid+"_inp_"+idd[1]).val("");
         	applyTableSearch(goods_table,s_cols)
         });
@@ -159,12 +159,12 @@ $(document).ready(function(){
 	});
 
 
-    $(".f-inp").on( 'keyup change', function(e){
+    $(".f-inp").on( "keyup change", function(e){
     	(e.keyCode == 13)
         	 ? applyTableSearch(goods_table,s_cols):null;
     });
 
-    $(".ind-search-btn").on( 'click', function(e){
+    $(".ind-search-btn").on( "click", function(e){
 		applyTableSearch(goods_table,s_cols);
     });
 
