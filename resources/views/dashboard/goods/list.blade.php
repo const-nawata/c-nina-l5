@@ -35,8 +35,8 @@
 
 	<tfoot>
 	<tr>
-		<th><button class="ind-search-btn"></button><input id="ind_search_inp_0" class="form-control f-inp" type="text" placeholder="{{ @trans('prompts.column_search') }}" /><button class="ind-clean-btn"></th>
-		<th><button class="ind-search-btn"></button><input id="ind_search_inp_1" class="form-control f-inp" type="text" placeholder="{{ @trans('prompts.column_search') }}" /><button class="ind-clean-btn"></th>
+		<th><button class="ind-search-btn"></button><input class="form-control f-inp" type="text" placeholder="{{ @trans('prompts.column_search') }}" /><button class="ind-clean-btn"></th>
+		<th><button class="ind-search-btn"></button><input class="form-control f-inp" type="text" placeholder="{{ @trans('prompts.column_search') }}" /><button class="ind-clean-btn"></th>
 		<th colspan="5">&nbsp;</th>
 	</tr>
 	</tfoot>
@@ -54,7 +54,7 @@ function applyTableSearch(table, sCols){
 
 	if( sCols ){
 		for( var i in sCols ){
-			table.column(i).search( $('#ind_search_inp_'+i).val());
+			table.column(i).search( $('#'+table.pid+"_inp_"+i).val());
 		}
 	}
 
@@ -63,11 +63,14 @@ function applyTableSearch(table, sCols){
 //--------------------------------------------------------------
 
 $(document).ready(function(){
-	var s_cols=[0,1]
+	var pid="goodstable"
+		,s_cols=[0,1]
+		,goods_table
+	;
 
-	,goods_table=
 
-	$('#goodstable').DataTable( {
+	goods_table=
+	$('#'+pid).DataTable( {
 		"processing": true,
 		"serverSide": true,
 
@@ -90,6 +93,8 @@ $(document).ready(function(){
 		"ajax": "/dashboard/goodstable"
 	});
 
+	goods_table.pid	= pid;
+
 
 	//Set input CSS styles
     $('#goodstable_filter input').addClass('form-control');
@@ -104,7 +109,7 @@ $(document).ready(function(){
 		text: false
 	});
 	$('#search_btn').on('click', function(e) {
-		goods_table.search($('#goodstable_filter input').val()).draw();
+		applyTableSearch(goods_table, s_cols)
 	});
 
 	//Main clean button
@@ -126,21 +131,20 @@ $(document).ready(function(){
 
 
 	//Set handlers for individual search inputs
-    goods_table.columns().every( function () {
-        var col_obj = this
-        ,inp_obj	= $( 'input', this.footer())
-        ;
+	for(var cn in s_cols ){
+		var inp_obj	= $('input', goods_table.column(cn).footer())
+		,btn_indiv	= $('.ind-clean-btn', goods_table.column(cn).footer());
 
-        inp_obj.on( 'keyup change', function(e){
-        	(e.keyCode == 13)
-            	 ? applyTableSearch(goods_table,s_cols):null;
-        });
+		inp_obj.attr('id', goods_table.pid+"_inp_"+cn);
+		btn_indiv.attr('id', goods_table.pid+"cleanbtn-"+cn);
 
-        $('.ind-clean-btn', this.footer()).on( 'click', function(e){
-        	inp_obj.val("");
+        btn_indiv.on( 'click', function(e){
+			idd	= $(this).attr('id').split("-");
+			$("#"+goods_table.pid+"_inp_"+idd[1]).val("");
         	applyTableSearch(goods_table,s_cols)
         });
-	});
+	}
+
 
 	//Individual search buttons style
     $(".ind-search-btn").button({
@@ -153,6 +157,12 @@ $(document).ready(function(){
 		icons: { primary: "ui-icon-cancel" },
 		text: false
 	});
+
+
+    $(".f-inp").on( 'keyup change', function(e){
+    	(e.keyCode == 13)
+        	 ? applyTableSearch(goods_table,s_cols):null;
+    });
 
     $(".ind-search-btn").on( 'click', function(e){
 		applyTableSearch(goods_table,s_cols);
