@@ -48,6 +48,25 @@
 
 @section('js_extra')
 <script type="text/javascript">
+
+//TODO:	Implement defining table's searchable columns (numbers) for individual search.
+
+//TODO: To ease select individual input object the every input object may have id with column number.
+//		In this case it won't be necessary to point footer in JS command. But for this case the previous TODO must be done.
+
+	var
+	col_0=table.column(0)
+	,col_1=table.column(1);
+
+	table.search($('div.dataTables_filter input').val());
+
+	col_0.search( $('input',col_0.footer()).val());
+	col_1.search( $('input',col_1.footer()).val());
+
+	table.draw();
+}
+//--------------------------------------------------------------
+
 $(document).ready(function(){
 	var	goods_table=
 
@@ -98,13 +117,11 @@ $(document).ready(function(){
 	});
 	$('#clean_btn').on('click', function(e) {
 		$('#goodstable_filter input').val("");
-		goods_table.search($('#goodstable_filter input').val()).draw();
 	});
 
 	//Change main search input handler
 	$('#goodstable_filter input').unbind();
 	$('#goodstable_filter input').on('keyup change', function(e) {
-		(e.keyCode == 13) ? goods_table.search($(this).val()).draw():null;
 	});
 
 
@@ -116,14 +133,12 @@ $(document).ready(function(){
 
         inp_obj.on( 'keyup change', function(e){
         	(e.keyCode == 13)
-            	? col_obj.search( $(this).val() ).draw():null;
         });
 
         $('.ind-clean-btn', this.footer()).on( 'click', function(e){
         	inp_obj.val("");
-        	col_obj.search( inp_obj.val()).draw();
         });
-});
+	});
 
 	//Individual search buttons style
     $(".ind-search-btn").button({
@@ -137,21 +152,9 @@ $(document).ready(function(){
 		text: false
 	});
 
-
-
     $(".ind-search-btn").on( 'click', function(e){
-		var
-			col_0=goods_table.column(0)
-			,col_1=goods_table.column(1);
-
-    	col_0.search( $('input',col_0.footer()).val());
-    	col_1.search( $('input',col_1.footer()).val());
-
-    	goods_table.draw();
     });
 
 });
-
-
 </script>
 @stop
