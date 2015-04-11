@@ -51,7 +51,7 @@
 
 $(document).ready(function(){
 	var pid="goodstable"
-		,s_cols=[0,1]
+		,search_cols=[0,1]
 		,goods_table=0
 	;
 
@@ -81,7 +81,7 @@ $(document).ready(function(){
 
 	goods_table.pid	= pid;
 
-	setTblElements( goods_table, s_cols );
+	setTblElements( goods_table, search_cols );
 
 });
 </script>
