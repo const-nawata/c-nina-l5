@@ -7,3 +7,4 @@
 .settings/
 composer.lock
 config/database.php
+storage/debug/goods.sql.design
