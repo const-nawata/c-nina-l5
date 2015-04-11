@@ -31,6 +31,28 @@
 	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	<![endif]-->
 
+
+<script type="text/javascript">
+var prompts	= {
+	"close":"{{ @trans('prompts.close') }}"
+	,"empty_table":"{{ @trans('prompts.empty_table') }}"
+	,"info":"{{ @trans('prompts.info') }}"
+	,"info_empty":"{{ @trans('prompts.info_empty') }}"
+	,"info_filtered":"{{ @trans('prompts.info_filtered') }}"
+	,"length_menu":"{{ @trans('prompts.length_menu') }}"
+	,"loading_records":"{{ @trans('prompts.loading_records') }}"
+	,"processing":"{{ @trans('prompts.processing') }}"
+	,"search":"{{ @trans('prompts.search') }}"
+	,"zero_records":"{{ @trans('prompts.zero_records') }}"
+	,"paginate":{
+        "first":"{{ @trans('prompts.paginate.first') }}",
+        "last":"{{ @trans('prompts.paginate.last') }}",
+        "next":"{{ @trans('prompts.paginate.next') }}",
+        "previous":"{{ @trans('prompts.paginate.previous') }}"
+	}
+}
+</script>
+
 	<link rel="stylesheet" href="/css/c-nina-main.css">
 	<script src="/js/c-nina.js"></script>
 

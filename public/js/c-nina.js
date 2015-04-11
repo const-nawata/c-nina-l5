@@ -1,3 +1,25 @@
+
+var tbl_prompts = {
+	"emptyTable":prompts.empty_table	// And so on
+	,"infoEmpty":prompts.info_empty
+
+	,"info":prompts.info
+	,"infoFiltered":prompts.info_filtered
+	,"zeroRecords":prompts.zero_records
+	,"search":""
+	,"lengthMenu":prompts.length_menu
+	,"processing":prompts.processing
+	,"loadingRecords": prompts.loading_records
+
+    ,"paginate":{
+        "first":prompts.paginate.first,
+        "last":prompts.paginate.last,
+        "next":prompts.paginate.next,
+        "previous":prompts.paginate.previous
+    }
+};
+
+
 /**
  * Shows alert on error etc.
  * @param string title
