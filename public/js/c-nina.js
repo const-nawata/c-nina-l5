@@ -86,6 +86,9 @@ function setTblElements( table, sCols ){
 		execTblSearch(table, sCols)
 	});
 
+
+
+
 	//Main clean button
 	$("#"+table.pid+"_filter").append("<button id='clean_btn'></button>");
     $("#clean_btn").button({
