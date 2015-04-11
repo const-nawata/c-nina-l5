@@ -86,6 +86,7 @@ function setTblElements( table, sCols ){
 		execTblSearch(table, sCols)
 	});
 
+//	$("#"+table.pid+"_filter").prepend("<div id='tools_div' class='tbl-tools'></div>");
 
 
 
