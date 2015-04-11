@@ -51,13 +51,11 @@ BEGIN
 	DECLARE v_name, v_article varchar (200);
 	DECLARE v_ret, v_wh, v_prc float;
 
-
-
 	DELETE FROM `goods` WHERE `name` LIKE '%Debug item%';
 
 
 	SET v_name		= 'Debug item ';
-	SET v_article	= 'ART-debug ';
+	SET v_article	= 'ART-';
 
 	WHILE v_n < v_n_goods DO
 		 
@@ -66,8 +64,8 @@ BEGIN
 		SET v_wh	= v_ret - (v_ret/100)*v_prc;
 
 		INSERT INTO `goods` (`name`,`article`,`unit_id`,`r_price`,`w_price`,`in_pack`,`packs`,`assort`,`created_at`,`updated_at`)VALUES(
-			CONCAT(v_name,v_n)
-			,CONCAT(v_article,v_n)
+			CONCAT(v_name,LPAD(v_n,5,'0'))
+			,CONCAT(v_article,LPAD(v_n,5,'0'),'-debug')
 			,(SELECT `id` FROM `units` WHERE `const` LIKE '%pcs%' LIMIT 1)
 			,v_ret				--	`r_price`
 			,v_wh				--	`w_price`
@@ -81,13 +79,8 @@ BEGIN
 
 -- 		SELECT v_ret, v_wh, v_prc;
 
-
-
 		SET v_n = v_n + 1;
 	END WHILE;
-
-
-
 END//
 
 
