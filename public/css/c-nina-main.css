@@ -164,6 +164,14 @@ input.field-search-input{
 	cursor: default;
 }
 
+.dataTables_wrapper table.dataTable tr.odd{
+	background-color: #fffdfb;
+}
+
+.dataTables_wrapper table.dataTable tr.even{
+	background-color: #fff5ea;
+}
+
 /*
 .tbl-tools{
 	background-color: #ff0000;
