@@ -48,7 +48,7 @@ class BaseModel extends Model{
 
 					case 'w_price':
 					case 'r_price':
-						$val	= round($rec->$col['name'],2);
+						$val	= number_format($rec->$col['name'],2,',',' ');
 						break;
 
 					default:
