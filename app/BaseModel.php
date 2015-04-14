@@ -36,6 +36,8 @@ class BaseModel extends Model{
 
     	$recs	= $recs->get();
 
+    	$pid	= $recs[0]->table.'table';
+
     	$data	= [];
     	foreach( $recs as $rec ){
     		$fld_vals	= [];
@@ -43,7 +45,7 @@ class BaseModel extends Model{
     		foreach( $cols as $col ){
 				switch( $col['name'] ){
 					case 'all_check':
-						$val	= "<input type='checkbox'>";
+						$val	= "<input type='checkbox' id='".$pid."rowcheckbox-".$rec->id."' class='td-check-box'>";
 						break;
 
 					case 'w_price':
@@ -57,8 +59,6 @@ class BaseModel extends Model{
 
 				$fld_vals[]	= $val;
     		}
-
-
 
     		$data[]	= $fld_vals;
     	}

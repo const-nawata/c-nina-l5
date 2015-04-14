@@ -86,10 +86,6 @@ function setTblElements( table, sCols ){
 		execTblSearch(table, sCols)
 	});
 
-//	$("#"+table.pid+"_filter").prepend("<div id='tools_div' class='tbl-tools'></div>");
-
-
-
 	//Main clean button
 	$("#"+table.pid+"_filter").append("<button id='clean_btn'></button>");
     $("#clean_btn").button({
@@ -103,9 +99,42 @@ function setTblElements( table, sCols ){
 
 	//Change main search input handler
 	$("#"+table.pid+"_filter input").unbind();
-	$("#"+table.pid+"_filter input").on("keyup change", function(e) {
+	$("#"+table.pid+"_filter input").on("keyup change", function(e){
 		(e.keyCode == 13) ? execTblSearch(table,sCols):null;
 	});
+	
+	
+
+	//Set click handler for all check/uncheck check-box
+	if($("#"+table.pid+" .all-check")){
+		$("#"+table.pid+" .all-check").prop('checked', false);
+		
+		$("#"+table.pid+" .all-check").on("click", function(e){
+			var that=$(this);
+			
+			$("#"+table.pid+" .td-check-box").each(function(){
+				$(this).prop('checked', that.is(':checked'));
+			});
+		});
+	}
+	
+	
+	
+	
+	
+	
+//	var all_checked=true;
+//	
+//	$("#"+table.pid+" .td-check-box").each(function(){
+//		if(!$(this).is(':checked')){
+//			all_checked	= false;
+//			break;
+//		}
+//	});
+//	
+//	$("#"+table.pid+" .td-check-box").prop('checked', all_checked);
+//
+//	
 
 	//Set handlers for individual search inputs
 	if( sCols && sCols.length > 0 ){

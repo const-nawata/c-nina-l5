@@ -21,7 +21,7 @@
 		<th rowspan="2">{{ @trans('prompts.article') }}</th>
 		<th colspan="2">{{ @trans('prompts.price') }}</th>
 		<th colspan="3">{{ @trans('prompts.quantity') }}</th>
-		<th rowspan="2"><input type="checkbox" id="all-check"></th>
+		<th rowspan="2"><input type="checkbox" class="all-check"></th>
 	</tr>
 	<tr>
 		<th>{{ @trans('prompts.wholesale') }}</th>
