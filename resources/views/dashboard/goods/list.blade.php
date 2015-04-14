@@ -17,12 +17,11 @@
 <table id="goodstable">
 	<thead>
 	<tr>
-
 		<th rowspan="2">{{ @trans('prompts.name') }}</th>
 		<th rowspan="2">{{ @trans('prompts.article') }}</th>
-
 		<th colspan="2">{{ @trans('prompts.price') }}</th>
 		<th colspan="3">{{ @trans('prompts.quantity') }}</th>
+		<th rowspan="2"><input type="checkbox" id="all-check"></th>
 	</tr>
 	<tr>
 		<th>{{ @trans('prompts.wholesale') }}</th>
@@ -61,7 +60,11 @@ $(document).ready(function(){
 		"serverSide": true,
 
 		"columnDefs": [
-			{ "searchable": false, "targets": [ 2,3,4,5,6 ] }
+			{ "searchable": false, "targets": [ 2,3,4,5,6 ] },
+			{ "orderable": false, "targets": [7] },
+			{"className":"right-align-col", "targets": [ 2,3,4,5,6 ]},
+			{"className":"center-align-col", "targets": [7]}
+
 		],
 
 		"columns":[
@@ -71,7 +74,8 @@ $(document).ready(function(){
 		   {"name":"r_price"},
 		   {"name":"in_pack"},
 		   {"name":"packs"},
-		   {"name":"assort"}
+		   {"name":"assort"},
+		   {"name":"all_check"}
 		],
 
 		"language": tbl_prompts,

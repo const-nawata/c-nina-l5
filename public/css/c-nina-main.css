@@ -99,7 +99,7 @@ body {
 	background-color: #e1f0f0;
 }
 
-table.dataTable thead th, table.dataTable thead td, table.dataTable tbody td{
+table.dataTable thead th, table.dataTable thead td,table.dataTable tbody td{
 	border-right:  1px solid #bfbfbf;
 }
 table.dataTable thead th, table.dataTable thead td
@@ -107,10 +107,19 @@ table.dataTable thead th, table.dataTable thead td
 {
 	border-bottom: 1px solid #bfbfbf;
 	background-color: #d1d8e9;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: center;
 }
 table.dataTable tfoot th, table.dataTable tfoot td {
     border-top: 1px solid #bfbfbf;
 }
+
+table.dataTable tbody td{
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
 div.dataTables_length select.form-control, div.dataTables_filter input.form-control, .dataTable input{
 	width:auto;
 	display: inherit;
@@ -170,6 +179,13 @@ input.field-search-input{
 
 .dataTables_wrapper table.dataTable tr.even{
 	background-color: #fff5ea;
+}
+
+.right-align-col{
+	text-align: right;
+}
+.center-align-col{
+	text-align: center;
 }
 
 /*

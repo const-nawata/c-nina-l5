@@ -38,12 +38,29 @@ class BaseModel extends Model{
 
     	$data	= [];
     	foreach( $recs as $rec ){
-    		$dt	= [];
+    		$fld_vals	= [];
 
-    		foreach( $cols as $col )
-    			$dt[]	= $rec->$col['name'];
+    		foreach( $cols as $col ){
+				switch( $col['name'] ){
+					case 'all_check':
+						$val	= "<input type='checkbox'>";
+						break;
 
-    		$data[]	= $dt;
+					case 'w_price':
+					case 'r_price':
+						$val	= round($rec->$col['name'],2);
+						break;
+
+					default:
+						$val	= $rec->$col['name'];
+				}
+
+				$fld_vals[]	= $val;
+    		}
+
+
+
+    		$data[]	= $fld_vals;
     	}
 
 		$output	= [
