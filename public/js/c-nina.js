@@ -63,6 +63,26 @@ function execTblSearch(table, sCols){
 //------------------------------------------------------------------------------
 
 /**
+ * sets state (enable/disable) of delete button due to state of row check-boxes.
+ * @param string pid - table HTML id.
+ * @returns	void
+ */
+function setDelBtnState( pid ){
+	var none_checked	= true;
+
+	$("#"+pid+" .row-check-box").each(function(){
+		if( $(this).is(':checked') ){
+			none_checked	= false;
+			return;
+		}
+	});
+
+	$("#"+pid+"_del_btn").attr( "disabled", none_checked );
+
+}
+//------------------------------------------------------------------------------
+
+/**
  * sets custom controls and also styles and handlers for controls.
  * @param DataTable table - object in which settings are performed
  * @param array sCols - indexes of searching columns
@@ -102,13 +122,14 @@ function setTblElements( table, sCols ){
 	obj	= $("#"+table.pid+" .all-check");
 
 	if(obj){
-		//Set onclick handler on "all rows" check-box
-		obj.on("click", function(e){
+		obj.on("click", function(e){		//Set onclick handler on "all rows" check-box
 			var that=$(this);
 
 			$("#"+table.pid+" .row-check-box").each(function(){
 				$(this).prop('checked', that.is(':checked'));
 			});
+
+			setDelBtnState( table.pid );
 		}).prop('checked', false);
 
 		//	There is no need in delete button if there are no row selboxes.
@@ -118,7 +139,7 @@ function setTblElements( table, sCols ){
 			text: false
 		}).on( "click", function(e){
 			alert("Delete record. Not implemented yet");
-		}).attr("title", prompts.del );
+		}).attr("title", prompts.del ).attr( "disabled", true );
 	}
 
 	//	Add new record button
@@ -187,5 +208,7 @@ function processRowCheck(pid){
 	});
 
 	$("#"+pid+" .all-check").prop('checked', all_checked);
+
+	setDelBtnState( pid );
 }
 //------------------------------------------------------------------------------
