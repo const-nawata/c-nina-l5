@@ -85,6 +85,27 @@ function setDelBtnState( pid ){
 //------------------------------------------------------------------------------
 
 /**
+ * defines state of main check box due to states of all individual row check boxes in table
+ * @param string pid - HTML id of table
+ * @returns	void
+ */
+function processRowCheck(pid){
+	var all_checked=true;
+
+	$("#"+pid+" .row-check-box").each(function(){
+
+		if( !$(this).is(':checked') ){
+			all_checked	= false;
+			return;
+		}
+	});
+
+	$("#"+pid+" .all-check").prop('checked', all_checked);
+
+	setDelBtnState( pid );
+}
+//------------------------------------------------------------------------------
+/**
  * sets custom controls and also styles and handlers for controls.
  * @param DataTable table - object in which settings are performed
  * @param array sCols - indexes of searching columns
@@ -191,27 +212,14 @@ function setTblElements( table, sCols ){
 
 	}
 
-}
-//------------------------------------------------------------------------------
+	//	Handler for edit row.
+	$("#"+table.pid+" tbody").on( 'click', 'td', function () {
 
-/**
- * defines state of main check box due to states of all individual row check boxes in table
- * @param string pid - HTML id of table
- * @returns	void
- */
-function processRowCheck(pid){
-	var all_checked=true;
-
-	$("#"+pid+" .row-check-box").each(function(){
-
-		if( !$(this).is(':checked') ){
-			all_checked	= false;
-			return;
+		if ( !$(this).hasClass('unclickable') ){
+			alert($(this).index()+" / Show edit form" );
 		}
-	});
 
-	$("#"+pid+" .all-check").prop('checked', all_checked);
+	} );
 
-	setDelBtnState( pid );
 }
 //------------------------------------------------------------------------------
