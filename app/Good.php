@@ -17,8 +17,4 @@ class Good extends BaseModel{
 		,'assort'	//int
 	];
 
-// 	public function __construct(){
-// 		$this->table	= 'goods';
-// 	}
-
 }//	Class end

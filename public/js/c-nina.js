@@ -69,6 +69,7 @@ function execTblSearch(table, sCols){
  * @return void
  */
 function setTblElements( table, sCols ){
+	var obj;
 
 	//Set input CSS styles
     $("#"+table.pid+"_filter input").addClass("form-control");
@@ -102,39 +103,21 @@ function setTblElements( table, sCols ){
 	$("#"+table.pid+"_filter input").on("keyup change", function(e){
 		(e.keyCode == 13) ? execTblSearch(table,sCols):null;
 	});
-	
-	
 
-	//Set click handler for all check/uncheck check-box
-	if($("#"+table.pid+" .all-check")){
-		$("#"+table.pid+" .all-check").prop('checked', false);
-		
-		$("#"+table.pid+" .all-check").on("click", function(e){
+	//Set onclick handler on "all rows" check-box
+	obj	= $("#"+table.pid+" .all-check");
+	if(obj){
+		obj.prop('checked', false);
+
+		obj.on("click", function(e){
 			var that=$(this);
-			
-			$("#"+table.pid+" .td-check-box").each(function(){
+
+			$("#"+table.pid+" .row-check-box").each(function(){
 				$(this).prop('checked', that.is(':checked'));
 			});
 		});
+
 	}
-	
-	
-	
-	
-	
-	
-//	var all_checked=true;
-//	
-//	$("#"+table.pid+" .td-check-box").each(function(){
-//		if(!$(this).is(':checked')){
-//			all_checked	= false;
-//			break;
-//		}
-//	});
-//	
-//	$("#"+table.pid+" .td-check-box").prop('checked', all_checked);
-//
-//	
 
 	//Set handlers for individual search inputs
 	if( sCols && sCols.length > 0 ){
@@ -174,5 +157,25 @@ function setTblElements( table, sCols ){
 			execTblSearch(table,sCols);
 	    });
 	}
+}
+//------------------------------------------------------------------------------
+
+/**
+ * defines state of main check box due to states of all individual row check boxes in table
+ * @param string pid - HTML id of table
+ * @returns	void
+ */
+function processRowCheck(pid){
+	var all_checked=true;
+
+	$("#"+pid+" .row-check-box").each(function(){
+
+		if( !$(this).is(':checked') ){
+			all_checked	= false;
+			return;
+		}
+	});
+
+	$("#"+pid+" .all-check").prop('checked', all_checked);
 }
 //------------------------------------------------------------------------------

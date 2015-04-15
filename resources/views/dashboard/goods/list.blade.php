@@ -60,7 +60,7 @@ $(document).ready(function(){
 		"serverSide": true,
 
 		"columnDefs": [
-			{ "searchable": false, "targets": [ 2,3,4,5,6 ] },
+			{ "searchable": false, "targets": [ 2,3,4,5,6,7 ] },
 			{ "orderable": false, "targets": [7] },
 			{"className":"right-align-col", "targets": [ 2,3,4,5,6 ]},
 			{"className":"center-align-col", "targets": [7]}

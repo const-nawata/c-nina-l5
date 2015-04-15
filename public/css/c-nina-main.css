@@ -184,6 +184,9 @@ input.field-search-input{
 .right-align-col{
 	text-align: right;
 }
+.left-align-col{/*Default usually*/
+	text-align: left;
+}
 .center-align-col{
 	text-align: center;
 }

@@ -16,11 +16,11 @@ class BaseModel extends Model{
 
     	$recs	= self::select();
 
-    	foreach( $cols as $col )
+    	foreach( $cols as $col )//	Individual column search
     		if( $col['search']['value'] != '' )
     			$recs->where($col['name'],'like','%'.$col['search']['value'].'%');
 
-    	if($rg['search']['value'] != '' )
+    	if($rg['search']['value'] != '' )//	All columns search
     		foreach( $cols as $col )
     			if($col['searchable'] == 'true' )
     				$recs->orWhere($col['name'],'like','%'.$rg['search']['value'].'%');
@@ -36,16 +36,18 @@ class BaseModel extends Model{
 
     	$recs	= $recs->get();
 
-    	$pid	= $recs[0]->table.'table';
+    	$pid 	= self::__callStatic('getTable',[]).'table';
 
     	$data	= [];
     	foreach( $recs as $rec ){
     		$fld_vals	= [];
 
     		foreach( $cols as $col ){
+    			$val	= "";
+
 				switch( $col['name'] ){
 					case 'all_check':
-						$val	= "<input type='checkbox' id='".$pid."rowcheckbox-".$rec->id."' class='td-check-box'>";
+						$val	= "<input type='checkbox' id='".$pid."rowcheckbox-".$rec->id."' class='row-check-box' onclick='processRowCheck(\"".$pid."\");' />";
 						break;
 
 					case 'w_price':
