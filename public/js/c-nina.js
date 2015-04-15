@@ -52,7 +52,7 @@ function showAlert( title, message, width ){
  * @return void
  */
 function execTblSearch(table, sCols){
-	table.search($('div.dataTables_filter input').val());
+	table.search( $("#"+table.pid+"_filter input").val() );
 
 	if( sCols )
 		for( var i in sCols )
@@ -93,7 +93,6 @@ function setDelBtnState( pid ){
 function setTblElements( table, sCols ){
 	var obj;
 
-	//Set input CSS styles
     $("#"+table.pid+"_filter input").unbind().on("keyup change", function(e){//Change main search input handler
 		(e.keyCode == 13) ? execTblSearch(table,sCols):null;
 	}).addClass("form-control").attr("placeholder", prompts.search );
@@ -101,19 +100,19 @@ function setTblElements( table, sCols ){
     $("#"+table.pid+"_length select").addClass("form-control");
 
     $("#"+table.pid+"_filter")
-    	.prepend("<button id='search_btn'></button>")//Main search button
-    	.append("<button id='clean_btn'></button>")//Clean button for main search
-    	.prepend("<span id='tbl-tool-btns' class='tbl-tool-btns-span'></span>");//	Tool buttons container
+    	.prepend("<button id='"+table.pid+"_search_btn'></button>")//Main search button
+    	.append("<button id='"+table.pid+"_clean_btn'></button>")//Clean button for main search
+    	.prepend("<span id='"+table.pid+"_tools' class='tbl-tool-btns-span'></span>");//	Tool buttons container
 
 
-    $("#search_btn").button({				//Settings of Main search button
+    $("#"+table.pid+"_search_btn").button({				//Settings of Main search button
 		icons: { primary: "ui-icon-search" },
 		text: false
 	}).on("click", function(e) {
 		execTblSearch(table, sCols)
 	}).attr("title", prompts.exec_search);
 
-    $("#clean_btn").button({				//Settings of Clean button for main search
+    $("#"+table.pid+"_clean_btn").button({				//Settings of Clean button for main search
 		icons: { primary: "ui-icon-cancel" },
 		text: false
 	}).on("click", function(e) {
@@ -135,7 +134,7 @@ function setTblElements( table, sCols ){
 		}).prop('checked', false);
 
 		//	There is no need in delete button if there are no row selboxes.
-		$("#"+table.pid+"_filter #tbl-tool-btns").prepend("<button id='"+table.pid+"_del_btn'></button>");
+		$("#"+table.pid+"_tools").prepend("<button id='"+table.pid+"_del_btn'></button>");
 		$("#"+table.pid+"_del_btn").button({
 			icons: { primary: "ui-icon-circle-minus" },
 			text: false
@@ -147,7 +146,7 @@ function setTblElements( table, sCols ){
 	}
 
 	//	Add new record button
-	$("#"+table.pid+"_filter #tbl-tool-btns").prepend("<button id='"+table.pid+"_add_btn'></button>");
+	$("#"+table.pid+"_tools").prepend("<button id='"+table.pid+"_add_btn'></button>");
 	$("#"+table.pid+"_add_btn").button({
 		icons: { primary: "ui-icon-circle-plus" },
 		text: false
