@@ -68,16 +68,18 @@ function execTblSearch(table, sCols){
  * @returns	void
  */
 function setDelBtnState( pid ){
-	var none_checked	= true;
+	var none_checked = true
+		,fade=0.5;
 
 	$("#"+pid+" .row-check-box").each(function(){
 		if( $(this).is(':checked') ){
 			none_checked	= false;
-			return;
+			fade = 1.0;
+			return false;//break each()
 		}
 	});
 
-	$("#"+pid+"_del_btn").attr( "disabled", none_checked );
+	$("#"+pid+"_del_btn").attr( "disabled", none_checked ).fadeTo( "fast", fade );
 
 }
 //------------------------------------------------------------------------------
@@ -139,7 +141,9 @@ function setTblElements( table, sCols ){
 			text: false
 		}).on( "click", function(e){
 			alert("Delete record. Not implemented yet");
-		}).attr("title", prompts.del ).attr( "disabled", true );
+		}).attr("title", prompts.del );
+
+		setDelBtnState( table.pid );
 	}
 
 	//	Add new record button
