@@ -72,103 +72,92 @@ function setTblElements( table, sCols ){
 	var obj;
 
 	//Set input CSS styles
-    $("#"+table.pid+"_filter input").addClass("form-control");
-    $("#"+table.pid+"_length select").addClass("form-control");
-    $("#"+table.pid+"_filter input").attr("placeholder", prompts.search );
-
-	//Change main search input handler
-	$("#"+table.pid+"_filter input").unbind();
-	$("#"+table.pid+"_filter input").on("keyup change", function(e){
+    $("#"+table.pid+"_filter input").unbind().on("keyup change", function(e){//Change main search input handler
 		(e.keyCode == 13) ? execTblSearch(table,sCols):null;
-	});
+	}).addClass("form-control").attr("placeholder", prompts.search );
 
-	//Main search button
-    $("#"+table.pid+"_filter").prepend("<button id='search_btn'></button>");
-    $("#search_btn").button({
+    $("#"+table.pid+"_length select").addClass("form-control");
+
+    $("#"+table.pid+"_filter")
+    	.prepend("<button id='search_btn'></button>")//Main search button
+    	.append("<button id='clean_btn'></button>")//Clean button for main search
+    	.prepend("<span id='tbl-tool-btns' class='tbl-tool-btns-span'></span>");//	Tool buttons container
+
+
+    $("#search_btn").button({				//Settings of Main search button
 		icons: { primary: "ui-icon-search" },
 		text: false
-	});
-	$("#search_btn").on("click", function(e) {
+	}).on("click", function(e) {
 		execTblSearch(table, sCols)
-	});
+	}).attr("title", prompts.exec_search);
 
-	//Clean button for main search
-	$("#"+table.pid+"_filter").append("<button id='clean_btn'></button>");
-    $("#clean_btn").button({
+    $("#clean_btn").button({				//Settings of Clean button for main search
 		icons: { primary: "ui-icon-cancel" },
 		text: false
-	});
-	$("#clean_btn").on("click", function(e) {
+	}).on("click", function(e) {
 		$("#"+table.pid+"_filter input").val("");
 		execTblSearch(table,sCols);
-	});
-
-	//	Tool buttons container
-	$("#"+table.pid+"_filter").prepend("<span id='tbl-tool-btns' class='tbl-tool-btns-span'></span>");
+	}).attr("title", prompts.clean);
 
 	obj	= $("#"+table.pid+" .all-check");
 
 	if(obj){
 		//Set onclick handler on "all rows" check-box
-		obj.prop('checked', false);
 		obj.on("click", function(e){
 			var that=$(this);
 
 			$("#"+table.pid+" .row-check-box").each(function(){
 				$(this).prop('checked', that.is(':checked'));
 			});
-		});
+		}).prop('checked', false);
 
 		//	There is no need in delete button if there are no row selboxes.
 		$("#"+table.pid+"_filter #tbl-tool-btns").prepend("<button id='"+table.pid+"_del_btn'></button>");
-		$("#"+table.pid+"_del_btn").attr("title", prompts.del );
-
-		$("#"+table.pid+"_del_btn").on( "click", function(e){
-			alert(747);
-		});
-
-	    $("#"+table.pid+"_del_btn").button({
+		$("#"+table.pid+"_del_btn").button({
 			icons: { primary: "ui-icon-circle-minus" },
 			text: false
-		});
+		}).on( "click", function(e){
+			alert("Delete record. Not implemented yet");
+		}).attr("title", prompts.del );
 	}
 
-//TODO: Apply "#"+table.pid+ to id of Add button
 	//	Add new record button
-	$("#"+table.pid+"_filter #tbl-tool-btns").prepend("<button id='add_btn'></button>");
-	$("#add_btn").attr("title",prompts.add);
-    $("#add_btn").button({
+	$("#"+table.pid+"_filter #tbl-tool-btns").prepend("<button id='"+table.pid+"_add_btn'></button>");
+	$("#"+table.pid+"_add_btn").button({
 		icons: { primary: "ui-icon-circle-plus" },
 		text: false
-	});
+	}).on( "click", function(e){
+		alert("Add record. Not implemented yet");
+	}).attr("title",prompts.add);
 
 	//Set handlers for individual search inputs
 	if( sCols && sCols.length > 0 ){
+
 		for(var cn in sCols ){
-			var inp_obj	= $("input", table.column(cn).footer())
-			,btn_indiv	= $(".ind-clean-btn", table.column(cn).footer());
+			$("input", table.column(cn).footer()).attr("id", table.pid+"_inp_"+cn);
 
-			inp_obj.attr("id", table.pid+"_inp_"+cn);
-			btn_indiv.attr("id", table.pid+"cleanbtn-"+cn);
-
-	        btn_indiv.on( "click", function(e){
-				idd	= $(this).attr("id").split("-");
-				$("#"+table.pid+"_inp_"+idd[1]).val("");
-	        	execTblSearch(table,sCols)
-	        });
+			$(".ind-clean-btn", table.column(cn).footer())
+				.attr("id", table.pid+"cleanbtn-"+cn)
+				.on( "click", function(e){
+					var idd	= $(this).attr("id").split("-");
+					$("#"+table.pid+"_inp_"+idd[1]).val("");
+		        	execTblSearch(table,sCols)
+				});
 		}
 
-		//Individual search buttons style
+		//Individual search buttons settings
 	    $(".ind-search-btn").button({
 			icons: { primary: "ui-icon-search" },
 			text: false
-		});
+		}).on( "click", function(e){
+			execTblSearch(table,sCols);
+	    }).attr("title", prompts.exec_search);
 
-		//Individual clean buttons style
+		//Individual clean buttons settings
 	    $(".ind-clean-btn").button({
 			icons: { primary: "ui-icon-cancel" },
 			text: false
-		});
+		}).attr("title", prompts.clean);
 
 
 	    $(".f-inp").on( "keyup change", function(e){
@@ -176,13 +165,8 @@ function setTblElements( table, sCols ){
 	        	 ? execTblSearch(table,sCols):null;
 	    });
 
-	    $(".ind-search-btn").on( "click", function(e){
-			execTblSearch(table,sCols);
-	    });
 	}
 
-	$(".ui-icon-search").parent('button').attr("title", prompts.exec_search);
-	$(".ui-icon-cancel").parent('button').attr("title", prompts.clean);
 }
 //------------------------------------------------------------------------------
 
