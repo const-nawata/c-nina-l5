@@ -120,14 +120,20 @@ function setTblElements( table, sCols ){
 		});
 
 		//	There is no need in delete button if there are no row selboxes.
-		$("#"+table.pid+"_filter #tbl-tool-btns").prepend("<button id='del_btn'></button>");
-		$("#del_btn").attr("title", prompts.del );
-	    $("#del_btn").button({
+		$("#"+table.pid+"_filter #tbl-tool-btns").prepend("<button id='"+table.pid+"_del_btn'></button>");
+		$("#"+table.pid+"_del_btn").attr("title", prompts.del );
+
+		$("#"+table.pid+"_del_btn").on( "click", function(e){
+			alert(747);
+		});
+
+	    $("#"+table.pid+"_del_btn").button({
 			icons: { primary: "ui-icon-circle-minus" },
 			text: false
 		});
 	}
 
+//TODO: Apply "#"+table.pid+ to id of Add button
 	//	Add new record button
 	$("#"+table.pid+"_filter #tbl-tool-btns").prepend("<button id='add_btn'></button>");
 	$("#add_btn").attr("title",prompts.add);
