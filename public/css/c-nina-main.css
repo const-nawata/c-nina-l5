@@ -191,6 +191,10 @@ input.field-search-input{
 	text-align: center;
 }
 
+.dataTables_wrapper .dataTables_filter .tbl-tool-btns-span{
+	padding-right: 20px;
+}
+
 /*
 .tbl-tools{
 	background-color: #ff0000;

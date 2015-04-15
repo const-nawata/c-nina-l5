@@ -1,6 +1,6 @@
 
-var tbl_prompts = {
-	"emptyTable":prompts.empty_table	// And so on
+var tbl_prompts = {//Don't delete. This variable is used in TableDate initialisation.
+	"emptyTable":prompts.empty_table
 	,"infoEmpty":prompts.info_empty
 
 	,"info":prompts.info
@@ -76,6 +76,11 @@ function setTblElements( table, sCols ){
     $("#"+table.pid+"_length select").addClass("form-control");
     $("#"+table.pid+"_filter input").attr("placeholder", prompts.search );
 
+	//Change main search input handler
+	$("#"+table.pid+"_filter input").unbind();
+	$("#"+table.pid+"_filter input").on("keyup change", function(e){
+		(e.keyCode == 13) ? execTblSearch(table,sCols):null;
+	});
 
 	//Main search button
     $("#"+table.pid+"_filter").prepend("<button id='search_btn'></button>");
@@ -87,7 +92,7 @@ function setTblElements( table, sCols ){
 		execTblSearch(table, sCols)
 	});
 
-	//Main clean button
+	//Clean button for main search
 	$("#"+table.pid+"_filter").append("<button id='clean_btn'></button>");
     $("#clean_btn").button({
 		icons: { primary: "ui-icon-cancel" },
@@ -98,10 +103,21 @@ function setTblElements( table, sCols ){
 		execTblSearch(table,sCols);
 	});
 
-	//Change main search input handler
-	$("#"+table.pid+"_filter input").unbind();
-	$("#"+table.pid+"_filter input").on("keyup change", function(e){
-		(e.keyCode == 13) ? execTblSearch(table,sCols):null;
+	//	Tool buttons
+	$("#"+table.pid+"_filter").prepend("<span id='tbl-tool-btns' class='tbl-tool-btns-span'></span>");
+
+	$("#"+table.pid+"_filter #tbl-tool-btns").prepend("<button id='del_btn'></button>");
+	$("#del_btn").attr("title", prompts.delete );
+    $("#del_btn").button({
+		icons: { primary: "ui-icon-circle-minus" },
+		text: false
+	});
+
+	$("#"+table.pid+"_filter #tbl-tool-btns").prepend("<button id='add_btn'></button>");
+	$("#add_btn").attr("title",prompts.add);
+    $("#add_btn").button({
+		icons: { primary: "ui-icon-circle-plus" },
+		text: false
 	});
 
 	//Set onclick handler on "all rows" check-box
@@ -157,6 +173,9 @@ function setTblElements( table, sCols ){
 			execTblSearch(table,sCols);
 	    });
 	}
+
+	$(".ui-icon-search").parent('button').attr("title", prompts.exec_search);
+	$(".ui-icon-cancel").parent('button').attr("title", prompts.clean);
 }
 //------------------------------------------------------------------------------
 

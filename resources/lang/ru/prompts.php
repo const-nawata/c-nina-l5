@@ -7,6 +7,7 @@ return [
 	'assort'=> 'Росс.',
 	'categories'	=> 'Категории',
 	'cats_manage'=> 'Управление категориями',
+	'clean'=> 'Очистить',
 	'close'=> 'Закрыть',
 	'contacts'	=> 'Контакты',
 	'creating'	=> 'Создание',
@@ -57,6 +58,7 @@ return [
 
 	//	DataTable ajax
 	,'empty_table'	=> 'В таблице нет доступных данных'
+	,'exec_search'	=> 'Выполнить поиск'
 	,'info_empty'	=> 'Показано с 0 по 0 из 0 зап.'
 
 	,'info'	=> 'Показаны записи с _START_ по _END_ из _TOTAL_'

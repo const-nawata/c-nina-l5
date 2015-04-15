@@ -34,22 +34,28 @@
 
 <script type="text/javascript">
 var prompts	= {
-	"close":"{{ @trans('prompts.close') }}"
+	"add":"{{ @trans('prompts.add') }}"
+	,"clean":"{{ @trans('prompts.clean') }}"
+	,"close":"{{ @trans('prompts.close') }}"
+	,"delete":"{{ @trans('prompts.delete') }}"
 	,"empty_table":"{{ @trans('prompts.empty_table') }}"
+	,"exec_search":"{{ @trans('prompts.exec_search') }}"
 	,"info":"{{ @trans('prompts.info') }}"
 	,"info_empty":"{{ @trans('prompts.info_empty') }}"
 	,"info_filtered":"{{ @trans('prompts.info_filtered') }}"
 	,"length_menu":"{{ @trans('prompts.length_menu') }}"
 	,"loading_records":"{{ @trans('prompts.loading_records') }}"
-	,"processing":"{{ @trans('prompts.processing') }}"
-	,"search":"{{ @trans('prompts.search') }}"
-	,"zero_records":"{{ @trans('prompts.zero_records') }}"
+
 	,"paginate":{
         "first":"{{ @trans('prompts.paginate.first') }}",
         "last":"{{ @trans('prompts.paginate.last') }}",
         "next":"{{ @trans('prompts.paginate.next') }}",
         "previous":"{{ @trans('prompts.paginate.previous') }}"
-	}
+
+	,"processing":"{{ @trans('prompts.processing') }}"
+	,"search":"{{ @trans('prompts.search') }}"
+	,"zero_records":"{{ @trans('prompts.zero_records') }}"
+}
 }
 </script>
 

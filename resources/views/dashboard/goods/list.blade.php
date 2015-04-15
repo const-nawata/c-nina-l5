@@ -49,9 +49,8 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-	var pid="goodstable"
+	var pid="goodstable"//This value must be equel to model table name + "table".
 		,search_cols=[0,1]
-		,goods_table=0
 	;
 
 
@@ -83,7 +82,7 @@ $(document).ready(function(){
 		"ajax": "/dashboard/goodstable"
 	});
 
-	goods_table.pid	= pid;
+	goods_table.pid	= pid;//This value must be equel to model table name + "table".
 
 	setTblElements( goods_table, search_cols );
 

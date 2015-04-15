@@ -9,6 +9,7 @@ return [
 	'assort'=> 'Free',
 	'categories'	=> 'Categories',
 	'cats_manage'=> 'Cateries managing',
+	'clean'=> 'Clean',
 	'close'=> 'Close',
 	'contacts'	=> 'Contacts',
 	'creating'	=> 'Creating',
@@ -59,6 +60,7 @@ return [
 
 	//	DataTable ajax
 	,'empty_table'	=> 'No data available in table'
+	,'exec_search'	=> 'Execute search'
 	,'info_empty'	=> 'Showing 0 to 0 of 0 entry'
 
 	,'info'	=> 'Showing _START_ to _END_ of _TOTAL_ entries'
