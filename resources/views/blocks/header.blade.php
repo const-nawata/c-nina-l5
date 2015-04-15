@@ -37,7 +37,7 @@ var prompts	= {
 	"add":"{{ @trans('prompts.add') }}"
 	,"clean":"{{ @trans('prompts.clean') }}"
 	,"close":"{{ @trans('prompts.close') }}"
-	,"delete":"{{ @trans('prompts.delete') }}"
+	,"del":"{{ @trans('prompts.delete') }}"
 	,"empty_table":"{{ @trans('prompts.empty_table') }}"
 	,"exec_search":"{{ @trans('prompts.exec_search') }}"
 	,"info":"{{ @trans('prompts.info') }}"

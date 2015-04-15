@@ -103,28 +103,14 @@ function setTblElements( table, sCols ){
 		execTblSearch(table,sCols);
 	});
 
-	//	Tool buttons
+	//	Tool buttons container
 	$("#"+table.pid+"_filter").prepend("<span id='tbl-tool-btns' class='tbl-tool-btns-span'></span>");
 
-	$("#"+table.pid+"_filter #tbl-tool-btns").prepend("<button id='del_btn'></button>");
-	$("#del_btn").attr("title", prompts.delete );
-    $("#del_btn").button({
-		icons: { primary: "ui-icon-circle-minus" },
-		text: false
-	});
-
-	$("#"+table.pid+"_filter #tbl-tool-btns").prepend("<button id='add_btn'></button>");
-	$("#add_btn").attr("title",prompts.add);
-    $("#add_btn").button({
-		icons: { primary: "ui-icon-circle-plus" },
-		text: false
-	});
-
-	//Set onclick handler on "all rows" check-box
 	obj	= $("#"+table.pid+" .all-check");
-	if(obj){
-		obj.prop('checked', false);
 
+	if(obj){
+		//Set onclick handler on "all rows" check-box
+		obj.prop('checked', false);
 		obj.on("click", function(e){
 			var that=$(this);
 
@@ -133,7 +119,22 @@ function setTblElements( table, sCols ){
 			});
 		});
 
+		//	There is no need in delete button if there are no row selboxes.
+		$("#"+table.pid+"_filter #tbl-tool-btns").prepend("<button id='del_btn'></button>");
+		$("#del_btn").attr("title", prompts.del );
+	    $("#del_btn").button({
+			icons: { primary: "ui-icon-circle-minus" },
+			text: false
+		});
 	}
+
+	//	Add new record button
+	$("#"+table.pid+"_filter #tbl-tool-btns").prepend("<button id='add_btn'></button>");
+	$("#add_btn").attr("title",prompts.add);
+    $("#add_btn").button({
+		icons: { primary: "ui-icon-circle-plus" },
+		text: false
+	});
 
 	//Set handlers for individual search inputs
 	if( sCols && sCols.length > 0 ){
