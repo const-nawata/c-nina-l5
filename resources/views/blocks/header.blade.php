@@ -35,6 +35,7 @@
 <script type="text/javascript">
 var prompts	= {
 	"add":"{{ @trans('prompts.add') }}"
+	,"archive":"{{ @trans('prompts.archive') }}"
 	,"clean":"{{ @trans('prompts.clean') }}"
 	,"close":"{{ @trans('prompts.close') }}"
 	,"del":"{{ @trans('prompts.delete') }}"

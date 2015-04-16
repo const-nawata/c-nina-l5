@@ -2,7 +2,6 @@
 var tbl_prompts = {//Don't delete. This variable is used in TableDate initialisation.
 	"emptyTable":prompts.empty_table
 	,"infoEmpty":prompts.info_empty
-
 	,"info":prompts.info
 	,"infoFiltered":prompts.info_filtered
 	,"zeroRecords":prompts.zero_records
@@ -55,8 +54,8 @@ function execTblSearch(table, sCols){
 	table.search( $("#"+table.pid+"_filter input").val() );
 
 	if( sCols )
-		for( var i in sCols )
-			table.column(i).search( $('#'+table.pid+"_inp_"+i).val());
+		for(var cn=0; cn<sCols.length; cn++ )
+			table.column(sCols[cn]).search( $('#'+table.pid+"_inp_"+sCols[cn]).val());
 
 	table.draw();
 }
@@ -79,7 +78,7 @@ function setDelBtnState( pid ){
 		}
 	});
 
-	$("#"+pid+"_del_btn").attr( "disabled", none_checked ).fadeTo( "fast", fade );
+	$("#"+pid+"_arch_btn").attr( "disabled", none_checked ).fadeTo( "fast", fade );
 
 }
 //------------------------------------------------------------------------------
@@ -154,14 +153,14 @@ function setTblElements( table, sCols ){
 			setDelBtnState( table.pid );
 		}).prop('checked', false);
 
-		//	There is no need in delete button if there are no row selboxes.
-		$("#"+table.pid+"_tools").prepend("<button id='"+table.pid+"_del_btn'></button>");
-		$("#"+table.pid+"_del_btn").button({
+		//	There is no need in archive button if there are no row selboxes.
+		$("#"+table.pid+"_tools").prepend("<button id='"+table.pid+"_arch_btn'></button>");
+		$("#"+table.pid+"_arch_btn").button({
 			icons: { primary: "ui-icon-circle-minus" },
 			text: false
 		}).on( "click", function(e){
 			alert("Delete record. Not implemented yet");
-		}).attr("title", prompts.del );
+		}).attr("title", prompts.archive );
 
 		setDelBtnState( table.pid );
 	}
@@ -178,11 +177,12 @@ function setTblElements( table, sCols ){
 	//Set handlers for individual search inputs
 	if( sCols && sCols.length > 0 ){
 
-		for(var cn in sCols ){
-			$("input", table.column(cn).footer()).attr("id", table.pid+"_inp_"+cn);
+		for(var cn=0; cn<sCols.length; cn++ ){
 
-			$(".ind-clean-btn", table.column(cn).footer())
-				.attr("id", table.pid+"cleanbtn-"+cn)
+			$("input", table.column(sCols[cn]).footer()).attr("id", table.pid+"_inp_"+sCols[cn]);
+
+			$(".ind-clean-btn", table.column(sCols[cn]).footer())
+				.attr("id", table.pid+"cleanbtn-"+sCols[cn])
 				.on( "click", function(e){
 					var idd	= $(this).attr("id").split("-");
 					$("#"+table.pid+"_inp_"+idd[1]).val("");

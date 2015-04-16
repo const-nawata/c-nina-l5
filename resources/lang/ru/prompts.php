@@ -3,6 +3,7 @@ return [
 	'about_us'	=> 'О нас',
 	'add'=> 'Добавить',
 	'adding'=> 'Добавление',
+	'archive'=> 'Архив',
 	'article'=> 'Артикул',
 	'assort'=> 'Росс.',
 	'categories'	=> 'Категории',

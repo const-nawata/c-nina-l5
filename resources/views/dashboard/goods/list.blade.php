@@ -17,6 +17,7 @@
 <table id="goodstable">
 	<thead>
 	<tr>
+		<th rowspan="2">id</th>
 		<th rowspan="2">{{ @trans('prompts.name') }}</th>
 		<th rowspan="2">{{ @trans('prompts.article') }}</th>
 		<th colspan="2">{{ @trans('prompts.price') }}</th>
@@ -34,9 +35,10 @@
 
 	<tfoot>
 	<tr>
+		<th>&nbsp;</th>
 		<th><button class="ind-search-btn"></button><input class="form-control f-inp" type="text" placeholder="{{ @trans('prompts.column_search') }}" /><button class="ind-clean-btn"></th>
 		<th><button class="ind-search-btn"></button><input class="form-control f-inp" type="text" placeholder="{{ @trans('prompts.column_search') }}" /><button class="ind-clean-btn"></th>
-		<th colspan="5">&nbsp;</th>
+		<th colspan="6">&nbsp;</th>
 	</tr>
 	</tfoot>
 
@@ -50,8 +52,10 @@
 
 $(document).ready(function(){
 	var pid="goodstable"//This value must be equel to model table name + "table".
-		,search_cols=[0,1]
+		,search_cols=[1,2]
 	;
+
+
 
 
 	goods_table = $('#'+pid).DataTable( {
@@ -59,14 +63,16 @@ $(document).ready(function(){
 		"serverSide": true,
 
 		"columnDefs": [
-			{"searchable": false, "targets": [ 2,3,4,5,6,7 ] },
-			{"orderable": false, "targets": [7] },
-			{"className":"right-align-col", "targets": [ 2,3,4,5,6 ]}
-			,{"className":"unclickable center-align-col", "targets": [7]}
+			{"visible": true, "width":"40px", "targets": [0] },
+			{"searchable": false, "targets": [ 0,3,4,5,6,7,8 ] },
+			{"orderable": false, "targets": [0,8] },
+			{"className":"right-align-col", "targets": [ 3,4,5,6,7 ]}
+			,{"className":"unclickable center-align-col", "targets": [8]}
 
 		],
 
 		"columns":[
+		   {"name":"id"},
 		   {"name":"name"},
 		   {"name":"article"},
 		   {"name":"w_price"},
@@ -75,11 +81,11 @@ $(document).ready(function(){
 		   {"name":"packs"},
 		   {"name":"assort"},
 		   {"name":"all_check"}
-		],
+		]
 
-		"language": tbl_prompts,
+		,"language": tbl_prompts
 
-		"ajax": "/dashboard/goodstable"
+		,"ajax": "/dashboard/goodstable"
 	});
 
 	goods_table.pid	= pid;//This value must be equel to model table name + "table".

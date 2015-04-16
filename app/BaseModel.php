@@ -12,6 +12,8 @@ class BaseModel extends Model{
  * @return array/json
  */
 	public static function getTableData( $rg, $isJson=FALSE ){
+		$pid 	= self::__callStatic('getTable',[]).'table';
+
     	$cols	= $rg['columns'];
 
     	$recs	= self::select();
@@ -35,8 +37,6 @@ class BaseModel extends Model{
     	$recs->forPage($page, $rg['length']);
 
     	$recs	= $recs->get();
-
-    	$pid 	= self::__callStatic('getTable',[]).'table';
 
     	$data	= [];
     	foreach( $recs as $rec ){

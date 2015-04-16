@@ -5,6 +5,7 @@ return [
 	'about_us'	=> 'About us',
 	'add'=> 'Add',
 	'adding'=> 'Adding',
+	'archive'=> 'Archive',
 	'article'=> 'Article',
 	'assort'=> 'Free',
 	'categories'	=> 'Categories',
