@@ -184,13 +184,13 @@ input.field-search-input{
 	background-color: #fff5ea;
 }
 
-.right-align-col{
+.right-align-sell{
 	text-align: right;
 }
-.left-align-col{/*Default usually*/
+.left-align-sell{/*Default usually*/
 	text-align: left;
 }
-.center-align-col{
+.center-align-sell{
 	text-align: center;
 }
 

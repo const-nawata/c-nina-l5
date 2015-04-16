@@ -32,7 +32,7 @@ return [
 		'f_i'	=>	'Новая'
 	],
 	'no'=> 'Нет',
-	'packs'=> 'Уп-ок',
+	'packs'=> 'Уп-к',
 	'parent'	=> 'Родитель',
 	'password'	=> 'Пароль',
 	'password_forgotten'	=> 'Пароль забыт?',

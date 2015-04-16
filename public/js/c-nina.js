@@ -216,11 +216,28 @@ function setTblElements( table, sCols ){
 
 	}
 
+
+	$("#"+table.pid+" tbody").on( 'click', 'tr', function () {
+		$("#"+table.pid).$('tr.selected').removeClass('selected');
+		$(this).addClass('selected');
+	});
+
 	//	Handler for edit row.
 	$("#"+table.pid+" tbody").on( 'click', 'td', function () {
 
 		if ( !$(this).hasClass('unclickable') ){
-			alert($(this).index()+" / Show edit form" );
+
+
+//			alert(table.pid);
+
+//			alert( table.cell( this ).data() );
+
+
+
+
+			alert(  table.cell( 'tr.selected', 0 ).data()  );
+
+//			alert($(this).index()+" / Show edit form" );
 		}
 
 	} );

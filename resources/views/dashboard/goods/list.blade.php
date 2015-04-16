@@ -63,11 +63,11 @@ $(document).ready(function(){
 		"serverSide": true,
 
 		"columnDefs": [
-			{"visible": false, "width":"40px", "targets": [0] },
-			{"searchable": false, "targets": [ 0,3,4,5,6,7,8 ] },
-			{"orderable": false, "targets": [0,8] },
-			{"className":"right-align-col", "targets": [ 3,4,5,6,7 ]}
-			,{"className":"unclickable center-align-col", "targets": [8]}
+// 			{"visible": false, "width":"40px", "targets": [0] },
+			{"searchable": false, "targets": [ 3,4,5,6,7,8 ] },
+			{"orderable": false, "targets": [8] },
+			{"className":"right-align-sell", "targets": [ 0,3,4,5,6,7 ]}
+			,{"className":"unclickable center-align-sell", "targets": [8]}
 
 		],
 
