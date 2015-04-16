@@ -35,7 +35,6 @@
 <script type="text/javascript">
 var prompts	= {
 	"add":"{{ @trans('prompts.add') }}"
-	,"archive":"{{ @trans('prompts.archive') }}"
 	,"clean":"{{ @trans('prompts.clean') }}"
 	,"close":"{{ @trans('prompts.close') }}"
 	,"del":"{{ @trans('prompts.delete') }}"
@@ -52,11 +51,12 @@ var prompts	= {
         "last":"{{ @trans('prompts.paginate.last') }}",
         "next":"{{ @trans('prompts.paginate.next') }}",
         "previous":"{{ @trans('prompts.paginate.previous') }}"
+	}
 
 	,"processing":"{{ @trans('prompts.processing') }}"
 	,"search":"{{ @trans('prompts.search') }}"
+	,"to_archive":"{{ @trans('prompts.to_archive') }}"
 	,"zero_records":"{{ @trans('prompts.zero_records') }}"
-}
 }
 </script>
 

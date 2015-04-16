@@ -13,8 +13,12 @@ var tbl_prompts = {//Don't delete. This variable is used in TableDate initialisa
     ,"paginate":{
         "first":prompts.paginate.first,
         "last":prompts.paginate.last,
-        "next":prompts.paginate.next,
-        "previous":prompts.paginate.previous
+
+//        "next":prompts.paginate.next,
+//        "previous":prompts.paginate.previous
+
+        "next":"&raquo;",
+        "previous":"&laquo;"
     }
 };
 
@@ -156,11 +160,11 @@ function setTblElements( table, sCols ){
 		//	There is no need in archive button if there are no row selboxes.
 		$("#"+table.pid+"_tools").prepend("<button id='"+table.pid+"_arch_btn'></button>");
 		$("#"+table.pid+"_arch_btn").button({
-			icons: { primary: "ui-icon-circle-minus" },
+			icons: { primary: "ui-icon-locked" },
 			text: false
 		}).on( "click", function(e){
 			alert("Delete record. Not implemented yet");
-		}).attr("title", prompts.archive );
+		}).attr("title", prompts.to_archive );
 
 		setDelBtnState( table.pid );
 	}
