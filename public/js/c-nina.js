@@ -148,12 +148,7 @@ function setTblElements( table, sCols ){
 
 	if(obj){
 		obj.on("click", function(e){		//Set onclick handler on "all rows" check-box
-			var that=$(this);
-
-			$("#"+table.pid+" .row-check-box").each(function(){
-				$(this).prop('checked', that.is(':checked'));
-			});
-
+			$("#"+table.pid+" .row-check-box").prop('checked', $(this).is(':checked'));
 			setDelBtnState( table.pid );
 		}).prop('checked', false);
 
@@ -221,14 +216,16 @@ function setTblElements( table, sCols ){
 	$("#"+table.pid+" tbody").on( 'click', 'td', function () {
 		$("#"+table.pid+" .selected").removeClass('selected');
 
+
 		if ( !$(this).hasClass('unclickable') ){
+			$("#"+table.pid+" .row-check-box").prop('checked', false);
 			$(this).parent('tr').addClass('selected');
 
-			alert(  table.cell( '.selected', 0 ).data()  );
+			alert(  "Show edit form for id: "+table.cell( '.selected', 0 ).data()  );
 
 		}
 
-	} );
+	});
 
 }
 //------------------------------------------------------------------------------
