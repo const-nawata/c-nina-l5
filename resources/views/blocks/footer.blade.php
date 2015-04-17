@@ -40,6 +40,7 @@ $(document).ready(function(){
 	$("#form-dialog").dialog({
 		autoOpen: false,
 		dialogClass: "dialog-form",
+		width: 600,
 		modal: true
 	});
 

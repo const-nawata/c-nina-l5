@@ -3,6 +3,7 @@
 use App\Category;
 use Request;
 use App\Http\Requests\CategoryFormRequest;
+use App\Http\Requests\GoodFormRequest;
 use League\Flysystem\Adapter\NullAdapter;
 use App\Good;
 
@@ -83,6 +84,50 @@ class DashboardController extends MainController{
 		'}';
 
 		return $json;
+    }
+//______________________________________________________________________________
+
+/**
+ *
+ * @param string $id
+ * @return string
+ */
+    public function getGoodform( $id=NULL ){
+    	if( $id == NULL ){
+    		$item	= new Good();
+    		$id_url	= '';
+    	}else{
+    		$item	= Good::find( $id );
+    		$id_url	= '/'.$id;
+    	}
+
+		return view( 'dashboard/goods/form', [
+			'id_url'	=> $id_url
+			,'name'		=> $item->name
+			,'article'	=> $item->article
+			,'unit_id'	=> $item->unit_id
+			,'r_price'	=> $item->r_price
+			,'w_price'	=> $item->w_price
+			,'in_pack'	=> $item->in_pack
+		]);
+    }
+//______________________________________________________________________________
+
+     public function postGood( GoodFormRequest $request, $id=NULL ){
+
+     	$good_data	= $request->all();
+
+// info(print_r( $good_data , TRUE));
+
+
+//     	$cat_data	= $request->all();
+//     	$cat_data['parent_id']	= $cat_data['parent_id'] < 0 ? NULL : $cat_data['parent_id'];
+
+//     	$cat	= $id != NULL ? Category::find( $id ) : new Category();
+//     	$cat	= $cat->fill( $cat_data );
+// 	    $res 	= $cat->save();
+
+    	return redirect('/dashboard/goods/list');
     }
 //______________________________________________________________________________
 

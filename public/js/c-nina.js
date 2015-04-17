@@ -212,8 +212,6 @@ function setTblElements( table, sCols ){
 	}
 
 
-
-
 //XXX Don't delete next comments
 //			goodstable_next prompts.paginate.next paginate_button next
 //	$("#"+table.pid+"_next").attr("title","Next");
@@ -228,46 +226,49 @@ function setTblElements( table, sCols ){
 //XXX
 
 
-
 	//	Handler for edit row.
 	$("#"+table.pid+" tbody").on( 'click', 'td', function () {
 		$("#"+table.pid+" .selected").removeClass('selected');
-
 
 		if ( !$(this).hasClass('unclickable') ){
 			$("#"+table.pid+" .row-check-box").prop('checked', false);
 			$(this).parent('tr').addClass('selected');
 
-//			alert(  "Show edit form for id: "+table.cell( '.selected', 0 ).data()  );
-			showForm( table.pid, "url", table.cell( '.selected', 0 ).data() );
-
+			showForm( table, table.cell( '.selected', 0 ).data() );
 		}
-
 	});
 
 }
 //------------------------------------------------------------------------------
 
 /**
- * Shows alert on error etc.
- * @param string title
- * @param string message
- * @param integer width - in px.
+ * Shows popup dialog to edit table recod
+ * @param object table
+ * @param integer id - record id
+ * @returns void
  */
-function showForm( title, url, id ){
-//	var d_width	= width ? width : 400;
+function showForm( table, id ){
+	var id_url	= id == null ? "" : "/"+id;
 
-    $("#form-dialog").html( "Form content for id: "+id );
-    $("#form-dialog" ).dialog( "option", "title", title );
-    $("#form-dialog").dialog("open");
+	$.ajax({
+		url: table.formUrl+id_url,
+		success: function(result){
+			$("#form-dialog").html( result );
+		},
 
-	$("#form-dialog").dialog( "option", "buttons",[
+    	error: function(){
+			alert( "Internal Error" );
+		}
+	});
+
+	$("#form-dialog" ).dialog( "option", "buttons",[
 		{
 			text: prompts.save,
 			click: function(){
+				$("#"+table.pid+"form").submit();
 				$(this).dialog("close");
 			}
 		}
-	]);
+	]).dialog("option","title",table.formTitle).dialog("open");
 }
 //------------------------------------------------------------------------------

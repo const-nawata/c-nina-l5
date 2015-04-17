@@ -14,7 +14,7 @@
 
 <div class="jumbotron j-tbl">
 
-<table id="goodstable">
+<table id="good">
 	<thead>
 	<tr>
 		<th rowspan="2">id</th>
@@ -51,7 +51,7 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-	var pid="goodstable"//This value must be equel to model table name + "table".
+	var pid="good"//This value must be equel to model name.
 		,search_cols=[1,2]
 	;
 
@@ -88,7 +88,9 @@ $(document).ready(function(){
 		,"ajax": "/dashboard/goodstable"
 	});
 
-	goods_table.pid	= pid;//This value must be equel to model table name + "table".
+	goods_table.pid	= pid;//This value must be equel to model name.
+	goods_table.formUrl = "/dashboard/goodform";
+	goods_table.formTitle = "Goods parametes editing";
 
 	setTblElements( goods_table, search_cols );
 

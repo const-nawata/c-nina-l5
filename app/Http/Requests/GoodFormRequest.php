@@ -3,7 +3,7 @@
 use App\Http\Requests\Request;
 use Response;
 
-class CategoryFormRequest extends Request {
+class GoodFormRequest extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.
