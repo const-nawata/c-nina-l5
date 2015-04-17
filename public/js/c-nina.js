@@ -217,27 +217,15 @@ function setTblElements( table, sCols ){
 	}
 
 
-	$("#"+table.pid+" tbody").on( 'click', 'tr', function () {
-		$("#"+table.pid).$('tr.selected').removeClass('selected');
-		$(this).addClass('selected');
-	});
-
 	//	Handler for edit row.
 	$("#"+table.pid+" tbody").on( 'click', 'td', function () {
+		$("#"+table.pid+" .selected").removeClass('selected');
 
 		if ( !$(this).hasClass('unclickable') ){
+			$(this).parent('tr').addClass('selected');
 
+			alert(  table.cell( '.selected', 0 ).data()  );
 
-//			alert(table.pid);
-
-//			alert( table.cell( this ).data() );
-
-
-
-
-			alert(  table.cell( 'tr.selected', 0 ).data()  );
-
-//			alert($(this).index()+" / Show edit form" );
 		}
 
 	} );
