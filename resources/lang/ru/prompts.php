@@ -55,6 +55,7 @@ return [
 	'your_login_data'	=> 'Введите Ваш логин и пароль'
 
 			//	Units
+	,'unit'	=> 'Ед.изм.'
 	,'pcs'	=> 'шт.'
 
 	//	DataTable ajax

@@ -55,15 +55,11 @@ $(document).ready(function(){
 		,search_cols=[1,2]
 	;
 
-
-
-
 	goods_table = $('#'+pid).DataTable( {
 		"processing": true,
 		"serverSide": true,
 
 		"columnDefs": [
-// 			{"visible": false, "width":"40px", "targets": [0] },
 			{"searchable": false, "targets": [ 3,4,5,6,7,8 ] },
 			{"orderable": false, "targets": [8] },
 			{"className":"right-align-sell", "targets": [ 0,3,4,5,6,7 ]}
@@ -91,8 +87,16 @@ $(document).ready(function(){
 	goods_table.pid	= pid;//This value must be equel to model name.
 	goods_table.formUrl = "/dashboard/goodform";
 	goods_table.formTitle = "Goods parametes editing";
+	goods_table.sel_id	= {{ $id }}
 
 	setTblElements( goods_table, search_cols );
+
+//TODO: Change all validation to JQuery
+@if( !$errors->isEmpty() )
+	showForm( goods_table, 94 );
+	showAlert( "{{ @trans( 'prompts.error' ) }}", "{!! $errors->first($errors->keys()[0]) !!}", 500 );
+@endif
+
 
 });
 </script>

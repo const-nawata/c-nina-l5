@@ -117,17 +117,11 @@ class DashboardController extends MainController{
 
      	$good_data	= $request->all();
 
-// info(print_r( $good_data , TRUE));
+    	$good	= $id != NULL ? Good::find( $id ) : new Good();
+    	$good	= $good->fill( $good_data );
+	    $res 	= $good->save();
 
-
-//     	$cat_data	= $request->all();
-//     	$cat_data['parent_id']	= $cat_data['parent_id'] < 0 ? NULL : $cat_data['parent_id'];
-
-//     	$cat	= $id != NULL ? Category::find( $id ) : new Category();
-//     	$cat	= $cat->fill( $cat_data );
-// 	    $res 	= $cat->save();
-
-    	return redirect('/dashboard/goods/list');
+		return $this->getGoods( $id );
     }
 //______________________________________________________________________________
 
@@ -144,8 +138,8 @@ class DashboardController extends MainController{
     }
 //______________________________________________________________________________
 
-    public function getGoods(){
-    	return view( 'dashboard/goods/list' );
+    public function getGoods( $id=NULL ){
+    	return view( 'dashboard/goods/list',['id'=>$id] );
     }
 //______________________________________________________________________________
 

@@ -57,6 +57,7 @@ return [
 	'your_login_data'	=> 'Your login data'
 
 			//	Units
+	,'unit'	=> 'Unit'
 	,'pcs'	=> 'pcs'
 
 	//	DataTable ajax

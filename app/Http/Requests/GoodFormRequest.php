@@ -22,7 +22,8 @@ class GoodFormRequest extends Request {
 	public function rules(){
 		return [
 			'name'      => 'required',
-			'rank'     => 'integer|min:0'
+			'w_price'     => 'numeric',
+			'r_price'     => 'numeric'
 		];
 	}
 
@@ -43,7 +44,7 @@ class GoodFormRequest extends Request {
     			$message	= str_replace($field,'\"'.trans( 'prompts.'.$field ).'\"', $message );
     		}
     	}
-
+// info(print_r( $errors , TRUE));
         // If you want to customize what happens on a failed validation,
         // override this method.
         // See what it does natively here:
