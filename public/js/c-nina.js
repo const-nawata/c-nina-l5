@@ -238,11 +238,35 @@ function setTblElements( table, sCols ){
 			$("#"+table.pid+" .row-check-box").prop('checked', false);
 			$(this).parent('tr').addClass('selected');
 
-			alert(  "Show edit form for id: "+table.cell( '.selected', 0 ).data()  );
+//			alert(  "Show edit form for id: "+table.cell( '.selected', 0 ).data()  );
+			showForm( table.pid, "url", table.cell( '.selected', 0 ).data() );
 
 		}
 
 	});
 
+}
+//------------------------------------------------------------------------------
+
+/**
+ * Shows alert on error etc.
+ * @param string title
+ * @param string message
+ * @param integer width - in px.
+ */
+function showForm( title, url, id ){
+
+    $("#form-dialog").html( "Form content for id: "+id );
+    $("#form-dialog" ).dialog( "option", "title", title );
+    $("#form-dialog").dialog("open");
+
+	$("#form-dialog").dialog( "option", "buttons",[
+		{
+			text: prompts.save,
+			click: function(){
+				$(this).dialog("close");
+			}
+		}
+	]);
 }
 //------------------------------------------------------------------------------
