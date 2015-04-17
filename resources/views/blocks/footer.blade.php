@@ -11,6 +11,7 @@
 </div>
 
 <div id="standard-dialog"></div>
+<div id="form-dialog"></div>
 
 
 </body>
@@ -32,7 +33,13 @@ $(document).ready(function(){
 
 	$("#standard-dialog").dialog({
 		autoOpen: false,
-		dialogClass: "no-close",
+		dialogClass: "dialog-standard",
+		modal: true
+	});
+
+	$("#form-dialog").dialog({
+		autoOpen: false,
+		dialogClass: "dialog-form",
 		modal: true
 	});
 

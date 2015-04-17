@@ -54,6 +54,7 @@ var prompts	= {
 	}
 
 	,"processing":"{{ @trans('prompts.processing') }}"
+	,"save":"{{ @trans('prompts.save') }}"
 	,"search":"{{ @trans('prompts.search') }}"
 	,"to_archive":"{{ @trans('prompts.to_archive') }}"
 	,"zero_records":"{{ @trans('prompts.zero_records') }}"

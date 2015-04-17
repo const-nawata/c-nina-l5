@@ -212,6 +212,23 @@ function setTblElements( table, sCols ){
 	}
 
 
+
+
+//XXX Don't delete next comments
+//			goodstable_next prompts.paginate.next paginate_button next
+//	$("#"+table.pid+"_next").attr("title","Next");
+//	$(".dataTables_paginate .paginate_button .next").attr("title","Next");
+
+//	if($("#"+table.pid+"_next")){
+////		alert("Good");
+//		$("#"+table.pid+"_next").attr("title","Next");
+//	}else{
+//		alert("Bad");
+//	}
+//XXX
+
+
+
 	//	Handler for edit row.
 	$("#"+table.pid+" tbody").on( 'click', 'td', function () {
 		$("#"+table.pid+" .selected").removeClass('selected');
