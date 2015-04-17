@@ -255,6 +255,7 @@ function setTblElements( table, sCols ){
  * @param integer width - in px.
  */
 function showForm( title, url, id ){
+//	var d_width	= width ? width : 400;
 
     $("#form-dialog").html( "Form content for id: "+id );
     $("#form-dialog" ).dialog( "option", "title", title );
