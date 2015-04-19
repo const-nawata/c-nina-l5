@@ -2,6 +2,7 @@
 
 use App\Category;
 use Request;
+use Response;
 use App\Http\Requests\CategoryFormRequest;
 use App\Http\Requests\GoodFormRequest;
 use League\Flysystem\Adapter\NullAdapter;
@@ -117,11 +118,20 @@ class DashboardController extends MainController{
 
      	$good_data	= $request->all();
 
-    	$good	= $id != NULL ? Good::find( $id ) : new Good();
-    	$good	= $good->fill( $good_data );
-	    $res 	= $good->save();
+// info(print_r(  $good_data ,true));
 
-		return $this->getGoods( $id );
+
+//     	$good	= $id != NULL ? Good::find( $id ) : new Good();
+//     	$good	= $good->fill( $good_data );
+// 	    $res 	= $good->save();
+
+// 		return $this->getGoods( $id );
+
+
+
+     	return Response::json(['id'=>$id]);
+
+//      	return '{"aaa":"fff"}';
     }
 //______________________________________________________________________________
 

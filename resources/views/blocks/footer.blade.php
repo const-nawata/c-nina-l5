@@ -11,8 +11,6 @@
 </div>
 
 <div id="standard-dialog"></div>
-<div id="form-dialog"></div>
-
 
 </body>
 <?php
@@ -36,14 +34,6 @@ $(document).ready(function(){
 		dialogClass: "dialog-standard",
 		modal: true
 	});
-
-	$("#form-dialog").dialog({
-		autoOpen: false,
-		dialogClass: "dialog-form",
-		width: 600,
-		modal: true
-	});
-
 });
 
 </script>

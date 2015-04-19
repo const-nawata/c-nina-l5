@@ -234,7 +234,7 @@ function setTblElements( table, sCols ){
 			$("#"+table.pid+" .row-check-box").prop('checked', false);
 			$(this).parent('tr').addClass('selected');
 
-			showForm( table, table.cell( '.selected', 0 ).data() );
+			showTblRecForm( table, table.cell( '.selected', 0 ).data() );
 		}
 	});
 
@@ -247,13 +247,19 @@ function setTblElements( table, sCols ){
  * @param integer id - record id
  * @returns void
  */
-function showForm( table, id ){
-	var id_url	= id == null ? "" : "/"+id;
+function showTblRecForm( table, id ){
+	var id_url	= id == null ? "" : "/"+id
+	,dform_id = table.pid+"-form-dialog"
+	,dform
+	;
+
+	$('body').append("<div id='"+dform_id+"'></div>");
+	dform	= $("#"+dform_id);
 
 	$.ajax({
 		url: table.formUrl+id_url,
 		success: function(result){
-			$("#form-dialog").html( result );
+			dform.html( result );
 		},
 
     	error: function(){
@@ -261,14 +267,50 @@ function showForm( table, id ){
 		}
 	});
 
-	$("#form-dialog" ).dialog( "option", "buttons",[
-		{
+
+	dform.dialog({
+		autoOpen: false,
+		dialogClass: "dialog-form",
+//TODO: Set width as table option.
+		width: 600,
+		modal: true,
+		title: table.formTitle,
+		buttons: [
+		   {
 			text: prompts.save,
 			click: function(){
 				$("#"+table.pid+"form").submit();
 				$(this).dialog("close");
 			}
 		}
-	]).dialog("option","title",table.formTitle).dialog("open");
+		]
+	}).dialog("open");
+
+
+	$( document ).ajaxComplete(function(){
+
+		$("#"+table.pid+"form").submit(function(e){
+
+		    $.ajax({
+		        url : $(this).attr("action"),
+		        type: "POST",
+		        data : $(this).serializeArray(),
+		        success:function(data, textStatus, jqXHR){
+		        	dform.dialog("close");
+		        	dform.remove();
+		        	dform	= null;
+
+		        	alert("id: "+data.id+" / pid: "+table.pid);
+		        },
+
+		        error: function(jqXHR, textStatus, errorThrown){
+		           	alert('Ajax submit failed.');
+		        }
+		    });
+		    e.preventDefault(); //STOP default action
+//		    e.unbind(); //unbind. to stop multiple form submit.
+		});
+	});
+
 }
 //------------------------------------------------------------------------------

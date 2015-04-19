@@ -91,13 +91,6 @@ $(document).ready(function(){
 
 	setTblElements( goods_table, search_cols );
 
-//TODO: Change all validation to JQuery
-@if( !$errors->isEmpty() )
-	showForm( goods_table, 94 );
-	showAlert( "{{ @trans( 'prompts.error' ) }}", "{!! $errors->first($errors->keys()[0]) !!}", 500 );
-@endif
-
-
 });
 </script>
 @stop
