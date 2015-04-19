@@ -12,7 +12,7 @@ class BaseModel extends Model{
  * @return array/json
  */
 	public static function getTableData( $rg, $isJson=FALSE ){
-		$pid 	= self::__callStatic('getTable',[]).'table';
+		$pid	= str_singular(self::__callStatic('getTable',[]));
 
     	$cols	= $rg['columns'];
 
