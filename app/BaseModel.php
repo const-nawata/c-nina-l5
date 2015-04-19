@@ -19,7 +19,7 @@ class BaseModel extends Model{
     	$recs	= self::select();
 
     	foreach( $cols as $col )//	Individual column search
-    		if( $col['search']['value'] != '' )
+    		if( $col['searchable'] == 'true' && $col['search']['value'] != '' )
     			$recs->where($col['name'],'like','%'.$col['search']['value'].'%');
 
     	if($rg['search']['value'] != '' )//	All columns search
