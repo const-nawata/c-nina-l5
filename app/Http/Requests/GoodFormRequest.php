@@ -22,8 +22,8 @@ class GoodFormRequest extends Request {
 	public function rules(){
 		return [
 			'name'      => 'required',
-			'w_price'     => 'numeric',
-			'r_price'     => 'numeric'
+			'wprice'     => 'numeric',
+			'rprice'     => 'numeric'
 		];
 	}
 
@@ -41,14 +41,24 @@ class GoodFormRequest extends Request {
 
     	foreach( $errors as $field=>&$messages ){
     		foreach( $messages as &$message ){
+
+info(print_r( $message , TRUE));
     			$message	= str_replace($field,'\"'.trans( 'prompts.'.$field ).'\"', $message );
     		}
     	}
 // info(print_r( $errors , TRUE));
+
         // If you want to customize what happens on a failed validation,
         // override this method.
         // See what it does natively here:
         // https://github.com/laravel/framework/blob/master/src/Illuminate/Foundation/Http/FormRequest.php
+
+
+
+// 		if ($this->ajax() || $this->wantsJson()){
+// 			return new JsonResponse($errors, 422);
+// 		}
+
 
     	return parent::response($errors);
     }

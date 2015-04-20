@@ -50,8 +50,8 @@ class BaseModel extends Model{
 						$val	= "<input type='checkbox' id='".$pid."rowcheckbox-".$rec->id."' class='row-check-box' onclick='processRowCheck(\"".$pid."\");' />";
 						break;
 
-					case 'w_price':
-					case 'r_price':
+					case 'wprice':
+					case 'rprice':
 						$val	= number_format($rec->$col['name'],2,',',' ');
 						break;
 

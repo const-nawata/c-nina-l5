@@ -28,8 +28,8 @@ class Unit_01_Test extends TestCase{
 		$new_item	= [
 			'name'	=> ''
 			,'article'=> ''
-			,'r_price'	=> 5.567
-			,'w_price'	=> 4.444
+			,'rprice'	=> 5.567
+			,'wprice'	=> 4.444
 			,'in_pack'	=> 24
 			,'packs'	=> 13
 			,'assort'	=> 17

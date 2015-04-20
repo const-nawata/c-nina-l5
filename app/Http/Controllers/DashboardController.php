@@ -107,8 +107,8 @@ class DashboardController extends MainController{
 			,'name'		=> $item->name
 			,'article'	=> $item->article
 			,'unit_id'	=> $item->unit_id
-			,'r_price'	=> $item->r_price
-			,'w_price'	=> $item->w_price
+			,'rprice'	=> $item->rprice
+			,'wprice'	=> $item->wprice
 			,'in_pack'	=> $item->in_pack
 		]);
     }

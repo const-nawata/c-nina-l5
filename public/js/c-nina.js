@@ -280,7 +280,7 @@ function showTblRecForm( table, id ){
 			text: prompts.save,
 			click: function(){
 				$("#"+table.pid+"form").submit();
-				$(this).dialog("close");
+//				$(this).dialog("close");
 			}
 		}
 		]
@@ -300,14 +300,21 @@ function showTblRecForm( table, id ){
 		        	dform.remove();
 		        	dform	= null;
 
-		        	alert("id: "+data.id+" / pid: "+table.pid);
+//		        	alert("id: "+data.id+" / pid: "+table.pid);
 		        },
 
 		        error: function(jqXHR, textStatus, errorThrown){
-		           	alert('Ajax submit failed.');
+		        	var err = jQuery.parseJSON(jqXHR.responseText);
+
+//		        		alert(jqXHR.responseText+" / "+jqXHR.status);
+
+
+		        		alert(err.rprice[0]);
+		        		$("#"+table.pid+"form").unbind('submit');//  "this" does not work.
 		        }
 		    });
 		    e.preventDefault(); //STOP default action
+
 //		    e.unbind(); //unbind. to stop multiple form submit.
 		});
 	});

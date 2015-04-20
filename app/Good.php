@@ -10,8 +10,8 @@ class Good extends BaseModel{
 	protected $fillable = [
 		'name'		//200
 		,'article'	//200
-		,'r_price'	//0.000
-		,'w_price'	//0.000
+		,'rprice'	//0.000
+		,'wprice'	//0.000
 		,'in_pack'	//int
 		,'packs'	//int
 		,'assort'	//int

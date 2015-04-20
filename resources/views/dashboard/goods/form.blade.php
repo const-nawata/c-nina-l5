@@ -15,16 +15,16 @@
 	</div>
 
 	<div class="form-group">
-	    {!! Form::label('w_price',@trans('prompts.wholesale'),['class'=>'control-label col-sm-3'] ) !!}
+	    {!! Form::label('wprice',@trans('prompts.wholesale'),['class'=>'control-label col-sm-3'] ) !!}
 	    <div class="col-sm-9">
-			{!! Form::text('w_price', $w_price, ['id'=>'w_price','class'=>'form-control']) !!}
+			{!! Form::text('wprice', $wprice, ['id'=>'wprice','class'=>'form-control']) !!}
 	    </div>
 	</div>
 
 	<div class="form-group">
-	    {!! Form::label('r_price',@trans('prompts.retail'),['class'=>'control-label col-sm-3'] ) !!}
+	    {!! Form::label('rprice',@trans('prompts.rprice'),['class'=>'control-label col-sm-3'] ) !!}
 	    <div class="col-sm-9">
-			{!! Form::text('r_price', $r_price, ['id'=>'r_price','class'=>'form-control']) !!}
+			{!! Form::text('rprice', $rprice, ['id'=>'rprice','class'=>'form-control']) !!}
 	    </div>
 	</div>
 

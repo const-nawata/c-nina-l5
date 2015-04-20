@@ -43,7 +43,7 @@ return [
 	'rank'	=> 'Place in list',
 	'registration'	=> 'Registration',
 	'remember_me'	=> 'Remember me',
-	'retail'	=> 'Ret.',
+	'rprice'	=> 'Ret.',
 	'root_cat'=> 'Root',
 	'russian'	=> 'Russian',
 	'save'	=> 'Save',

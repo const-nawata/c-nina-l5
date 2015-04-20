@@ -26,7 +26,7 @@
 	</tr>
 	<tr>
 		<th>{{ @trans('prompts.wholesale') }}</th>
-		<th>{{ @trans('prompts.retail') }}</th>
+		<th>{{ @trans('prompts.rprice') }}</th>
 		<th>{{ @trans('prompts.in_pack') }}</th>
 		<th>{{ @trans('prompts.packs') }}</th>
 		<th>{{ @trans('prompts.assort') }}</th>
@@ -71,8 +71,8 @@ $(document).ready(function(){
 		   {"name":"id"},
 		   {"name":"name"},
 		   {"name":"article"},
-		   {"name":"w_price"},
-		   {"name":"r_price"},
+		   {"name":"wprice"},
+		   {"name":"rprice"},
 		   {"name":"in_pack"},
 		   {"name":"packs"},
 		   {"name":"assort"},
