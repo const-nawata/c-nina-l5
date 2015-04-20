@@ -285,7 +285,6 @@ function showTblRecForm( table, id ){
 			text: prompts.save,
 			click: function(){
 				$("#"+table.pid+"form").submit();
-//				$(this).dialog("close");
 			}
 		}
 		]
@@ -293,12 +292,9 @@ function showTblRecForm( table, id ){
 
 	$( document ).ajaxComplete(function(){
 
-
 		$("#"+table.pid+"form").submit(function(e){
-//		$("#"+table.pid+"form").one("submit",function(e){
 
-
-			if(!is_submit ){
+			if( !is_submit ){
 				is_submit	= true;
 
 			    $.ajax({
@@ -309,20 +305,17 @@ function showTblRecForm( table, id ){
 			        	dform.dialog("close");
 			        	dform.remove();
 			        	dform	= null;
-			        	window.location.href = "/dashboard/goods/"+id;
+			        	window.location.href = table.afterPostUrl+data.id;
 			        },
 
 			        error: function(jqXHR, textStatus, errorThrown){
-			        	var err = jQuery.parseJSON(jqXHR.responseText);
+			        	var err = jQuery.parseJSON(jqXHR.responseText);//TODO: Not finished.
 			        		showAlert( "Vlidation error", err.rprice[0] );
 			        }
 			    });
 			}
 
 		    e.preventDefault(); //STOP default action
-
-		    $("#"+table.pid+"form").unbind(); //unbind. to stop multiple form submit.
-		    return false;
 		});
 	});
 

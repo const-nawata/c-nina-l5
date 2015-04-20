@@ -87,7 +87,8 @@ $(document).ready(function(){
 	goods_table.pid	= pid;//This value must be equel to model name.
 	goods_table.formUrl = "/dashboard/goodform";
 	goods_table.formTitle = "Goods parametes editing";
-	goods_table.sel_id	= {{ $id }}
+	goods_table.sel_id	= {{ $id != null ? $id : 'null' }}
+	goods_table.afterPostUrl = "/dashboard/goods/";
 
 	setTblElements( goods_table, search_cols );
 

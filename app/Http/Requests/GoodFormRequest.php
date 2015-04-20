@@ -21,9 +21,10 @@ class GoodFormRequest extends Request {
 	 */
 	public function rules(){
 		return [
-			'name'      => 'required',
-			'wprice'     => 'numeric',
-			'rprice'     => 'numeric'
+			'name'		=> 'required',
+			'wprice'	=> 'required|numeric',
+			'rprice'	=> 'required|numeric',
+			'unit_id'	=> 'required|integer'
 		];
 	}
 
@@ -41,8 +42,6 @@ class GoodFormRequest extends Request {
 
     	foreach( $errors as $field=>&$messages ){
     		foreach( $messages as &$message ){
-
-info(print_r( $message , TRUE));
     			$message	= str_replace($field,'\"'.trans( 'prompts.'.$field ).'\"', $message );
     		}
     	}
