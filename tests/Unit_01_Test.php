@@ -30,7 +30,7 @@ class Unit_01_Test extends TestCase{
 			,'article'=> ''
 			,'rprice'	=> 5.567
 			,'wprice'	=> 4.444
-			,'in_pack'	=> 24
+			,'inpack'	=> 24
 			,'packs'	=> 13
 			,'assort'	=> 17
 		];

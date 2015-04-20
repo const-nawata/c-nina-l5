@@ -24,7 +24,7 @@ return [
 	'expand'	=> 'Expand',
 	'goods'	=> 'Goods',
 	'home'	=> 'Home',
-	'in_pack'	=> 'In pack',
+	'inpack'	=> 'In pack',
 	'lang'	=> 'Lang',
 	'list_order'	=> 'Order in list',
 	'login'	=> 'Login',

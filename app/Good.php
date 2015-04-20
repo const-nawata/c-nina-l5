@@ -12,7 +12,7 @@ class Good extends BaseModel{
 		,'article'	//200
 		,'rprice'	//0.000
 		,'wprice'	//0.000
-		,'in_pack'	//int
+		,'inpack'	//int
 		,'packs'	//int
 		,'assort'	//int
 	];

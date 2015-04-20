@@ -26,6 +26,7 @@
 */
 ?>
 <script type="text/javascript">
+var is_submit=false;
 
 $(document).ready(function(){
 

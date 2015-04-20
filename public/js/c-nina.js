@@ -241,6 +241,7 @@ function setTblElements( table, sCols ){
 }
 //------------------------------------------------------------------------------
 
+
 /**
  * Shows popup dialog to edit table recod
  * @param object table
@@ -248,10 +249,13 @@ function setTblElements( table, sCols ){
  * @returns void
  */
 function showTblRecForm( table, id ){
+
 	var id_url	= id == null ? "" : "/"+id
 	,dform_id = table.pid+"-form-dialog"
 	,dform
 	;
+
+	is_submit	= false;
 
 	$('body').append("<div id='"+dform_id+"'></div>");
 	dform	= $("#"+dform_id);
@@ -275,6 +279,7 @@ function showTblRecForm( table, id ){
 		width: 600,
 		modal: true,
 		title: table.formTitle,
+
 		buttons: [
 		   {
 			text: prompts.save,
@@ -286,38 +291,61 @@ function showTblRecForm( table, id ){
 		]
 	}).dialog("open");
 
-
 	$( document ).ajaxComplete(function(){
 
+
 		$("#"+table.pid+"form").submit(function(e){
-
-		    $.ajax({
-		        url : $(this).attr("action"),
-		        type: "POST",
-		        data : $(this).serializeArray(),
-		        success:function(data, textStatus, jqXHR){
-		        	dform.dialog("close");
-		        	dform.remove();
-		        	dform	= null;
-
-//		        	alert("id: "+data.id+" / pid: "+table.pid);
-		        },
-
-		        error: function(jqXHR, textStatus, errorThrown){
-		        	var err = jQuery.parseJSON(jqXHR.responseText);
-
-//		        		alert(jqXHR.responseText+" / "+jqXHR.status);
+//		$("#"+table.pid+"form").one("submit",function(e){
 
 
-		        		alert(err.rprice[0]);
-		        		$("#"+table.pid+"form").unbind('submit');//  "this" does not work.
-		        }
-		    });
+			if(!is_submit ){
+				is_submit	= true;
+
+			    $.ajax({
+			        url : $(this).attr("action"),
+			        type: "POST",
+			        data : $(this).serializeArray(),
+			        success:function(data, textStatus, jqXHR){
+			        	dform.dialog("close");
+			        	dform.remove();
+			        	dform	= null;
+			        	window.location.href = "/dashboard/goods/"+id;
+			        },
+
+			        error: function(jqXHR, textStatus, errorThrown){
+			        	var err = jQuery.parseJSON(jqXHR.responseText);
+			        		showAlert( "Vlidation error", err.rprice[0] );
+			        }
+			    });
+			}
+
 		    e.preventDefault(); //STOP default action
 
-//		    e.unbind(); //unbind. to stop multiple form submit.
+		    $("#"+table.pid+"form").unbind(); //unbind. to stop multiple form submit.
+		    return false;
 		});
 	});
 
 }
 //------------------------------------------------------------------------------
+
+function showAlert( title, message ){
+    message	= message.replace(":name", '<i>"'+name+'"</i>' );
+
+	$("#standard-dialog").dialog( "option", "width", "400px" );
+    $("#standard-dialog").html( message );
+    $("#standard-dialog" ).dialog( "option", "title", title );
+    $("#standard-dialog").dialog("open");
+
+	$( "#standard-dialog" ).dialog( "option", "buttons",[
+		{
+			text: "close",
+			click: function(){
+				is_submit	= false;
+				$(this).dialog("close");
+			}
+		}
+	]);
+}
+//------------------------------------------------------------------------------
+

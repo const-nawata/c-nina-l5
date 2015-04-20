@@ -1,4 +1,4 @@
-{!! Form::open(['url'=>action('DashboardController@postGood').$id_url,'method'=>'post', 'role'=>'form', 'class'=>'form-horizontal','id'=>'goodform','name'=>'goodform']) !!}
+{!! Form::open(['url'=>action('DashboardController@postGood').$id_url,'method'=>'post', 'role'=>'form', 'class'=>'form-horizontal','id'=>'goodform','name'=>'goodform','onsubmit'=>'return false;']) !!}
 
 	<div class="form-group">
 	    {!! Form::label('name',@trans('prompts.name'),['class'=>'control-label col-sm-3'] ) !!}
@@ -29,9 +29,9 @@
 	</div>
 
 	<div class="form-group">
-	    {!! Form::label('in_pack',@trans('prompts.in_pack'),['class'=>'control-label col-sm-3'] ) !!}
+	    {!! Form::label('inpack',@trans('prompts.inpack'),['class'=>'control-label col-sm-3'] ) !!}
 	    <div class="col-sm-9">
-			{!! Form::text('in_pack', $in_pack, ['id'=>'in_pack','class'=>'form-control']) !!}
+			{!! Form::text('inpack', $inpack, ['id'=>'inpack','class'=>'form-control']) !!}
 	    </div>
 	</div>
 

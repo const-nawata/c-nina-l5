@@ -109,7 +109,7 @@ class DashboardController extends MainController{
 			,'unit_id'	=> $item->unit_id
 			,'rprice'	=> $item->rprice
 			,'wprice'	=> $item->wprice
-			,'in_pack'	=> $item->in_pack
+			,'inpack'	=> $item->inpack
 		]);
     }
 //______________________________________________________________________________
@@ -118,20 +118,11 @@ class DashboardController extends MainController{
 
      	$good_data	= $request->all();
 
-// info(print_r(  $good_data ,true));
+    	$good	= $id != NULL ? Good::find( $id ) : new Good();
+    	$good	= $good->fill( $good_data );
+	    $res 	= $good->save();
 
-
-//     	$good	= $id != NULL ? Good::find( $id ) : new Good();
-//     	$good	= $good->fill( $good_data );
-// 	    $res 	= $good->save();
-
-// 		return $this->getGoods( $id );
-
-
-
-     	return Response::json(['id'=>$id]);
-
-//      	return '{"aaa":"fff"}';
+     	return Response::json(['id'=>$good->id]);
     }
 //______________________________________________________________________________
 
