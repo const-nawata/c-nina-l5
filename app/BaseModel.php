@@ -5,15 +5,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class BaseModel extends Model{
 
-/**
- * gets prepared date to show in DataTables JQuery plugin
- * @param array $rg - get/post parameters which is sent by ajax
- * @param bool $isJson - retuned format
- * @return array/json
- */
-	public static function getTableData( $rg, $isJson=FALSE ){
-		$pid	= str_singular(self::__callStatic('getTable',[]));
 
+	private static function getTableRecs( &$rg ){
     	$cols	= $rg['columns'];
 
     	$recs	= self::select();
@@ -31,12 +24,31 @@ class BaseModel extends Model{
     		$recs->orderBy( $cols[$order['column']]['name'], $order['dir'] );
 
 
-    	$n_filtered	= $recs->count();
+    	$rg['filtered']	= $recs->count();
 
     	$page	= $rg['start']/$rg['length'] + 1;
     	$recs->forPage($page, $rg['length']);
 
     	$recs	= $recs->get();
+
+    	return $recs;
+	}
+
+/**
+ * gets prepared date to show in DataTables JQuery plugin
+ * @param array $rg - get/post parameters which is sent by ajax
+ * @param bool $isJson - retuned format
+ * @return array/json
+ */
+	public static function getTableData( $rg, $isJson=FALSE ){
+
+		$recs	= self::getTableRecs( $rg );
+// info(print_r(  $rg, TRUE));
+//TODO: Maybe it'd better to send pid by ajax. And maybe there is a possibility to get this ajax's pid in JS from table instanse.
+//This may simplify code.
+		$pid	= str_singular(self::__callStatic('getTable',[]));
+
+		$cols	= $rg['columns'];
 
     	$data	= [];
     	foreach( $recs as $rec ){
@@ -68,8 +80,9 @@ class BaseModel extends Model{
 		$output	= [
 			'draw' => intval($rg['draw']),
 			'recordsTotal' => self::all()->count(),
-			'recordsFiltered' => $n_filtered,
+			'recordsFiltered' => $rg['filtered'],
 			'data' => $data
+// 			,'start'=>50
 		];
 
 		return $isJson ? json_encode($output) : $output;
