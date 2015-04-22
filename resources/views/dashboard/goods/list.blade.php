@@ -91,7 +91,7 @@ $(document).ready(function(){
 
 	goods_table.pid	= pid;//This value must be equal to the model name.
 	goods_table.formUrl = "/dashboard/goodform";
-	goods_table.formTitle = "Goods parametes editing";
+	goods_table.formTitle = "{{ @trans('prompts.prod_edit') }}";
 	goods_table.afterPostUrl = "/dashboard/goods/";
 	goods_table.formWidth	= 700;//	Optional
 

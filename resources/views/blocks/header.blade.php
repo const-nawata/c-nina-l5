@@ -45,6 +45,7 @@ var prompts	= {
 	,"info_filtered":"{{ @trans('prompts.info_filtered') }}"
 	,"length_menu":"{{ @trans('prompts.length_menu') }}"
 	,"loading_records":"{{ @trans('prompts.loading_records') }}"
+	,"op_result": "{{ @trans('messages.op_result') }}"
 
 	,"paginate":{
         "first":"{{ @trans('prompts.paginate.first') }}",
@@ -60,7 +61,6 @@ var prompts	= {
 	,"zero_records":"{{ @trans('prompts.zero_records') }}"
 }
 ,messages={
-	"op_result": "{{ @trans('messages.op_result') }}",
 	"save_success": "{{ @trans('messages.save_success') }}",
 	"valid_error":"{{ @trans('messages.valid_error') }}"
 }

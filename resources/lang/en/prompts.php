@@ -34,11 +34,13 @@ return [
 		'f_i'	=>	'New'
 	],
 	'no'=> 'No',
+	'op_result'		=> 'Result of operation',
 	'packs'=> 'Packs',
 	'parent'=> 'Parent',
 	'password'	=> 'Password',
 	'password_forgotten'	=> 'Password forgotten?',
 	'price'	=> 'Price',
+	'prod_edit'		=> 'Product parameters editing',
 	'quantity'	=> 'Quantity',
 	'rank'	=> 'Place in list',
 	'registration'	=> 'Registration',

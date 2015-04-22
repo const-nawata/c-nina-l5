@@ -305,10 +305,10 @@ function showTblRecForm( table, id ){
 			        data : $(this).serializeArray(),
 			        success:function(data, textStatus, jqXHR){
 			        	dform.dialog("close");
-			        	showAlert( messages.op_result, messages.save_success );
+			        	showAlert( prompts.op_result, messages.save_success );
 			        	table.ajax.reload();
-//			        	table.page( 6 ).draw( false );//TODO: Committed for further use.
-			        	tbl_rec_id=null;//TODO: Put in reload colback
+//			        	table.page( 6 ).draw( false );//TODO: Commented for further use.
+			        	tbl_rec_id=null;//TODO: Put in reload callback
 			        },
 
 			        error: function(jqXHR, textStatus, errorThrown){
@@ -352,7 +352,7 @@ function showAlert( title, message, focusId ){
 				}
 			}
 		])
-		.html( message.replace(":name", '<i>"'+name+'"</i>' ))
+		.html( message )
 		.dialog("open");
 }
 //------------------------------------------------------------------------------
