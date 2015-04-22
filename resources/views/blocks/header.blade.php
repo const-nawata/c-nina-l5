@@ -45,7 +45,7 @@ var prompts	= {
 	,"info_filtered":"{{ @trans('prompts.info_filtered') }}"
 	,"length_menu":"{{ @trans('prompts.length_menu') }}"
 	,"loading_records":"{{ @trans('prompts.loading_records') }}"
-	,"op_result": "{{ @trans('messages.op_result') }}"
+	,"op_result": "{{ @trans('prompts.op_result') }}"
 
 	,"paginate":{
         "first":"{{ @trans('prompts.paginate.first') }}",

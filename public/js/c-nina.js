@@ -306,9 +306,10 @@ function showTblRecForm( table, id ){
 			        success:function(data, textStatus, jqXHR){
 			        	dform.dialog("close");
 			        	showAlert( prompts.op_result, messages.save_success );
-			        	table.ajax.reload();
-//			        	table.page( 6 ).draw( false );//TODO: Commented for further use.
-			        	tbl_rec_id=null;//TODO: Put in reload callback
+			        	table.ajax.reload(function(json ){
+		        			table.page( json.page ).draw( false );
+		        			tbl_rec_id	= null;
+			        	},false);
 			        },
 
 			        error: function(jqXHR, textStatus, errorThrown){

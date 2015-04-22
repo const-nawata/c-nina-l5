@@ -9,27 +9,35 @@ class BaseModel extends Model{
 	private static function getTableRecs( &$rg ){
     	$cols	= $rg['columns'];
 
-    	$recs	= self::select();
+		if( $rg['id'] != NULL ){
+
+		}else{
+
+		}
+// info(print_r( $rg ,true));
+
+
+    	$stmt	= self::select();
 
     	foreach( $cols as $col )//	Individual column search
     		if( $col['searchable'] == 'true' && $col['search']['value'] != '' )
-    			$recs->where($col['name'],'like','%'.$col['search']['value'].'%');
+    			$stmt->where($col['name'],'like','%'.$col['search']['value'].'%');
 
     	if($rg['search']['value'] != '' )//	All columns search
     		foreach( $cols as $col )
     			if($col['searchable'] == 'true' )
-    				$recs->orWhere($col['name'],'like','%'.$rg['search']['value'].'%');
+    				$stmt->orWhere($col['name'],'like','%'.$rg['search']['value'].'%');
 
     	foreach( $rg['order'] as $order )
-    		$recs->orderBy( $cols[$order['column']]['name'], $order['dir'] );
+    		$stmt->orderBy( $cols[$order['column']]['name'], $order['dir'] );
 
 
-    	$rg['filtered']	= $recs->count();
+    	$rg['filtered']	= $stmt->count();
 
     	$page	= $rg['start']/$rg['length'] + 1;
-    	$recs->forPage($page, $rg['length']);
+    	$stmt->forPage($page, $rg['length']);
 
-    	$recs	= $recs->get();
+    	$recs	= $stmt->get();
 
     	return $recs;
 	}
@@ -42,7 +50,14 @@ class BaseModel extends Model{
  */
 	public static function getTableData( $rg, $isJson=FALSE ){
 
+
+
+
 		$recs	= self::getTableRecs( $rg );
+
+
+
+
 // info(print_r(  $rg, TRUE));
 //TODO: Maybe it'd better to send pid by ajax. And maybe there is a possibility to get this ajax's pid in JS from table instanse.
 //This may simplify code.
@@ -82,7 +97,7 @@ class BaseModel extends Model{
 			'recordsTotal' => self::all()->count(),
 			'recordsFiltered' => $rg['filtered'],
 			'data' => $data
-// 			,'start'=>50
+ 			,'page'=>10
 		];
 
 		return $isJson ? json_encode($output) : $output;
