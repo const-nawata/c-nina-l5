@@ -258,7 +258,9 @@ function showTblRecForm( table, id ){
 	is_submit	= false;
 
 	$('body').append("<div id='"+dform_id+"'></div>");
-	dform	= $("#"+dform_id);
+
+	if(!dform)
+		dform	= $("#"+dform_id);
 
 	$.ajax({
 		url: table.formUrl+id_url,
@@ -303,14 +305,17 @@ function showTblRecForm( table, id ){
 			        data : $(this).serializeArray(),
 			        success:function(data, textStatus, jqXHR){
 			        	dform.dialog("close");
-			        	dform.remove();
-			        	dform	= null;
-			        	window.location.href = table.afterPostUrl+data.id;
+			        	showAlert( messages.op_result, messages.save_success );
+			        	table.ajax.reload();//TODO: Set right paging. Due to selected record.
 			        },
 
 			        error: function(jqXHR, textStatus, errorThrown){
-			        	var err = jQuery.parseJSON(jqXHR.responseText);//TODO: Not finished.
-			        		showAlert( "Vlidation error", err.rprice[0] );
+			        	var err = jQuery.parseJSON(jqXHR.responseText);
+
+			        	for(var field_id in err ){
+			        		showAlert( messages.valid_error, err[field_id][0], field_id );
+			        		break;
+			        	}
 			        }
 			    });
 			}
@@ -322,23 +327,31 @@ function showTblRecForm( table, id ){
 }
 //------------------------------------------------------------------------------
 
-function showAlert( title, message ){
-    message	= message.replace(":name", '<i>"'+name+'"</i>' );
+/**
+ * extends alert functionality. Also sets global is_submit to false.
+ * @param string title
+ * @param string message
+ * @returns void
+ */
+function showAlert( title, message, focusId ){
 
-	$("#standard-dialog").dialog( "option", "width", "400px" );
-    $("#standard-dialog").html( message );
-    $("#standard-dialog" ).dialog( "option", "title", title );
-    $("#standard-dialog").dialog("open");
+	$("#standard-dialog")
+		.dialog( "option", "width", "400px" )
+	    .dialog( "option", "title", title )
+		.dialog( "option", "buttons",[
+			{
+				text: prompts.close,
+				click: function(){
+					$(this).dialog("close");
+					is_submit	= false;
 
-	$( "#standard-dialog" ).dialog( "option", "buttons",[
-		{
-			text: "close",
-			click: function(){
-				is_submit	= false;
-				$(this).dialog("close");
+					if(focusId)
+						$("#"+focusId).focus();
+				}
 			}
-		}
-	]);
+		])
+		.html( message.replace(":name", '<i>"'+name+'"</i>' ))
+		.dialog("open");
 }
 //------------------------------------------------------------------------------
 

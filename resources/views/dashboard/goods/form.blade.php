@@ -15,7 +15,7 @@
 	</div>
 
 	<div class="form-group">
-	    {!! Form::label('wprice',@trans('prompts.wholesale'),['class'=>'control-label col-sm-3'] ) !!}
+	    {!! Form::label('wprice',@trans('prompts.wprice'),['class'=>'control-label col-sm-3'] ) !!}
 	    <div class="col-sm-9">
 			{!! Form::text('wprice', $wprice, ['id'=>'wprice','class'=>'form-control']) !!}
 	    </div>

@@ -25,7 +25,7 @@
 		<th rowspan="2"><input type="checkbox" class="all-check"></th>
 	</tr>
 	<tr>
-		<th>{{ @trans('prompts.wholesale') }}</th>
+		<th>{{ @trans('prompts.wprice') }}</th>
 		<th>{{ @trans('prompts.rprice') }}</th>
 		<th>{{ @trans('prompts.inpack') }}</th>
 		<th>{{ @trans('prompts.packs') }}</th>
@@ -51,7 +51,7 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-	var pid="good"//This value must be equel to model name.
+	var pid="good"//This value must be equal to the model name.
 		,search_cols=[1,2]
 	;
 
@@ -84,10 +84,9 @@ $(document).ready(function(){
 		,"ajax": "/dashboard/goodstable"
 	});
 
-	goods_table.pid	= pid;//This value must be equel to model name.
+	goods_table.pid	= pid;//This value must be equal to the model name.
 	goods_table.formUrl = "/dashboard/goodform";
 	goods_table.formTitle = "Goods parametes editing";
-	goods_table.sel_id	= {{ $id != null ? $id : 'null' }}
 	goods_table.afterPostUrl = "/dashboard/goods/";
 
 	setTblElements( goods_table, search_cols );

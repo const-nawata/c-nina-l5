@@ -59,6 +59,11 @@ var prompts	= {
 	,"to_archive":"{{ @trans('prompts.to_archive') }}"
 	,"zero_records":"{{ @trans('prompts.zero_records') }}"
 }
+,messages={
+	"op_result": "{{ @trans('messages.op_result') }}",
+	"save_success": "{{ @trans('messages.save_success') }}",
+	"valid_error":"{{ @trans('messages.valid_error') }}"
+}
 </script>
 
 	<link rel="stylesheet" href="/css/c-nina-main.css">

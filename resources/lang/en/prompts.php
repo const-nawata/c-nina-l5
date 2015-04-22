@@ -51,7 +51,7 @@ return [
 	'username'	=> 'Username',
 	'users'	=> 'Users',
 	'welcome'	=> 'Welcome',
-	'wholesale'	=> 'Whole',
+	'wprice'	=> 'Whole',
 	'wrap'	=> 'Wrap',
 	'yes'=> 'Yes',
 	'your_login_data'	=> 'Your login data'
