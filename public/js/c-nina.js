@@ -307,7 +307,8 @@ function showTblRecForm( table, id ){
 			        	dform.dialog("close");
 			        	showAlert( messages.op_result, messages.save_success );
 			        	table.ajax.reload();
-			        	tbl_rec_id=null;
+//			        	table.page( 6 ).draw( false );//TODO: Committed for further use.
+			        	tbl_rec_id=null;//TODO: Put in reload colback
 			        },
 
 			        error: function(jqXHR, textStatus, errorThrown){
