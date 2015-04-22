@@ -64,6 +64,8 @@ var prompts	= {
 	"save_success": "{{ @trans('messages.save_success') }}",
 	"valid_error":"{{ @trans('messages.valid_error') }}"
 }
+,tbl_rec_id=null
+;
 </script>
 
 	<link rel="stylesheet" href="/css/c-nina-main.css">

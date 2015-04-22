@@ -78,16 +78,22 @@ $(document).ready(function(){
 		   {"name":"assort"},
 		   {"name":"all_check"}
 		]
-
+//	table.ajax.data	= {"tfield":"Tfield value"};
 		,"language": tbl_prompts
 
-		,"ajax": "/dashboard/goodstable"
+		,"ajax": {
+			"url": "/dashboard/goodstable",
+			"data":function(d) {
+	            d.id=tbl_rec_id;
+        	}
+		}
 	});
 
 	goods_table.pid	= pid;//This value must be equal to the model name.
 	goods_table.formUrl = "/dashboard/goodform";
 	goods_table.formTitle = "Goods parametes editing";
 	goods_table.afterPostUrl = "/dashboard/goods/";
+	goods_table.formWidth	= 700;//	Optional
 
 	setTblElements( goods_table, search_cols );
 

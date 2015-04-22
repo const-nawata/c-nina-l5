@@ -255,6 +255,7 @@ function showTblRecForm( table, id ){
 	,dform
 	;
 
+	tbl_rec_id	= id;
 	is_submit	= false;
 
 	$('body').append("<div id='"+dform_id+"'></div>");
@@ -277,8 +278,7 @@ function showTblRecForm( table, id ){
 	dform.dialog({
 		autoOpen: false,
 		dialogClass: "dialog-form",
-//TODO: Set width as table option.
-		width: 600,
+		width: table.formWidth ? table.formWidth : 600,
 		modal: true,
 		title: table.formTitle,
 
@@ -306,7 +306,8 @@ function showTblRecForm( table, id ){
 			        success:function(data, textStatus, jqXHR){
 			        	dform.dialog("close");
 			        	showAlert( messages.op_result, messages.save_success );
-			        	table.ajax.reload();//TODO: Set right paging. Due to selected record.
+			        	table.ajax.reload();
+			        	tbl_rec_id=null;
 			        },
 
 			        error: function(jqXHR, textStatus, errorThrown){
