@@ -242,7 +242,7 @@ function showTblRecForm( table, id ){
 		dform	= $("#"+dform_id);
 
 	$.ajax({
-		url: table.formUrl+id_url,
+		url: table.formUrl+"/"+table.pid+id_url,
 		success: function(result){
 			dform.html( result );
 		},

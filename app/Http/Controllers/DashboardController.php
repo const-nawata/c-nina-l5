@@ -93,7 +93,7 @@ class DashboardController extends MainController{
  * @param string $id
  * @return string
  */
-    public function getGoodform( $id=NULL ){
+    public function getGoodform( $pid, $id=NULL ){
     	if( $id == NULL ){
     		$item	= new Good();
     		$id_url	= '';
@@ -103,7 +103,8 @@ class DashboardController extends MainController{
     	}
 
 		return view( 'dashboard/goods/form', [
-			'id_url'	=> $id_url
+			'pid'		=> $pid
+			,'id_url'	=> $id_url
 			,'name'		=> $item->name
 			,'article'	=> $item->article
 			,'unit_id'	=> $item->unit_id
@@ -140,14 +141,14 @@ class DashboardController extends MainController{
 //______________________________________________________________________________
 
     public function getGoods( $id=NULL ){
-    	return view( 'dashboard/goods/list',['id'=>$id] );
+    	return view( 'dashboard/goods/list',['pid'=>'goodstable'] );
     }
 //______________________________________________________________________________
 
     public function getGoodstable(){
 
 
-info(print_r( $_GET , TRUE));
+// info(print_r( $_GET , TRUE));
 
     	return Good::getTableData( $_GET, TRUE );
     }
