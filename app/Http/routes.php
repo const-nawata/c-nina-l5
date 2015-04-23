@@ -31,4 +31,4 @@ Route::controller('users', 'UsersController');
 Route::controller('dashboard', 'DashboardController');
 Route::get('category/remove/{id?}', 'DashboardController@removeCategory');//TODO: Try to find possibility to remove qeation mark
 Route::post('category/save/{id?}', 'DashboardController@postCategory');
-// Route::post('good/save/{id?}', 'DashboardController@postGooid');
+Route::post('goods/delete', 'DashboardController@deleteGoods');

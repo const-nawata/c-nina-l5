@@ -82,6 +82,63 @@ function processRowCheck(pid){
 	setDelBtnState( pid );
 }
 //------------------------------------------------------------------------------
+
+function removeRecords(table){
+	var tstv
+	,is_del
+	,ids=[]
+	;
+
+	$("#"+table.pid+" .row-check-box").each(function(){
+		var idd;
+
+		if( $(this).is(':checked') ){
+			idd	= $(this).attr("id").split("-");
+			ids.push(idd[1]);
+		}
+	});
+
+
+
+//	alert(ids.toString());
+
+
+
+
+
+	is_del	= typeof table.isDel == 'undefined' ? true : table.isDel;
+
+
+	tstv	= {
+		'_token':table.token,
+		"val1":"VAL1"
+	};
+
+
+    $.ajax({
+        url : "/goods/delete",
+        type: "POST",
+        dataType: "json",
+//        data : ids,
+        data : tstv,
+        success:function(data, textStatus, jqXHR){
+        	alert("Success");
+        },
+
+        error: function(jqXHR, textStatus, errorThrown){
+        	alert("Error");
+        }
+    });
+
+
+//	if(is_del){
+//		alert("Delete");
+//	}else{
+//		alert("Archive");
+//	}
+}
+//------------------------------------------------------------------------------
+
 /**
  * sets custom controls and also styles and handlers for controls.
  * @param DataTable table - object in which settings are performed
@@ -90,10 +147,8 @@ function processRowCheck(pid){
  */
 function setTblElements( table ){
 	var obj
-	,sCols;
-
-	if(table.searchCols)
-		sCols=table.searchCols;
+	,sCols
+	;
 
     $("#"+table.pid+"_filter input").unbind().on("keyup change", function(e){//Change main search input handler
 		(e.keyCode == 13) ? execTblSearch(table):null;
@@ -130,13 +185,14 @@ function setTblElements( table ){
 			setDelBtnState( table.pid );
 		}).prop('checked', false);
 
-		//	There is no need in archive button if there are no row selboxes.
+		//	There is no need in archive button if there are no row selboxes.						Delete
 		$("#"+table.pid+"_tools").prepend("<button id='"+table.pid+"_arch_btn'></button>");
 		$("#"+table.pid+"_arch_btn").button({
 			icons: { primary: "ui-icon-locked" },
 			text: false
 		}).on( "click", function(e){
-			alert("Arch/Del record. Not implemented yet");
+//			alert("Arch/Del record. Not implemented yet");////////////////////////////////
+			removeRecords( table );
 		}).attr("title", prompts.to_archive );
 
 		setDelBtnState( table.pid );
@@ -152,10 +208,10 @@ function setTblElements( table ){
 	}).attr("title",prompts.add);
 
 	//Set handlers for individual search inputs
-	if( sCols && sCols.length > 0 ){
+	if( typeof table.searchCols != "undefined" && table.searchCols.length > 0 ){
+		sCols=table.searchCols;
 
-		for(var cn=0; cn<sCols.length; cn++ ){
-
+		for(var cn in sCols ){
 			$("input", table.column(sCols[cn]).footer()).attr("id", table.pid+"_inp_"+sCols[cn]);
 
 			$(".ind-clean-btn", table.column(sCols[cn]).footer())

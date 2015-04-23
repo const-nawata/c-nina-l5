@@ -154,6 +154,14 @@ class DashboardController extends MainController{
     }
 //______________________________________________________________________________
 
+    public function deleteGoods(){
+
+// info(print_r(  $_POST, TRUE));
+
+
+    	return json_encode(['res'=>'Good']);
+    }
+
     public function getUsers(){
     	return view( 'dashboard/users' );
     }

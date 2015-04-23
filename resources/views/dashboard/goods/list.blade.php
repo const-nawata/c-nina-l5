@@ -92,6 +92,9 @@ $(document).ready(function(){
 	goods_table.formTitle = "{{ @trans('prompts.prod_edit') }}";
 	goods_table.afterPostUrl = "/dashboard/goods/";
 	goods_table.formWidth	= 700;//	Optional
+	goods_table.isDel	= true;//	Optional
+	goods_table.token	= "{!! csrf_token(); !!}";
+
 
 	setTblElements( goods_table );
 
