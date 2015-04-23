@@ -28,12 +28,12 @@ var tbl_prompts = {//Don't delete. This variable is used in TableDate initialisa
  * @param array sCols - indexes of searching columns
  * @return void
  */
-function execTblSearch(table, sCols){
+function execTblSearch(table){
 	table.search( $("#"+table.pid+"_filter input").val() );
 
-	if( sCols )
-		for(var cn=0; cn<sCols.length; cn++ )
-			table.column(sCols[cn]).search( $('#'+table.pid+"_inp_"+sCols[cn]).val());
+	if( table.searchCols  && table.searchCols.length > 0 )
+		for(var cn=0; cn<table.searchCols.length; cn++ )
+			table.column(table.searchCols[cn]).search( $('#'+table.pid+"_inp_"+table.searchCols[cn]).val());
 
 	table.draw();
 }
@@ -88,11 +88,15 @@ function processRowCheck(pid){
  * @param array sCols - indexes of searching columns
  * @return void
  */
-function setTblElements( table, sCols ){
-	var obj;
+function setTblElements( table ){
+	var obj
+	,sCols;
+
+	if(table.searchCols)
+		sCols=table.searchCols;
 
     $("#"+table.pid+"_filter input").unbind().on("keyup change", function(e){//Change main search input handler
-		(e.keyCode == 13) ? execTblSearch(table,sCols):null;
+		(e.keyCode == 13) ? execTblSearch(table):null;
 	}).addClass("form-control").attr("placeholder", prompts.search );
 
     $("#"+table.pid+"_length select").addClass("form-control");
@@ -107,7 +111,7 @@ function setTblElements( table, sCols ){
 		icons: { primary: "ui-icon-search" },
 		text: false
 	}).on("click", function(e) {
-		execTblSearch(table, sCols)
+		execTblSearch(table)
 	}).attr("title", prompts.exec_search);
 
     $("#"+table.pid+"_clean_btn").button({				//Settings of Clean button for main search
@@ -115,7 +119,7 @@ function setTblElements( table, sCols ){
 		text: false
 	}).on("click", function(e) {
 		$("#"+table.pid+"_filter input").val("");
-		execTblSearch(table,sCols);
+		execTblSearch(table);
 	}).attr("title", prompts.clean);
 
 	obj	= $("#"+table.pid+" .all-check");
@@ -159,7 +163,7 @@ function setTblElements( table, sCols ){
 				.on( "click", function(e){
 					var idd	= $(this).attr("id").split("-");
 					$("#"+table.pid+"_inp_"+idd[1]).val("");
-		        	execTblSearch(table,sCols)
+		        	execTblSearch(table)
 				});
 		}
 
@@ -168,7 +172,7 @@ function setTblElements( table, sCols ){
 			icons: { primary: "ui-icon-search" },
 			text: false
 		}).on( "click", function(e){
-			execTblSearch(table,sCols);
+			execTblSearch(table);
 	    }).attr("title", prompts.exec_search);
 
 		//Individual clean buttons settings
@@ -180,7 +184,7 @@ function setTblElements( table, sCols ){
 
 	    $(".f-inp").on( "keyup change", function(e){
 	    	(e.keyCode == 13)
-	        	 ? execTblSearch(table,sCols):null;
+	        	 ? execTblSearch(table):null;
 	    });
 
 	}
@@ -224,12 +228,11 @@ function setTblElements( table, sCols ){
  */
 function showTblRecForm( table, id ){
 
-	var id_url	= id == null ? "" : "/"+id
+	var tst
+	,id_url	= id == null ? "" : "/"+id
 	,dform_id = table.pid+"-form-dialog"
 	,dform
 	;
-
-//debugger;
 
 	is_submit	= false;
 

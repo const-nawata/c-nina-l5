@@ -147,7 +147,7 @@ class DashboardController extends MainController{
     public function getGoodstable(){
 
 
-// info(print_r( $_GET , TRUE));
+info(print_r( $_GET , TRUE));
 
     	return Good::getTableData( $_GET, TRUE );
     }

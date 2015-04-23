@@ -14,7 +14,7 @@
 
 <div class="jumbotron j-tbl">
 
-<table id="good">
+<table id="goodstbl">
 	<thead>
 	<tr>
 		<th rowspan="2">id</th>
@@ -51,8 +51,8 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-	var pid="good"//This value must be equal to the model name.
-		,search_cols=[1,2]
+	var pid="goodstbl"//Don't forget about HTML id!!!
+// 		,search_cols=[1,2]
 	;
 
 	goods_table = $('#'+pid).DataTable( {
@@ -85,19 +85,18 @@ $(document).ready(function(){
 			"url": "/dashboard/goodstable",
 			"data":function(d) {
 	            d.pid	= pid;
-	            d.tst_val="Test value for development purpose";
-	            return d;
         	}
 		}
 	});
 
-	goods_table.pid	= pid;//This value must be equal to the model name.
+	goods_table.pid	= pid;
+	goods_table.searchCols	= [1,2];//	Optional
 	goods_table.formUrl = "/dashboard/goodform";
 	goods_table.formTitle = "{{ @trans('prompts.prod_edit') }}";
 	goods_table.afterPostUrl = "/dashboard/goods/";
 	goods_table.formWidth	= 700;//	Optional
 
-	setTblElements( goods_table, search_cols );
+	setTblElements( goods_table );
 
 });
 </script>
