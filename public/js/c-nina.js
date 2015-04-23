@@ -229,7 +229,8 @@ function showTblRecForm( table, id ){
 	,dform
 	;
 
-	tbl_rec_id	= id;
+//debugger;
+
 	is_submit	= false;
 
 	$('body').append("<div id='"+dform_id+"'></div>");
@@ -280,9 +281,7 @@ function showTblRecForm( table, id ){
 			        success:function(data, textStatus, jqXHR){
 			        	dform.dialog("close");
 			        	inform( prompts.op_result, messages.save_success );
-			        	table.ajax.reload(function(json ){
-		        			tbl_rec_id	= null;
-			        	},false);
+			        	table.ajax.reload(null,false);
 			        },
 
 			        error: function(jqXHR, textStatus, errorThrown){

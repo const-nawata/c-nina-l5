@@ -78,13 +78,15 @@ $(document).ready(function(){
 		   {"name":"assort"},
 		   {"name":"all_check"}
 		]
-//	table.ajax.data	= {"tfield":"Tfield value"};
+
 		,"language": tbl_prompts
 
 		,"ajax": {
 			"url": "/dashboard/goodstable",
 			"data":function(d) {
-	            d.id=tbl_rec_id;
+	            d.pid	= pid;
+	            d.tst_val="Test value for development purpose";
+	            return d;
         	}
 		}
 	});

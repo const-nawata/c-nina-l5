@@ -9,14 +9,6 @@ class BaseModel extends Model{
 	private static function getTableRecs( &$rg ){
     	$cols	= $rg['columns'];
 
-		if( $rg['id'] != NULL ){
-
-		}else{
-
-		}
-// info(print_r( $rg ,true));
-
-
     	$stmt	= self::select();
 
     	foreach( $cols as $col )//	Individual column search
@@ -37,9 +29,7 @@ class BaseModel extends Model{
     	$page	= $rg['start']/$rg['length'] + 1;
     	$stmt->forPage($page, $rg['length']);
 
-    	$recs	= $stmt->get();
-
-    	return $recs;
+    	return $stmt->get();
 	}
 
 /**
@@ -51,9 +41,8 @@ class BaseModel extends Model{
 	public static function getTableData( $rg, $isJson=FALSE ){
 
 		$recs	= self::getTableRecs( $rg );
-//TODO: Maybe it'd better to send pid by ajax. And maybe there is a possibility to get this ajax's pid in JS from table instanse.
-//This may simplify code.
-		$pid	= str_singular(self::__callStatic('getTable',[]));
+
+		$pid	= $rg['pid'];
 
 		$cols	= $rg['columns'];
 
