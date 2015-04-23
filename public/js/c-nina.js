@@ -22,32 +22,6 @@ var tbl_prompts = {//Don't delete. This variable is used in TableDate initialisa
     }
 };
 
-
-/**
- * Shows alert on error etc.
- * @param string title
- * @param string message
- * @param integer width - in px.
- */
-function showAlert( title, message, width ){
-	var d_width	= width ? width : 400;
-
-	$("#standard-dialog").dialog( "option", "width", d_width+"px" );
-    $("#standard-dialog").html( message );
-    $("#standard-dialog" ).dialog( "option", "title", title );
-    $("#standard-dialog").dialog("open");
-
-	$( "#standard-dialog" ).dialog( "option", "buttons",[
-		{
-			text: prompts.close,
-			click: function(){
-				$(this).dialog("close");
-			}
-		}
-	]);
-}
-//------------------------------------------------------------------------------
-
 /**
  * calls TableDates searching utility
  * @param DataTable table - object in which shearch is performed
@@ -305,7 +279,7 @@ function showTblRecForm( table, id ){
 			        data : $(this).serializeArray(),
 			        success:function(data, textStatus, jqXHR){
 			        	dform.dialog("close");
-			        	showAlert( prompts.op_result, messages.save_success );
+			        	inform( prompts.op_result, messages.save_success );
 			        	table.ajax.reload(function(json ){
 		        			table.page( json.page ).draw( false );
 		        			tbl_rec_id	= null;
@@ -316,7 +290,7 @@ function showTblRecForm( table, id ){
 			        	var err = jQuery.parseJSON(jqXHR.responseText);
 
 			        	for(var field_id in err ){
-			        		showAlert( messages.valid_error, err[field_id][0], field_id );
+			        		inform( messages.valid_error, err[field_id][0], field_id );
 			        		break;
 			        	}
 			        }
@@ -336,7 +310,7 @@ function showTblRecForm( table, id ){
  * @param string message
  * @returns void
  */
-function showAlert( title, message, focusId ){
+function inform( title, message, focusId ){
 
 	$("#standard-dialog")
 		.dialog( "option", "width", "400px" )

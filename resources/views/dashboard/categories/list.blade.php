@@ -179,9 +179,9 @@ function showDelCatDialog( id, name ){
 //------------------------------------------------------------------------------
 
 $(document).ready(function(){
-
+<?php //TODO: Put focus to infom() on wrong field.?>
 @if( !$errors->isEmpty() )
-	showAlert( "{{ @trans( 'prompts.error' ) }}", "{!! $errors->first($errors->keys()[0]) !!}", 500 );
+	inform( "{{ @trans( 'prompts.error' ) }}", "{!! $errors->first($errors->keys()[0]) !!}" );
 @else
 	fillCatForm( {{ $sel_id }} );
 @endif
