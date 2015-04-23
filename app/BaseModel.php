@@ -89,7 +89,6 @@ class BaseModel extends Model{
 			'recordsTotal' => self::all()->count(),
 			'recordsFiltered' => $rg['filtered'],
 			'data' => $data
-//  			,'page'=>10
 		];
 
 		return $isJson ? json_encode($output) : $output;
