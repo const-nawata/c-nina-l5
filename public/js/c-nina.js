@@ -136,7 +136,7 @@ function setTblElements( table ){
 			icons: { primary: "ui-icon-locked" },
 			text: false
 		}).on( "click", function(e){
-			alert("Delete record. Not implemented yet");
+			alert("Arch/Del record. Not implemented yet");
 		}).attr("title", prompts.to_archive );
 
 		setDelBtnState( table.pid );
@@ -148,7 +148,7 @@ function setTblElements( table ){
 		icons: { primary: "ui-icon-circle-plus" },
 		text: false
 	}).on( "click", function(e){
-		alert("Add record. Not implemented yet");
+		showTblRecForm( table, null );
 	}).attr("title",prompts.add);
 
 	//Set handlers for individual search inputs
