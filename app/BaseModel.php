@@ -50,15 +50,7 @@ class BaseModel extends Model{
  */
 	public static function getTableData( $rg, $isJson=FALSE ){
 
-
-
-
 		$recs	= self::getTableRecs( $rg );
-
-
-
-
-// info(print_r(  $rg, TRUE));
 //TODO: Maybe it'd better to send pid by ajax. And maybe there is a possibility to get this ajax's pid in JS from table instanse.
 //This may simplify code.
 		$pid	= str_singular(self::__callStatic('getTable',[]));
@@ -97,7 +89,7 @@ class BaseModel extends Model{
 			'recordsTotal' => self::all()->count(),
 			'recordsFiltered' => $rg['filtered'],
 			'data' => $data
- 			,'page'=>10
+//  			,'page'=>10
 		];
 
 		return $isJson ? json_encode($output) : $output;

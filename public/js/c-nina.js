@@ -281,7 +281,7 @@ function showTblRecForm( table, id ){
 			        	dform.dialog("close");
 			        	inform( prompts.op_result, messages.save_success );
 			        	table.ajax.reload(function(json ){
-		        			table.page( json.page ).draw( false );
+//		        			table.page( json.page ).draw( false );
 		        			tbl_rec_id	= null;
 			        	},false);
 			        },
