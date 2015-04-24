@@ -93,7 +93,10 @@ class DashboardController extends MainController{
  * @param string $id
  * @return string
  */
-    public function getGoodform( $pid, $id=NULL ){
+    public function getGoodEditform( $pid, $id=NULL ){
+
+// info("Point 0");
+
     	if( $id == NULL ){
     		$item	= new Good();
     		$id_url	= '';
@@ -146,20 +149,16 @@ class DashboardController extends MainController{
 //______________________________________________________________________________
 
     public function getGoodstable(){
-
-
-// info(print_r( $_GET , TRUE));
-
     	return Good::getTableData( $_GET, TRUE );
     }
 //______________________________________________________________________________
 
-    public function deleteGoods(){
+    public function archiveGoods(){
 
 // info(print_r(  $_POST, TRUE));
 
 
-    	return json_encode(['res'=>'Good']);
+    	return json_encode(['result'=>TRUE]);
     }
 
     public function getUsers(){

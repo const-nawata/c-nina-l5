@@ -79,25 +79,25 @@ $(document).ready(function(){
 		,"language": tbl_prompts
 
 		,"ajax": {
-			"url": "/dashboard/goodstable",
+			"url": "/goods/table",
 			"data":function(d) {
 	            d.pid	= "{{ $pid }}";
         	}
 		}
 	});
 
-	goods_table.pid	= "{{ $pid }}";
+	goods_table.pid			= "{{ $pid }}";
 	goods_table.searchCols	= [1,2];//	Optional
-	goods_table.formUrl = "/dashboard/goodform";
-	goods_table.formTitle = "{{ @trans('prompts.prod_edit') }}";
-	goods_table.afterPostUrl = "/dashboard/goods/";
 	goods_table.formWidth	= 700;//	Optional
-	goods_table.isDel	= true;//	Optional
-	goods_table.token	= "{!! csrf_token(); !!}";
+	goods_table.token		= "{!! csrf_token(); !!}";
+	goods_table.formTitle	= "{{ @trans('prompts.prod_edit') }}";
 
+	goods_table.urls	= {
+		"form":"/good/form",
+		"del":"/goods/archive",
+	};
 
 	setTblElements( goods_table );
-
 });
 </script>
 @stop

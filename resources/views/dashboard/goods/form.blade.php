@@ -1,4 +1,4 @@
-{!! Form::open(['url'=>action('DashboardController@postGood').$id_url,'method'=>'post', 'role'=>'form', 'class'=>'form-horizontal','id'=>$pid.'form','name'=>$pid.'form']) !!}
+{!! Form::open(['url'=>'/good/save'.$id_url,'method'=>'post', 'role'=>'form', 'class'=>'form-horizontal','id'=>$pid.'form','name'=>$pid.'form']) !!}
 
 	<div class="form-group">
 	    {!! Form::label('name',@trans('prompts.name'),['class'=>'control-label col-sm-3'] ) !!}

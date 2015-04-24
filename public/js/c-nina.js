@@ -84,7 +84,7 @@ function processRowCheck(pid){
 //------------------------------------------------------------------------------
 
 function removeRecords(table){
-	var tstv
+	var del_data
 	,is_del
 	,ids=[]
 	;
@@ -99,28 +99,20 @@ function removeRecords(table){
 	});
 
 
-
-//	alert(ids.toString());
-
-
-
-
-
 	is_del	= typeof table.isDel == 'undefined' ? true : table.isDel;
 
 
-	tstv	= {
+	del_data	= {
 		'_token':table.token,
-		"val1":"VAL1"
+		"ids":ids
 	};
 
 
     $.ajax({
-        url : "/goods/delete",
+        url : table.urls.del,
         type: "POST",
         dataType: "json",
-//        data : ids,
-        data : tstv,
+        data : del_data,
         success:function(data, textStatus, jqXHR){
         	alert("Success");
         },
@@ -129,13 +121,6 @@ function removeRecords(table){
         	alert("Error");
         }
     });
-
-
-//	if(is_del){
-//		alert("Delete");
-//	}else{
-//		alert("Archive");
-//	}
 }
 //------------------------------------------------------------------------------
 
@@ -298,7 +283,7 @@ function showTblRecForm( table, id ){
 		dform	= $("#"+dform_id);
 
 	$.ajax({
-		url: table.formUrl+"/"+table.pid+id_url,
+		url: table.urls.form+"/"+table.pid+id_url,
 		success: function(result){
 			dform.html( result );
 		},
