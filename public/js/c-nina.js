@@ -83,9 +83,13 @@ function processRowCheck(pid){
 }
 //------------------------------------------------------------------------------
 
+/**
+ * call server-side method to remove record from table view.
+ * @param object table
+ * @returns void
+ */
 function removeRecords(table){
 	var del_data
-	,is_del
 	,ids=[]
 	;
 
@@ -98,15 +102,10 @@ function removeRecords(table){
 		}
 	});
 
-
-	is_del	= typeof table.isDel == 'undefined' ? true : table.isDel;
-
-
 	del_data	= {
 		'_token':table.token,
 		"ids":ids
 	};
-
 
     $.ajax({
         url : table.urls.del,
@@ -115,8 +114,12 @@ function removeRecords(table){
         data : del_data,
         success:function(data, textStatus, jqXHR){
         	var resp = jqXHR.responseJSON;
+
         	inform( prompts.op_result, resp.message );
-        	table.ajax.reload();
+
+        	table.ajax.reload(function(json){
+        		setDelBtnState( table.pid );
+        	});
         },
 
         error: function(jqXHR, textStatus, errorThrown){
@@ -125,6 +128,8 @@ function removeRecords(table){
         }
     });
 }
+//------------------------------------------------------------------------------
+
 //------------------------------------------------------------------------------
 
 /**
@@ -262,7 +267,6 @@ function setTblElements( table ){
 
 }
 //------------------------------------------------------------------------------
-
 
 /**
  * Shows popup dialog to edit table recod
