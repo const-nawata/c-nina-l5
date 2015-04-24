@@ -114,7 +114,10 @@ function removeRecords(table){
         dataType: "json",
         data : del_data,
         success:function(data, textStatus, jqXHR){
-        	alert("Success");
+        	var resp = jqXHR.responseJSON;
+
+
+        	table.ajax.reload();
         },
 
         error: function(jqXHR, textStatus, errorThrown){

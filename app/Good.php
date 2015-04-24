@@ -15,6 +15,14 @@ class Good extends BaseModel{
 		,'inpack'	//int
 		,'packs'	//int
 		,'assort'	//int
+		,'archived'	//boolean
 	];
+
+	public static function archiveGoods( $ids=[] ){
+		$affectedRows	= self::whereIn('id',$ids)->update(['archived' => TRUE])
+		;
+		return $affectedRows;
+	}
+//______________________________________________________________________________
 
 }//	Class end

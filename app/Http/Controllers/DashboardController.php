@@ -157,8 +157,11 @@ class DashboardController extends MainController{
 
 // info(print_r(  $_POST, TRUE));
 
+//     	$result	= TRUE;
 
-    	return json_encode(['result'=>TRUE]);
+    	$n_rows 	= Good::archiveGoods( $_POST['ids'], TRUE );
+
+    	return json_encode( ['result'=>$n_rows] );
     }
 
     public function getUsers(){
