@@ -155,13 +155,16 @@ class DashboardController extends MainController{
 
     public function archiveGoods(){
 
-// info(print_r(  $_POST, TRUE));
-
-//     	$result	= TRUE;
-
     	$n_rows 	= Good::archiveGoods( $_POST['ids'], TRUE );
+    	$n_rows_req	= count($_POST['ids']);
 
-    	return json_encode( ['result'=>$n_rows] );
+    	$message	= $n_rows == $n_rows_req
+    		? trans('messages.arch_success')
+    		: '';
+
+
+
+    	return json_encode( ['message'=>$message] );
     }
 
     public function getUsers(){

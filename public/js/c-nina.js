@@ -115,13 +115,13 @@ function removeRecords(table){
         data : del_data,
         success:function(data, textStatus, jqXHR){
         	var resp = jqXHR.responseJSON;
-
-
+        	inform( prompts.op_result, resp.message );
         	table.ajax.reload();
         },
 
         error: function(jqXHR, textStatus, errorThrown){
-        	alert("Error");
+        	var err = jqXHR.responseJSON;
+        	inform( prompts.sys_error, errorThrown );
         }
     });
 }
@@ -327,15 +327,15 @@ function showTblRecForm( table, id ){
 			        data : $(this).serializeArray(),
 			        success:function(data, textStatus, jqXHR){
 			        	dform.dialog("close");
-			        	inform( prompts.op_result, messages.save_success );
+			        	inform( prompts.op_result, messages.save_success );//TODO: Get message from server. Like in remove handler.
 			        	table.ajax.reload(null,false);
 			        },
 
 			        error: function(jqXHR, textStatus, errorThrown){
-			        	var err = jQuery.parseJSON(jqXHR.responseText);
+			        	var err = jqXHR.responseJSON;
 
 			        	for(var field_id in err ){
-			        		inform( messages.valid_error, err[field_id][0], field_id );
+			        		inform( prompts.valid_error, err[field_id][0], field_id );
 			        		break;
 			        	}
 			        }

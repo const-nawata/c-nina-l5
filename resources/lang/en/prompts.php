@@ -56,7 +56,9 @@ return [
 	'wprice'	=> 'Whole',
 	'wrap'	=> 'Wrap',
 	'yes'=> 'Yes',
-	'your_login_data'	=> 'Your login data'
+	'your_login_data'	=> 'Your login data',
+	'sys_error'		=> 'System error.',
+	'valid_error'	=> 'Validation error.'
 
 			//	Units
 	,'unit'	=> 'Unit'

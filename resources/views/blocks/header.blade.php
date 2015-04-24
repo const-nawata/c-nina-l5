@@ -58,11 +58,12 @@ var prompts	= {
 	,"save":"{{ @trans('prompts.save') }}"
 	,"search":"{{ @trans('prompts.search') }}"
 	,"to_archive":"{{ @trans('prompts.to_archive') }}"
-	,"zero_records":"{{ @trans('prompts.zero_records') }}"
+	,"zero_records":"{{ @trans('prompts.zero_records') }}",
+	"sys_error":"{{ @trans('prompts.sys_error') }}",
+	"valid_error":"{{ @trans('prompts.valid_error') }}"
 }
 ,messages={
-	"save_success": "{{ @trans('messages.save_success') }}",
-	"valid_error":"{{ @trans('messages.valid_error') }}"
+	"save_success": "{{ @trans('messages.save_success') }}"
 }
 ;
 </script>
