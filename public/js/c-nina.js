@@ -142,7 +142,7 @@ function setTblElements( table ){
 	var obj
 	,sCols
 	;
-
+/*
     $("#"+table.pid+"_filter input").unbind().on("keyup change", function(e){//Change main search input handler
 		(e.keyCode == 13) ? execTblSearch(table):null;
 	}).addClass("form-control").attr("placeholder", prompts.search );
@@ -153,7 +153,6 @@ function setTblElements( table ){
     	.prepend("<button id='"+table.pid+"_search_btn'></button>")//Main search button
     	.append("<button id='"+table.pid+"_clean_btn'></button>")//Clean button for main search
     	.prepend("<span id='"+table.pid+"_tools' class='tbl-tool-btns-span'></span>");//	Tool buttons container
-
 
     $("#"+table.pid+"_search_btn").button({				//Settings of Main search button
 		icons: { primary: "ui-icon-search" },
@@ -171,6 +170,12 @@ function setTblElements( table ){
 	}).attr("title", prompts.clean);
 
 	obj	= $("#"+table.pid+" .all-check");
+
+*/
+
+
+
+
 
 	if(obj){
 		obj.on("click", function(e){		//Set onclick handler on "all rows" check-box
@@ -199,6 +204,15 @@ function setTblElements( table ){
 	}).on( "click", function(e){
 		showTblRecForm( table, null );
 	}).attr("title",prompts.add);
+
+
+
+
+
+
+
+
+
 
 	//Set handlers for individual search inputs
 	if( typeof table.searchCols != "undefined" && table.searchCols.length > 0 ){
