@@ -131,7 +131,7 @@
 				icons: { primary: "ui-icon-circle-plus" },
 				text: false
 			}).on( "click", function(e){
-//				showTblRecForm( table, null );
+				showTblRecForm( null );
 			}).attr("title",prompts.add);
 
 
@@ -143,7 +143,7 @@
 					$("#"+$.fn.pid+" .row-check-box").prop('checked', false);
 					$(this).parent('tr').addClass('selected');
 
-//					showTblRecForm( table, table.cell( '.selected', 0 ).data() );
+					showTblRecForm( $.fn.tbl.cell( '.selected', 0 ).data() );
 				}
 			});
 
@@ -213,13 +213,13 @@
 					dform	= $("#"+dform_id);
 
 				$.ajax({
-					url: table.urls.form+"/"+table.pid+id_url,
+					url: pE.urls.form+"/"+$.fn.pid+id_url,
 					success: function(result){
 						dform.html( result );
 					},
 
 			    	error: function(){
-						alert( "Internal Error" );
+						alert( "Internal Error" );//TODO: Process ajax error by standard response paramenters.
 					}
 				});
 
@@ -227,15 +227,15 @@
 				dform.dialog({
 					autoOpen: false,
 					dialogClass: "dialog-form",
-					width: table.formWidth ? table.formWidth : 600,
+					width: typeof pE.formWidth != "undefined" ? pE.formWidth : 600,
 					modal: true,
-					title: table.formTitle,
+					title: typeof pE.formTitle != "undefined" ? pE.formTitle : "",
 
 					buttons: [
 					   {
 						text: prompts.save,
 						click: function(){
-							$("#"+table.pid+"form").submit();
+							$("#"+$.fn.pid+"form").submit();
 						}
 					}
 					]
@@ -243,7 +243,7 @@
 
 				$( document ).ajaxComplete(function(){
 
-					$("#"+table.pid+"form").submit(function(e){
+					$("#"+$.fn.pid+"form").submit(function(e){
 
 						if( !is_submit ){
 							is_submit	= true;
@@ -255,7 +255,7 @@
 						        success:function(data, textStatus, jqXHR){
 						        	dform.dialog("close");
 						        	inform( prompts.op_result, messages.save_success );//TODO: Get message from server. Like in remove handler.
-						        	table.ajax.reload(null,false);
+						        	$.fn.tbl.ajax.reload(null,false);
 						        },
 
 						        error: function(jqXHR, textStatus, errorThrown){

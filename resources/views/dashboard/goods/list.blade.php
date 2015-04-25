@@ -79,15 +79,18 @@ $(document).ready(function(){
 
 		,"ajax": {
 			"url": "/goods/table"
-// 			,"data":function(d) {
-// 	            d.pid	= "{{ $pid }}";
-//         	}
 		}
 
 	}
 
 	,{
-		"searchCols": [1,2]//	Optional
+		"searchCols":	[1,2],//	Optional
+		"formWidth":	700,//	Optional
+		"formTitle": "{{ @trans('prompts.prod_edit') }}",//	Optional
+		"urls": {
+			"form":"/good/form",
+			"del":"/goods/archive"
+		}
 	});
 });
 /*
