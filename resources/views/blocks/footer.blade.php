@@ -35,6 +35,7 @@ $(document).ready(function(){
 		dialogClass: "dialog-standard",
 		modal: true
 	});
+
 });
 
 </script>

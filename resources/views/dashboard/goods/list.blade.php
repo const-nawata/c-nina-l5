@@ -51,6 +51,47 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
+	var goods_table = $("#{!! $pid !!}").cNinaTable({
+		"processing": true,
+		"serverSide": true,
+
+		"columnDefs": [
+			{"searchable": false, "targets": [ 3,4,5,6,7,8 ] },
+			{"orderable": false, "targets": [8] },
+			{"className":"right-align-sell", "targets": [ 0,3,4,5,6,7 ]}
+			,{"className":"unclickable center-align-sell", "targets": [8]}
+
+		],
+
+		"columns":[
+		   {"name":"id"},
+		   {"name":"name"},
+		   {"name":"article"},
+		   {"name":"wprice"},
+		   {"name":"rprice"},
+		   {"name":"inpack"},
+		   {"name":"packs"},
+		   {"name":"assort"},
+		   {"name":"all_check"}
+		]
+
+		,"language": tbl_prompts
+
+		,"ajax": {
+			"url": "/goods/table"
+// 			,"data":function(d) {
+// 	            d.pid	= "{{ $pid }}";
+//         	}
+		}
+
+	}
+
+	,{
+		"searchCols": [1,2]//	Optional
+	});
+});
+/*
+$(document).ready(function(){
 
 	goods_table = $("#{{ $pid }}").DataTable( {
 		"processing": true,
@@ -99,5 +140,7 @@ $(document).ready(function(){
 
 	setTblElements( goods_table );
 });
+ */
+
 </script>
 @stop

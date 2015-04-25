@@ -21,22 +21,22 @@ var tbl_prompts = {//Don't delete. This variable is used in TableDate initialisa
         "previous":"&laquo;"
     }
 };
-
-/**
- * calls TableDates searching utility
- * @param DataTable table - object in which shearch is performed
- * @param array sCols - indexes of searching columns
- * @return void
- */
-function execTblSearch(table){
-	table.search( $("#"+table.pid+"_filter input").val() );
-
-	if( table.searchCols  && table.searchCols.length > 0 )
-		for(var cn=0; cn<table.searchCols.length; cn++ )
-			table.column(table.searchCols[cn]).search( $('#'+table.pid+"_inp_"+table.searchCols[cn]).val());
-
-	table.draw();
-}
+//
+///**
+// * calls TableDates searching utility
+// * @param DataTable table - object in which shearch is performed
+// * @param array sCols - indexes of searching columns
+// * @return void
+// */
+//function execTblSearch(table){
+//	table.search( $("#"+table.pid+"_filter input").val() );
+//
+//	if( table.searchCols  && table.searchCols.length > 0 )
+//		for(var cn=0; cn<table.searchCols.length; cn++ )
+//			table.column(table.searchCols[cn]).search( $('#'+table.pid+"_inp_"+table.searchCols[cn]).val());
+//
+//	table.draw();
+//}
 //------------------------------------------------------------------------------
 
 /**
