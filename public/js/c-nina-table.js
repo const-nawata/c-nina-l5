@@ -2,24 +2,74 @@
  *
  */
 
-(function($){
-//	$.fn.pick_obj	= null;
-//	$.fn.timeoutID;
+//var tbl_prompts = {
+//	"emptyTable":prompts.empty_table
+//	,"infoEmpty":prompts.info_empty
+//	,"info":prompts.info
+//	,"infoFiltered":prompts.info_filtered
+//	,"zeroRecords":prompts.zero_records
+//	,"search":""
+//	,"lengthMenu":prompts.length_menu
+//	,"processing":prompts.processing
+//	,"loadingRecords": prompts.loading_records
+//
+//    ,"paginate":{
+//        "first":prompts.paginate.first,
+//        "last":prompts.paginate.last,
+//
+////        "next":prompts.paginate.next,
+////        "previous":prompts.paginate.previous
+//
+//        "next":"&raquo;",
+//        "previous":"&laquo;"
+//    }
+//};
 
+(function($){
 	$.fn.pid	= null;
 	$.fn.tbl	= null;
 	$.fn.isIndSearch	= false;
 
     $.fn.extend({
+/**
+ * extends DataTable functionality.
+ * @param	JSON object pT - standard DataTable parameters.
+ * @param	JSON object pE - extended parameters needed for table tuning.
+ * @returns	void
+ */
     	cNinaTable: function(pT, pE){
     		$.fn.pid	= $(this).attr("id");
     		$.fn.isIndSearch	= typeof pE.searchCols != "undefined" && pE.searchCols.length > 0;
 
-    		pT.ajax.data=function(srvData){
+    		pT.ajax.data=function(srvData){//Data to send to server
  	            srvData.pid	= $.fn.pid;
          	};
 
-         	$.fn.tbl	= $(this).DataTable(pT);
+         	pT.language	= {
+				"emptyTable":prompts.empty_table
+				,"infoEmpty":prompts.info_empty
+				,"info":prompts.info
+				,"infoFiltered":prompts.info_filtered
+				,"zeroRecords":prompts.zero_records
+				,"search":""
+				,"lengthMenu":prompts.length_menu
+				,"processing":prompts.processing
+				,"loadingRecords": prompts.loading_records
+
+			    ,"paginate":{
+			        "first":prompts.paginate.first,
+			        "last":prompts.paginate.last,
+
+			//        "next":prompts.paginate.next,
+			//        "previous":prompts.paginate.previous
+
+			        "next":"&raquo;",
+			        "previous":"&laquo;"
+			    }
+         	};
+
+
+         	$.fn.tbl	= $(this).DataTable(pT);//						Start table creating ###############################################
 
 		    $("#"+$.fn.pid+"_filter input").unbind().on("keyup change", function(e){//Change main search input handler
 				(e.keyCode == 13) ? execTblSearch():null;
@@ -47,9 +97,7 @@
 				execTblSearch();
 			}).attr("title", prompts.clean);
 
-
-			//Set handlers for individual search inputs
-			if( $.fn.isIndSearch ){
+			if( $.fn.isIndSearch ){								//Set handlers for individual search inputs
 
 				for(var cn in pE.searchCols ){
 					$("input", $.fn.tbl.column(pE.searchCols[cn]).footer()).attr("id", $.fn.pid+"_inp_"+pE.searchCols[cn]);
@@ -100,13 +148,48 @@
 					icons: { primary: "ui-icon-locked" },
 					text: false
 				}).on( "click", function(e){
-//					removeRecords( table );
+					var del_data
+					,ids=[]
+					;
+
+					$("#"+$.fn.pid+" .row-check-box").each(function(){
+						var idd;
+
+						if( $(this).is(':checked') ){
+							idd	= $(this).attr("id").split("-");
+							ids.push(idd[1]);
+						}
+					});
+
+					del_data	= {
+						'_token':pE.token,
+						"ids":ids
+					};
+
+				    $.ajax({
+				        url : pE.urls.del,
+				        type: "POST",
+				        dataType: "json",
+				        data : del_data,
+				        success:function(data, textStatus, jqXHR){
+				        	var resp = jqXHR.responseJSON;
+
+				        	inform( prompts.op_result, resp.message );
+
+				        	$.fn.tbl.ajax.reload(function(json){
+				        		setDelBtnState();
+				        	});
+				        },
+
+				        error: function(jqXHR, textStatus, errorThrown){
+				        	var err = jqXHR.responseJSON;
+				        	inform( prompts.sys_error, errorThrown );
+				        }
+				    });
 				}).attr("title", prompts.to_archive );
 
-				setDelBtnState();
+				$( document ).ajaxComplete(function(){// Row check-boxes handlers.
 
-
-				$( document ).ajaxComplete(function(){
 					$("#"+$.fn.pid+" .row-check-box").on("click", function(e){
 						var all_checked=true;
 
@@ -122,6 +205,8 @@
 						setDelBtnState();
 					});
 				});
+
+				setDelBtnState();
 
 			}
 

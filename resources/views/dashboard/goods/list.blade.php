@@ -75,75 +75,22 @@ $(document).ready(function(){
 		   {"name":"all_check"}
 		]
 
-		,"language": tbl_prompts
-
 		,"ajax": {
 			"url": "/goods/table"
 		}
-
 	}
 
 	,{
 		"searchCols":	[1,2],//	Optional
 		"formWidth":	700,//	Optional
 		"formTitle": "{{ @trans('prompts.prod_edit') }}",//	Optional
+		"token":	"{!! csrf_token(); !!}",
 		"urls": {
 			"form":"/good/form",
 			"del":"/goods/archive"
 		}
 	});
 });
-/*
-$(document).ready(function(){
-
-	goods_table = $("#{{ $pid }}").DataTable( {
-		"processing": true,
-		"serverSide": true,
-
-		"columnDefs": [
-			{"searchable": false, "targets": [ 3,4,5,6,7,8 ] },
-			{"orderable": false, "targets": [8] },
-			{"className":"right-align-sell", "targets": [ 0,3,4,5,6,7 ]}
-			,{"className":"unclickable center-align-sell", "targets": [8]}
-
-		],
-
-		"columns":[
-		   {"name":"id"},
-		   {"name":"name"},
-		   {"name":"article"},
-		   {"name":"wprice"},
-		   {"name":"rprice"},
-		   {"name":"inpack"},
-		   {"name":"packs"},
-		   {"name":"assort"},
-		   {"name":"all_check"}
-		]
-
-		,"language": tbl_prompts
-
-		,"ajax": {
-			"url": "/goods/table",
-			"data":function(d) {
-	            d.pid	= "{{ $pid }}";
-        	}
-		}
-	});
-
-	goods_table.pid			= "{{ $pid }}";
-	goods_table.searchCols	= [1,2];//	Optional
-	goods_table.formWidth	= 700;//	Optional
-	goods_table.token		= "{!! csrf_token(); !!}";
-	goods_table.formTitle	= "{{ @trans('prompts.prod_edit') }}";
-
-	goods_table.urls	= {
-		"form":"/good/form",
-		"del":"/goods/archive",
-	};
-
-	setTblElements( goods_table );
-});
- */
 
 </script>
 @stop
