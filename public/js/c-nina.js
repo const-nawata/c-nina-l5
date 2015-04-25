@@ -38,49 +38,49 @@ var tbl_prompts = {//Don't delete. This variable is used in TableDate initialisa
 //	table.draw();
 //}
 //------------------------------------------------------------------------------
-
-/**
- * sets state (enable/disable) of delete button due to state of row check-boxes.
- * @param string pid - table HTML id.
- * @returns	void
- */
-function setDelBtnState( pid ){
-	var none_checked = true
-		,fade=0.5;
-
-	$("#"+pid+" .row-check-box").each(function(){
-		if( $(this).is(':checked') ){
-			none_checked	= false;
-			fade = 1.0;
-			return false;//break each()
-		}
-	});
-
-	$("#"+pid+"_arch_btn").attr( "disabled", none_checked ).fadeTo( "fast", fade );
-
-}
-//------------------------------------------------------------------------------
-
-/**
- * defines state of main check box due to states of all individual row check boxes in table
- * @param string pid - HTML id of table
- * @returns	void
- */
-function processRowCheck(pid){
-	var all_checked=true;
-
-	$("#"+pid+" .row-check-box").each(function(){
-
-		if( !$(this).is(':checked') ){
-			all_checked	= false;
-			return;
-		}
-	});
-
-	$("#"+pid+" .all-check").prop('checked', all_checked);
-
-	setDelBtnState( pid );
-}
+//
+///**
+// * sets state (enable/disable) of delete button due to state of row check-boxes.
+// * @param string pid - table HTML id.
+// * @returns	void
+// */
+//function setDelBtnState( pid ){
+//	var none_checked = true
+//		,fade=0.5;
+//
+//	$("#"+pid+" .row-check-box").each(function(){
+//		if( $(this).is(':checked') ){
+//			none_checked	= false;
+//			fade = 1.0;
+//			return false;//break each()
+//		}
+//	});
+//
+//	$("#"+pid+"_arch_btn").attr( "disabled", none_checked ).fadeTo( "fast", fade );
+//
+//}
+////------------------------------------------------------------------------------
+//
+///**
+// * defines state of main check box due to states of all individual row check boxes in table
+// * @param string pid - HTML id of table
+// * @returns	void
+// */
+//function processRowCheck(pid){
+//	var all_checked=true;
+//
+//	$("#"+pid+" .row-check-box").each(function(){
+//
+//		if( !$(this).is(':checked') ){
+//			all_checked	= false;
+//			return;
+//		}
+//	});
+//
+//	$("#"+pid+" .all-check").prop('checked', all_checked);
+//
+//	setDelBtnState( pid );
+//}
 //------------------------------------------------------------------------------
 
 /**
@@ -138,10 +138,10 @@ function removeRecords(table){
  * @param array sCols - indexes of searching columns
  * @return void
  */
-function setTblElements( table ){
-	var obj
-	,sCols
-	;
+//function setTblElements( table ){
+//	var obj
+//	,sCols
+//	;
 /*
     $("#"+table.pid+"_filter input").unbind().on("keyup change", function(e){//Change main search input handler
 		(e.keyCode == 13) ? execTblSearch(table):null;
@@ -176,7 +176,7 @@ function setTblElements( table ){
 
 
 
-
+/*
 	if(obj){
 		obj.on("click", function(e){		//Set onclick handler on "all rows" check-box
 			$("#"+table.pid+" .row-check-box").prop('checked', $(this).is(':checked'));
@@ -204,6 +204,7 @@ function setTblElements( table ){
 	}).on( "click", function(e){
 		showTblRecForm( table, null );
 	}).attr("title",prompts.add);
+*/
 
 
 
@@ -212,8 +213,7 @@ function setTblElements( table ){
 
 
 
-
-
+/*
 	//Set handlers for individual search inputs
 	if( typeof table.searchCols != "undefined" && table.searchCols.length > 0 ){
 		sCols=table.searchCols;
@@ -251,7 +251,7 @@ function setTblElements( table ){
 	    });
 
 	}
-
+*/
 
 //XXX Don't delete next comments
 //			goodstable_next prompts.paginate.next paginate_button next
@@ -266,105 +266,107 @@ function setTblElements( table ){
 //	}
 //XXX
 
+//
+//	//	Handler for edit row.
+//	$("#"+table.pid+" tbody").on( 'click', 'td', function () {
+//		$("#"+table.pid+" .selected").removeClass('selected');
+//
+//		if ( !$(this).hasClass('unclickable') ){
+//			$("#"+table.pid+" .row-check-box").prop('checked', false);
+//			$(this).parent('tr').addClass('selected');
+//
+//			showTblRecForm( table, table.cell( '.selected', 0 ).data() );
+//		}
+//	});
 
-	//	Handler for edit row.
-	$("#"+table.pid+" tbody").on( 'click', 'td', function () {
-		$("#"+table.pid+" .selected").removeClass('selected');
-
-		if ( !$(this).hasClass('unclickable') ){
-			$("#"+table.pid+" .row-check-box").prop('checked', false);
-			$(this).parent('tr').addClass('selected');
-
-			showTblRecForm( table, table.cell( '.selected', 0 ).data() );
-		}
-	});
-
-}
+//}
 //------------------------------------------------------------------------------
+//
+///**
+// * Shows popup dialog to edit table recod
+// * @param object table
+// * @param integer id - record id
+// * @returns void
+// */
+//function showTblRecForm( table, id ){
+//
+//	var tst
+//	,id_url	= id == null ? "" : "/"+id
+//	,dform_id = table.pid+"-form-dialog"
+//	,dform
+//	;
+//
+//	is_submit	= false;
+//
+//	$('body').append("<div id='"+dform_id+"'></div>");
+//
+//	if(!dform)
+//		dform	= $("#"+dform_id);
+//
+//	$.ajax({
+//		url: table.urls.form+"/"+table.pid+id_url,
+//		success: function(result){
+//			dform.html( result );
+//		},
+//
+//    	error: function(){
+//			alert( "Internal Error" );
+//		}
+//	});
+//
+//
+//	dform.dialog({
+//		autoOpen: false,
+//		dialogClass: "dialog-form",
+//		width: table.formWidth ? table.formWidth : 600,
+//		modal: true,
+//		title: table.formTitle,
+//
+//		buttons: [
+//		   {
+//			text: prompts.save,
+//			click: function(){
+//				$("#"+table.pid+"form").submit();
+//			}
+//		}
+//		]
+//	}).dialog("open");
+//
+//	$( document ).ajaxComplete(function(){
+//
+//		$("#"+table.pid+"form").submit(function(e){
+//
+//			if( !is_submit ){
+//				is_submit	= true;
+//
+//			    $.ajax({
+//			        url : $(this).attr("action"),
+//			        type: "POST",
+//			        data : $(this).serializeArray(),
+//			        success:function(data, textStatus, jqXHR){
+//			        	dform.dialog("close");
+//			        	inform( prompts.op_result, messages.save_success );//TODO: Get message from server. Like in remove handler.
+//			        	table.ajax.reload(null,false);
+//			        },
+//
+//			        error: function(jqXHR, textStatus, errorThrown){
+//			        	var err = jqXHR.responseJSON;
+//
+//			        	for(var field_id in err ){
+//			        		inform( prompts.valid_error, err[field_id][0], field_id );
+//			        		break;
+//			        	}
+//			        }
+//			    });
+//			}
+//
+//		    e.preventDefault(); //STOP default action
+//		});
+//	});
+//
+//}
+////-------------------------------------
 
-/**
- * Shows popup dialog to edit table recod
- * @param object table
- * @param integer id - record id
- * @returns void
- */
-function showTblRecForm( table, id ){
-
-	var tst
-	,id_url	= id == null ? "" : "/"+id
-	,dform_id = table.pid+"-form-dialog"
-	,dform
-	;
-
-	is_submit	= false;
-
-	$('body').append("<div id='"+dform_id+"'></div>");
-
-	if(!dform)
-		dform	= $("#"+dform_id);
-
-	$.ajax({
-		url: table.urls.form+"/"+table.pid+id_url,
-		success: function(result){
-			dform.html( result );
-		},
-
-    	error: function(){
-			alert( "Internal Error" );
-		}
-	});
-
-
-	dform.dialog({
-		autoOpen: false,
-		dialogClass: "dialog-form",
-		width: table.formWidth ? table.formWidth : 600,
-		modal: true,
-		title: table.formTitle,
-
-		buttons: [
-		   {
-			text: prompts.save,
-			click: function(){
-				$("#"+table.pid+"form").submit();
-			}
-		}
-		]
-	}).dialog("open");
-
-	$( document ).ajaxComplete(function(){
-
-		$("#"+table.pid+"form").submit(function(e){
-
-			if( !is_submit ){
-				is_submit	= true;
-
-			    $.ajax({
-			        url : $(this).attr("action"),
-			        type: "POST",
-			        data : $(this).serializeArray(),
-			        success:function(data, textStatus, jqXHR){
-			        	dform.dialog("close");
-			        	inform( prompts.op_result, messages.save_success );//TODO: Get message from server. Like in remove handler.
-			        	table.ajax.reload(null,false);
-			        },
-
-			        error: function(jqXHR, textStatus, errorThrown){
-			        	var err = jqXHR.responseJSON;
-
-			        	for(var field_id in err ){
-			        		inform( prompts.valid_error, err[field_id][0], field_id );
-			        		break;
-			        	}
-			        }
-			    });
-			}
-
-		    e.preventDefault(); //STOP default action
-		});
-	});
-
-}
 //------------------------------------------------------------------------------
 
 /**
