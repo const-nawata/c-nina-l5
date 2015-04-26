@@ -182,9 +182,9 @@ input.field-search-input{
 .dataTables_wrapper table.dataTable tr.even{
 	background-color: #fff5ea;
 }
-.dataTables_wrapper table.dataTable tr.selected{
+/*.dataTables_wrapper table.dataTable tr.selected{
 	background-color: #eeeedd;
-}
+}*/
 
 .right-align-sell{
 	text-align: right;

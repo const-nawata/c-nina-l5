@@ -11,9 +11,8 @@
     		var table
     			,pid		= $(this).attr("id")
     			,isIndivSch	= false
-//    			,chkbx_obj	= $("#"+pid+" .all-check")				//All-checking check-box.
-//    			,chkbx_obj	= $("#"+pid+" thead .checkboxtd input")
     			,chkbx_obj
+//    			,is_tbl_loaded=false
     			;
 
     		isIndivSch	= typeof pE.searchCols != "undefined" && pE.searchCols.length > 0;
@@ -110,11 +109,10 @@
 
 			}
 
+			chkbx_obj	= $("#"+pid+" thead .checkboxtd input"); //General check-box must be created on appropriate view
+
 			$( document ).ajaxComplete(function(){// Tools elements.
-
-				chkbx_obj	= $("#"+pid+" thead .checkboxtd input"); //General check-box must be created on appropriate view
-
-				if(chkbx_obj){//	Creating "Remove" button and check-boxes for row selection. There is no need in "Remove" button if there are no row check-boxes.
+				if(chkbx_obj){	//	Creating check-boxes for row selection.
 
 					chkbx_obj.on("click", function(e){		//Initialize General check-box
 						$("#"+pid+" tbody td .row-check-box").prop('checked', $(this).is(':checked'));
@@ -137,70 +135,67 @@
 
 						setDelBtnState();
 					});
+				}
+			});//	ajaxComplete (end)
 
-					//	Creating "Remove" button
-					$("#"+pid+"_tools").prepend("<button id='"+pid+"_remove_btn'></button>");
-					$("#"+pid+"_remove_btn").button({
-						icons: { primary: "ui-icon-locked" },
-						text: false
-					}).on( "click", function(e){
-						var ids=[];
-
-						$("#"+pid+" tbody td .row-check-box").each(function(){
-							( $(this).is(':checked') )
-								? ids.push($(this).parent("td").parent("tr").children("td").first().html()):null;
-						});
-
-						affirm(prompts.op_confirm, messages.arch_recs(ids.length)+"<br />"+"<b>"+messages.confirm+"</b>", function(){
-						    $.ajax({
-						        url : pE.urls.del,
-						        type: "POST",
-						        dataType: "json",
-						        data : {"_token":pE.token,"ids":ids},
-						        success:function(data, textStatus, jqXHR){
-						        	var resp = jqXHR.responseJSON;
-
-						        	inform( prompts.op_result, resp.message );
-
-						        	table.ajax.reload(function(json){
-						        		setDelBtnState();
-						        	});
-						        },
-
-						        error: function(jqXHR, textStatus, errorThrown){
-						        	var err = jqXHR.responseJSON;
-						        	inform( prompts.sys_error, errorThrown );
-						        }
-						    });
-						});
-
-					}).attr("title", prompts.to_archive );
-
-					setDelBtnState();
-				}//	Remove button... (end if)
-
-				//	Creating "Add New Record" button
-				$("#"+pid+"_tools").prepend("<button id='"+pid+"_add_btn'></button>");
-				$("#"+pid+"_add_btn").button({
-					icons: { primary: "ui-icon-circle-plus" },
+			if(chkbx_obj){	//	There is no need in "Remove" button if there are no row check-boxes.
+				//	Creating "Remove" buttonj.
+				$("#"+pid+"_tools").prepend("<button id='"+pid+"_remove_btn'></button>");
+				$("#"+pid+"_remove_btn").button({
+					icons: { primary: "ui-icon-locked" },
 					text: false
 				}).on( "click", function(e){
-					showTblRecForm( null );
-				}).attr("title",prompts.add);
+					var ids=[];
 
-				//	Handler to start row item editing.
-				$("#"+pid+" tbody").on( 'click', 'td', function(){
-					$("#"+pid+" .selected").removeClass('selected');
+					$("#"+pid+" tbody td .row-check-box").each(function(){
+						( $(this).is(':checked') )
+							? ids.push($(this).parent("td").parent("tr").children("td").first().html()):null;
+					});
 
-					if ( !$(this).hasClass('unclickable') ){
-						$("#"+pid+" .row-check-box").prop('checked', false);
-						$(this).parent('tr').addClass('selected');
+					affirm(prompts.op_confirm, messages.arch_recs(ids.length)+"<br />"+"<b>"+messages.confirm+"</b>", function(){
+					    $.ajax({
+					        url : pE.urls.del,
+					        type: "POST",
+					        dataType: "json",
+					        data : {"_token":pE.token,"ids":ids},
+					        success:function(data, textStatus, jqXHR){
+					        	var resp = jqXHR.responseJSON;
 
-//						showTblRecForm( table.cell( '.selected', 0 ).data() );//TODO: Change getting id logic like in removing logic.
-						showTblRecForm( $(this).parent("tr").children("td").first().html());
-					}
-				});
-			});//	ajaxComplete (end)
+					        	inform( prompts.op_result, resp.message );
+
+//						        	is_tbl_loaded	= false;
+					        	table.ajax.reload(function(json){
+					        		setDelBtnState();
+					        	});
+					        },
+
+					        error: function(jqXHR, textStatus, errorThrown){
+					        	var err = jqXHR.responseJSON;
+					        	inform( prompts.sys_error, errorThrown );
+					        }
+					    });
+					});
+
+				}).attr("title", prompts.to_archive );
+				setDelBtnState();
+			}
+
+			//	Creating "Add New Record" button
+			$("#"+pid+"_tools").prepend("<button id='"+pid+"_add_btn'></button>");
+			$("#"+pid+"_add_btn").button({
+				icons: { primary: "ui-icon-circle-plus" },
+				text: false
+			}).on( "click", function(e){
+				showTblRecForm( null );
+			}).attr("title",prompts.add);
+
+			//	Handler to start row item editing.
+			$("#"+pid+" tbody").on( 'click', 'td', function(){
+				if ( !$(this).hasClass('unclickable') ){
+					$("#"+pid+" .row-check-box").prop('checked', false);
+					showTblRecForm( $(this).parent("tr").children("td").first().html());
+				}
+			});
 
 //	#######################	FUNCTIONS	###########################################################
 			/**
@@ -274,7 +269,6 @@
 					}
 				});
 
-
 				dform.dialog({
 					autoOpen: false,
 					dialogClass: "dialog-form",
@@ -306,6 +300,7 @@
 						        success:function(data, textStatus, jqXHR){
 						        	dform.dialog("close");
 						        	inform( prompts.op_result, messages.save_success );//TODO: Get message from server. Like in remove handler.
+
 						        	table.ajax.reload(null,false);
 						        },
 
