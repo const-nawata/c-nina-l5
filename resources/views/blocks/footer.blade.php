@@ -26,11 +26,12 @@
 */
 ?>
 <script type="text/javascript">
-var is_submit=false;
+var is_submit=false,
+	std_dlg;
 
 $(document).ready(function(){
 
-	$("#standard-dialog").dialog({
+	std_dlg	= $("#standard-dialog").dialog({
 		autoOpen: false,
 		dialogClass: "dialog-standard",
 		modal: true

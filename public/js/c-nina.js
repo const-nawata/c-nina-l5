@@ -8,7 +8,7 @@
  */
 function inform( title, message, focusId ){
 
-	$("#standard-dialog")
+	std_dlg
 		.dialog( "option", "width", "400px" )
 	    .dialog( "option", "title", title )
 		.dialog( "option", "buttons",[
@@ -26,33 +26,37 @@ function inform( title, message, focusId ){
 		.html( message )
 		.dialog("open");
 }
+//------------------------------------------------------------------------------
 
+/**
+ * extends confirm functionality.
+ * @param title
+ * @param message
+ * @param callback
+ */
 function affirm( title, message, callback ){
-//	var result = false;
-
-	$("#standard-dialog")
+	std_dlg
 		.dialog( "option", "width", "400px" )
 	    .dialog( "option", "title", title )
 		.dialog( "option", "buttons",[
-		{
-			text: prompts.yes,
-			click: function(){
-				$(this).dialog("close");
-				callback();
-			}
+			{
+				text: prompts.yes,
+				click: function(){
+					$(this).dialog("close");
 
-		},
+					if(typeof callback != "undefined")
+						callback();
+				}
+			},
 
-		{
-			text: prompts.no,
-			click: function(){
-				$(this).dialog("close");
+			{
+				text: prompts.no,
+				click: function(){
+					$(this).dialog("close");
+				}
 			}
-		}
-	])
+		])
 		.html( message )
 		.dialog("open");
-
 }
 //------------------------------------------------------------------------------
-

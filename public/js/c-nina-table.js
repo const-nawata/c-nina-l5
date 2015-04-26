@@ -114,17 +114,15 @@
 
 				chkbx_obj	= $("#"+pid+" thead .checkboxtd input"); //General check-box must be created on appropriate view
 
-
 				if(chkbx_obj){//	Creating "Remove" button and check-boxes for row selection. There is no need in "Remove" button if there are no row check-boxes.
 
-					chkbx_obj.on("click", function(e){		//Set onclick handler on General check-box
+					chkbx_obj.on("click", function(e){		//Initialize General check-box
 						$("#"+pid+" tbody td .row-check-box").prop('checked', $(this).is(':checked'));
 						setDelBtnState();
 					}).prop('checked', false);
 
 					//	Creating check-boxes for row selection.
 					$("#"+pid+" tbody .checkboxtd").html("<input type='checkbox' class='row-check-box' />");
-
 					$("#"+pid+" tbody td .row-check-box").on("click", function(e){
 						var all_checked=true;
 
@@ -153,8 +151,7 @@
 								? ids.push($(this).parent("td").parent("tr").children("td").first().html()):null;
 						});
 
-
-						affirm(prompts.op_confirm, messages.arch_recs(ids.length)+"\n"+messages.confirm, function(){
+						affirm(prompts.op_confirm, messages.arch_recs(ids.length)+"<br />"+"<b>"+messages.confirm+"</b>", function(){
 						    $.ajax({
 						        url : pE.urls.del,
 						        type: "POST",
@@ -180,7 +177,7 @@
 					}).attr("title", prompts.to_archive );
 
 					setDelBtnState();
-				}//	Remove button (end if)
+				}//	Remove button... (end if)
 
 				//	Creating "Add New Record" button
 				$("#"+pid+"_tools").prepend("<button id='"+pid+"_add_btn'></button>");
@@ -191,8 +188,7 @@
 					showTblRecForm( null );
 				}).attr("title",prompts.add);
 
-
-				//	Handler for edit row.
+				//	Handler to start row item editing.
 				$("#"+pid+" tbody").on( 'click', 'td', function(){
 					$("#"+pid+" .selected").removeClass('selected');
 
@@ -200,18 +196,11 @@
 						$("#"+pid+" .row-check-box").prop('checked', false);
 						$(this).parent('tr').addClass('selected');
 
-						showTblRecForm( table.cell( '.selected', 0 ).data() );
+//						showTblRecForm( table.cell( '.selected', 0 ).data() );//TODO: Change getting id logic like in removing logic.
+						showTblRecForm( $(this).parent("tr").children("td").first().html());
 					}
 				});
-
-
 			});//	ajaxComplete (end)
-
-
-
-
-
-
 
 //	#######################	FUNCTIONS	###########################################################
 			/**
