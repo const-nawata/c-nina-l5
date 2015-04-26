@@ -34,6 +34,7 @@ return [
 		'f_i'	=>	'New'
 	],
 	'no'=> 'No',
+	'op_confirm'	=> 'Confirm operation',
 	'op_result'		=> 'Result of operation',
 	'packs'=> 'Packs',
 	'parent'=> 'Parent',
@@ -43,6 +44,11 @@ return [
 	'prod_edit'		=> 'Product parameters editing',
 	'quantity'	=> 'Quantity',
 	'rank'	=> 'Place in list',
+	'recs'	=> [
+		'sn'	=> 'record',
+		'pl24'	=> 'records',
+		'pl'	=> 'records'
+	],
 	'registration'	=> 'Registration',
 	'remember_me'	=> 'Remember me',
 	'rprice'	=> 'Ret.',

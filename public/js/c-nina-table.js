@@ -153,26 +153,30 @@
 								? ids.push($(this).parent("td").parent("tr").children("td").first().html()):null;
 						});
 
-					    $.ajax({
-					        url : pE.urls.del,
-					        type: "POST",
-					        dataType: "json",
-					        data : {"_token":pE.token,"ids":ids},
-					        success:function(data, textStatus, jqXHR){
-					        	var resp = jqXHR.responseJSON;
 
-					        	inform( prompts.op_result, resp.message );
+						affirm(prompts.op_confirm, messages.arch_recs(ids.length)+"\n"+messages.confirm, function(){
+						    $.ajax({
+						        url : pE.urls.del,
+						        type: "POST",
+						        dataType: "json",
+						        data : {"_token":pE.token,"ids":ids},
+						        success:function(data, textStatus, jqXHR){
+						        	var resp = jqXHR.responseJSON;
 
-					        	table.ajax.reload(function(json){
-					        		setDelBtnState();
-					        	});
-					        },
+						        	inform( prompts.op_result, resp.message );
 
-					        error: function(jqXHR, textStatus, errorThrown){
-					        	var err = jqXHR.responseJSON;
-					        	inform( prompts.sys_error, errorThrown );
-					        }
-					    });
+						        	table.ajax.reload(function(json){
+						        		setDelBtnState();
+						        	});
+						        },
+
+						        error: function(jqXHR, textStatus, errorThrown){
+						        	var err = jqXHR.responseJSON;
+						        	inform( prompts.sys_error, errorThrown );
+						        }
+						    });
+						});
+
 					}).attr("title", prompts.to_archive );
 
 					setDelBtnState();

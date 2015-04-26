@@ -149,10 +149,6 @@ class DashboardController extends MainController{
 //______________________________________________________________________________
 
     public function getGoodstable(){
-
-
-
-//     	return Good::getTableData( $_GET, TRUE );
     	return Good::getTblDataJSON( $_GET );
     }
 //______________________________________________________________________________
@@ -165,8 +161,6 @@ class DashboardController extends MainController{
     	$message	= $n_rows == $n_rows_req
     		? trans('messages.arch_success')
     		: '';
-
-
 
     	return json_encode( ['message'=>$message] );
     }

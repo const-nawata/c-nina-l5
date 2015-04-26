@@ -45,6 +45,8 @@ var prompts	= {
 	,"info_filtered":"{{ @trans('prompts.info_filtered') }}"
 	,"length_menu":"{{ @trans('prompts.length_menu') }}"
 	,"loading_records":"{{ @trans('prompts.loading_records') }}"
+	,"no":"{{ @trans( 'prompts.no' ) }}"
+	,"op_confirm": "{{ @trans('prompts.op_confirm') }}"
 	,"op_result": "{{ @trans('prompts.op_result') }}"
 
 	,"paginate":{
@@ -55,15 +57,39 @@ var prompts	= {
 	}
 
 	,"processing":"{{ @trans('prompts.processing') }}"
+	,"recs":{
+		"sn":"{{ @trans('prompts.recs.sn') }}",
+		"pl24":"{{ @trans('prompts.recs.pl24') }}",
+		"pl":"{{ @trans('prompts.recs.pl') }}"
+	}
 	,"save":"{{ @trans('prompts.save') }}"
 	,"search":"{{ @trans('prompts.search') }}"
 	,"to_archive":"{{ @trans('prompts.to_archive') }}"
+	,"yes":"{{ @trans( 'prompts.yes' ) }}"
 	,"zero_records":"{{ @trans('prompts.zero_records') }}",
 	"sys_error":"{{ @trans('prompts.sys_error') }}",
 	"valid_error":"{{ @trans('prompts.valid_error') }}"
 }
 ,messages={
-	"save_success": "{{ @trans('messages.save_success') }}"
+	"confirm": "{{ @trans('messages.confirm') }}"
+	,"save_success": "{{ @trans('messages.save_success') }}"
+	,"arch_recs":function(nrecs){
+		var message	= "{{ @trans('messages.arch_recs') }}",result,factor;
+		result	= message.replace( ":nrecs", nrecs );
+		factor	= (nrecs % 10);
+
+		switch( factor ){
+			case 1: result	= result.replace( ":recs", "{{ @trans('prompts.recs.sn') }}" );	break;
+
+			case 2:
+			case 3:
+			case 4: result	= result.replace( ":recs", "{{ @trans('prompts.recs.pl24') }}" );	break;
+
+			default:
+				result	= result.replace( ":recs", "{{ @trans('prompts.recs.pl') }}" );
+		}
+		return result;
+	}
 }
 ;
 </script>

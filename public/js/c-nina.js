@@ -26,5 +26,33 @@ function inform( title, message, focusId ){
 		.html( message )
 		.dialog("open");
 }
+
+function affirm( title, message, callback ){
+//	var result = false;
+
+	$("#standard-dialog")
+		.dialog( "option", "width", "400px" )
+	    .dialog( "option", "title", title )
+		.dialog( "option", "buttons",[
+		{
+			text: prompts.yes,
+			click: function(){
+				$(this).dialog("close");
+				callback();
+			}
+
+		},
+
+		{
+			text: prompts.no,
+			click: function(){
+				$(this).dialog("close");
+			}
+		}
+	])
+		.html( message )
+		.dialog("open");
+
+}
 //------------------------------------------------------------------------------
 
