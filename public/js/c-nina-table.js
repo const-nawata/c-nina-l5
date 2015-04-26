@@ -112,42 +112,52 @@
 
 			$( document ).ajaxComplete(function(){// Tools elements.
 
-				chkbx_obj	= $("#"+pid+" thead .checkboxtd input");
-				if(chkbx_obj){//	Remove button and check-boxes for row selection. There is no need in remove button if there are no row check-boxes.
-					chkbx_obj.on("click", function(e){		//Set onclick handler on "all rows" check-box
+				chkbx_obj	= $("#"+pid+" thead .checkboxtd input"); //General check-box must be created on appropriate view
+
+
+				if(chkbx_obj){//	Creating "Remove" button and check-boxes for row selection. There is no need in "Remove" button if there are no row check-boxes.
+
+					chkbx_obj.on("click", function(e){		//Set onclick handler on General check-box
 						$("#"+pid+" tbody td .row-check-box").prop('checked', $(this).is(':checked'));
 						setDelBtnState();
 					}).prop('checked', false);
 
-					//
-					$("#"+pid+"_tools").prepend("<button id='"+pid+"_arch_btn'></button>");
-					$("#"+pid+"_arch_btn").button({
-						icons: { primary: "ui-icon-locked" },
-						text: false
-					}).on( "click", function(e){
-						var del_data
-						,ids=[]
-						;
+					//	Creating check-boxes for row selection.
+					$("#"+pid+" tbody .checkboxtd").html("<input type='checkbox' class='row-check-box' />");
+
+					$("#"+pid+" tbody td .row-check-box").on("click", function(e){
+						var all_checked=true;
 
 						$("#"+pid+" tbody td .row-check-box").each(function(){
-							var idd;
-
-							if( $(this).is(':checked') ){
-								idd	= $(this).attr("id").split("-");
-								ids.push(idd[1]);
+							if( !$(this).is(':checked') ){
+								all_checked	= false;
+								return false;
 							}
 						});
 
-						del_data	= {
-							'_token':pE.token,
-							"ids":ids
-						};
+						chkbx_obj.prop('checked', all_checked );
+
+						setDelBtnState();
+					});
+
+					//	Creating "Remove" button
+					$("#"+pid+"_tools").prepend("<button id='"+pid+"_remove_btn'></button>");
+					$("#"+pid+"_remove_btn").button({
+						icons: { primary: "ui-icon-locked" },
+						text: false
+					}).on( "click", function(e){
+						var ids=[];
+
+						$("#"+pid+" tbody td .row-check-box").each(function(){
+							( $(this).is(':checked') )
+								? ids.push($(this).parent("td").parent("tr").children("td").first().html()):null;
+						});
 
 					    $.ajax({
 					        url : pE.urls.del,
 					        type: "POST",
 					        dataType: "json",
-					        data : del_data,
+					        data : {"_token":pE.token,"ids":ids},
 					        success:function(data, textStatus, jqXHR){
 					        	var resp = jqXHR.responseJSON;
 
@@ -165,27 +175,10 @@
 					    });
 					}).attr("title", prompts.to_archive );
 
-					//	Add check-boxes for row selection.
-					$("#"+pid+" tbody .checkboxtd").html("<input type='checkbox' class='row-check-box' />");
-
-					$("#"+pid+" tbody td .row-check-box").on("click", function(e){
-						var all_checked=true;
-
-						$("#"+pid+" tbody td .row-check-box").each(function(){
-							if( !$(this).is(':checked') ){
-								all_checked	= false;
-								return false;
-							}
-						});
-
-						chkbx_obj.prop('checked', all_checked );
-
-						setDelBtnState();
-					});
 					setDelBtnState();
 				}//	Remove button (end if)
 
-				//	Add new record button
+				//	Creating "Add New Record" button
 				$("#"+pid+"_tools").prepend("<button id='"+pid+"_add_btn'></button>");
 				$("#"+pid+"_add_btn").button({
 					icons: { primary: "ui-icon-circle-plus" },
@@ -251,7 +244,7 @@
 					}
 				});
 
-				$("#"+pid+"_arch_btn").attr( "disabled", none_checked ).fadeTo( "fast", fade_level );
+				$("#"+pid+"_remove_btn").attr( "disabled", none_checked ).fadeTo( "fast", fade_level );
 
 			}
 			//------------------------------------------------------------------
