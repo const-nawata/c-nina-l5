@@ -38,7 +38,7 @@ class BaseModel extends Model{
  * @param bool $isJson - retuned format
  * @return array/json
  */
-	public static function getTableData( $rg, $isJson=FALSE ){
+	public static function getTableData( $rg ){
 
 		$recs	= self::getTableRecs( $rg );
 
@@ -51,36 +51,33 @@ class BaseModel extends Model{
     		$fld_vals	= [];
 
     		foreach( $cols as $col ){
-    			$val	= "";
+//     			$val	= "";
 
-				switch( $col['name'] ){
-					case 'all_check':
-						$val	= "<input type='checkbox' id='".$pid."rowcheckbox-".$rec->id."' class='row-check-box' />";
-						break;
+// 				switch( $col['name'] ){
+// 					case 'checkbox':
+// 						$val	= "<input type='checkbox' id='".$pid."rowcheckbox-".$rec->id."' class='row-check-box' />";
+// 						break;
 
-					case 'wprice':
-					case 'rprice':
-						$val	= number_format($rec->$col['name'],2,',',' ');
-						break;
+// 					default:
+// 						$val	= $rec->$col['name'];
+// 				}
 
-					default:
-						$val	= $rec->$col['name'];
-				}
 
-				$fld_vals[]	= $val;
+// 				$val	= isset($rec->$col['name']) ? $rec->$col['name'] : '';
+
+
+				$fld_vals[]	= isset($rec->$col['name']) ? $rec->$col['name'] : '';
     		}
 
     		$data[]	= $fld_vals;
     	}
 
-		$output	= [
+		return [
 			'draw' => intval($rg['draw']),
 			'recordsTotal' => self::all()->count(),
 			'recordsFiltered' => $rg['filtered'],
 			'data' => $data
 		];
-
-		return $isJson ? json_encode($output) : $output;
 	}
 //______________________________________________________________________________
 

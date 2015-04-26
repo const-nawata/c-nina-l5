@@ -22,7 +22,8 @@
 		<th rowspan="2">{{ @trans('prompts.article') }}</th>
 		<th colspan="2">{{ @trans('prompts.price') }}</th>
 		<th colspan="3">{{ @trans('prompts.quantity') }}</th>
-		<th rowspan="2"><input type="checkbox" class="all-check"></th>
+<!-- 		<th rowspan="2"><input type="checkbox" class="all-check"></th>		 -->
+		<th rowspan="2"><input type="checkbox"></th>
 	</tr>
 	<tr>
 		<th>{{ @trans('prompts.wprice') }}</th>
@@ -59,7 +60,7 @@ $(document).ready(function(){
 			{"searchable": false, "targets": [ 3,4,5,6,7,8 ] },
 			{"orderable": false, "targets": [8] },
 			{"className":"right-align-sell", "targets": [ 0,3,4,5,6,7 ]}
-			,{"className":"unclickable center-align-sell", "targets": [8]}
+			,{"className":"checkboxtd unclickable center-align-sell", "targets": [8]}
 
 		],
 
@@ -71,8 +72,8 @@ $(document).ready(function(){
 		   {"name":"rprice"},
 		   {"name":"inpack"},
 		   {"name":"packs"},
-		   {"name":"assort"},
-		   {"name":"all_check"}
+		   {"name":"assort"}
+		   ,{"name":"checkbox"}
 		]
 
 		,"ajax": {
