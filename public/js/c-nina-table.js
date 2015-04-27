@@ -79,20 +79,27 @@
 			}).attr("title", prompts.clean);
 
 			if( isIndivSch ){								//Set individual search inputs
-
 				for(var cn in pE.searchCols ){
+					$(table.column(pE.searchCols[cn]).footer()).html('<button class="ind-search-btn"></button><input class="form-control" type="text" placeholder="'+prompts.column_search+'" /><button class="ind-clean-btn">');
 
-					$(table.column(pE.searchCols[cn]).footer()).html('<button class="ind-search-btn"></button><input class="form-control f-inp" type="text" placeholder="'+prompts.column_search+'" /><button class="ind-clean-btn">');
+					$("input", table.column(pE.searchCols[cn]).footer())
+						.attr("id", pid+"_inp_"+pE.searchCols[cn])
+						.on( "keyup change", function(e){
+							(e.keyCode == 13) ? execTblSearch():null;
+						});
 
-					$("input", table.column(pE.searchCols[cn]).footer()).attr("id", pid+"_inp_"+pE.searchCols[cn]);
-
+					//Individual clean buttons settings
 					$(".ind-clean-btn", table.column(pE.searchCols[cn]).footer())
 						.attr("id", pid+"cleanbtn-"+pE.searchCols[cn])
+						.button({
+							icons: { primary: "ui-icon-cancel" },
+							text: false
+						})
 						.on( "click", function(e){
 							var idd	= $(this).attr("id").split("-");
 							$("#"+pid+"_inp_"+idd[1]).val("");
 				        	execTblSearch()
-						});
+						}).attr("title", prompts.clean);
 				}
 
 				//Individual search buttons settings
@@ -102,19 +109,6 @@
 				}).on( "click", function(e){
 					execTblSearch();
 			    }).attr("title", prompts.exec_search);
-
-				//Individual clean buttons settings
-			    $(".ind-clean-btn").button({
-					icons: { primary: "ui-icon-cancel" },
-					text: false
-				}).attr("title", prompts.clean);
-
-
-			    $(".f-inp").on( "keyup change", function(e){
-			    	(e.keyCode == 13)
-			        	 ? execTblSearch():null;
-			    });
-
 			}
 
 			chkbx_obj	= $("#"+pid+" thead .checkboxtd input"); //General check-box must be created on appropriate view
@@ -171,7 +165,6 @@
 
 					        	inform( prompts.op_result, resp.message );
 
-//						        	is_tbl_loaded	= false;
 					        	table.ajax.reload(function(json){
 					        		setDelBtnState();
 					        	});

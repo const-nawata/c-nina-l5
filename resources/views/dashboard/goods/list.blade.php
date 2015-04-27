@@ -36,12 +36,6 @@
 	<tfoot>
 	<tr>
 		<th>&nbsp;</th>
-
-<?php /* ?>
-		<th><button class="ind-search-btn"></button><input class="form-control f-inp" type="text" placeholder="{{ @trans('prompts.column_search') }}" /><button class="ind-clean-btn"></th>
-		<th><button class="ind-search-btn"></button><input class="form-control f-inp" type="text" placeholder="{{ @trans('prompts.column_search') }}" /><button class="ind-clean-btn"></th>
-<?php */ ?>
-
 		<th></th>
 		<th></th>
 		<th colspan="6">&nbsp;</th>
