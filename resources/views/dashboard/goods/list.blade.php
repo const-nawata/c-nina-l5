@@ -13,7 +13,6 @@
 
 
 <div class="jumbotron j-tbl">
-
 <table id="{{ $pid }}">
 	<thead>
 	<tr>
@@ -22,7 +21,7 @@
 		<th rowspan="2">{{ @trans('prompts.article') }}</th>
 		<th colspan="2">{{ @trans('prompts.price') }}</th>
 		<th colspan="3">{{ @trans('prompts.quantity') }}</th>
-		<th rowspan="2"><input type="checkbox"></th>
+		<th rowspan="2"></th>
 	</tr>
 	<tr>
 		<th>{{ @trans('prompts.wprice') }}</th>
@@ -56,11 +55,8 @@ $(document).ready(function(){
 		"serverSide": true,
 
 		"columnDefs": [
-			{"searchable": false, "targets": [ 3,4,5,6,7,8 ] },
-			{"orderable": false, "targets": [8] },
+			{"searchable": false, "targets": [ 3,4,5,6,7 ] },
 			{"className":"right-align-sell", "targets": [ 0,3,4,5,6,7 ]}
-			,{"className":"checkboxtd unclickable center-align-sell", "targets": [8]}
-
 		],
 
 		"columns":[

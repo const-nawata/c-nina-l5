@@ -1,12 +1,24 @@
 /**
  * extends DataTable functionality.
  * Sets additional controls for searching, creating, editing and deleting records.
- * Deleting possibility needs extra column with name "checkbox" in "columns" array of pT parameter.
- * And you should also creaty extra th column with <input> check box in the header of table view.
+ *
+ * Deleting possibility needs extra item with name "checkbox" in "columns" array of pT parameter.
+ * And for this purpose you must create extra th column (epmty) in the header of the table view.
+ * @important "checkbox" number in "columns" array and "checkbox" th number must be the same!!!
  *
  * @param	JSON object pT - standard DataTable parameters. See API in https://legacy.datatables.net/
  * @param	JSON object pE - extended parameters needed for table tuning. This data includes next parameters:
- * 		array searchCols - columns numbers which will be used for individual searching (start from 0).
+ * 		array searchCols (Optional) - columns numbers which will be used for individual searching (start from 0).
+ * 							For those columns text fields is created in the footer. So you must ctreate appropriate th colamnts (empty) in footer.
+ * 		integer formWidth (Optional) - create/edit record form width in pixels. Default 600.
+ * 		string formTitle  (Optional) - create/edit record form title Default "".
+ * 		string token (Mandatory)	- laravel security token.
+ * 		array urls (Mandatory)	- urls for differnt actions:
+ * 			"form"	- to show form action
+ * 			"del"	- to delete action
+ *
+ * @example	- See /goods/list.blade.php
+ *
  * @returns	void
  */
 (function($){
@@ -17,10 +29,19 @@
     			,pid		= $(this).attr("id")
     			,isIndivSch	= false
     			,chkbx_obj
-//    			,is_tbl_loaded=false
+    			,chk_bx_col	= -1
     			;
 
     		isIndivSch	= typeof pE.searchCols != "undefined" && pE.searchCols.length > 0;
+
+    		for(var nc in pT.columns )
+    			if(pT.columns[nc].name == "checkbox" ){
+    				chk_bx_col	= parseInt(nc);
+    				pT.columnDefs.push({"className":"checkboxtd unclickable center-align-sell", "targets": [chk_bx_col]});
+    				pT.columnDefs.push({"orderable": false, "targets": [chk_bx_col] });
+    				pT.columnDefs.push({"searchable": false, "targets": [chk_bx_col]});
+    				break;
+    			}
 
     		pT.ajax.data=function(srvData){//Data to send to server
  	            srvData.pid	= pid;
@@ -49,8 +70,12 @@
 			    }
          	};
 
-
          	table	= $(this).DataTable(pT);//						Start table creating ###############################################
+
+         	( chk_bx_col >= 0 )//	Drow general check-box
+         		? $(table.column(chk_bx_col).header())
+         			.html('<input type="checkbox">')
+         		:null;
 
 		    $("#"+pid+"_filter input").unbind().on("keyup change", function(e){//Change main search input handler
 				(e.keyCode == 13) ? execTblSearch():null;
@@ -98,7 +123,7 @@
 						.on( "click", function(e){
 							var idd	= $(this).attr("id").split("-");
 							$("#"+pid+"_inp_"+idd[1]).val("");
-				        	execTblSearch()
+				        	execTblSearch();
 						}).attr("title", prompts.clean);
 				}
 
@@ -111,30 +136,21 @@
 			    }).attr("title", prompts.exec_search);
 			}
 
-			chkbx_obj	= $("#"+pid+" thead .checkboxtd input"); //General check-box must be created on appropriate view
-
-
-
-
-
-
-
-
-
-
-
-			$( document ).ajaxComplete(function(){// Tools elements.
-				if(chkbx_obj){	//	Creating check-boxes for row selection.
-
-					chkbx_obj.on("click", function(e){		//Initialize General check-box
+			if(chk_bx_col >= 0){	//	Creating check-boxes for row selection and "Remove" button to remove rows.
+				chkbx_obj	= $("#"+pid+" thead .checkboxtd input") //Initialize General check-box
+					.on("click", function(e){
 						$("#"+pid+" tbody td .row-check-box").prop('checked', $(this).is(':checked'));
 						setDelBtnState();
 					}).prop('checked', false);
 
+
+
+				$( document ).ajaxComplete(function(){
 					//	Creating check-boxes for row selection.
 					$("#"+pid+" tbody .checkboxtd").html("<input type='checkbox' class='row-check-box' />");
+
 					$("#"+pid+" tbody td .row-check-box").on("click", function(e){
-						var all_checked=true;
+						var all_checked	= true;
 
 						$("#"+pid+" tbody td .row-check-box").each(function(){
 							if( !$(this).is(':checked') ){
@@ -147,11 +163,10 @@
 
 						setDelBtnState();
 					});
-				}
-			});//	ajaxComplete (end)
 
-			if(chkbx_obj){	//	There is no need in "Remove" button if there are no row check-boxes.
-				//	Creating "Remove" buttonj.
+				});
+
+				//	Creating "Remove" button.
 				$("#"+pid+"_tools").prepend("<button id='"+pid+"_remove_btn'></button>");
 				$("#"+pid+"_remove_btn").button({
 					icons: { primary: "ui-icon-locked" },
@@ -205,6 +220,7 @@
 				if ( !$(this).hasClass('unclickable') ){
 					$("#"+pid+" .row-check-box").prop('checked', false);
 					showTblRecForm( $(this).parent("tr").children("td").first().html());
+					setDelBtnState();
 				}
 			});
 
@@ -289,11 +305,11 @@
 
 					buttons: [
 					   {
-						text: prompts.save,
-						click: function(){
-							$("#"+pid+"form").submit();
-						}
-					}
+						   text: prompts.save,
+						   click: function(){
+							   $("#"+pid+"form").submit();
+						   }
+					   }
 					]
 				}).dialog("open");
 
