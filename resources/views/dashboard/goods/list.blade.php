@@ -22,7 +22,6 @@
 		<th rowspan="2">{{ @trans('prompts.article') }}</th>
 		<th colspan="2">{{ @trans('prompts.price') }}</th>
 		<th colspan="3">{{ @trans('prompts.quantity') }}</th>
-<!-- 		<th rowspan="2"><input type="checkbox" class="all-check"></th>		 -->
 		<th rowspan="2"><input type="checkbox"></th>
 	</tr>
 	<tr>
@@ -37,8 +36,14 @@
 	<tfoot>
 	<tr>
 		<th>&nbsp;</th>
+
+<?php /* ?>
 		<th><button class="ind-search-btn"></button><input class="form-control f-inp" type="text" placeholder="{{ @trans('prompts.column_search') }}" /><button class="ind-clean-btn"></th>
 		<th><button class="ind-search-btn"></button><input class="form-control f-inp" type="text" placeholder="{{ @trans('prompts.column_search') }}" /><button class="ind-clean-btn"></th>
+<?php */ ?>
+
+		<th></th>
+		<th></th>
 		<th colspan="6">&nbsp;</th>
 	</tr>
 	</tfoot>

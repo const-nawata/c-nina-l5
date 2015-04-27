@@ -64,6 +64,7 @@ var prompts	= {
 	}
 	,"save":"{{ @trans('prompts.save') }}"
 	,"search":"{{ @trans('prompts.search') }}"
+	,"column_search":"{{ @trans('prompts.column_search') }}"
 	,"to_archive":"{{ @trans('prompts.to_archive') }}"
 	,"yes":"{{ @trans( 'prompts.yes' ) }}"
 	,"zero_records":"{{ @trans('prompts.zero_records') }}",

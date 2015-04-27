@@ -1,11 +1,16 @@
-(function($){
-    $.fn.extend({
 /**
  * extends DataTable functionality.
- * @param	JSON object pT - standard DataTable parameters.
- * @param	JSON object pE - extended parameters needed for table tuning.
+ * Sets additional controls for creating, editing and deleting records.
+ * Deleting possibility needs extra column with name "checkbox" in "columns" array of pT parameter.
+ * And you should also creaty extra column with <input> check box in the header of table view.
+ *
+ * @param	JSON object pT - standard DataTable parameters. See API in https://legacy.datatables.net/
+ * @param	JSON object pE - extended parameters needed for table tuning. This data includes next parameters:
+ * 		array searchCols - columns numbers which will be used for individual searching (start from 0).
  * @returns	void
  */
+(function($){
+    $.fn.extend({
     	cNinaTable: function(pT, pE){
 
     		var table
@@ -73,9 +78,12 @@
 				execTblSearch();
 			}).attr("title", prompts.clean);
 
-			if( isIndivSch ){								//Set handlers for individual search inputs
+			if( isIndivSch ){								//Set individual search inputs
 
 				for(var cn in pE.searchCols ){
+
+					$(table.column(pE.searchCols[cn]).footer()).html('<button class="ind-search-btn"></button><input class="form-control f-inp" type="text" placeholder="'+prompts.column_search+'" /><button class="ind-clean-btn">');
+
 					$("input", table.column(pE.searchCols[cn]).footer()).attr("id", pid+"_inp_"+pE.searchCols[cn]);
 
 					$(".ind-clean-btn", table.column(pE.searchCols[cn]).footer())
