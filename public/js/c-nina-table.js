@@ -1,8 +1,8 @@
 /**
  * extends DataTable functionality.
- * Sets additional controls for creating, editing and deleting records.
+ * Sets additional controls for searching, creating, editing and deleting records.
  * Deleting possibility needs extra column with name "checkbox" in "columns" array of pT parameter.
- * And you should also creaty extra column with <input> check box in the header of table view.
+ * And you should also creaty extra th column with <input> check box in the header of table view.
  *
  * @param	JSON object pT - standard DataTable parameters. See API in https://legacy.datatables.net/
  * @param	JSON object pE - extended parameters needed for table tuning. This data includes next parameters:
@@ -63,14 +63,14 @@
 		    	.append("<button id='"+pid+"_clean_btn'></button>")//Clean button for main search
 		    	.prepend("<span id='"+pid+"_tools' class='tbl-tool-btns-span'></span>");//	Tool buttons container
 
-		    $("#"+pid+"_search_btn").button({				//Settings of Main search button
+		    $("#"+pid+"_search_btn").button({				//Settings for Main search button
 				icons: { primary: "ui-icon-search" },
 				text: false
 			}).on("click", function(e) {
 				execTblSearch();
 			}).attr("title", prompts.exec_search);
 
-		    $("#"+pid+"_clean_btn").button({				//Settings of Clean button for main search
+		    $("#"+pid+"_clean_btn").button({				//Settings for Clean button of main search
 				icons: { primary: "ui-icon-cancel" },
 				text: false
 			}).on("click", function(e) {
@@ -112,6 +112,16 @@
 			}
 
 			chkbx_obj	= $("#"+pid+" thead .checkboxtd input"); //General check-box must be created on appropriate view
+
+
+
+
+
+
+
+
+
+
 
 			$( document ).ajaxComplete(function(){// Tools elements.
 				if(chkbx_obj){	//	Creating check-boxes for row selection.
