@@ -103,13 +103,12 @@
 				$("#"+pid+"_remove_btn").attr( "disabled", disabled_state ).fadeTo( "fast", fade_level );
 
 			};
-			//------------------------------------------------------------------
+			//------------------------------------------------------------------   table.search( $("#"+pid+"_filter label input").
 //	#######################	PUBLIC FUNCTIONS (end)	###########################################################
 
-         	( chk_bx_col >= 0 )//	Drow general check-box
-         		? $(table.column(chk_bx_col).header()).html('<input type="checkbox">'):null;
+			$("#"+pid+"_filter input").attr("id",pid+"_main_search_inp");
 
-		    $("#"+pid+"_filter input").unbind().on("keyup change", function(e){//Change main search input handler
+		    $("#"+pid+"_main_search_inp").unbind().on("keyup change", function(e){//Change main search input handler
 				(e.keyCode == 13) ? execTblSearch():null;
 			}).addClass("form-control").attr("placeholder", prompts.search );
 
@@ -118,7 +117,8 @@
 		    $("#"+pid+"_filter")
 		    	.prepend("<button id='"+pid+"_search_btn'></button>")//Main search button
 		    	.append("<button id='"+pid+"_clean_btn'></button>")//Clean button for main search
-		    	.prepend("<span id='"+pid+"_tools' class='tbl-tool-btns-span'></span>");//	Tool buttons container
+		    	.prepend("<span id='"+pid+"_tools' class='tbl-tool-btns-span'></span>")//	Tool buttons container
+		    	;
 
 		    $("#"+pid+"_search_btn").button({				//Settings for Main search button
 				icons: { primary: "ui-icon-search" },
@@ -131,7 +131,7 @@
 				icons: { primary: "ui-icon-cancel" },
 				text: false
 			}).on("click", function(e) {
-				$("#"+pid+"_filter input").val("");
+				$("#"+pid+"_main_search_inp").val("");
 				execTblSearch();
 			}).attr("title", prompts.clean);
 
@@ -169,7 +169,9 @@
 			}
 
 			if(chk_bx_col >= 0){	//	Creating check-boxes for row selection and "Remove" button to remove rows.
-				chkbx_obj	= $("#"+pid+" thead .checkboxtd input") //Initialize General check-box
+				$(table.column(chk_bx_col).header()).html('<input type="checkbox" id="'+pid+'_gen_chkbx">');	//	Drow general check-box
+
+				chkbx_obj	= $("#"+pid+"_gen_chkbx") //Initialize General check-box
 					.on("click", function(e){
 						$("#"+pid+" tbody td .row-check-box").prop('checked', $(this).is(':checked'));
 						table.setDelBtnState();
@@ -263,7 +265,7 @@
 			 * @return void
 			 */
 			function execTblSearch(){
-				table.search( $("#"+pid+"_filter input").val() );
+				table.search( $("#"+pid+"_filter label input").val() );
 
 				if( isIndivSch )
 					for(var cn in pE.searchCols )

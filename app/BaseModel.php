@@ -6,14 +6,29 @@ use Illuminate\Database\Eloquent\Model;
 class BaseModel extends Model{
 
 
-	private static function getTableRecs( &$rg ){
+	private static function getTableRecs( &$rg, $fldTypes=[] ){
     	$cols	= $rg['columns'];
 
     	$stmt	= self::select();
 
-    	foreach( $cols as $col )//	Individual column search
-    		if( $col['searchable'] == 'true' && $col['search']['value'] != '' )
-    			$stmt->where($col['name'],'like','%'.$col['search']['value'].'%');
+    	foreach( $cols as $col ){//	Individual column search
+    		$ftype	= isset($fldTypes[$col['name']]) ? $fldTypes[$col['name']] : 'varchar';
+
+    		switch( $ftype ){
+    			case 'varchar':
+    			case 'text':
+		    		if( $col['searchable'] == 'true' && $col['search']['value'] != '' )
+		    			$stmt->where($col['name'],'like','%'.$col['search']['value'].'%');
+    				break;
+
+    			case 'bool':
+    			case 'integer':
+    			case 'float':
+		    		if( $col['searchable'] == 'true')
+		    			$stmt->where($col['name'],'=', $col['search']['value']);
+    				break;
+    		}
+    	}
 
     	if($rg['search']['value'] != '' )//	All columns search
     		foreach( $cols as $col )
@@ -38,9 +53,9 @@ class BaseModel extends Model{
  * @param bool $isJson - retuned format
  * @return array/json
  */
-	public static function getTableData( $rg ){
+	public static function getTableData( $rg, $fldTypes=[] ){
 
-		$recs	= self::getTableRecs( $rg );
+		$recs	= self::getTableRecs( $rg, $fldTypes );
 
 		$pid	= $rg['pid'];
 

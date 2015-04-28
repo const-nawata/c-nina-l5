@@ -90,7 +90,7 @@ $(document).ready(function(){
 		}
 	});
 
-	$("#{!! $pid !!}_filter").prepend('<input class="filter-check-box" type="checkbox" id="{!! $pid !!}_archive_chkbx">');
+	$("#{!! $pid !!}_tools").prepend('<input class="filter-check-box" type="checkbox" id="{!! $pid !!}_archive_chkbx">');
 	$("#{!! $pid !!}_archive_chkbx")
 		.on("click", function(e){
 			if($(this).is(':checked')){
@@ -104,7 +104,8 @@ $(document).ready(function(){
         		goods_table.setDelBtnState();
         	});
 
-		}).attr("title", "{{ @trans('prompts.show_all') }}");
+		})
+		.attr("title", "{{ @trans('prompts.show_all') }}");
 
 });
 

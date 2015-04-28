@@ -18,6 +18,17 @@ class Good extends BaseModel{
 		,'archived'	//boolean
 	];
 
+	private static $fldTypes	= [
+		'name'		=> 'varchar',
+		'article'	=> 'varchar',
+		'rprice'	=> 'float',
+		'wprice'	=> 'float',
+		'inpack'	=> 'integer',
+		'packs'		=> 'integer',
+		'assort'	=> 'integer',
+		'archived'	=> 'bool'
+	];
+
 	public static function archiveGoods( $ids=[] ){
 		$affectedRows	= self::whereIn('id',$ids)->update(['archived' => TRUE])
 		;
@@ -26,8 +37,23 @@ class Good extends BaseModel{
 //______________________________________________________________________________
 
 	public static function getTblDataJSON( $rg ){
-		$tbl_info	= self::getTableData( $rg );
+
+		$rg['columns'][]	= [
+			'data'	=> count($rg['columns']),
+			'name'	=> 'archived',
+			'searchable'	=> 'true',
+			'orderable'		=> 'false',
+			'search'	=> [
+				'value'	=> $rg['is_show_arch'] == 'true'
+			]
+		];
+
+		$tbl_info	= self::getTableData( $rg, self::$fldTypes );
 // info(print_r( $rg , TRUE));
+
+
+
+
     	$data	= [];
     	foreach( $tbl_info['data'] as $rec ){
     		$fld_vals	= [];

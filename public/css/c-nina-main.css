@@ -201,3 +201,7 @@ input.field-search-input{
 	vertical-align:middle;
 	margin-right: 5px;
 }
+
+.filter-check-box{
+	vertical-align: middle;
+}
