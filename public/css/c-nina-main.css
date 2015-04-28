@@ -199,9 +199,13 @@ input.field-search-input{
 
 .dataTables_wrapper .dataTables_filter .filter-check-box{
 	vertical-align:middle;
-	margin-right: 5px;
+	/*margin-right: 5px;*/
+	margin: 0 5px 0 0;
 }
 
-.filter-check-box{
-	vertical-align: middle;
+.tbl-content-type{
+	padding-right: 40px;
+	color: #95355e;
+	font-weight: bold;
+	font-size: 18px;
 }

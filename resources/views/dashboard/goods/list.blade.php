@@ -1,7 +1,7 @@
 @extends('layouts.middle')
 
 @section('title')
-{{ @trans('prompts.goods') }}
+{!! @trans('prompts.goods') !!}
 @stop
 
 @section('buttons')
@@ -17,18 +17,18 @@
 	<thead>
 	<tr>
 		<th rowspan="2">id</th>
-		<th rowspan="2">{{ @trans('prompts.name') }}</th>
-		<th rowspan="2">{{ @trans('prompts.article') }}</th>
-		<th colspan="2">{{ @trans('prompts.price') }}</th>
-		<th colspan="3">{{ @trans('prompts.quantity') }}</th>
+		<th rowspan="2">{!! @trans('prompts.name') !!}</th>
+		<th rowspan="2">{!! @trans('prompts.article') !!}</th>
+		<th colspan="2">{!! @trans('prompts.price') !!}</th>
+		<th colspan="3">{!! @trans('prompts.quantity') !!}</th>
 		<th rowspan="2"></th>
 	</tr>
 	<tr>
-		<th>{{ @trans('prompts.wprice') }}</th>
-		<th>{{ @trans('prompts.rprice') }}</th>
-		<th>{{ @trans('prompts.inpack') }}</th>
-		<th>{{ @trans('prompts.packs') }}</th>
-		<th>{{ @trans('prompts.assort') }}</th>
+		<th>{!! @trans('prompts.wprice') !!}</th>
+		<th>{!! @trans('prompts.rprice') !!}</th>
+		<th>{!! @trans('prompts.inpack') !!}</th>
+		<th>{!! @trans('prompts.packs') !!}</th>
+		<th>{!! @trans('prompts.assort') !!}</th>
 	</tr>
 	</thead>
 
@@ -82,7 +82,7 @@ $(document).ready(function(){
 	,{
 		"searchCols":	[1,2],//	Optional
 		"formWidth":	700,//	Optional
-		"formTitle": "{{ @trans('prompts.prod_edit') }}",//	Optional
+		"formTitle": "{!! @trans('prompts.prod_edit') !!}",//	Optional
 		"token":	"{!! csrf_token(); !!}",
 		"urls": {
 			"form":"/good/form",
@@ -90,23 +90,32 @@ $(document).ready(function(){
 		}
 	});
 
-	$("#{!! $pid !!}_tools").prepend('<input class="filter-check-box" type="checkbox" id="{!! $pid !!}_archive_chkbx">');
+	$("#{!! $pid !!}_tools")
+		.prepend('<input class="filter-check-box" type="checkbox" id="{!! $pid !!}_archive_chkbx">')
+		.prepend('<span class="tbl-content-type" id="{!! $pid !!}_content_type_span">&nbsp;</span>');
+
 	$("#{!! $pid !!}_archive_chkbx")
 		.on("click", function(e){
+			var chkbx_title
+				,tbl_content_type
+			;
+
 			if(!$(this).is(':checked')){
-				$(this).attr("title", "{{ @trans('prompts.show_arch') }}");
+				chkbx_title	= "{!! @trans('prompts.show_arch') !!}";
+				tbl_content_type = "&nbsp;";
 			}else{
-				$(this).attr("title", "{{ @trans('prompts.show_active') }}");
+				chkbx_title	= "{!! @trans('prompts.show_active') !!}";
+				tbl_content_type	= "&#8212;&nbsp;{!! @trans('prompts.archive') !!}&nbsp;&#8212;";
 			}
 
+			$(this).attr("title", chkbx_title );
+			$("#{!! $pid !!}_content_type_span").html(tbl_content_type );
 
         	goods_table.ajax.reload(function(json){
         		goods_table.setDelBtnState();
         	});
-
 		})
-		.attr("title", "{{ @trans('prompts.show_arch') }}");
-
+		.attr("title", "{!! @trans('prompts.show_arch') !!}");
 });
 
 </script>
