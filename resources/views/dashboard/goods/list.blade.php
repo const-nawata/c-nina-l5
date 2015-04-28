@@ -93,10 +93,10 @@ $(document).ready(function(){
 	$("#{!! $pid !!}_tools").prepend('<input class="filter-check-box" type="checkbox" id="{!! $pid !!}_archive_chkbx">');
 	$("#{!! $pid !!}_archive_chkbx")
 		.on("click", function(e){
-			if($(this).is(':checked')){
-				$(this).attr("title", "{{ @trans('prompts.hide_arch') }}");
+			if(!$(this).is(':checked')){
+				$(this).attr("title", "{{ @trans('prompts.show_arch') }}");
 			}else{
-				$(this).attr("title", "{{ @trans('prompts.show_all') }}");
+				$(this).attr("title", "{{ @trans('prompts.show_active') }}");
 			}
 
 
@@ -105,7 +105,7 @@ $(document).ready(function(){
         	});
 
 		})
-		.attr("title", "{{ @trans('prompts.show_all') }}");
+		.attr("title", "{{ @trans('prompts.show_arch') }}");
 
 });
 

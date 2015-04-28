@@ -11,29 +11,36 @@ class BaseModel extends Model{
 
     	$stmt	= self::select();
 
+
+		$stmt->orWhere(function($query) use ( $cols, $rg ){
+		    foreach ($cols as $col) {
+		    	if($col['searchable'] == 'true' )
+					$query->orWhere($col['name'],'like','%'.$rg['search']['value'].'%');
+		    }
+		 });
+
+
     	foreach( $cols as $col ){//	Individual column search
     		$ftype	= isset($fldTypes[$col['name']]) ? $fldTypes[$col['name']] : 'varchar';
 
     		switch( $ftype ){
     			case 'varchar':
     			case 'text':
-		    		if( $col['searchable'] == 'true' && $col['search']['value'] != '' )
+		    		if( $col['search']['value'] != '' )
 		    			$stmt->where($col['name'],'like','%'.$col['search']['value'].'%');
     				break;
 
     			case 'bool':
+    				$stmt->where($col['name'],'=', $col['search']['value']);
+    				break;
+
     			case 'integer':
     			case 'float':
-		    		if( $col['searchable'] == 'true')
+					if( $col['search']['value'] != '' )
 		    			$stmt->where($col['name'],'=', $col['search']['value']);
     				break;
     		}
     	}
-
-    	if($rg['search']['value'] != '' )//	All columns search
-    		foreach( $cols as $col )
-    			if($col['searchable'] == 'true' )
-    				$stmt->orWhere($col['name'],'like','%'.$rg['search']['value'].'%');
 
     	foreach( $rg['order'] as $order )
     		$stmt->orderBy( $cols[$order['column']]['name'], $order['dir'] );

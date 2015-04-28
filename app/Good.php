@@ -49,10 +49,6 @@ class Good extends BaseModel{
 		];
 
 		$tbl_info	= self::getTableData( $rg, self::$fldTypes );
-// info(print_r( $rg , TRUE));
-
-
-
 
     	$data	= [];
     	foreach( $tbl_info['data'] as $rec ){
@@ -78,5 +74,6 @@ class Good extends BaseModel{
 
 		return json_encode($tbl_info);
 	}
+//______________________________________________________________________________
 
 }//	Class end
