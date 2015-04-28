@@ -72,7 +72,10 @@ $(document).ready(function(){
 		]
 
 		,"ajax": {
-			"url": "/goods/table"
+			"url": "/goods/table",
+			"data":function(srvData){
+				srvData.is_show_arch = $("#{!! $pid !!}_archive_chkbx").is(':checked');
+			}
 		}
 	}
 
@@ -86,6 +89,23 @@ $(document).ready(function(){
 			"del":"/goods/archive"
 		}
 	});
+
+	$("#{!! $pid !!}_filter").prepend('<input class="filter-check-box" type="checkbox" id="{!! $pid !!}_archive_chkbx">');
+	$("#{!! $pid !!}_archive_chkbx")
+		.on("click", function(e){
+			if($(this).is(':checked')){
+				$(this).attr("title", "{{ @trans('prompts.hide_arch') }}");
+			}else{
+				$(this).attr("title", "{{ @trans('prompts.show_all') }}");
+			}
+
+
+        	goods_table.ajax.reload(function(json){
+        		goods_table.setDelBtnState();
+        	});
+
+		}).attr("title", "{{ @trans('prompts.show_all') }}");
+
 });
 
 </script>

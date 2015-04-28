@@ -182,9 +182,6 @@ input.field-search-input{
 .dataTables_wrapper table.dataTable tr.even{
 	background-color: #fff5ea;
 }
-/*.dataTables_wrapper table.dataTable tr.selected{
-	background-color: #eeeedd;
-}*/
 
 .right-align-sell{
 	text-align: right;
@@ -198,4 +195,9 @@ input.field-search-input{
 
 .dataTables_wrapper .dataTables_filter .tbl-tool-btns-span{
 	padding-right: 20px;
+}
+
+.dataTables_wrapper .dataTables_filter .filter-check-box{
+	vertical-align:middle;
+	margin-right: 5px;
 }

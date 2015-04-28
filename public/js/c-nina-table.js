@@ -17,6 +17,8 @@
  * 			"form"	- to show form action
  * 			"del"	- to delete action
  *
+ * @public function setDelBtnState - see description
+ *
  * @example	- See /goods/list.blade.php
  *
  * @returns	void
@@ -30,6 +32,7 @@
     			,isIndivSch	= false
     			,chkbx_obj
     			,chk_bx_col	= -1
+    			,data_func	= function(srvData){}
     			;
 
     		isIndivSch	= typeof pE.searchCols != "undefined" && pE.searchCols.length > 0;
@@ -43,7 +46,13 @@
     				break;
     			}
 
-    		pT.ajax.data=function(srvData){//Data to send to server
+    		data_func	= ( typeof pT.ajax.data != "undefined")
+    			? pT.ajax.data
+    			: data_func;
+
+
+    		pT.ajax.data	= function(srvData){//Data to send to server
+    			data_func(srvData);
  	            srvData.pid	= pid;
          	};
 
@@ -72,10 +81,33 @@
 
          	table	= $(this).DataTable(pT);//						Start table creating ###############################################
 
+//	#######################	PUBLIC FUNCTIONS	###########################################################
+			/**
+			 * sets state (enable/disable) of delete button due to state of row check-boxes.
+			 * @public
+			 * @param string pid - table HTML id.
+			 * @returns	void
+			 */
+			table.setDelBtnState = function (){
+				var disabled_state = true
+					,fade_level=0.5;
+
+				$("#"+pid+" .row-check-box").each(function(){
+					if( $(this).is(':checked') ){
+						disabled_state	= false;
+						fade_level = 1.0;
+						return false;//break each()
+					}
+				});
+
+				$("#"+pid+"_remove_btn").attr( "disabled", disabled_state ).fadeTo( "fast", fade_level );
+
+			};
+			//------------------------------------------------------------------
+//	#######################	PUBLIC FUNCTIONS (end)	###########################################################
+
          	( chk_bx_col >= 0 )//	Drow general check-box
-         		? $(table.column(chk_bx_col).header())
-         			.html('<input type="checkbox">')
-         		:null;
+         		? $(table.column(chk_bx_col).header()).html('<input type="checkbox">'):null;
 
 		    $("#"+pid+"_filter input").unbind().on("keyup change", function(e){//Change main search input handler
 				(e.keyCode == 13) ? execTblSearch():null;
@@ -140,7 +172,7 @@
 				chkbx_obj	= $("#"+pid+" thead .checkboxtd input") //Initialize General check-box
 					.on("click", function(e){
 						$("#"+pid+" tbody td .row-check-box").prop('checked', $(this).is(':checked'));
-						setDelBtnState();
+						table.setDelBtnState();
 					}).prop('checked', false);
 
 
@@ -161,9 +193,8 @@
 
 						chkbx_obj.prop('checked', all_checked );
 
-						setDelBtnState();
+						table.setDelBtnState();
 					});
-
 				});
 
 				//	Creating "Remove" button.
@@ -191,7 +222,7 @@
 					        	inform( prompts.op_result, resp.message );
 
 					        	table.ajax.reload(function(json){
-					        		setDelBtnState();
+					        		table.setDelBtnState();
 					        	});
 					        },
 
@@ -203,7 +234,7 @@
 					});
 
 				}).attr("title", prompts.to_archive );
-				setDelBtnState();
+				table.setDelBtnState();
 			}
 
 			//	Creating "Add New Record" button
@@ -220,11 +251,11 @@
 				if ( !$(this).hasClass('unclickable') ){
 					$("#"+pid+" .row-check-box").prop('checked', false);
 					showTblRecForm( $(this).parent("tr").children("td").first().html());
-					setDelBtnState();
+					table.setDelBtnState();
 				}
 			});
 
-//	#######################	FUNCTIONS	###########################################################
+//	#######################	PRIVATE FUNCTIONS	###########################################################
 			/**
 			 * calls TableDates searching utility
 			 * @param DataTable table - object in which shearch is performed
@@ -239,28 +270,6 @@
 						table.column(pE.searchCols[cn]).search( $('#'+pid+"_inp_"+pE.searchCols[cn]).val());
 
 				table.draw();
-			}
-			//------------------------------------------------------------------
-
-			/**
-			 * sets state (enable/disable) of delete button due to state of row check-boxes.
-			 * @param string pid - table HTML id.
-			 * @returns	void
-			 */
-			function setDelBtnState(){
-				var none_checked = true
-					,fade_level=0.5;
-
-				$("#"+pid+" .row-check-box").each(function(){
-					if( $(this).is(':checked') ){
-						none_checked	= false;
-						fade_level = 1.0;
-						return false;//break each()
-					}
-				});
-
-				$("#"+pid+"_remove_btn").attr( "disabled", none_checked ).fadeTo( "fast", fade_level );
-
 			}
 			//------------------------------------------------------------------
 
@@ -348,7 +357,9 @@
 
 			}
 			//------------------------------------------------------------------
+//	#######################	PRIVATE FUNCTIONS (end)	###########################################################
 
+			return table;
     	}
     });
 })(jQuery);

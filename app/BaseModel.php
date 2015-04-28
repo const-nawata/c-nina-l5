@@ -50,24 +50,8 @@ class BaseModel extends Model{
     	foreach( $recs as $rec ){
     		$fld_vals	= [];
 
-    		foreach( $cols as $col ){
-//     			$val	= "";
-
-// 				switch( $col['name'] ){
-// 					case 'checkbox':
-// 						$val	= "<input type='checkbox' id='".$pid."rowcheckbox-".$rec->id."' class='row-check-box' />";
-// 						break;
-
-// 					default:
-// 						$val	= $rec->$col['name'];
-// 				}
-
-
-// 				$val	= isset($rec->$col['name']) ? $rec->$col['name'] : '';
-
-
+    		foreach( $cols as $col )
 				$fld_vals[]	= isset($rec->$col['name']) ? $rec->$col['name'] : '';
-    		}
 
     		$data[]	= $fld_vals;
     	}
