@@ -206,7 +206,6 @@
 				}).on( "click", function(e){
 					var ids=[]
 					,remove_message
-					,to_srv_data
 					;
 
 					$("#"+pid+" tbody td .row-check-box").each(function(){
@@ -222,14 +221,17 @@
 					remove_message	= 	'<div class="affirm-message-1">'+remove_message+'</div>'+
 										'<div class="affirm-message-2">'+messages.confirm+'</div>'
 
-					switch( typeof pE.remove.data ){
-						case "undefined": to_srv_data = null;break;
-						case "function": to_srv_data = pE.remove.data();break;
-						default: to_srv_data = pE.remove.data;
-					}
-					to_srv_data	= {"_token":pE.token,"ids":ids,"data":to_srv_data};
-
 					affirm(prompts.op_confirm, remove_message, function(){
+						var to_srv_data;
+
+						switch( typeof pE.remove.data ){
+							case "undefined": to_srv_data = null;break;
+							case "function": to_srv_data = pE.remove.data();break;
+							default: to_srv_data = pE.remove.data;
+						}
+						to_srv_data	= {"_token":pE.token,"ids":ids,"data":to_srv_data};
+
+
 					    $.ajax({
 					        url : pE.urls.del,
 					        type: "POST",

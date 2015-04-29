@@ -92,6 +92,7 @@ $(document).ready(function(){
 					: messages.archivate_recs(n_recs);
 			}
 			,"data":function(){
+				$("#{!! $pid !!}_gen_chkbx").prop('checked', false );
 				return {"is_to_arch" : !$("#{!! $pid !!}_archive_chkbx").is(':checked')}
 			}
 		}
@@ -116,7 +117,6 @@ $(document).ready(function(){
 				remove_btn_title	= "{!! @trans('prompts.to_archive') !!}";
 				chkbx_title	= "{!! @trans('prompts.show_arch') !!}";
 				tbl_content_type = "&nbsp;";
-
 			}else{
 				remove_btn_icon	= "ui-icon-arrowreturnthick-1-e";
 				remove_btn_title= "{!! @trans('prompts.to_active') !!}";
