@@ -201,7 +201,7 @@
 				//	Creating "Remove" button.
 				$("#"+pid+"_tools").prepend("<button id='"+pid+"_remove_btn'></button>");
 				$("#"+pid+"_remove_btn").button({
-					icons: { primary: "ui-icon-locked" },
+					icons: { primary: "ui-icon-trash" },
 					text: false
 				}).on( "click", function(e){
 					var ids=[]
@@ -213,10 +213,14 @@
 							? ids.push($(this).parent("td").parent("tr").children("td").first().html()):null;
 					});
 
+					switch( typeof pE.removeMessage ){
+						case "undefined": remove_message = messages.delete_recs(ids.length);break;
+						case "function": remove_message = pE.removeMessage();break;
+						default: remove_message = pE.removeMessage;
+					}
 
-					remove_message	= typeof pE.removeMessage == "undefined"
-						? messages.delete_recs(ids.length)+"<br />"+"<b>"+messages.confirm+"</b>"
-						: pE.removeMessage;
+					remove_message	= 	'<div class="affirm-message-1">'+remove_message+'</div>'+
+										'<div class="affirm-message-2">'+messages.confirm+'</div>'
 
 					affirm(prompts.op_confirm, remove_message, function(){
 					    $.ajax({

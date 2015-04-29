@@ -86,8 +86,8 @@ $(document).ready(function(){
 			});
 
 			return $("#{!! $pid !!}_archive_chkbx").is(':checked')
-				? messages.activate_recs(n_recs)+"<br />"+"<b>"+messages.confirm+"</b>"
-				: messages.archivate_recs(n_recs)+"<br />"+"<b>"+messages.confirm+"</b>"
+				? messages.activate_recs(n_recs)
+				: messages.archivate_recs(n_recs);
 		}
 	});
 

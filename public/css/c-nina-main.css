@@ -209,3 +209,13 @@ input.field-search-input{
 	font-weight: bold;
 	font-size: 18px;
 }
+.affirm-message-1,.affirm-message-2{
+	width: 100%;
+	
+	padding-top: 10px;
+}
+.affirm-message-2{
+	text-align: center;
+	font-weight: bold;
+	font-size: 18px;
+}
