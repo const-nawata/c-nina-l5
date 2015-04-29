@@ -81,31 +81,6 @@
 
          	table	= $(this).DataTable(pT);//						Start table creating ###############################################
 
-//	#######################	PUBLIC FUNCTIONS	###########################################################
-			/**
-			 * sets state (enable/disable) of delete button due to state of row check-boxes.
-			 * @public
-			 * @param string pid - table HTML id.
-			 * @returns	void
-			 */
-			table.setDelBtnState = function (){
-				var disabled_state = true
-					,fade_level=0.5;
-
-				$("#"+pid+" .row-check-box").each(function(){
-					if( $(this).is(':checked') ){
-						disabled_state	= false;
-						fade_level = 1.0;
-						return false;//break each()
-					}
-				});
-
-				$("#"+pid+"_remove_btn").attr( "disabled", disabled_state ).fadeTo( "fast", fade_level );
-
-			};
-			//------------------------------------------------------------------   table.search( $("#"+pid+"_filter label input").
-//	#######################	PUBLIC FUNCTIONS (end)	###########################################################
-
 			$("#"+pid+"_filter input").attr("id",pid+"_main_search_inp");
 
 		    $("#"+pid+"_main_search_inp").unbind().on("keyup change", function(e){//Change main search input handler
@@ -176,6 +151,33 @@
 						$("#"+pid+" tbody td .row-check-box").prop('checked', $(this).is(':checked'));
 						table.setDelBtnState();
 					}).prop('checked', false);
+
+//	#######################	PUBLIC FUNCTIONS	###########################################################
+			/**
+			 * sets state (enable/disable) of delete button due to state of row check-boxes.
+			 * @public
+			 * @param string pid - table HTML id.
+			 * @returns	void
+			 */
+			table.setDelBtnState = function (){
+				var disabled_state = true
+					,fade_level=0.5;
+
+				$("#"+pid+" .row-check-box").each(function(){
+					if( $(this).is(':checked') ){
+						disabled_state	= false;
+						fade_level = 1.0;
+						return false;//break each()
+					}
+				});
+
+				$("#"+pid+"_remove_btn").attr( "disabled", disabled_state ).fadeTo( "fast", fade_level );
+
+//				chkbx_obj.prop('checked', !disabled_state );
+
+			};
+			//------------------------------------------------------------------   table.search( $("#"+pid+"_filter label input").
+//	#######################	PUBLIC FUNCTIONS (end)	###########################################################
 
 
 
