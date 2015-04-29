@@ -144,7 +144,11 @@ class DashboardController extends MainController{
 //______________________________________________________________________________
 
     public function getGoods( $id=NULL ){
-    	return view( 'dashboard/goods/list',['pid'=>'goodstable'] );
+    	$js_fields	= Good::getFieldsJSON($exclFields=['archived']);
+    	$js_fields	= json_decode($js_fields,TRUE);
+    	$js_fields[]= ['name'=>'checkbox'];
+
+    	return view( 'dashboard/goods/list',['pid'=>'goodstable','jsFields'=>json_encode($js_fields)] );
     }
 //______________________________________________________________________________
 
