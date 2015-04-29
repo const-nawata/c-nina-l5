@@ -78,16 +78,22 @@ $(document).ready(function(){
 			"form":"/good/form",
 			"del":"/goods/archive"
 		}
-		,"removeMessage":function(){
-			var n_recs = 0;
 
-			$("#{!! $pid !!} tbody td .row-check-box").each(function(){
-				$(this).is(':checked') ? n_recs++ :null;
-			});
+		,"remove":{
+			"message":function(){
+				var n_recs = 0;
 
-			return $("#{!! $pid !!}_archive_chkbx").is(':checked')
-				? messages.activate_recs(n_recs)
-				: messages.archivate_recs(n_recs);
+				$("#{!! $pid !!} tbody td .row-check-box").each(function(){
+					$(this).is(':checked') ? n_recs++ :null;
+				});
+
+				return $("#{!! $pid !!}_archive_chkbx").is(':checked')
+					? messages.activate_recs(n_recs)
+					: messages.archivate_recs(n_recs);
+			}
+			,"data":function(){
+				return {"is_to_arch" : !$("#{!! $pid !!}_archive_chkbx").is(':checked')}
+			}
 		}
 	});
 
@@ -99,17 +105,28 @@ $(document).ready(function(){
 		.on("click", function(e){
 			var chkbx_title
 				,tbl_content_type
+				,remove_btn_icon
+				,remove_btn_title
 			;
 
 			$("#{!! $pid !!}_gen_chkbx").prop('checked', false );
 
 			if(!$(this).is(':checked')){
+				remove_btn_icon	= "ui-icon-trash";
+				remove_btn_title	= "{!! @trans('prompts.to_archive') !!}";
 				chkbx_title	= "{!! @trans('prompts.show_arch') !!}";
 				tbl_content_type = "&nbsp;";
+
 			}else{
+				remove_btn_icon	= "ui-icon-arrowreturnthick-1-e";
+				remove_btn_title= "{!! @trans('prompts.to_active') !!}";
 				chkbx_title	= "{!! @trans('prompts.show_active') !!}";
 				tbl_content_type	= "&#8212;&nbsp;{!! @trans('prompts.archive') !!}&nbsp;&#8212;";
 			}
+
+			$("#{!! $pid !!}_remove_btn").button({
+					icons: { primary: remove_btn_icon }
+			}).attr("title", remove_btn_title );
 
 			$(this).attr("title", chkbx_title );
 			$("#{!! $pid !!}_content_type_span").html(tbl_content_type );

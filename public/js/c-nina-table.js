@@ -173,7 +173,7 @@
 
 				$("#"+pid+"_remove_btn").attr( "disabled", disabled_state ).fadeTo( "fast", fade_level );
 			};
-			//------------------------------------------------------------------   table.search( $("#"+pid+"_filter label input").
+			//------------------------------------------------------------------
 //	#######################	PUBLIC FUNCTIONS (end)	###########################################################
 
 
@@ -206,6 +206,7 @@
 				}).on( "click", function(e){
 					var ids=[]
 					,remove_message
+					,to_srv_data
 					;
 
 					$("#"+pid+" tbody td .row-check-box").each(function(){
@@ -213,21 +214,27 @@
 							? ids.push($(this).parent("td").parent("tr").children("td").first().html()):null;
 					});
 
-					switch( typeof pE.removeMessage ){
+					switch( typeof pE.remove.message ){
 						case "undefined": remove_message = messages.delete_recs(ids.length);break;
-						case "function": remove_message = pE.removeMessage();break;
-						default: remove_message = pE.removeMessage;
+						case "function": remove_message = pE.remove.message();break;
+						default: remove_message = pE.remove.message;
 					}
-
 					remove_message	= 	'<div class="affirm-message-1">'+remove_message+'</div>'+
 										'<div class="affirm-message-2">'+messages.confirm+'</div>'
+
+					switch( typeof pE.remove.data ){
+						case "undefined": to_srv_data = null;break;
+						case "function": to_srv_data = pE.remove.data();break;
+						default: to_srv_data = pE.remove.data;
+					}
+					to_srv_data	= {"_token":pE.token,"ids":ids,"data":to_srv_data};
 
 					affirm(prompts.op_confirm, remove_message, function(){
 					    $.ajax({
 					        url : pE.urls.del,
 					        type: "POST",
 					        dataType: "json",
-					        data : {"_token":pE.token,"ids":ids},
+					        data : to_srv_data,
 					        success:function(data, textStatus, jqXHR){
 					        	var resp = jqXHR.responseJSON;
 

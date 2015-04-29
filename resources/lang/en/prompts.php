@@ -59,6 +59,7 @@ return [
 	'save'	=> 'Save',
 	'show_active'	=> 'Show active',
 	'show_arch'	=> 'Show archive',
+	'to_active'=> 'To active',
 	'to_archive'=> 'To archive',
 	'username'	=> 'Username',
 	'users'	=> 'Users',

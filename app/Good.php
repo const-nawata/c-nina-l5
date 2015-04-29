@@ -30,10 +30,8 @@ class Good extends BaseModel{
 		'archived'	=> 'bool'
 	];
 
-	public static function archiveGoods( $ids=[] ){
-		$affectedRows	= self::whereIn('id',$ids)->update(['archived' => TRUE])
-		;
-		return $affectedRows;
+	public static function archiveGoods( $status, $ids=[] ){
+		return self::whereIn('id',$ids)->update(['archived' => $status]);
 	}
 //______________________________________________________________________________
 

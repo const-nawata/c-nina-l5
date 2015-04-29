@@ -158,8 +158,8 @@ class DashboardController extends MainController{
 //______________________________________________________________________________
 
     public function archiveGoods(){
+    	$n_rows 	= Good::archiveGoods( $_POST['data']['is_to_arch'] == 'true', $_POST['ids'] );
 
-    	$n_rows 	= Good::archiveGoods( $_POST['ids'], TRUE );
     	$n_rows_req	= count($_POST['ids']);
 
     	$message	= $n_rows == $n_rows_req
