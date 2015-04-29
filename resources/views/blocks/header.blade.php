@@ -38,6 +38,8 @@ var prompts	= {
 	,"clean":"{{ @trans('prompts.clean') }}"
 	,"close":"{{ @trans('prompts.close') }}"
 	,"del":"{{ @trans('prompts.delete') }}"
+	,"entry_edit":"{{ @trans('prompts.entry_edit') }}"
+	,"entry_new":"{{ @trans('prompts.entry_new') }}"
 	,"empty_table":"{{ @trans('prompts.empty_table') }}"
 	,"exec_search":"{{ @trans('prompts.exec_search') }}"
 	,"info":"{{ @trans('prompts.info') }}"

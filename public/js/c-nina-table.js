@@ -172,9 +172,6 @@
 				});
 
 				$("#"+pid+"_remove_btn").attr( "disabled", disabled_state ).fadeTo( "fast", fade_level );
-
-//				chkbx_obj.prop('checked', !disabled_state );
-
 			};
 			//------------------------------------------------------------------   table.search( $("#"+pid+"_filter label input").
 //	#######################	PUBLIC FUNCTIONS (end)	###########################################################
@@ -314,7 +311,7 @@
 					dialogClass: "dialog-form",
 					width: typeof pE.formWidth != "undefined" ? pE.formWidth : 600,
 					modal: true,
-					title: typeof pE.formTitle != "undefined" ? pE.formTitle : "",
+					title: id == null ? prompts.entry_new : prompts.entry_edit,
 
 					buttons: [
 					   {

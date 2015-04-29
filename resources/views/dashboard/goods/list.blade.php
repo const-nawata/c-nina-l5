@@ -73,7 +73,7 @@ $(document).ready(function(){
 	,{
 		"searchCols":	[1,2],//	Optional
 		"formWidth":	700,//	Optional
-		"formTitle": "{!! @trans('prompts.prod_edit') !!}",//	Optional
+		"formTitle": "{!! @trans('prompts.entry_edit') !!}",//	Optional
 		"token":	"{!! csrf_token(); !!}",
 		"urls": {
 			"form":"/good/form",

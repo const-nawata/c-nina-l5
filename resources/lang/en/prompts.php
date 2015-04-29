@@ -21,6 +21,8 @@ return [
 	'editing'	=> 'Editing',
 	'english'	=> 'English',
 	'enter'	=> 'Enter',
+	'entry_edit'=> 'Entry editing',
+	'entry_new'=> 'New entry',
 	'error'	=> 'Error',
 	'expand'	=> 'Expand',
 	'goods'	=> 'Goods',
@@ -42,7 +44,6 @@ return [
 	'password'	=> 'Password',
 	'password_forgotten'	=> 'Password forgotten?',
 	'price'	=> 'Price',
-	'prod_edit'		=> 'Product parameters editing',
 	'quantity'	=> 'Quantity',
 	'rank'	=> 'Place in list',
 	'recs'	=> [
