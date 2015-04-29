@@ -73,15 +73,23 @@ $(document).ready(function(){
 	,{
 		"searchCols":	[1,2],//	Optional
 		"formWidth":	700,//	Optional
-		"formTitle": "{!! @trans('prompts.entry_edit') !!}",//	Optional
 		"token":	"{!! csrf_token(); !!}",
 		"urls": {
 			"form":"/good/form",
 			"del":"/goods/archive"
 		}
+		,"removeMessage":function(){
+			var n_recs = 0;
+
+			$("#{!! $pid !!} tbody td .row-check-box").each(function(){
+				$(this).is(':checked') ? n_recs++ :null;
+			});
+
+			return $("#{!! $pid !!}_archive_chkbx").is(':checked')
+				? messages.activate_recs(n_recs)+"<br />"+"<b>"+messages.confirm+"</b>"
+				: messages.archivate_recs(n_recs)+"<br />"+"<b>"+messages.confirm+"</b>"
+		}
 	});
-
-
 
 	$("#{!! $pid !!}_tools")
 		.prepend('<input class="filter-check-box" type="checkbox" id="{!! $pid !!}_archive_chkbx">')

@@ -76,25 +76,30 @@ var prompts	= {
 ,messages={
 	"confirm": "{{ @trans('messages.confirm') }}"
 	,"save_success": "{{ @trans('messages.save_success') }}"
-	,"arch_recs":function(nrecs){
-		var message	= "{{ @trans('messages.arch_recs') }}",result,factor;
-		result	= message.replace( ":nrecs", nrecs );
-		factor	= (nrecs % 10);
+	,"archivate_recs":function(nrecs){return setRemoveMessageParams("{{ @trans('messages.archivate_recs') }}", nrecs);}
+	,"activate_recs":function(nrecs){return setRemoveMessageParams("{{ @trans('messages.activate_recs') }}", nrecs);}
+	,"delete_recs":function(nrecs){return setRemoveMessageParams("{{ @trans('messages.delete_recs') }}", nrecs);}
+};
 
-		switch( factor ){
-			case 1: result	= result.replace( ":recs", "{{ @trans('prompts.recs.sn') }}" );	break;
+function setRemoveMessageParams(message, nrecs){
+	var
+	result,factor;
 
-			case 2:
-			case 3:
-			case 4: result	= result.replace( ":recs", "{{ @trans('prompts.recs.pl24') }}" );	break;
+	result	= message.replace( ":nrecs", nrecs );
+	factor	= (nrecs % 10);
 
-			default:
-				result	= result.replace( ":recs", "{{ @trans('prompts.recs.pl') }}" );
-		}
-		return result;
+	switch( factor ){
+		case 1: result	= result.replace( ":recs", "{{ @trans('prompts.recs.sn') }}" );	break;
+
+		case 2:
+		case 3:
+		case 4: result	= result.replace( ":recs", "{{ @trans('prompts.recs.pl24') }}" );	break;
+
+		default:
+			result	= result.replace( ":recs", "{{ @trans('prompts.recs.pl') }}" );
 	}
+	return result;
 }
-;
 </script>
 
 	<link rel="stylesheet" href="/css/c-nina-main.css">

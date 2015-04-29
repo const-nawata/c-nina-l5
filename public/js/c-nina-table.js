@@ -10,8 +10,8 @@
  * @param	JSON object pE - extended parameters needed for table tuning. This data includes next parameters:
  * 		array searchCols (Optional) - columns numbers which will be used for individual searching (start from 0).
  * 							For those columns text fields is created in the footer. So you must ctreate appropriate th colamnts (empty) in footer.
- * 		integer formWidth (Optional) - create/edit record form width in pixels. Default 600.
  * 		string formTitle  (Optional) - create/edit record form title Default "".
+ * 		string removeMessage - message, which fiered before records removing
  * 		string token (Mandatory)	- laravel security token.
  * 		array urls (Mandatory)	- urls for differnt actions:
  * 			"form"	- to show form action
@@ -204,14 +204,21 @@
 					icons: { primary: "ui-icon-locked" },
 					text: false
 				}).on( "click", function(e){
-					var ids=[];
+					var ids=[]
+					,remove_message
+					;
 
 					$("#"+pid+" tbody td .row-check-box").each(function(){
 						( $(this).is(':checked') )
 							? ids.push($(this).parent("td").parent("tr").children("td").first().html()):null;
 					});
 
-					affirm(prompts.op_confirm, messages.arch_recs(ids.length)+"<br />"+"<b>"+messages.confirm+"</b>", function(){
+
+					remove_message	= typeof pE.removeMessage == "undefined"
+						? messages.delete_recs(ids.length)+"<br />"+"<b>"+messages.confirm+"</b>"
+						: pE.removeMessage;
+
+					affirm(prompts.op_confirm, remove_message, function(){
 					    $.ajax({
 					        url : pE.urls.del,
 					        type: "POST",

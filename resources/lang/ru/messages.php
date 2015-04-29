@@ -1,8 +1,10 @@
 <?php
 return [
-	'arch_recs'		=> 'Вы собираетесь заархвировать :nrecs :recs.',
+	'activate_recs'	=> 'Вы собираетесь сделать активными :nrecs :recs.',
+	'archivate_recs'=> 'Вы собираетесь поместить в архив :nrecs :recs.',
 	'arch_success'	=> 'Архивация успешно выполнена.',
 	'confirm'		=> 'Вы уверены?',
+	'delete_recs'	=> 'Вы собираетесь удалить :nrecs :recs.',
 	'del_cat'		=> '<p>Вы собираетесь удалить категорию :name.</p><b>Вы уверены?</b>',
 	'login_failed'	=> 'Пользователю :username не удалось залогиниться.',
 	'login_success'	=> 'Пользователь :username успешно залогинился.',
