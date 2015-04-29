@@ -93,6 +93,8 @@ $(document).ready(function(){
 				,tbl_content_type
 			;
 
+			$("#{!! $pid !!}_gen_chkbx").prop('checked', false );
+
 			if(!$(this).is(':checked')){
 				chkbx_title	= "{!! @trans('prompts.show_arch') !!}";
 				tbl_content_type = "&nbsp;";
