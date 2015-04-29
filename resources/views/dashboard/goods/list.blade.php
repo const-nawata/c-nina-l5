@@ -50,26 +50,17 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-	var goods_table = $("#{!! $pid !!}").cNinaTable({
-		"processing": true,
-		"serverSide": true,
 
-		"columnDefs": [
+	var goods_table = $("#{!! $pid !!}").cNinaTable({
+		"processing": true
+		,"serverSide": true
+
+		,"columnDefs": [
 			{"searchable": false, "targets": [ 3,4,5,6,7 ] },
 			{"className":"right-align-sell", "targets": [ 0,3,4,5,6,7 ]}
-		],
-
-		"columns":[
-		   {"name":"id"},
-		   {"name":"name"},
-		   {"name":"article"},
-		   {"name":"wprice"},
-		   {"name":"rprice"},
-		   {"name":"inpack"},
-		   {"name":"packs"},
-		   {"name":"assort"}
-		   ,{"name":"checkbox"}
 		]
+
+		,"columns":{!! $jsFields !!}
 
 		,"ajax": {
 			"url": "/goods/table",
@@ -89,6 +80,8 @@ $(document).ready(function(){
 			"del":"/goods/archive"
 		}
 	});
+
+
 
 	$("#{!! $pid !!}_tools")
 		.prepend('<input class="filter-check-box" type="checkbox" id="{!! $pid !!}_archive_chkbx">')

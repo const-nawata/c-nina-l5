@@ -18,7 +18,8 @@ class Good extends BaseModel{
 		,'archived'	//boolean
 	];
 
-	private static $fldTypes	= [
+	protected $jsFields	= [
+		'id'		=> 'integer',
 		'name'		=> 'varchar',
 		'article'	=> 'varchar',
 		'rprice'	=> 'float',
@@ -48,7 +49,7 @@ class Good extends BaseModel{
 			]
 		];
 
-		$tbl_info	= self::getTableData( $rg, self::$fldTypes );
+		$tbl_info	= self::getTableData( $rg );
 
     	$data	= [];
     	foreach( $tbl_info['data'] as $rec ){

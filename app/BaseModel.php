@@ -6,11 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 class BaseModel extends Model{
 
 
-	private static function getTableRecs( &$rg, $fldTypes=[] ){
+	protected $jsFields	= [];
+
+	private static function getTableRecs( &$rg, $jsFields=[] ){
     	$cols	= $rg['columns'];
 
     	$stmt	= self::select();
 
+    	$instance = new static;
+    	$js_fields	= $instance->jsFields;
 
 		$stmt->orWhere(function($query) use ( $cols, $rg ){
 		    foreach ($cols as $col) {
@@ -21,7 +25,7 @@ class BaseModel extends Model{
 
 
     	foreach( $cols as $col ){//	Individual column search
-    		$ftype	= isset($fldTypes[$col['name']]) ? $fldTypes[$col['name']] : 'varchar';
+    		$ftype	= isset($js_fields[$col['name']]) ? $js_fields[$col['name']] : 'varchar';
 
     		switch( $ftype ){
     			case 'varchar':
@@ -60,9 +64,9 @@ class BaseModel extends Model{
  * @param bool $isJson - retuned format
  * @return array/json
  */
-	public static function getTableData( $rg, $fldTypes=[] ){
+	public static function getTableData( $rg ){
 
-		$recs	= self::getTableRecs( $rg, $fldTypes );
+		$recs	= self::getTableRecs( $rg );
 
 		$pid	= $rg['pid'];
 
@@ -84,6 +88,29 @@ class BaseModel extends Model{
 			'recordsFiltered' => $rg['filtered'],
 			'data' => $data
 		];
+	}
+//______________________________________________________________________________
+
+/**
+ * gets JSON array string for DataTable component.
+ * @param	array $excludeFields - fields which must be excluded from DataTable processing.
+ * @return string
+ */
+	public static function getFieldsJSON($exclFields=[]){
+
+    	$instance = new static;
+    	$js_fields	= $instance->jsFields;
+
+    	foreach($exclFields as $fld )
+    		unset($js_fields["$fld"]);
+
+    	$result	= [];
+    	foreach($js_fields as $fld_name=>$fld )
+    		$result[]	= ['name'=>$fld_name];
+
+    	$result	= json_encode($result);
+
+    	return $result;
 	}
 //______________________________________________________________________________
 
