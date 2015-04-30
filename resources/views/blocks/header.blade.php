@@ -35,9 +35,13 @@
 <script type="text/javascript">
 var prompts	= {
 	"add":"{{ @trans('prompts.add') }}"
+	,"archive":"{{ @trans('prompts.archive') }}"
 	,"clean":"{{ @trans('prompts.clean') }}"
 	,"close":"{{ @trans('prompts.close') }}"
+	,"column_search":"{{ @trans('prompts.column_search') }}"
 	,"del":"{{ @trans('prompts.delete') }}"
+	,"desel_all":"{{ @trans('prompts.desel_all') }}"
+	,"desel":"{{ @trans('prompts.desel') }}"
 	,"entry_edit":"{{ @trans('prompts.entry_edit') }}"
 	,"entry_new":"{{ @trans('prompts.entry_new') }}"
 	,"empty_table":"{{ @trans('prompts.empty_table') }}"
@@ -66,12 +70,17 @@ var prompts	= {
 	}
 	,"save":"{{ @trans('prompts.save') }}"
 	,"search":"{{ @trans('prompts.search') }}"
-	,"column_search":"{{ @trans('prompts.column_search') }}"
+	,"sel_all":"{{ @trans('prompts.sel_all') }}"
+	,"sel":"{{ @trans('prompts.sel') }}"
+	,"show_active":"{{ @trans('prompts.show_active') }}"
+	,"show_arch":"{{ @trans('prompts.show_arch') }}"
+	,"sys_error":"{{ @trans('prompts.sys_error') }}"
+	,"to_active":"{{ @trans('prompts.to_active') }}"
 	,"to_archive":"{{ @trans('prompts.to_archive') }}"
+	,"valid_error":"{{ @trans('prompts.valid_error') }}"
 	,"yes":"{{ @trans( 'prompts.yes' ) }}"
-	,"zero_records":"{{ @trans('prompts.zero_records') }}",
-	"sys_error":"{{ @trans('prompts.sys_error') }}",
-	"valid_error":"{{ @trans('prompts.valid_error') }}"
+	,"zero_records":"{{ @trans('prompts.zero_records') }}"
+
 }
 ,messages={
 	"confirm": "{{ @trans('messages.confirm') }}"

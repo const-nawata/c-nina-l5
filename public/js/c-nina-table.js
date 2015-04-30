@@ -144,13 +144,24 @@
 			}
 
 			if(chk_bx_col >= 0){	//	Creating check-boxes for row selection and "Remove" button to remove rows.
-				$(table.column(chk_bx_col).header()).html('<input type="checkbox" id="'+pid+'_gen_chkbx">');	//	Drow general check-box
+				$(table.column(chk_bx_col).header()).html('<input type="checkbox" id="'+pid+'_gen_chkbx">');	//	Drow general check-box for all secetion
 
 				chkbx_obj	= $("#"+pid+"_gen_chkbx") //Initialize General check-box
 					.on("click", function(e){
 						$("#"+pid+" tbody td .row-check-box").prop('checked', $(this).is(':checked'));
+
+						if($(this).is(':checked')){
+							$("#"+pid+" tbody td .row-check-box").attr("title", prompts.desel);
+							$(this).attr("title", prompts.desel_all);
+						}else{
+							$("#"+pid+" tbody td .row-check-box").attr("title", prompts.sel);
+							$(this).attr("title", prompts.sel_all);
+						}
+
 						table.setDelBtnState();
-					}).prop('checked', false);
+					})
+					.prop('checked', false)
+					.attr("title", prompts.sel_all );
 
 //	#######################	PUBLIC FUNCTIONS	###########################################################
 			/**
@@ -183,19 +194,25 @@
 					$("#"+pid+" tbody .checkboxtd").html("<input type='checkbox' class='row-check-box' />");
 
 					$("#"+pid+" tbody td .row-check-box").on("click", function(e){
-						var all_checked	= true;
+						var all_checked	= true, gtitle=prompts.desel_all;
+
+						$(this).attr("title", $(this).is(':checked') ? prompts.desel : prompts.sel);
 
 						$("#"+pid+" tbody td .row-check-box").each(function(){
 							if( !$(this).is(':checked') ){
 								all_checked	= false;
+								gtitle=prompts.sel_all
 								return false;
 							}
 						});
 
-						chkbx_obj.prop('checked', all_checked );
+						chkbx_obj
+							.prop('checked', all_checked )
+							.attr("title", gtitle );
 
 						table.setDelBtnState();
 					});
+					$("#"+pid+" tbody td .row-check-box").attr("title", prompts.sel );
 				});
 
 				//	Creating "Remove" button.

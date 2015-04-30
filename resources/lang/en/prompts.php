@@ -17,6 +17,8 @@ return [
 	'dashboard'	=> 'Dashboard',
 	'delete'	=> 'Delete',
 	'del_cat'	=> 'Category deletion',
+	'desel_all'=> 'Deselect all',
+	'desel'		=> 'Deselect',
 	'edit'	=> 'Edit',
 	'editing'	=> 'Editing',
 	'english'	=> 'English',
@@ -68,6 +70,8 @@ return [
 	'wrap'	=> 'Wrap',
 	'yes'=> 'Yes',
 	'your_login_data'	=> 'Your login data',
+	'sel_all'		=> 'Select all',
+	'sel'		=> 'Select',
 	'sys_error'		=> 'System error.',
 	'valid_error'	=> 'Validation error.'
 

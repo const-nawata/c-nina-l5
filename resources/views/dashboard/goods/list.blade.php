@@ -71,7 +71,7 @@ $(document).ready(function(){
 	}
 
 	,{
-		"searchCols":	[1,2],//	Optional
+		"searchCols":	[1,2],//	Optional sel_all
 		"formWidth":	700,//	Optional
 		"token":	"{!! csrf_token(); !!}",
 		"urls": {
@@ -92,7 +92,7 @@ $(document).ready(function(){
 					: messages.archivate_recs(n_recs);
 			}
 			,"data":function(){
-				$("#{!! $pid !!}_gen_chkbx").prop('checked', false );
+				$("#{!! $pid !!}_gen_chkbx").prop('checked', false ).attr("title", prompts.sel_all );
 				return {"is_to_arch" : !$("#{!! $pid !!}_archive_chkbx").is(':checked')}
 			}
 		}
@@ -114,14 +114,14 @@ $(document).ready(function(){
 
 			if(!$(this).is(':checked')){
 				remove_btn_icon	= "ui-icon-trash";
-				remove_btn_title	= "{!! @trans('prompts.to_archive') !!}";
-				chkbx_title	= "{!! @trans('prompts.show_arch') !!}";
+				remove_btn_title	= prompts.to_archive;
+				chkbx_title	= prompts.show_arch;
 				tbl_content_type = "&nbsp;";
 			}else{
 				remove_btn_icon	= "ui-icon-arrowreturnthick-1-e";
-				remove_btn_title= "{!! @trans('prompts.to_active') !!}";
-				chkbx_title	= "{!! @trans('prompts.show_active') !!}";
-				tbl_content_type	= "&#8212;&nbsp;{!! @trans('prompts.archive') !!}&nbsp;&#8212;";
+				remove_btn_title= prompts.to_active;
+				chkbx_title	= prompts.show_active;
+				tbl_content_type	= "&#8212;&nbsp;"+prompts.archive+"&nbsp;&#8212;";
 			}
 
 			$("#{!! $pid !!}_remove_btn").button({
@@ -135,7 +135,7 @@ $(document).ready(function(){
         		goods_table.setDelBtnState();
         	});
 		})
-		.attr("title", "{!! @trans('prompts.show_arch') !!}");
+		.attr("title", prompts.show_arch);
 });
 
 </script>
