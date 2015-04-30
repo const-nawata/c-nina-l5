@@ -38,7 +38,7 @@
 	<div class="form-group">
 	    {!! Form::label('name',@trans('prompts.unit'),['class'=>'control-label col-sm-3'] ) !!}
 	    <div class="col-sm-9">
-			{!! Form::text('unit_id', $unit_id, ['id'=>'unit_id','class'=>'form-control']) !!}
+			{!! Form::select('unit_id', $units['list'], $units['sel'], ['id'=>'unit_id','class'=>'form-control'] ) !!}
 	    </div>
 	</div>
 

@@ -75,10 +75,6 @@ return [
 	'sys_error'		=> 'Системная ошибка.',
 	'valid_error'	=> 'Ошибка валидации.'
 
-			//	Units
-	,'unit'	=> 'Ед.изм.'
-	,'pcs'	=> 'шт.'
-
 	//	DataTable ajax
 	,'empty_table'	=> 'В таблице нет доступных данных'
 	,'exec_search'	=> 'Выполнить поиск'
@@ -98,5 +94,13 @@ return [
 		'last'=>'Посл.',
 		'next'=>'След. &raquo;',
 		'previous'=>'&laquo; Пред.'
+	]
+
+			//	Units
+	,'unit'	=> 'Ед.изм.'
+
+	,'units'	=> [
+		'l'		=> 'л',
+		'pcs'	=> 'шт.'
 	]
 ];

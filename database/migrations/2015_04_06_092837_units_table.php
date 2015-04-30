@@ -17,7 +17,7 @@ class UnitsTable extends Migration {
 			$table->engine = 'InnoDB';
 			$table->increments( 'id' )->unsigned();
 
-			$table->string( 'const', 200 );
+			$table->string( 'const', 50 );
 
 			$table->unique( 'const' );
 

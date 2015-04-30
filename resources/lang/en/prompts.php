@@ -75,10 +75,6 @@ return [
 	'sys_error'		=> 'System error.',
 	'valid_error'	=> 'Validation error.'
 
-			//	Units
-	,'unit'	=> 'Unit'
-	,'pcs'	=> 'pcs'
-
 	//	DataTable ajax
 	,'empty_table'	=> 'No data available in table'
 	,'exec_search'	=> 'Execute search'
@@ -98,5 +94,13 @@ return [
 		'last'=>'Last',
 		'next'=>'Next &raquo;',
 		'previous'=>'&laquo; Previous'
+	]
+
+			//	Units
+	,'unit'	=> 'Unit'
+
+	,'units'	=> [
+		'l'		=> 'l',
+		'pcs'	=> 'pcs'
 	]
 ];

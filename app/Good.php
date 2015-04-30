@@ -15,6 +15,7 @@ class Good extends BaseModel{
 		,'inpack'	//int
 		,'packs'	//int
 		,'assort'	//int
+		,'unit_id'	//int
 		,'archived'	//boolean
 	];
 

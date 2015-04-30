@@ -7,6 +7,7 @@ use App\Http\Requests\CategoryFormRequest;
 use App\Http\Requests\GoodFormRequest;
 use League\Flysystem\Adapter\NullAdapter;
 use App\Good;
+use App\Unit;
 
 
 class DashboardController extends MainController{
@@ -95,8 +96,6 @@ class DashboardController extends MainController{
  */
     public function getGoodEditform( $pid, $id=NULL ){
 
-// info("Point 0");
-
     	if( $id == NULL ){
     		$item	= new Good();
     		$id_url	= '';
@@ -104,6 +103,15 @@ class DashboardController extends MainController{
     		$item	= Good::find( $id );
     		$id_url	= '/'.$id;
     	}
+
+    	$cllct	= Unit::select(['id','const'])->get();
+
+    	$units	= []; $sel = -1;
+    	foreach( $cllct as $unit ){
+    		$units[$unit->id]	= @trans('prompts.units.'.$unit->const);
+    		$sel	= ($unit->id == $item->unit_id) ? $unit->id : $sel;
+    	}
+
 
 		return view( 'dashboard/goods/form', [
 			'pid'		=> $pid
@@ -114,12 +122,12 @@ class DashboardController extends MainController{
 			,'rprice'	=> $item->rprice
 			,'wprice'	=> $item->wprice
 			,'inpack'	=> $item->inpack
+			,'units'	=> ['list'=>$units,'sel'=>$sel]
 		]);
     }
 //______________________________________________________________________________
 
      public function postGood( GoodFormRequest $request, $id=NULL ){
-
      	$good_data	= $request->all();
 
     	$good	= $id != NULL ? Good::find( $id ) : new Good();
