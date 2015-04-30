@@ -104,15 +104,6 @@ class DashboardController extends MainController{
     		$id_url	= '/'.$id;
     	}
 
-    	$cllct	= Unit::select(['id','const'])->get();
-
-    	$units	= []; $sel = -1;
-    	foreach( $cllct as $unit ){
-    		$units[$unit->id]	= @trans('prompts.units.'.$unit->const);
-    		$sel	= ($unit->id == $item->unit_id) ? $unit->id : $sel;
-    	}
-
-
 		return view( 'dashboard/goods/form', [
 			'pid'		=> $pid
 			,'id_url'	=> $id_url
@@ -122,7 +113,7 @@ class DashboardController extends MainController{
 			,'rprice'	=> $item->rprice
 			,'wprice'	=> $item->wprice
 			,'inpack'	=> $item->inpack
-			,'units'	=> ['list'=>$units,'sel'=>$sel]
+			,'units'	=> ['list'=>Unit::getUnits(),'sel'=>$item->unit_id]
 		]);
     }
 //______________________________________________________________________________

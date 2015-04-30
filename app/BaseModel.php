@@ -16,32 +16,36 @@ class BaseModel extends Model{
     	$instance = new static;
     	$js_fields	= $instance->jsFields;
 
-		$stmt->orWhere(function($query) use ( $cols, $rg ){
-		    foreach ($cols as $col) {
-		    	if($col['searchable'] == 'true' )
-					$query->orWhere($col['name'],'like','%'.$rg['search']['value'].'%');
-		    }
-		 });
+    	if($rg['search']['value'] != '')
+			$stmt->orWhere(function($query) use ( $cols, $rg ){
+			    foreach ($cols as $col) {
+			    	if($col['searchable'] == 'true' )
+						$query->orWhere($col['name'],'like','%'.$rg['search']['value'].'%');
+			    }
+			 });
 
 
-    	foreach( $cols as $col ){//	Individual column search
+			//	Individual column search
+    	foreach( $cols as $col ){
+    		$search	= $col['search']['value'];
+
     		$ftype	= isset($js_fields[$col['name']]) ? $js_fields[$col['name']] : 'varchar';
 
     		switch( $ftype ){
     			case 'varchar':
     			case 'text':
-		    		if( $col['search']['value'] != '' )
-		    			$stmt->where($col['name'],'like','%'.$col['search']['value'].'%');
+		    		if( $search != '' )
+		    			$stmt->where($col['name'],'like','%'.$search.'%' );
     				break;
 
     			case 'bool':
-    				$stmt->where($col['name'],'=', $col['search']['value']);
+    				$stmt->where($col['name'],'=', $search );
     				break;
 
     			case 'integer':
     			case 'float':
-					if( $col['search']['value'] != '' )
-		    			$stmt->where($col['name'],'=', $col['search']['value']);
+					if( $search != '' )
+		    			$stmt->where($col['name'],'=', $search );
     				break;
     		}
     	}

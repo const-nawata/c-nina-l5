@@ -2,6 +2,7 @@
  namespace App;
 
 use App\BaseModel;
+use App\Unit;
 
 class Good extends BaseModel{
 
@@ -38,17 +39,31 @@ class Good extends BaseModel{
 
 	public static function getTblDataJSON( $rg ){
 
+		$last_column	= count($rg['columns']);
 		$rg['columns'][]	= [
-			'data'	=> count($rg['columns']),
+			'data'	=> $last_column,
 			'name'	=> 'archived',
-			'searchable'	=> 'true',
+			'searchable'	=> 'false',
 			'orderable'		=> 'false',
 			'search'	=> [
 				'value'	=> $rg['is_show_arch'] == 'true'
 			]
 		];
 
+		$last_column	= count($rg['columns']);
+		$rg['columns'][]	= [
+			'data'	=> $last_column,
+			'name'	=> 'unit_id',
+			'searchable'	=> 'false',
+			'orderable'		=> 'false',
+			'search'	=> [
+				'value'	=> ''
+			]
+		];
+
 		$tbl_info	= self::getTableData( $rg );
+
+		$units	= Unit::getUnits();
 
     	$data	= [];
     	foreach( $tbl_info['data'] as $rec ){
@@ -59,6 +74,11 @@ class Good extends BaseModel{
 					case 'wprice':
 					case 'rprice':
 						$val	= number_format($rec[$ind],2,',',' ');
+						break;
+
+					case 'inpack':
+					case 'assort':
+						$val	= $rec[$ind].' '.$units[$rec[$last_column]];
 						break;
 
 					default:
