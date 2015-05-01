@@ -72,7 +72,7 @@ $(document).ready(function(){
 
 	,{
 		"searchCols":	[1,2],//	Optional sel_all
-		"formWidth":	700,//	Optional
+		"formWidth":	1000,//	Optional
 		"token":	"{!! csrf_token(); !!}",
 		"urls": {
 			"form":"/good/form",

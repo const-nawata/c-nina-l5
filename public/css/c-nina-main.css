@@ -227,3 +227,7 @@ input.field-search-input{
 	font-weight: bold;
 	font-size: 18px;
 }
+
+.dialog-form .container{
+	width: auto;
+}
