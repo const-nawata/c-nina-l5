@@ -288,6 +288,7 @@
 			$("#"+pid+" tbody").on( 'click', 'td', function(){
 				if ( !$(this).hasClass('unclickable') ){
 					$("#"+pid+" .row-check-box").prop('checked', false);
+					$(this).parent("tr").addClass("selected-tr");
 					showTblRecForm( $(this).parent("tr").children("td").first().html());
 					table.setDelBtnState();
 				}
@@ -349,6 +350,9 @@
 					width: typeof pE.formWidth != "undefined" ? pE.formWidth : 600,
 					modal: true,
 					title: id == null ? prompts.entry_new : prompts.entry_edit,
+					close: function( event, ui ) {
+						$("#"+pid+" tbody tr.selected-tr").removeClass("selected-tr");
+					},
 
 					buttons: [
 					   {

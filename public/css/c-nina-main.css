@@ -182,6 +182,14 @@ input.field-search-input{
 .dataTables_wrapper table.dataTable tr.even{
 	background-color: #fff5ea;
 }
+.dataTables_wrapper table.dataTable tr.odd:HOVER
+,.dataTables_wrapper table.dataTable tr.even:HOVER{
+	background-color: #ffdbb3;
+}
+
+.dataTables_wrapper table.dataTable tr.selected-tr{
+	background-color: #ffdbb3;
+}
 
 .right-align-sell{
 	text-align: right;
