@@ -12,6 +12,10 @@ use App\Unit;
 
 class DashboardController extends MainController{
 
+
+//		Categories
+//______________________________________________________________________________
+
 	private static function getCatsSelBoxItem( $parentsArr, $cat, $level=-1 ){
 		$level++;
 
@@ -89,6 +93,21 @@ class DashboardController extends MainController{
     }
 //______________________________________________________________________________
 
+     public function postCategory( CategoryFormRequest $request, $id=NULL ){
+
+    	$cat_data	= $request->all();
+    	$cat_data['parent_id']	= $cat_data['parent_id'] < 0 ? NULL : $cat_data['parent_id'];
+
+    	$cat	= $id != NULL ? Category::find( $id ) : new Category();
+    	$cat	= $cat->fill( $cat_data );
+	    $res 	= $cat->save();
+
+    	return redirect('/dashboard/categories/'.$cat->id);
+    }
+//______________________________________________________________________________
+//		Goods
+//______________________________________________________________________________
+
 /**
  *
  * @param string $id
@@ -126,19 +145,6 @@ class DashboardController extends MainController{
 	    $res 	= $good->save();
 
      	return Response::json(['id'=>$good->id]);
-    }
-//______________________________________________________________________________
-
-     public function postCategory( CategoryFormRequest $request, $id=NULL ){
-
-    	$cat_data	= $request->all();
-    	$cat_data['parent_id']	= $cat_data['parent_id'] < 0 ? NULL : $cat_data['parent_id'];
-
-    	$cat	= $id != NULL ? Category::find( $id ) : new Category();
-    	$cat	= $cat->fill( $cat_data );
-	    $res 	= $cat->save();
-
-    	return redirect('/dashboard/categories/'.$cat->id);
     }
 //______________________________________________________________________________
 
