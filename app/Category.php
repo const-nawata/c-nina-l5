@@ -8,8 +8,11 @@ class Category extends BaseModel{
 
 	protected $fillable = [
 		'name'
-		,'parent_id'
-		,'rank'
+	];
+
+	protected $jsFields	= [
+		'id'		=> 'integer',
+		'name'		=> 'varchar'
 	];
 
 	private static function isChildrenHasExpand( $children, $selCatId ){
@@ -82,5 +85,26 @@ class Category extends BaseModel{
 		];
 	}
 //______________________________________________________________________________
+
+
+
+
+	public static function getTblDataJSON( $rg ){
+		$tbl_info	= self::getTableData( $rg );
+    	$data	= [];
+    	foreach( $tbl_info['data'] as $rec ){
+    		$fld_vals	= [];
+
+    		foreach( $rg['columns'] as $ind=>$col ){
+				$val	= $rec[$ind];
+				$fld_vals[]	= $val;
+    		}
+    		$data[]	= $fld_vals;
+    	}
+
+		$tbl_info['data']	= $data;
+
+		return json_encode($tbl_info);
+	}
 
 }//	Class end

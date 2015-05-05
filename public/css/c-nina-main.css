@@ -99,6 +99,10 @@ body {
 	background-color: #e1f0f0;
 }
 
+table.dataTable thead .checkboxtd{
+	width: 18px;
+}
+
 table.dataTable thead th, table.dataTable thead td,table.dataTable tbody td{
 	border-right:  1px solid #bfbfbf;
 }

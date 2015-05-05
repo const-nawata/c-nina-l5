@@ -29,6 +29,8 @@ Route::get('/', [
 Route::controller('index', 'IndexController');
 Route::controller('users', 'UsersController');
 Route::controller('dashboard', 'DashboardController');
+
+Route::get('categories/table', 'DashboardController@getCategoriestable');
 Route::get('category/remove/{id?}', 'DashboardController@removeCategory');
 Route::post('category/save/{id?}', 'DashboardController@postCategory');
 

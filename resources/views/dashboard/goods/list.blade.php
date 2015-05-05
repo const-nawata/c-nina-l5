@@ -63,8 +63,8 @@ $(document).ready(function(){
 		,"columns":{!! $jsFields !!}
 
 		,"ajax": {
-			"url": "/goods/table",
-			"data":function(srvData){
+			"url": "/goods/table"
+			,"data":function(srvData){
 				srvData.is_show_arch = $("#{!! $pid !!}_archive_chkbx").is(':checked');
 			}
 		}

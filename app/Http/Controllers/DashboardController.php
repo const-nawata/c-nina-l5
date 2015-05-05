@@ -1,11 +1,13 @@
 <?php namespace App\Http\Controllers;
 
-use App\Category;
+
 use Request;
 use Response;
 use App\Http\Requests\CategoryFormRequest;
 use App\Http\Requests\GoodFormRequest;
 use League\Flysystem\Adapter\NullAdapter;
+
+use App\Category;
 use App\Good;
 use App\Unit;
 
@@ -40,23 +42,15 @@ class DashboardController extends MainController{
  * @return \Illuminate\View\View - HTML content
  */
     public function getCategories( $selCatId=NUll ){
-    	$tree	= Category::getTree( $selCatId );
+		$js_fields	= Category::getFieldsJSON();
+		$js_fields	= json_decode($js_fields,TRUE);
+    	$js_fields[]= ['name'=>'checkbox'];
+		return view( 'dashboard/categories/list',['pid'=>'categoriestable','jsFields'=>json_encode($js_fields)] );
+    }
+//______________________________________________________________________________
 
-    	$cat_sel	= ($selCatId == NULL)
-			? new Category()
-			: Category::find( $selCatId );
-
-    	$cats_names	= [ -1=>'- '.trans('prompts.root_cat').' -'];
-    	foreach( $tree as $cat )
-    		$cats_names	= self::getCatsSelBoxItem( $cats_names, $cat );
-
-    	return view( 'dashboard/categories/list'
-    				,[
-    					'tree'		=> $tree
-    					,'sel_id'	=> ($selCatId!=NULL?$selCatId : 'null')
-    					, 'cats_names'=>$cats_names
-    				]
-    			);
+    public function getCategoriestable(){
+    	return Category::getTblDataJSON( $_GET );
     }
 //______________________________________________________________________________
 

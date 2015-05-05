@@ -17,6 +17,10 @@
  * 			"form"	- to show form action
  * 			"del"	- to delete action
  *
+ *		array remove (Optional) - extra settings for non-standard removing (for examle archiving)
+ *			"message"	- message after delete. May be function.
+ *			"data"	- extra data which is sent to server by ajax
+ *
  * @public function setDelBtnState - see description
  *
  * @example	- See /goods/list.blade.php
@@ -32,7 +36,7 @@
     			,isIndivSch	= false
     			,chkbx_obj
     			,chk_bx_col	= -1
-    			,data_func	= function(srvData){}
+    			,data_func	= function(srvData){}//Needed
     			;
 
     		isIndivSch	= typeof pE.searchCols != "undefined" && pE.searchCols.length > 0;
