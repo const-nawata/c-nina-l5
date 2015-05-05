@@ -274,8 +274,7 @@
 					        }
 					    });
 					});
-
-				}).attr("title", prompts.to_archive );
+				}).attr("title", prompts.del );
 				table.setDelBtnState();
 			}
 
