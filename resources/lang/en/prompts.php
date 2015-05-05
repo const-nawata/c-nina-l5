@@ -28,6 +28,7 @@ return [
 	'error'	=> 'Error',
 	'expand'	=> 'Expand',
 	'goods'	=> 'Goods',
+	'goods_manage'=> 'Goods managing',
 	'home'	=> 'Home',
 	'inpack'	=> 'In pack',
 	'lang'	=> 'Lang',

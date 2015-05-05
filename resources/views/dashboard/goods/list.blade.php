@@ -8,10 +8,11 @@
 	@include('dashboard/blocks/buttons')
 @stop
 
+@section('screen_title')
+<div class="page-header"><h3>{{ @trans('prompts.goods_manage') }}</h3></div>
+@stop
 
 @section('content')
-
-
 <div class="jumbotron j-tbl">
 <table id="{{ $pid }}">
 	<thead>
@@ -43,7 +44,6 @@
 
 </table>
 </div>
-
 @stop
 
 @section('js_extra')
