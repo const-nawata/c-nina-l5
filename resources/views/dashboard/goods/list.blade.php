@@ -136,6 +136,8 @@ $(document).ready(function(){
         	});
 		})
 		.attr("title", prompts.show_arch);
+
+	$("#{!! $pid !!}_remove_btn").attr("title", prompts.to_archive);
 });
 
 </script>
