@@ -66,31 +66,30 @@ class DashboardController extends MainController{
  * @param string $id
  * @return string
  */
-    public function getCategory( $id=NULL ){
+    public function getCatEditform( $pid, $id=NULL ){
 
 		$cat	= $id != NULL ? Category::find( $id ) : new Category();
 
+    	if( $id == NULL ){
+    		$cat	= new Category();
+    		$id_url	= '';
+    	}else{
+    		$cat	= Category::find( $id );
+    		$id_url	= '/'.$id;
+    	}
 
-		$n_children = Category::where('parent_id', '=', $id )->count();
-
-		$json	=
-
-		 '{'.
-			'"id":'.($id != NULL?$id:'null').
-			',"name":"'.$cat->name.'"'.
-			',"parent_id":'.($cat->parent_id!=NULL?$cat->parent_id:'null').
-			',"rank":'.($cat->rank!=NULL?$cat->rank:0).
-			',"n_children":'.$n_children.
-		'}';
-
-		return $json;
+		return view( 'dashboard/categories/form', [
+			'pid'		=> $pid
+			,'id_url'	=> $id_url
+			,'name'		=> $cat->name
+		]);
     }
 //______________________________________________________________________________
 
      public function postCategory( CategoryFormRequest $request, $id=NULL ){
 
     	$cat_data	= $request->all();
-    	$cat_data['parent_id']	= $cat_data['parent_id'] < 0 ? NULL : $cat_data['parent_id'];
+//     	$cat_data['parent_id']	= $cat_data['parent_id'] < 0 ? NULL : $cat_data['parent_id'];
 
     	$cat	= $id != NULL ? Category::find( $id ) : new Category();
     	$cat	= $cat->fill( $cat_data );
