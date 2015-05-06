@@ -7,6 +7,7 @@ use App\Http\Requests\CategoryFormRequest;
 use App\Http\Requests\GoodFormRequest;
 use League\Flysystem\Adapter\NullAdapter;
 
+use DB;
 use App\Category;
 use App\Good;
 use App\Unit;
@@ -136,13 +137,14 @@ class DashboardController extends MainController{
 			,'wprice'	=> $item->wprice
 			,'inpack'	=> $item->inpack
 			,'units'	=> ['list'=>Unit::getUnits(),'sel'=>$item->unit_id]
+			,'cats'		=> Category::select(DB::raw("id,name,exists(SELECT * FROM `good_cat` WHERE `good_id`=$id) AS ismember"))->get()->toArray()
 		]);
     }
 //______________________________________________________________________________
 
      public function postGood( GoodFormRequest $request, $id=NULL ){
      	$good_data	= $request->all();
-
+info(print_r( $good_data , TRUE));
     	$good	= $id != NULL ? Good::find( $id ) : new Good();
     	$good	= $good->fill( $good_data );
 	    $res 	= $good->save();

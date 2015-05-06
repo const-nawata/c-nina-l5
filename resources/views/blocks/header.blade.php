@@ -111,7 +111,10 @@ function setRemoveMessageParams(message, nrecs){
 }
 </script>
 
+	<link rel="stylesheet" href="/css/multiselect.css">
 	<link rel="stylesheet" href="/css/c-nina-main.css">
+
+	<script src="/js/multiselect.js"></script>
 	<script src="/js/c-nina.js"></script>
 	<script src="/js/c-nina-table.js"></script>
 

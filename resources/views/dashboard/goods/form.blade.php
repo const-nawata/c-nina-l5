@@ -54,11 +54,22 @@
 
 	<div id="cats_tree" class="col-md-5">
 		<div class="jumbotron">
-		ddddd
-		ddddd
+			<select id="cats" name="cats">
+				<option>Opp1</option>
+				<option>Opp2</option>
+				<option>Opp3</option>
+				<option>Opp4</option>
+				<option>Opp5</option>
+			</select>
 		</div>
 	</div>
 
 </div>
 {!! Form::close() !!}
 </div>
+
+<script>
+$(document).ready(function(){
+	$("#cats").multiselect();
+});
+</script>
