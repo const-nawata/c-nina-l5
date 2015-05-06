@@ -91,19 +91,6 @@ class Category extends BaseModel{
 
 	public static function getTblDataJSON( $rg ){
 		$tbl_info	= self::getTableData( $rg );
-    	$data	= [];
-    	foreach( $tbl_info['data'] as $rec ){
-    		$fld_vals	= [];
-
-    		foreach( $rg['columns'] as $ind=>$col ){
-				$val	= $rec[$ind];
-				$fld_vals[]	= $val;
-    		}
-    		$data[]	= $fld_vals;
-    	}
-
-		$tbl_info['data']	= $data;
-
 		return json_encode($tbl_info);
 	}
 

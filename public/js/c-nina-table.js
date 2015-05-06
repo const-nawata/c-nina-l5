@@ -234,22 +234,33 @@
 							? ids.push($(this).parent("td").parent("tr").children("td").first().html()):null;
 					});
 
-					switch( typeof pE.remove.message ){
-						case "undefined": remove_message = messages.delete_recs(ids.length);break;
-						case "function": remove_message = pE.remove.message();break;
-						default: remove_message = pE.remove.message;
-					}
+
+					if( typeof pE.remove == "undefined")
+						remove_message = messages.delete_recs(ids.length);
+
+					else
+						switch( typeof pE.remove.message ){
+							case "undefined": remove_message = messages.delete_recs(ids.length);break;
+							case "function": remove_message = pE.remove.message();break;
+							default: remove_message = pE.remove.message;
+						}
+
 					remove_message	= 	'<div class="affirm-message-1">'+remove_message+'</div>'+
 										'<div class="affirm-message-2">'+messages.confirm+'</div>'
 
 					affirm(prompts.op_confirm, remove_message, function(){
 						var to_srv_data;
 
-						switch( typeof pE.remove.data ){
-							case "undefined": to_srv_data = null;break;
-							case "function": to_srv_data = pE.remove.data();break;
-							default: to_srv_data = pE.remove.data;
-						}
+						if( typeof pE.remove == "undefined")
+							to_srv_data = null;
+
+						else
+							switch( typeof pE.remove.data ){
+								case "undefined": to_srv_data = null;break;
+								case "function": to_srv_data = pE.remove.data();break;
+								default: to_srv_data = pE.remove.data;
+							}
+
 						to_srv_data	= {"_token":pE.token,"ids":ids,"data":to_srv_data};
 
 

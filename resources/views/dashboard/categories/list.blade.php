@@ -109,7 +109,7 @@ $(document).ready(function(){
 		"token":	"{!! csrf_token(); !!}",
 		"urls": {
 			"form":"/category/form",
-			"del":"/category/remove"
+			"del":"/categories/remove"
 		}
 
 	});

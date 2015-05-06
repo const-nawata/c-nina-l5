@@ -54,10 +54,16 @@ class DashboardController extends MainController{
     }
 //______________________________________________________________________________
 
-    public function removeCategory( $id ){
-		$cat = Category::find( $id );
-		$cat->delete();
-    	return redirect('/dashboard/categories');
+    public function removeCategories(){
+    	$n_rows	= Category::select()->whereIn('id',$_POST['ids'])->delete();
+
+    	$n_rows_req	= count($_POST['ids']);
+
+    	$message	= $n_rows == $n_rows_req
+    		? trans('messages.del_success')
+    		: trans('messages.del_error');
+
+    	return json_encode( ['message'=>$message] );
     }
 //______________________________________________________________________________
 
@@ -89,7 +95,6 @@ class DashboardController extends MainController{
      public function postCategory( CategoryFormRequest $request, $id=NULL ){
 
     	$cat_data	= $request->all();
-//     	$cat_data['parent_id']	= $cat_data['parent_id'] < 0 ? NULL : $cat_data['parent_id'];
 
     	$cat	= $id != NULL ? Category::find( $id ) : new Category();
     	$cat	= $cat->fill( $cat_data );
@@ -153,7 +158,7 @@ class DashboardController extends MainController{
     public function getGoodstable(){
     	return Good::getTblDataJSON( $_GET );
     }
-//______________________________________________________________________________
+//______________________________________________________________________________ arch_error
 
     public function archiveGoods(){
     	$n_rows 	= Good::archiveGoods( $_POST['data']['is_to_arch'] == 'true', $_POST['ids'] );
@@ -162,7 +167,7 @@ class DashboardController extends MainController{
 
     	$message	= $n_rows == $n_rows_req
     		? trans('messages.arch_success')
-    		: '';
+    		: trans('messages.arch_error');
 
     	return json_encode( ['message'=>$message] );
     }

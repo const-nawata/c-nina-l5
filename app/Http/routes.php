@@ -31,7 +31,7 @@ Route::controller('users', 'UsersController');
 Route::controller('dashboard', 'DashboardController');
 
 Route::get('categories/table', 'DashboardController@getCategoriestable');
-Route::get('category/remove/{id?}', 'DashboardController@removeCategory');
+Route::post('categories/remove', 'DashboardController@removeCategories');
 Route::get('category/form/{pid}/{id?}', 'DashboardController@getCatEditform');
 Route::post('category/save/{id?}', 'DashboardController@postCategory');
 
