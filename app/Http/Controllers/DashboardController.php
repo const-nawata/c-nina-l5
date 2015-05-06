@@ -14,6 +14,11 @@ use App\Unit;
 
 class DashboardController extends MainController{
 
+    public function getUsers(){
+    	return view( 'dashboard/users' );
+    }
+//______________________________________________________________________________
+
 
 //		Categories
 //______________________________________________________________________________
@@ -72,7 +77,7 @@ class DashboardController extends MainController{
  * @param string $id
  * @return string
  */
-    public function getCatEditform( $pid, $id=NULL ){
+    public function getCategoryForm( $pid, $id=NULL ){
 
 		$cat	= $id != NULL ? Category::find( $id ) : new Category();
 
@@ -111,7 +116,7 @@ class DashboardController extends MainController{
  * @param string $id
  * @return string
  */
-    public function getGoodEditform( $pid, $id=NULL ){
+    public function getGoodForm( $pid, $id=NULL ){
 
     	if( $id == NULL ){
     		$item	= new Good();
@@ -171,10 +176,5 @@ class DashboardController extends MainController{
 
     	return json_encode( ['message'=>$message] );
     }
-
-    public function getUsers(){
-    	return view( 'dashboard/users' );
-    }
-//______________________________________________________________________________
 
 }//	Class end
