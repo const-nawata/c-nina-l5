@@ -70,8 +70,11 @@ var prompts	= {
 	}
 	,"save":"{{ @trans('prompts.save') }}"
 	,"search":"{{ @trans('prompts.search') }}"
-	,"sel_all":"{{ @trans('prompts.sel_all') }}"
 	,"sel":"{{ @trans('prompts.sel') }}"
+	,"sel_all":"{{ @trans('prompts.sel_all') }}"
+	,"sel_none":"{{ @trans('prompts.sel_none') }}"
+	,"selected":"{{ @trans('prompts.selected') }}"
+	,"selected_all":"{{ @trans('prompts.selected_all') }}"
 	,"show_active":"{{ @trans('prompts.show_active') }}"
 	,"show_arch":"{{ @trans('prompts.show_arch') }}"
 	,"sys_error":"{{ @trans('prompts.sys_error') }}"

@@ -79,11 +79,15 @@
 <script>
 $(document).ready(function(){
 	$("#categories").multiselect({
-		"maxHeight":230
-// 		,"checkboxName":"cat-"
+		"maxHeight":265
+// 		,"checkboxName":"cat-" selected
 		,"includeSelectAllOption":true
 		,"enableHTML":true
 		,"selectAllText":"<span>— "+prompts.sel_all+" —</span>"
+		,"nonSelectedText":prompts.sel_none
+		,"nSelectedText":prompts.selected.toLowerCase()
+		,"allSelectedText":prompts.selected_all
+		,"numberDisplayed":0
 	});
 
 	$("#{!! $pid !!}form input").each(function(){
