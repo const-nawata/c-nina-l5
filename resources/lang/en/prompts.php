@@ -60,8 +60,11 @@ return [
 	'root_cat'=> 'Root',
 	'russian'	=> 'Russian',
 	'save'	=> 'Save',
+	'sel_all'		=> 'Select all',
+	'sel'		=> 'Select',
 	'show_active'	=> 'Show active',
 	'show_arch'	=> 'Show archive',
+	'sys_error'		=> 'System error.',
 	'to_active'=> 'To active',
 	'to_archive'=> 'To archive',
 	'username'	=> 'Username',
@@ -71,9 +74,6 @@ return [
 	'wrap'	=> 'Wrap',
 	'yes'=> 'Yes',
 	'your_login_data'	=> 'Your login data',
-	'sel_all'		=> 'Select all',
-	'sel'		=> 'Select',
-	'sys_error'		=> 'System error.',
 	'valid_error'	=> 'Validation error.'
 
 	//	DataTable ajax

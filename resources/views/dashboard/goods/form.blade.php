@@ -52,16 +52,24 @@
 
 	</div>
 
+
+<?php
+
+// info(print_r( $cats , TRUE));
+
+?>
+
 	<div id="cats_tree" class="col-md-5">
-		<div class="jumbotron">
-			<select id="cats" name="cats">
-				<option>Opp1</option>
-				<option>Opp2</option>
-				<option>Opp3</option>
-				<option>Opp4</option>
-				<option>Opp5</option>
+
+
+			<select id="categories" multiple="multiple">
+@foreach($cats as $cat)
+			    <option value="{!! $cat['id'] !!}" label="{{ $cat['name'] }}"></option>
+@endforeach
 			</select>
-		</div>
+
+
+
 	</div>
 
 </div>
@@ -70,6 +78,29 @@
 
 <script>
 $(document).ready(function(){
-	$("#cats").multiselect();
+	$("#categories").multiselect({
+		"maxHeight":230
+// 		,"checkboxName":"cat-"
+		,"includeSelectAllOption":true
+		,"enableHTML":true
+		,"selectAllText":"<span>— "+prompts.sel_all+" —</span>"
+	});
+
+	$("#{!! $pid !!}form input").each(function(){
+		if($(this).attr("type") == "checkbox" ){
+			if( $(this).val() == "multiselect-all" ){
+				$(this).on("click", function(e){
+					var prompt = $(this).is(':checked')
+						? prompts.desel_all
+						: prompts.sel_all;
+
+					$(this).parent("label").children("span").html("— "+prompt+" —");
+				});
+			}else{
+				$(this).attr("name","categories["+$(this).val()+"]");
+			}
+		}
+	});
+
 });
 </script>
