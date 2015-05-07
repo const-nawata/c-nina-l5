@@ -242,3 +242,26 @@ input.field-search-input{
 	width: 20px;
 	height: 20px;
 }
+#cats_div .input-group-addon{
+	font-size: 11px;
+	padding: 0 12px;
+}
+#cats_div li.multiselect-item button{
+	font-size: 12px;
+	margin-bottom: 0px;
+	padding: 0px 10px;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+}
+#cats_div li.multiselect-item input{
+	height: 24px;
+	font-size: 12px;
+	padding: 0 10px;
+	vertical-align: middle;
+	margin-top: 5px;
+}
+#cats_div .input-group{
+	padding: 0;
+}
+#cats_div i.glyphicon{
+	top: 3px;
+}

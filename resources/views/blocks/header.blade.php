@@ -2,9 +2,9 @@
 <html>
 <head>
 	<title>@yield('title') — {{ @trans('prompts.brand') }}</title>
-
+<?php /* ?>
 	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
-
+<?php */ ?>
 	<meta content="text/html; charset=utf-8" http-equiv="content-type">
 	<meta name="keywords" content="магазин,контейтер,764,Нина,калиновский,базар,черновцы,чернівці">
 	<meta name="description" content="Контейнер 764. Продажа тапочек оптом и в розницу.">

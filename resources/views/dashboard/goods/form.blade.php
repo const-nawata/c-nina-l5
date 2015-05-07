@@ -52,10 +52,31 @@
 
 	</div>
 
-	<span class="glyphicon glyphicon-cloud-upload"></span>
-<button class="glyphicon glyphicon-play" style="width: 20px;height: 20px;"></button>
-<?php
 
+<?php /* ?>
+<div class="row">
+  <div class="col-lg-6">
+    <div class="input-group">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+      </span>
+      <input type="text" class="form-control" placeholder="Search for...">
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+  <div class="col-lg-6">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Search for...">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+      </span>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+
+
+
+<?php
+*/
 // info(print_r( $cats , TRUE));
 
 ?>
@@ -90,6 +111,9 @@ $(document).ready(function(){
 		,"allSelectedText":prompts.selected_all
 		,"numberDisplayed":0
 		,"enableFiltering":true
+// 		,"templates":{
+// 			"filterClearBtn":'<span class="input-group-btn"><button id="t1-t1"></button></span>'
+// 		}
 	});
 
 	$("#{!! $pid !!}form input").each(function(){
@@ -108,10 +132,16 @@ $(document).ready(function(){
 		}
 	});
 
-	$(".multiselect-clear-filter")
+	$("#t1-t1").button({
+					icons: { primary: "ui-icon-trash" },
+					text: false
+				});
+
+// 	$(".multiselect-clear-filter").append('<span class="glyphicon glyphicon-play"></span>')   <span class="input-group-btn">  btn btn-default multiselect-clear-filter
+// 	.addClass("glyphicon glyphicon-play")
 // 	.removeClass()
 // 	.removeClass("btn-default")
-	.html('<span class="glyphicon glyphicon-play"></span>')
+// 	.html('<span class="glyphicon glyphicon-play"></span>')
 			;
 
 });
