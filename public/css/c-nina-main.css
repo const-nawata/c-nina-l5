@@ -235,3 +235,10 @@ input.field-search-input{
 .dialog-form .container{
 	width: auto;
 }
+#cats_div .input-group-btn{
+	width: 20px;
+}
+#cats_div .glyphicon{
+	width: 20px;
+	height: 20px;
+}

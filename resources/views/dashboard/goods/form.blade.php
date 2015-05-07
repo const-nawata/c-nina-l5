@@ -52,14 +52,15 @@
 
 	</div>
 
-
+	<span class="glyphicon glyphicon-cloud-upload"></span>
+<button class="glyphicon glyphicon-play" style="width: 20px;height: 20px;"></button>
 <?php
 
 // info(print_r( $cats , TRUE));
 
 ?>
 
-	<div id="cats_tree" class="col-md-5">
+	<div id="cats_div" class="col-md-5">
 
 
 			<select id="categories" multiple="multiple">
@@ -88,6 +89,7 @@ $(document).ready(function(){
 		,"nSelectedText":prompts.selected.toLowerCase()
 		,"allSelectedText":prompts.selected_all
 		,"numberDisplayed":0
+		,"enableFiltering":true
 	});
 
 	$("#{!! $pid !!}form input").each(function(){
@@ -105,6 +107,12 @@ $(document).ready(function(){
 			}
 		}
 	});
+
+	$(".multiselect-clear-filter")
+// 	.removeClass()
+// 	.removeClass("btn-default")
+	.html('<span class="glyphicon glyphicon-play"></span>')
+			;
 
 });
 </script>
