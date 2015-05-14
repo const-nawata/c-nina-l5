@@ -239,25 +239,29 @@ input.field-search-input{
 	width: 20px;
 }
 #cats_div .glyphicon{
-	width: 20px;
+	width: 21px;
 	height: 20px;
 }
 #cats_div .input-group-addon{
-	font-size: 11px;
+	font-size: 12px;
 	padding: 0 12px;
+	height: 20px;
 }
 #cats_div li.multiselect-item button{
-	font-size: 12px;
-	margin-bottom: 0px;
+	font-size: 13px;
 	padding: 0px 10px;
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+	height: 24px;
+	margin-bottom: 0;
 }
 #cats_div li.multiselect-item input{
-	height: 24px;
 	font-size: 12px;
 	padding: 0 10px;
+	margin-top: 0;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+
 	vertical-align: middle;
-	margin-top: 5px;
+	height: 24px;
 }
 #cats_div .input-group{
 	padding: 0;
