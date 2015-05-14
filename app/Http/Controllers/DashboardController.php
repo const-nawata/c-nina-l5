@@ -11,7 +11,7 @@ use DB;
 use App\Category;
 use App\Good;
 use App\Unit;
-
+use App\Goodcat;
 
 class DashboardController extends MainController{
 
@@ -122,9 +122,11 @@ class DashboardController extends MainController{
     	if( $id == NULL ){
     		$item	= new Good();
     		$id_url	= '';
+    		$cats	= [];
     	}else{
     		$item	= Good::find( $id );
     		$id_url	= '/'.$id;
+    		$cats	= Category::select(DB::raw("id,name,exists(SELECT * FROM `goodcats` WHERE `good_id`=$id) AS ismember"))->get()->toArray();
     	}
 
 		return view( 'dashboard/goods/form', [
@@ -137,17 +139,30 @@ class DashboardController extends MainController{
 			,'wprice'	=> $item->wprice
 			,'inpack'	=> $item->inpack
 			,'units'	=> ['list'=>Unit::getUnits(),'sel'=>$item->unit_id]
-			,'cats'		=> Category::select(DB::raw("id,name,exists(SELECT * FROM `good_cat` WHERE `good_id`=$id) AS ismember"))->get()->toArray()
+			,'cats'		=> $cats
 		]);
     }
 //______________________________________________________________________________
 
      public function postGood( GoodFormRequest $request, $id=NULL ){
      	$good_data	= $request->all();
-info(print_r( $good_data , TRUE));
+// info(print_r( $good_data , TRUE));
     	$good	= $id != NULL ? Good::find( $id ) : new Good();
     	$good	= $good->fill( $good_data );
 	    $res 	= $good->save();
+
+	    Goodcat::select()->where('good_id','=', $good->id )->delete();
+
+	    if( isset($good_data['categories']) ){
+	    	$good_cats	= [];
+	    	foreach( $good_data['categories'] as $cat_id ){
+	    		$good_cats[]	= new Goodcat( ['cat_id'=>$cat_id] );
+	    	}
+
+	    	$good->goodcats()->saveMany( $good_cats );
+	    }
+// info("id: ".$good->id);
+
 
      	return Response::json(['id'=>$good->id]);
     }
@@ -165,7 +180,7 @@ info(print_r( $good_data , TRUE));
     public function getGoodstable(){
     	return Good::getTblDataJSON( $_GET );
     }
-//______________________________________________________________________________ arch_error
+//______________________________________________________________________________
 
     public function archiveGoods(){
     	$n_rows 	= Good::archiveGoods( $_POST['data']['is_to_arch'] == 'true', $_POST['ids'] );
