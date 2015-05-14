@@ -6,6 +6,7 @@ use App\Unit;
 
 class Goodcat extends BaseModel{
 
+	protected $table = 'goodcats';
 
 	protected $fillable = [
 		'good_id'
