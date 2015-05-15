@@ -7,7 +7,7 @@
 </div>
 
 <div class="btn-group" role="group">
-	<a type="button" class="btn btn-default" href="/dashboard/goods">{{ @trans('prompts.goods') }}</a>
+	<a type="button" class="btn btn-default" href="/dashboard/products">{{ @trans('prompts.goods') }}</a>
 </div>
 
 <div class="btn-group" role="group">

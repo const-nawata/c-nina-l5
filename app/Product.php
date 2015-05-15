@@ -32,7 +32,7 @@ class Product extends BaseModel{
 		'archived'	=> 'bool'
 	];
 
-	public static function archiveGoods( $status, $ids=[] ){
+	public static function archive( $status, $ids=[] ){
 		return self::whereIn('id',$ids)->update(['archived' => $status]);
 	}
 //______________________________________________________________________________

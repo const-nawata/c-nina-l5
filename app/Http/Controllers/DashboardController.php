@@ -117,7 +117,7 @@ class DashboardController extends MainController{
  * @param string $id
  * @return string
  */
-    public function getGoodForm( $pid, $id=NULL ){
+    public function getProductForm( $pid, $id=NULL ){
 
     	if( $id == NULL ){
     		$item	= new Product();
@@ -144,7 +144,7 @@ class DashboardController extends MainController{
     }
 //______________________________________________________________________________
 
-     public function postGood( ProductFormRequest $request, $id=NULL ){
+     public function postProduct( ProductFormRequest $request, $id=NULL ){
      	$good_data	= $request->all();
 
     	$good	= $id != NULL ? Product::find( $id ) : new Good();
@@ -166,7 +166,7 @@ class DashboardController extends MainController{
     }
 //______________________________________________________________________________
 
-    public function getGoods( $id=NULL ){
+    public function getProducts( $id=NULL ){
     	$js_fields	= Product::getFieldsJSON($exclFields=['archived']);
     	$js_fields	= json_decode($js_fields,TRUE);
     	$js_fields[]= ['name'=>'checkbox'];
@@ -175,13 +175,13 @@ class DashboardController extends MainController{
     }
 //______________________________________________________________________________
 
-    public function getGoodstable(){
+    public function getProductstable(){
     	return Product::getTblDataJSON( $_GET );
     }
 //______________________________________________________________________________
 
-    public function archiveGoods(){
-    	$n_rows 	= Product::archiveGoods( $_POST['data']['is_to_arch'] == 'true', $_POST['ids'] );
+    public function archiveProducts(){
+    	$n_rows 	= Product::archive( $_POST['data']['is_to_arch'] == 'true', $_POST['ids'] );
 
     	$n_rows_req	= count($_POST['ids']);
 
