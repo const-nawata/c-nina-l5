@@ -1,7 +1,7 @@
 @extends('layouts.middle')
 
 @section('title')
-{!! @trans('prompts.goods') !!}
+{!! @trans('prompts.products') !!}
 @stop
 
 @section('buttons')
@@ -9,7 +9,7 @@
 @stop
 
 @section('screen_title')
-<div class="page-header"><h3>{{ @trans('prompts.goods_manage') }}</h3></div>
+<div class="page-header"><h3>{{ @trans('prompts.products_manage') }}</h3></div>
 @stop
 
 @section('content')
@@ -51,7 +51,7 @@
 
 $(document).ready(function(){
 
-	var goods_table = $("#{!! $pid !!}").cNinaTable({
+	var products_table = $("#{!! $pid !!}").cNinaTable({
 		"processing": true
 		,"serverSide": true
 
@@ -131,8 +131,8 @@ $(document).ready(function(){
 			$(this).attr("title", chkbx_title );
 			$("#{!! $pid !!}_content_type_span").html(tbl_content_type );
 
-        	goods_table.ajax.reload(function(json){
-        		goods_table.setDelBtnState();
+        	products_table.ajax.reload(function(json){
+        		products_table.setDelBtnState();
         	});
 		})
 		.attr("title", prompts.show_arch);
