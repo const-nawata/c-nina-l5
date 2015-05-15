@@ -50,7 +50,7 @@
 	<div id="cats_div" class="col-md-5">
 		<select id="categories" multiple="multiple">
 			@foreach($cats as $cat)
-		    <option value="{!! $cat['id'] !!}" label="{{ $cat['name'] }}"></option>
+		    <option value="{!! $cat['id'] !!}" label="{{ $cat['name'] }}" {!! $cat['sel'] !!}></option>
 			@endforeach
 		</select>
 	</div>
@@ -92,7 +92,5 @@ $(document).ready(function(){
 		icons: { primary: "ui-icon-trash" },
 		text: false
 	});
-
-
 });
 </script>

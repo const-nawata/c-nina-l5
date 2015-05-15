@@ -126,7 +126,7 @@ class DashboardController extends MainController{
     	}else{
     		$item	= Good::find( $id );
     		$id_url	= '/'.$id;
-    		$cats	= Category::select(DB::raw("id,name,exists(SELECT * FROM `goodcats` WHERE `good_id`=$id) AS ismember"))->get()->toArray();
+    		$cats	= Category::select(DB::raw("id,name,IF(exists(SELECT * FROM `goodcats` WHERE `good_id`=$id AND `cat_id`=`categories`.`id`),'selected','') AS `sel`"))->get()->toArray();
     	}
 
 		return view( 'dashboard/goods/form', [
