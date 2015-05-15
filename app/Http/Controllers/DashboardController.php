@@ -9,9 +9,9 @@ use League\Flysystem\Adapter\NullAdapter;
 
 use DB;
 use App\Category;
-use App\Good;
+use App\Product;
 use App\Unit;
-use App\Goodcat;
+use App\Prodcat;
 
 class DashboardController extends MainController{
 
@@ -98,20 +98,20 @@ class DashboardController extends MainController{
     }
 //______________________________________________________________________________
 
-     public function postCategory( CategoryFormRequest $request, $id=NULL ){
+	public function postCategory( CategoryFormRequest $request, $id=NULL ){
 
-    	$cat_data	= $request->all();
+		$cat_data	= $request->all();
 
-    	$cat	= $id != NULL ? Category::find( $id ) : new Category();
-    	$cat	= $cat->fill( $cat_data );
-	    $res 	= $cat->save();
+		$cat	= $id != NULL ? Category::find( $id ) : new Category();
+		$cat	= $cat->fill( $cat_data );
+		$res 	= $cat->save();
 
-    	return redirect('/dashboard/categories/'.$cat->id);
-    }
-//______________________________________________________________________________
-//		Goods
-//______________________________________________________________________________
+		return redirect('/dashboard/categories/'.$cat->id);
+	}
 
+//------------------------------------------------------------------------------
+//		Products
+//------------------------------------------------------------------------------
 /**
  *
  * @param string $id
@@ -120,13 +120,13 @@ class DashboardController extends MainController{
     public function getGoodForm( $pid, $id=NULL ){
 
     	if( $id == NULL ){
-    		$item	= new Good();
+    		$item	= new Product();
     		$id_url	= '';
     		$cats	= [];
     	}else{
-    		$item	= Good::find( $id );
+    		$item	= Product::find( $id );
     		$id_url	= '/'.$id;
-    		$cats	= Category::select(DB::raw("id,name,IF(exists(SELECT * FROM `goodcats` WHERE `good_id`=$id AND `cat_id`=`categories`.`id`),'selected','') AS `sel`"))->get()->toArray();
+    		$cats	= Category::select(DB::raw("id,name,IF(exists(SELECT * FROM `prodcats` WHERE `product_id`=$id AND `category_id`=`categories`.`id`),'selected','') AS `sel`"))->get()->toArray();
     	}
 
 		return view( 'dashboard/goods/form', [
@@ -147,19 +147,19 @@ class DashboardController extends MainController{
      public function postGood( GoodFormRequest $request, $id=NULL ){
      	$good_data	= $request->all();
 
-    	$good	= $id != NULL ? Good::find( $id ) : new Good();
+    	$good	= $id != NULL ? Product::find( $id ) : new Good();
     	$good	= $good->fill( $good_data );
 	    $res 	= $good->save();
 
-	    Goodcat::select()->where('good_id','=', $good->id )->delete();
+	    Prodcat::select()->where('product_id','=', $good->id )->delete();
 
 	    if( isset($good_data['categories']) ){
 
 	    	$good_cats	= [];
 	    	foreach( $good_data['categories'] as $cat_id )
-	    		$good_cats[]	= new Goodcat( ['cat_id'=>$cat_id] );
+	    		$good_cats[]	= new Prodcat( ['category_id'=>$cat_id] );
 
-	    	$good->hasMany('App\Goodcat')->saveMany( $good_cats );
+	    	$good->hasMany('App\Prodcat')->saveMany( $good_cats );
 	    }
 
      	return Response::json(['id'=>$good->id]);
@@ -167,21 +167,21 @@ class DashboardController extends MainController{
 //______________________________________________________________________________
 
     public function getGoods( $id=NULL ){
-    	$js_fields	= Good::getFieldsJSON($exclFields=['archived']);
+    	$js_fields	= Product::getFieldsJSON($exclFields=['archived']);
     	$js_fields	= json_decode($js_fields,TRUE);
     	$js_fields[]= ['name'=>'checkbox'];
 
-    	return view( 'dashboard/goods/list',['pid'=>'goodstable','jsFields'=>json_encode($js_fields)] );
+    	return view( 'dashboard/goods/list',['pid'=>'productstable','jsFields'=>json_encode($js_fields)] );
     }
 //______________________________________________________________________________
 
     public function getGoodstable(){
-    	return Good::getTblDataJSON( $_GET );
+    	return Product::getTblDataJSON( $_GET );
     }
 //______________________________________________________________________________
 
     public function archiveGoods(){
-    	$n_rows 	= Good::archiveGoods( $_POST['data']['is_to_arch'] == 'true', $_POST['ids'] );
+    	$n_rows 	= Product::archiveGoods( $_POST['data']['is_to_arch'] == 'true', $_POST['ids'] );
 
     	$n_rows_req	= count($_POST['ids']);
 

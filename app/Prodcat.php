@@ -4,19 +4,19 @@
 use App\BaseModel;
 use App\Unit;
 
-class Goodcat extends BaseModel{
+class Prodcat extends BaseModel{
 
-	protected $table = 'goodcats';
+	protected $table = 'prodcats';
 
 	public $timestamps = FALSE;
 
 	protected $fillable = [
-		'good_id'
-		,'cat_id'
+		'product_id'
+		,'category_id'
 	];
 
 	public function product(){
-		return $this->belongsToMany('App\Good');
+		return $this->belongsToMany('App\Product');
 
 		//	This method created for future using.
 //Example:

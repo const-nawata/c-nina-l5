@@ -20,7 +20,7 @@ class GoodCatMapTable extends Migration {
 			$table->integer( 'cat_id',FALSE, TRUE);
 
 
-			$table->foreign('good_id','good_map_fk')
+			$table->foreign('good_id','prod_map_fk')
 				->references('id')->on('goods')
 				->onDelete('cascade')
 				->onUpdate('cascade');

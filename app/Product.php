@@ -4,9 +4,9 @@
 use App\BaseModel;
 use App\Unit;
 
-class Good extends BaseModel{
+class Product extends BaseModel{
 
-	protected $table = 'goods';
+	protected $table = 'products';
 
 	protected $fillable = [
 		'name'		//200
