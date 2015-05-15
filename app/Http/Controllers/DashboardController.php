@@ -4,7 +4,7 @@
 use Request;
 use Response;
 use App\Http\Requests\CategoryFormRequest;
-use App\Http\Requests\GoodFormRequest;
+use App\Http\Requests\ProductFormRequest;
 use League\Flysystem\Adapter\NullAdapter;
 
 use DB;
@@ -144,7 +144,7 @@ class DashboardController extends MainController{
     }
 //______________________________________________________________________________
 
-     public function postGood( GoodFormRequest $request, $id=NULL ){
+     public function postGood( ProductFormRequest $request, $id=NULL ){
      	$good_data	= $request->all();
 
     	$good	= $id != NULL ? Product::find( $id ) : new Good();
