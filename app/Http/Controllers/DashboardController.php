@@ -122,7 +122,7 @@ class DashboardController extends MainController{
     	if( $id == NULL ){
     		$item	= new Product();
     		$id_url	= '';
-    		$cats	= [];
+    		$cats	= [];//TODO: Get all categoties where `sel`=""
     	}else{
     		$item	= Product::find( $id );
     		$id_url	= '/'.$id;
@@ -145,24 +145,24 @@ class DashboardController extends MainController{
 //______________________________________________________________________________
 
      public function postProduct( ProductFormRequest $request, $id=NULL ){
-     	$good_data	= $request->all();
+     	$prod_data	= $request->all();
 
-    	$good	= $id != NULL ? Product::find( $id ) : new Good();
-    	$good	= $good->fill( $good_data );
-	    $res 	= $good->save();
+    	$prod	= $id != NULL ? Product::find( $id ) : new Product();
+    	$prod	= $prod->fill( $prod_data );
+	    $prod->save();
 
-	    Prodcat::select()->where('product_id','=', $good->id )->delete();
+	    Prodcat::select()->where('product_id','=', $prod->id )->delete();
 
-	    if( isset($good_data['categories']) ){
+	    if( isset($prod_data['categories']) ){
 
-	    	$good_cats	= [];
-	    	foreach( $good_data['categories'] as $cat_id )
-	    		$good_cats[]	= new Prodcat( ['category_id'=>$cat_id] );
+	    	$prod_cats	= [];
+	    	foreach( $prod_data['categories'] as $cat_id )
+	    		$prod_cats[]	= new Prodcat( ['category_id'=>$cat_id] );
 
-	    	$good->hasMany('App\Prodcat')->saveMany( $good_cats );
+	    	$prod->hasMany('App\Prodcat')->saveMany( $prod_cats );
 	    }
 
-     	return Response::json(['id'=>$good->id]);
+     	return Response::json(['id'=>$prod->id]);
     }
 //______________________________________________________________________________
 
