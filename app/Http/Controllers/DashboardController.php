@@ -146,7 +146,7 @@ class DashboardController extends MainController{
 
      public function postGood( GoodFormRequest $request, $id=NULL ){
      	$good_data	= $request->all();
-// info(print_r( $good_data , TRUE));
+
     	$good	= $id != NULL ? Good::find( $id ) : new Good();
     	$good	= $good->fill( $good_data );
 	    $res 	= $good->save();
@@ -154,15 +154,13 @@ class DashboardController extends MainController{
 	    Goodcat::select()->where('good_id','=', $good->id )->delete();
 
 	    if( isset($good_data['categories']) ){
+
 	    	$good_cats	= [];
-	    	foreach( $good_data['categories'] as $cat_id ){
+	    	foreach( $good_data['categories'] as $cat_id )
 	    		$good_cats[]	= new Goodcat( ['cat_id'=>$cat_id] );
-	    	}
 
-	    	$good->goodcats()->saveMany( $good_cats );
+	    	$good->hasMany('App\Goodcat')->saveMany( $good_cats );
 	    }
-// info("id: ".$good->id);
-
 
      	return Response::json(['id'=>$good->id]);
     }

@@ -2,6 +2,7 @@
  namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Goodcat;
 
 class BaseModel extends Model{
 
