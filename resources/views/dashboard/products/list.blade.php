@@ -63,7 +63,7 @@ $(document).ready(function(){
 		,"columns":{!! $jsFields !!}
 
 		,"ajax": {
-			"url": "/goods/table"
+			"url": "/products/table"
 			,"data":function(srvData){
 				srvData.is_show_arch = $("#{!! $pid !!}_archive_chkbx").is(':checked');
 			}
@@ -75,8 +75,8 @@ $(document).ready(function(){
 		"formWidth":	1000,//	Optional
 		"token":	"{!! csrf_token(); !!}",
 		"urls": {
-			"form":"/good/form",
-			"del":"/goods/archive"
+			"form":"/product/form",
+			"del":"/products/archive"
 		}
 
 		,"remove":{

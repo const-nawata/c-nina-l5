@@ -129,7 +129,7 @@ class DashboardController extends MainController{
     		$cats	= Category::select(DB::raw("id,name,IF(exists(SELECT * FROM `prodcats` WHERE `product_id`=$id AND `category_id`=`categories`.`id`),'selected','') AS `sel`"))->get()->toArray();
     	}
 
-		return view( 'dashboard/goods/form', [
+		return view( 'dashboard/products/form', [
 			'pid'		=> $pid
 			,'id_url'	=> $id_url
 			,'name'		=> $item->name
@@ -171,7 +171,7 @@ class DashboardController extends MainController{
     	$js_fields	= json_decode($js_fields,TRUE);
     	$js_fields[]= ['name'=>'checkbox'];
 
-    	return view( 'dashboard/goods/list',['pid'=>'productstable','jsFields'=>json_encode($js_fields)] );
+    	return view( 'dashboard/products/list',['pid'=>'productstable','jsFields'=>json_encode($js_fields)] );
     }
 //______________________________________________________________________________
 

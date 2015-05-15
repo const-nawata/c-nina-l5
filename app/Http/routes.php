@@ -35,7 +35,7 @@ Route::post('categories/remove', 'DashboardController@removeCategories');
 Route::get('category/form/{pid}/{id?}', 'DashboardController@getCategoryForm');
 Route::post('category/save/{id?}', 'DashboardController@postCategory');
 
-Route::get('goods/table', 'DashboardController@getProductstable');
-Route::post('goods/archive', 'DashboardController@archiveProducts');
-Route::get('good/form/{pid}/{id?}', 'DashboardController@getProductForm');
-Route::post('good/save/{id?}', 'DashboardController@postProduct');
+Route::get('products/table', 'DashboardController@getProductstable');
+Route::post('products/archive', 'DashboardController@archiveProducts');
+Route::get('product/form/{pid}/{id?}', 'DashboardController@getProductForm');
+Route::post('product/save/{id?}', 'DashboardController@postProduct');

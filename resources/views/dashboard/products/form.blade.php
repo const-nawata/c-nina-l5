@@ -1,5 +1,5 @@
 <div class="container">
-{!! Form::open(['url'=>'/good/save'.$id_url,'method'=>'post', 'role'=>'form', 'class'=>'form-horizontal','id'=>$pid.'form','name'=>$pid.'form']) !!}
+{!! Form::open(['url'=>'/product/save'.$id_url,'method'=>'post', 'role'=>'form', 'class'=>'form-horizontal','id'=>$pid.'form','name'=>$pid.'form']) !!}
 <div class="row">
 	<div id="item_data" class="col-md-7">
 

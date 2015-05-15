@@ -23,7 +23,7 @@
  *
  * @public function setDelBtnState - see description
  *
- * @example	- See /goods/list.blade.php
+ * @example	- See /products/list.blade.php
  *
  * @returns	void
  */
