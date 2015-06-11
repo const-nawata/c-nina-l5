@@ -120,26 +120,24 @@ class DashboardController extends MainController{
     public function getProductForm( $pid, $id=NULL ){
 
     	if( $id == NULL ){
-    		$item	= new Product();
+    		$prod	= new Product();
     		$id_url	= '';
-    		$cats	= [];//TODO: Get all categoties where `sel`=""
     	}else{
-    		$item	= Product::find( $id );
-    		$id_url	= '/'.$id;
-    		$cats	= Category::select(DB::raw("id,name,IF(exists(SELECT * FROM `prodcats` WHERE `product_id`=$id AND `category_id`=`categories`.`id`),'selected','') AS `sel`"))->get()->toArray();
+    		$prod	= Product::find( $id );
+	   		$id_url	= '/'.$id;
     	}
 
 		return view( 'dashboard/products/form', [
 			'pid'		=> $pid
 			,'id_url'	=> $id_url
-			,'name'		=> $item->name
-			,'article'	=> $item->article
-			,'unit_id'	=> $item->unit_id
-			,'rprice'	=> $item->rprice
-			,'wprice'	=> $item->wprice
-			,'inpack'	=> $item->inpack
-			,'units'	=> ['list'=>Unit::getUnits(),'sel'=>$item->unit_id]
-			,'cats'		=> $cats
+			,'name'		=> $prod->name
+			,'article'	=> $prod->article
+			,'unit_id'	=> $prod->unit_id
+			,'rprice'	=> $prod->rprice
+			,'wprice'	=> $prod->wprice
+			,'inpack'	=> $prod->inpack
+			,'units'	=> ['list'=>Unit::getUnits(),'sel'=>$prod->unit_id]
+			,'cats'		=> Category::select(DB::raw("id,name,IF(exists(SELECT * FROM `prodcats` WHERE `product_id`='$id' AND `category_id`=`categories`.`id`),'selected','') AS `sel`"))->get()->toArray()
 		]);
     }
 //______________________________________________________________________________

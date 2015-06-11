@@ -74,19 +74,6 @@ class Category extends BaseModel{
 	}
 //______________________________________________________________________________
 
-/**
- * defines validation rules for planet creation.
- * @return	array - validation rules
- */
-	public static function getValidationRules() {
-		return [
-			'name'      => 'required',
-			'rank'     => 'integer|min:0'
-		];
-	}
-//______________________________________________________________________________
-
-
 
 
 	public static function getTblDataJSON( $rg ){
