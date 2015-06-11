@@ -67,19 +67,11 @@ function createCatListItem( $cat, $level=-1 ){
 <div class="jumbotron j-tbl">
 <table id="{{ $pid }}">
 	<thead>
-	<tr>
-		<th>id</th>
-		<th>{!! @trans('prompts.name') !!}</th>
-		<th></th>
-	</tr>
+		<tr><th>id</th><th>{!! @trans('prompts.name') !!}</th><th></th></tr>
 	</thead>
 
 	<tfoot>
-	<tr>
-		<th>&nbsp;</th>
-		<th></th>
-		<th></th>
-	</tr>
+		<tr><th>&nbsp;</th><th></th><th></th></tr>
 	</tfoot>
 </table>
 </div>
