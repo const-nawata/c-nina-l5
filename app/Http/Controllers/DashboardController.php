@@ -50,16 +50,23 @@ class DashboardController extends MainController{
  */
     public function getCategories( $selCatId=NUll ){
 
+    	$tree	= Categorytree::getTree( $selCatId );
 
-    	$tree	= Categorytree::getTree(  );
+// info(print_r( $tree , TRUE));
 
-info(print_r( $tree , TRUE));
-// echo '<pre style="text-align:left;font-size:10px;">'.print_r( $tree, true ).'</pre>';
 
 		$js_fields	= Category::getFieldsJSON();
 		$js_fields	= json_decode($js_fields,TRUE);
     	$js_fields[]= ['name'=>'checkbox'];
-		return view( 'dashboard/categories/list',['pid'=>'categoriestable','jsFields'=>json_encode($js_fields)] );
+		return view(
+			'dashboard/categories/list',[
+				'pid'=>'categoriestable'
+				,'jsFields'=>json_encode($js_fields)
+
+				,'tree'	=> $tree
+			]
+
+		);
     }
 //______________________________________________________________________________
 
