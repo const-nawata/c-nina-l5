@@ -14,6 +14,7 @@ class CategorytreeRankField extends Migration {
 		Schema::table('categorytree', function( Blueprint $table ){
 			$table->integer('rank', FALSE, TRUE )->after('parent_id')->default(0);
 			$table->index( ['rank'],'categorytree_rank_index' );
+			$table->integer( 'parent_id')->nullable()->change();
 		});
 
 	}
