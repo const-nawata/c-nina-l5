@@ -27,6 +27,7 @@ return [
 	'entry_new'=> 'New entry',
 	'error'	=> 'Error',
 	'expand'	=> 'Expand',
+	'income'	=> 'Income',
 	'products'	=> 'Goods',
 	'products_manage'=> 'Goods managing',
 	'home'	=> 'Home',
@@ -65,6 +66,7 @@ return [
 	'sel_none'=>'None selected',
 	'selected'=>'Selected',
 	'selected_all'=>'All selected',
+	'selling'=>'Selling',
 	'show_active'	=> 'Show active',
 	'show_arch'	=> 'Show archive',
 	'sys_error'		=> 'System error.',
@@ -77,7 +79,8 @@ return [
 	'wrap'	=> 'Wrap',
 	'yes'=> 'Yes',
 	'your_login_data'	=> 'Your login data',
-	'valid_error'	=> 'Validation error.'
+	'valid_error'	=> 'Validation error.',
+	'writing_off'	=> 'Writing off'
 
 	//	DataTable ajax
 	,'empty_table'	=> 'No data available in table'

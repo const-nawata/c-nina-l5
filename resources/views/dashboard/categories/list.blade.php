@@ -59,7 +59,7 @@ function createCatListItem( $cat, $level=-1 ){
 @stop
 
 @section('screen_title')
-<div class="page-header"><h3>{{ @trans('prompts.cats_manage') }}</h3></div>
+<h3>{{ @trans('prompts.cats_manage') }}</h3>
 @stop
 
 

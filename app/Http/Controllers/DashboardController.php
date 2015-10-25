@@ -17,6 +17,10 @@ use App\Categorytree;
 class DashboardController extends MainController{
 
     public function getUsers(){
+
+// $pt	= 10;
+// dd($pt);
+
     	return view( 'dashboard/users' );
     }
 //______________________________________________________________________________

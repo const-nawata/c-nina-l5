@@ -1,6 +1,6 @@
 <?php
 /**
- * Layout with narrow right sidebar and wide left sidebar (content)
+ * Layout with single wide middle sidebar (content)
  */
 ?>
 @extends('layouts.main')

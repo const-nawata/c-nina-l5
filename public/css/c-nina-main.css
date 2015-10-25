@@ -5,6 +5,10 @@ body {
     padding-bottom: 20px;
 }
 
+div#screen_title h3{
+	margin-top: 0;
+}
+
 .upper-page-line{
 	height: 45px;
 	background-color: #454073;
@@ -268,4 +272,11 @@ input.field-search-input{
 }
 #cats_div i.glyphicon{
 	top: 3px;
+}
+
+/*  Products */
+
+ul.products-actions li a{
+	padding-top: 5px;
+	padding-bottom: 5px;
 }

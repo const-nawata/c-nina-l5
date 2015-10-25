@@ -27,8 +27,9 @@ return [
 	'entry_new'=> 'Новая запись',
 	'error'	=> 'Ошибка',
 	'expand'	=> 'Развернуть',
+	'income'	=> 'Приём',
 	'products'	=> 'Товары',
-	'products_manage'=> 'Управление тварами',
+	'products_manage'=> 'Управление товарами',
 	'home'	=> 'Главная',
 	'inpack'	=> 'В уп.',
 	'lang'	=> 'Язык',
@@ -65,6 +66,7 @@ return [
 	'sel_none'=>'Ничего не выбрано',
 	'selected'=>'Выбрано',
 	'selected_all'=>'Все выбраны',
+	'selling'=>'Продажа',
 	'show_active'	=> 'Показать актив',
 	'show_arch'	=> 'Показать архив',
 	'sys_error'		=> 'Системная ошибка.',
@@ -77,7 +79,8 @@ return [
 	'wrap'	=> 'Свернуть',
 	'yes'=> 'Да',
 	'your_login_data'	=> 'Введите Ваш логин и пароль',
-	'valid_error'	=> 'Ошибка валидации.'
+	'valid_error'	=> 'Ошибка валидации.',
+	'writing_off'	=> 'Списание'
 
 	//	DataTable ajax
 	,'empty_table'	=> 'В таблице нет доступных данных'

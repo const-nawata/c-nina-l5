@@ -9,7 +9,22 @@
 @stop
 
 @section('screen_title')
-<div class="page-header"><h3>{{ @trans('prompts.products_manage') }}</h3></div>
+	<div class="row">
+
+		<div class="col-sm-3">
+			<h3>{{ @trans('prompts.products_manage') }}</h3>
+		</div>
+
+		<div class="col-sm-9">
+			<ul class="nav nav-tabs products-actions">
+				<li class="active" role="presentation"><a href="#">{!! @trans('prompts.registration') !!}</a></li>
+				<li role="presentation"><a href="#">{!! @trans('prompts.income') !!}</a></li>
+				<li role="presentation"><a href="#">{!! @trans('prompts.selling') !!}</a></li>
+				<li role="presentation"><a href="#">{!! @trans('prompts.writing_off') !!}</a></li>
+			</ul>
+		</div>
+
+	</div>
 @stop
 
 @section('content')
