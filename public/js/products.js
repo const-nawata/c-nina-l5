@@ -100,7 +100,7 @@ function buildTableContent( tableParams ){
 	switch( tableParams.pid ){
 		case "productstable": showProductsTable( tableParams ); break;
 		case "incomestable": break;
-		case "sellingstable": break;
+		case "salestable": break;
 		case "offstable": break;
 	}
 }
