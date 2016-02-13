@@ -37,5 +37,5 @@ Route::post('category/save/{id?}', 'DashboardController@postCategory');
 
 Route::get('products/table', 'DashboardController@getProductstable');
 Route::post('products/archive', 'DashboardController@archiveProducts');
-Route::get('product/registrationform/{pid}/{id?}', 'DashboardController@getProductForm');
+Route::get('product/registrationform/{pid}/{id?}', 'DashboardController@getProductRegistrationForm');
 Route::post('product/save/{id?}', 'DashboardController@postProduct');

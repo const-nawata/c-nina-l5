@@ -136,7 +136,7 @@ class DashboardController extends MainController{
  * @param string $id
  * @return string
  */
-    public function getProductForm( $pid, $id=NULL ){
+    public function getProductRegistrationForm( $pid, $id=NULL ){
 
     	if( $id == NULL ){
     		$prod	= new Product();
@@ -146,7 +146,7 @@ class DashboardController extends MainController{
 	   		$id_url	= '/'.$id;
     	}
 
-		return view( 'dashboard/products/form', [
+		return view( 'dashboard/products/registrationform', [
 			'pid'		=> $pid
 			,'id_url'	=> $id_url
 			,'name'		=> $prod->name
