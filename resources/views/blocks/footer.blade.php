@@ -13,18 +13,7 @@
 <div id="standard-dialog"></div>
 
 </body>
-<?php
-/*									//	Not translated prompts for DataTable ajax
-    "infoPostFix":    "",
-    "thousands":      ",",
 
-    "aria": {
-        "sortAscending":  ": activate to sort column ascending",
-        ,"search":"{{ @trans('prompts.search') }}"
-        "sortDescending": ": activate to sort column descending"
-    }
-*/
-?>
 <script type="text/javascript">
 var is_submit=false,
 	std_dlg;

@@ -183,7 +183,7 @@ class DashboardController extends MainController{
     }
 //______________________________________________________________________________
 
-    public function getProducts( $id=NULL ){
+    public function getProductslist( $id=NULL ){
     	$js_fields	= Product::getFieldsJSON($exclFields=['archived']);
     	$js_fields	= json_decode($js_fields,TRUE);
     	$js_fields[]= ['name'=>'checkbox'];

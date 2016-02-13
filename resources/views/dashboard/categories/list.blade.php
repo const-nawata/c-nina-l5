@@ -71,8 +71,7 @@ function createCatListItem( $cat, $level=-1 ){
 			<div>TREE</div>
 		</div>
 
-
-	 <div class="col-sm-6">
+	 	<div class="col-sm-6">
 			<table id="{{ $pid }}">
 				<thead>
 					<tr><th>id</th><th>{!! @trans('prompts.name') !!}</th><th></th></tr>
