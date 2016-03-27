@@ -17,10 +17,6 @@ use App\Categorytree;
 class DashboardController extends MainController{
 
     public function getUsers(){
-
-// $pt	= 10;
-// dd($pt);
-
     	return view( 'dashboard/users' );
     }
 //______________________________________________________________________________
@@ -55,9 +51,6 @@ class DashboardController extends MainController{
     public function getCategories( $selCatId=NUll ){
 
     	$tree	= Categorytree::getTree( $selCatId );
-
-// info(print_r( $tree , TRUE));
-
 
 		$js_fields	= Category::getFieldsJSON();
 		$js_fields	= json_decode($js_fields,TRUE);
@@ -163,7 +156,6 @@ class DashboardController extends MainController{
 
      public function postProduct( ProductFormRequest $request, $id=NULL ){
      	$prod_data	= $request->all();
-
     	$prod	= $id != NULL ? Product::find( $id ) : new Product();
     	$prod	= $prod->fill( $prod_data );
 	    $prod->save();

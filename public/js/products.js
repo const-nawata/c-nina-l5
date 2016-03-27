@@ -29,7 +29,7 @@ function showProductsTable( tableParams ){
 		"formWidth":	1000,//	Optional
 		"token":	tableParams.token,
 		"urls": {
-			"form":"/product/registrationform",
+			"getform":"/product/registrationform",
 			"del":"/products/archive"
 		}
 

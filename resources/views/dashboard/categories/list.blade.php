@@ -110,7 +110,7 @@ $(document).ready(function(){
 		"formWidth":	1000,//	Optional
 		"token":	"{!! csrf_token(); !!}",
 		"urls": {
-			"form":"/category/form",
+			"getform":"/category/form",
 			"del":"/categories/remove"
 		}
 

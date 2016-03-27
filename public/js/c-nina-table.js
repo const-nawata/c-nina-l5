@@ -348,7 +348,7 @@
 					dform	= $("#"+dform_id);
 
 				$.ajax({
-					url: pE.urls.form+"/"+pid+id_url,
+					url: pE.urls.getform+"/"+pid+id_url,
 					success: function(result){
 						dform.html( result );
 					},
