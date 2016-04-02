@@ -8,4 +8,4 @@
 composer.lock
 config/database.php
 storage/debug/goods.sql.design
-resources/views/dashboard/products/tabs/registration.blade.php
+public/uploads/*

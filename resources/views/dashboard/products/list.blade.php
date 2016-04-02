@@ -36,7 +36,6 @@
 	@if( $pid == 'productstable' )
 		@include('dashboard/products/tabs/registration')
 	@else
-
 	@endif
 </div>
 @stop
@@ -51,7 +50,12 @@ $(document).ready(function(){
 			"token":		"{!! csrf_token(); !!}",
 			"js_fields":	{!! $jsFields !!}
 		}
+
+		,message="{!! $message !!}"
 	;
+
+	(message!="") ? inform( prompts.op_result, message ):null;
+
 	table_content	= buildTableContent( table_params );
 });
 

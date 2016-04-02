@@ -156,6 +156,7 @@ class DashboardController extends MainController{
 
      public function postProduct( ProductFormRequest $request, $id=NULL ){
      	$prod_data	= $request->all();
+
     	$prod	= $id != NULL ? Product::find( $id ) : new Product();
     	$prod	= $prod->fill( $prod_data );
 	    $prod->save();
@@ -171,16 +172,25 @@ class DashboardController extends MainController{
 	    	$prod->hasMany('App\Prodcat')->saveMany( $prod_cats );
 	    }
 
-     	return Response::json(['id'=>$prod->id]);
+		if ($request->hasFile('photo')) {
+			$file	= $request->file('photo');
+
+			$extension = $file->getClientOriginalExtension();
+			$fileName = rand(11111,99999).'.'.$extension;
+
+			$file->move('uploads/products/images', $fileName);
+		}
+
+	    return $this->getProductslist( trans('messages.save_success') );
     }
 //______________________________________________________________________________
 
-    public function getProductslist( $id=NULL ){
+    public function getProductslist( $message='' ){
     	$js_fields	= Product::getFieldsJSON($exclFields=['archived']);
     	$js_fields	= json_decode($js_fields,TRUE);
     	$js_fields[]= ['name'=>'checkbox'];
 
-    	return view( 'dashboard/products/list',['pid'=>'productstable','jsFields'=>json_encode($js_fields)] );
+    	return view( 'dashboard/products/list',['pid'=>'productstable','jsFields'=>json_encode($js_fields),'message'=>$message] );
     }
 //______________________________________________________________________________
 
@@ -200,5 +210,6 @@ class DashboardController extends MainController{
 
     	return json_encode( ['message'=>$message] );
     }
+//______________________________________________________________________________
 
 }//	Class end

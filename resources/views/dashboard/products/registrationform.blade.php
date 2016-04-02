@@ -1,5 +1,5 @@
 <div class="container">
-{!! Form::open(['url'=>'/product/save'.$id_url,'method'=>'post', 'role'=>'form', 'class'=>'form-horizontal','id'=>$pid.'form','name'=>$pid.'form']) !!}
+{!! Form::open(['url'=>'/product/save'.$id_url,'method'=>'post', 'files'=>true, 'role'=>'form', 'class'=>'form-horizontal','id'=>$pid.'form','name'=>$pid.'form']) !!}
 <div class="row">
 	<div id="item_data" class="col-md-7">
 
@@ -42,6 +42,13 @@
 		    {!! Form::label('name',@trans('prompts.unit'),['class'=>'control-label col-sm-3'] ) !!}
 		    <div class="col-sm-9">
 				{!! Form::select('unit_id', $units['list'], $units['sel'], ['id'=>'unit_id','class'=>'form-control'] ) !!}
+		    </div>
+		</div>
+
+		<div class="form-group">
+			{!! Form::label('photo',@trans('prompts.photo'),['class'=>'control-label col-sm-3'] ) !!}
+		    <div class="col-sm-9">
+	    		{!! Form::file('photo', ['id'=>'photo','data-show-caption'=>'true','data-show-upload'=>'false','multiple']) !!}
 		    </div>
 		</div>
 

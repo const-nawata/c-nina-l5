@@ -333,7 +333,6 @@
 			 * @returns void
 			 */
 			function showTblRecForm( id ){
-
 				var tst
 				,id_url	= id == null ? "" : "/"+id
 				,dform_id = pid+"-form-dialog"
@@ -351,6 +350,9 @@
 					url: pE.urls.getform+"/"+pid+id_url,
 					success: function(result){
 						dform.html( result );
+						
+						$( "#"+pid+"form" ).append( '<button type="submit" id="btn_submit_'+pid+'">Sumbit</button>' );
+						$("#btn_submit_"+pid).hide();
 					},
 
 			    	error: function(){
@@ -372,45 +374,11 @@
 					   {
 						   text: prompts.save,
 						   click: function(){
-							   $("#"+pid+"form").submit();
+							   $("#btn_submit_"+pid).trigger( "click" );
 						   }
 					   }
 					]
 				}).dialog("open");
-
-				$( document ).ajaxComplete(function(){
-
-					$("#"+pid+"form").submit(function(e){
-
-						if( !is_submit ){
-							is_submit	= true;
-
-						    $.ajax({
-						        url : $(this).attr("action"),
-						        type: "POST",
-						        data : $(this).serializeArray(),
-						        success:function(data, textStatus, jqXHR){
-						        	dform.dialog("close");
-						        	inform( prompts.op_result, messages.save_success );//TODO: Get message from server. Like in remove handler.
-
-						        	table.ajax.reload(null,false);
-						        },
-
-						        error: function(jqXHR, textStatus, errorThrown){
-						        	var err = jqXHR.responseJSON;
-
-						        	for(var field_id in err ){
-						        		inform( prompts.valid_error, err[field_id][0], field_id );
-						        		break;
-						        	}
-						        }
-						    });
-						}
-
-					    e.preventDefault(); //STOP default action
-					});
-				});
-
 			}
 			//------------------------------------------------------------------
 //	#######################	PRIVATE FUNCTIONS (end)	###########################################################
