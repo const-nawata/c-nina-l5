@@ -39,7 +39,8 @@ return [
 	'logout'	=> 'Logout',
 	'name'	=> 'Name',
 	'new'	=>[
-		'f_i'	=>	'New'
+		'f_i'	=>	'New',
+		'n_i'	=>	'New'
 	],
 	'no'=> 'No',
 	'op_confirm'	=> 'Confirm operation',

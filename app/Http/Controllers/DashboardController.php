@@ -158,28 +158,28 @@ class DashboardController extends MainController{
      	$prod_data	= $request->all();
 
     	$prod	= $id != NULL ? Product::find( $id ) : new Product();
-    	$prod	= $prod->fill( $prod_data );
-	    $prod->save();
 
-	    Prodcat::select()->where('product_id','=', $prod->id )->delete();
-
-	    if( isset($prod_data['categories']) ){
-
-	    	$prod_cats	= [];
-	    	foreach( $prod_data['categories'] as $cat_id )
-	    		$prod_cats[]	= new Prodcat( ['category_id'=>$cat_id] );
-
-	    	$prod->hasMany('App\Prodcat')->saveMany( $prod_cats );
-	    }
+// 	    Prodcat::select()->where('product_id','=', $prod->id )->delete();		//TODO: For future
+// 	    if( isset($prod_data['categories']) ){
+// 	    	$prod_cats	= [];
+// 	    	foreach( $prod_data['categories'] as $cat_id )
+// 	    		$prod_cats[]	= new Prodcat( ['category_id'=>$cat_id] );
+// 	    	$prod->hasMany('App\Prodcat')->saveMany( $prod_cats );
+// 	    }
 
 		if ($request->hasFile('photo')) {
-			$file	= $request->file('photo');
+			$dir	= 'uploads/products/images';
 
-			$extension = $file->getClientOriginalExtension();
-			$fileName = rand(11111,99999).'.'.$extension;
+		   	($prod->photo != NULL ) ? unlink($dir.'/'.$prod->photo.'.jpg'):null;
 
-			$file->move('uploads/products/images', $fileName);
+			$file		= $request->file('photo');
+			$ext		= $file->getClientOriginalExtension();
+			$prod->photo= strtotime(date('Y-m-d H:i:s'));
+			$file->move( $dir, $prod->photo.'.'.$ext );//	saved in ./public/uploads/products/images
 		}
+
+    	$prod	= $prod->fill( $prod_data );
+	    $prod->save();
 
 	    return $this->getProductslist( trans('messages.save_success') );
     }

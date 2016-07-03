@@ -46,7 +46,7 @@
 		</div>
 
 		<div class="form-group">
-			{!! Form::label('photo',@trans('prompts.photo'),['class'=>'control-label col-sm-3'] ) !!}
+			{!! Form::label('photo',@trans('prompts.new.n_i').' '.@trans('prompts.photo'),['class'=>'control-label col-sm-3'] ) !!}
 		    <div class="col-sm-9">
 	    		{!! Form::file('photo', ['id'=>'photo','data-show-caption'=>'true','data-show-upload'=>'false','multiple']) !!}
 		    </div>
@@ -54,6 +54,11 @@
 
 	</div>
 
+
+<?php /*
+//			Categories selectin. It must be implemented in the future.
+
+ ?>
 	<div id="cats_div" class="col-md-5">
 		<select id="categories" multiple="multiple">
 			@foreach($cats as $cat)
@@ -61,6 +66,9 @@
 			@endforeach
 		</select>
 	</div>
+
+<?php */ ?>
+
 </div>
 {!! Form::close() !!}
 </div>
