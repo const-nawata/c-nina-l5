@@ -1,3 +1,2 @@
 #C-Nina — internet shop
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+Description not yet.
