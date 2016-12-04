@@ -79,6 +79,7 @@ class BaseModel extends Model{
     		$fld_vals	= [];
 
     		foreach( $cols as $col ){
+				$fname		= $col['name'];
 				$fld_vals[]	= isset($rec->$fname) ? $rec->$fname: '';
     		}
 
