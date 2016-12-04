@@ -70,19 +70,17 @@ class BaseModel extends Model{
  * @return array/json
  */
 	public static function getTableData( $rg ){
-
 		$recs	= self::getTableRecs( $rg );
-
 		$pid	= $rg['pid'];
-
 		$cols	= $rg['columns'];
 
     	$data	= [];
     	foreach( $recs as $rec ){
     		$fld_vals	= [];
 
-    		foreach( $cols as $col )
-				$fld_vals[]	= isset($rec->$col['name']) ? $rec->$col['name'] : '';
+    		foreach( $cols as $col ){
+				$fld_vals[]	= isset($rec->$fname) ? $rec->$fname: '';
+    		}
 
     		$data[]	= $fld_vals;
     	}
