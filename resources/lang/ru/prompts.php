@@ -7,6 +7,7 @@ return [
 	'adding'=> 'Добавление',
 	'archive'=> 'Архив',
 	'article'=> 'Артикул',
+	'assortment'=> 'Ассортимент',
 	'assort'=> 'Росс.',
 	'categories'=> 'Категории',
 	'cats_manage'=> 'Управление категориями',

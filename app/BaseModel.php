@@ -64,7 +64,7 @@ class BaseModel extends Model{
 	}
 
 /**
- * gets prepared date to show in DataTables JQuery plugin
+ * gets prepared data to show in DataTables JQuery plugin
  * @param array $rg - get/post parameters which is sent by ajax
  * @param bool $isJson - retuned format
  * @return array/json

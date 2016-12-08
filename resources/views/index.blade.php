@@ -1,4 +1,4 @@
-@extends('layouts.left')
+@extends('layouts.middle')
 
 @section('title')
 {{ @trans('prompts.home') }}
@@ -8,10 +8,15 @@
 	@include('blocks/buttons')
 @stop
 
-@section('sidebar')
-<div>left side bar</div>
+@section('screen_title')
+<h3>{{ @trans('prompts.assortment') }}</h3>
 @stop
 
 @section('content')
-<div>Index content</div>
+
+	@foreach ($products as $product)
+        {{ $product->name }}<br>
+	@endforeach
+
+	{!! $products->render() !!}
 @stop

@@ -1,17 +1,17 @@
 <?php namespace App\Http\Controllers;
 
 
-use Request;
-use Response;
+// use Request;
+// use Response;
 use App\Http\Requests\CategoryFormRequest;
 use App\Http\Requests\ProductFormRequest;
-use League\Flysystem\Adapter\NullAdapter;
+// use League\Flysystem\Adapter\NullAdapter;
 
 use DB;
 use App\Category;
 use App\Product;
 use App\Unit;
-use App\Prodcat;
+// use App\Prodcat;
 use App\Categorytree;
 
 class DashboardController extends MainController{
@@ -55,15 +55,11 @@ class DashboardController extends MainController{
 		$js_fields	= Category::getFieldsJSON();
 		$js_fields	= json_decode($js_fields,TRUE);
     	$js_fields[]= ['name'=>'checkbox'];
-		return view(
-			'dashboard/categories/list',[
-				'pid'=>'categoriestable'
-				,'jsFields'=>json_encode($js_fields)
-
-				,'tree'	=> $tree
-			]
-
-		);
+		return view('dashboard/categories/list',[
+			'pid'=>'categoriestable'
+			,'jsFields'=>json_encode($js_fields)
+			,'tree'	=> $tree
+		]);
     }
 //______________________________________________________________________________
 

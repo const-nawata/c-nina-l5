@@ -1,13 +1,16 @@
 <?php namespace App\Http\Controllers;
 
-// use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\DB;
 
 class IndexController extends MainController{
-// class IndexController extends Controller{
 
     public function getIndex(){
-    	return view( 'index' );
+
+		$products = DB::table('products')->paginate(5);
+
+    	return view( 'index',[
+    		'products'=>$products
+    	]);
     }
 //______________________________________________________________________________
 
