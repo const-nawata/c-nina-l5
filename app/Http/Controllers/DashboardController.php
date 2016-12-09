@@ -150,6 +150,18 @@ class DashboardController extends MainController{
     }
 //______________________________________________________________________________
 
+	private static function resizeProdImage( $file ){
+// 		$path	= base_path().'/public/uploads/products/images/';
+		$file	= base_path().'/public/uploads/products/images/'.$file;
+		list( $width, $height) = getimagesize( $file );
+		$src = imagecreatefromjpeg( $file );
+		$dst = imagecreatetruecolor( 816, 459 );
+		imagecopyresampled( $dst, $src, 0, 0, 0, 0, 816, 459, $width, $height );
+		imagejpeg( $dst, $file );
+	}
+//______________________________________________________________________________
+
+
      public function postProduct( ProductFormRequest $request, $id=NULL ){
      	$prod_data	= $request->all();
 
@@ -169,9 +181,13 @@ class DashboardController extends MainController{
 		   	($prod->photo != NULL ) ? unlink($dir.'/'.$prod->photo.'.jpg'):null;
 
 			$file		= $request->file('photo');
+
+//TODO: extention must be jpg. Implement validation.
 			$ext		= $file->getClientOriginalExtension();
 			$prod->photo= strtotime(date('Y-m-d H:i:s'));
 			$file->move( $dir, $prod->photo.'.'.$ext );//	saved in ./public/uploads/products/images
+
+			self::resizeProdImage( $prod->photo.'.'.$ext );
 		}
 
     	$prod	= $prod->fill( $prod_data );

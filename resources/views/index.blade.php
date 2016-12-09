@@ -19,4 +19,37 @@
 	@endforeach
 
 	{!! $products->render() !!}
+
+
+
+
+<div class="row">
+  <div class="col-md-3">
+    <a href="#" class="thumbnail">
+      <img src="/uploads/products/images/1480877728.jpg" alt="alld">
+    </a>
+  </div>
+
+  <div class="col-md-3">
+    <a href="#" class="thumbnail">
+      <img src="/uploads/products/images/1481225226.jpg" alt="alld">
+    </a>
+  </div>
+
+  <div class="col-md-3">
+    <a href="#" class="thumbnail">
+      <img src="/uploads/products/images/1480877728.jpg" alt="alld">
+    </a>
+  </div>
+
+
+  <div class="col-md-3">
+    <a href="#" class="thumbnail">
+      <img src="/uploads/products/images/1481225226.jpg" alt="alld">
+    </a>
+  </div>
+
+</div>
+
+
 @stop

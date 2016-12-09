@@ -45,7 +45,6 @@ class ProductFormRequest extends Request {
     			$message	= str_replace($field,'\"'.trans( 'prompts.'.$field ).'\"', $message );
     		}
     	}
-// info(print_r( $errors , TRUE));
 
         // If you want to customize what happens on a failed validation,
         // override this method.

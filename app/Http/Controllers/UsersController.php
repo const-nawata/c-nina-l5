@@ -20,7 +20,6 @@ class UsersController extends MainController {
 	    ];
 
 	    if( Auth::attempt($creds, $request->has('remember'))){
-// 	    	info(trans( 'messages.login_success', ['username'=>$creds['username']] ));
 	    	return redirect()->intended();
 	    }
 
