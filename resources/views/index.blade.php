@@ -14,42 +14,31 @@
 
 @section('content')
 
+<?php
+	$path	= '/uploads/products/images/';
+	$sell	= 0;
+?>
+
+<div class="container">
 	@foreach ($products as $product)
-        {{ $product->name }}<br>
+
+		@if($sell == 0)
+	<div class="row">
+		@endif
+		  <div class="col-md-3">
+		    <a href="#" class="thumbnail">
+		      <img src="{!! $path !!}default.jpg" alt="alld">
+		    </a>
+		  </div>
+			<?php $sell++; ?>
+		@if($sell == 4)
+	</div>
+	<?php $sell = 0; ?>
+		@endif
+
 	@endforeach
-
-	{!! $products->render() !!}
-
-
-
-
-<div class="row">
-  <div class="col-md-3">
-    <a href="#" class="thumbnail">
-      <img src="/uploads/products/images/1480877728.jpg" alt="alld">
-    </a>
-  </div>
-
-  <div class="col-md-3">
-    <a href="#" class="thumbnail">
-      <img src="/uploads/products/images/1481225226.jpg" alt="alld">
-    </a>
-  </div>
-
-  <div class="col-md-3">
-    <a href="#" class="thumbnail">
-      <img src="/uploads/products/images/1480877728.jpg" alt="alld">
-    </a>
-  </div>
-
-
-  <div class="col-md-3">
-    <a href="#" class="thumbnail">
-      <img src="/uploads/products/images/1481225226.jpg" alt="alld">
-    </a>
-  </div>
-
 </div>
+	{!! $products->render() !!}
 
 
 @stop

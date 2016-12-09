@@ -6,7 +6,7 @@ class IndexController extends MainController{
 
     public function getIndex(){
 
-		$products = DB::table('products')->paginate(5);
+		$products = DB::table('products')->paginate(8);
 
     	return view( 'index',[
     		'products'=>$products
