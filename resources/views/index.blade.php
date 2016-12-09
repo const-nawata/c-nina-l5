@@ -14,11 +14,8 @@
 
 @section('content')
 
-<?php
-	$path	= '/uploads/products/images/';
-	$sell	= 0;
-?>
-
+<?php $sell	= 0; ?>
+<div class="jumbotron  j-tbl">
 <div class="container">
 	@foreach ($products as $product)
 
@@ -27,18 +24,23 @@
 		@endif
 		  <div class="col-md-3">
 		    <a href="#" class="thumbnail">
-		      <img src="{!! $path !!}default.jpg" alt="alld">
+		      <img src="{!! $path !!}default.jpg" alt="{{ $product->name }}">
+		      <div>{{ $product->name }}</div>
 		    </a>
 		  </div>
-			<?php $sell++; ?>
+
+<?php $sell++; ?>
+
 		@if($sell == 4)
 	</div>
-	<?php $sell = 0; ?>
+
+<?php $sell = 0; ?>
+
 		@endif
 
 	@endforeach
 </div>
 	{!! $products->render() !!}
-
+</div>
 
 @stop

@@ -9,7 +9,8 @@ class IndexController extends MainController{
 		$products = DB::table('products')->paginate(8);
 
     	return view( 'index',[
-    		'products'=>$products
+    		'products'	=> $products,
+    		'path'		=> '/uploads/products/images/'
     	]);
     }
 //______________________________________________________________________________
