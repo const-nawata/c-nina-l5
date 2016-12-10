@@ -4,13 +4,19 @@ use Illuminate\Support\Facades\DB;
 
 class IndexController extends MainController{
 
+	private function prepareProducts( $products ){
+		$path	= '/uploads/products/images/';
+
+		foreach( $products as &$product )
+			$product->photo	= $path.(($product->photo == null ) ? 'default.jpg' : $product->photo.'.jpg');
+
+		return $products;
+	}
+//______________________________________________________________________________
+
     public function getIndex(){
-
-		$products = DB::table('products')->paginate(8);
-
     	return view( 'index',[
-    		'products'	=> $products,
-    		'path'		=> '/uploads/products/images/'
+    		'products'	=> $this->prepareProducts( DB::table('products')->paginate(8) )
     	]);
     }
 //______________________________________________________________________________

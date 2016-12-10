@@ -24,7 +24,7 @@
 		@endif
 		  <div class="col-md-3">
 		    <a href="#" class="thumbnail">
-		      <img src="{!! $path !!}default.jpg" alt="{{ $product->name }}">
+		      <img src="{!! $product->photo !!}" alt="{{ $product->name }}">
 		      <div>{{ $product->name }}</div>
 		    </a>
 		  </div>
