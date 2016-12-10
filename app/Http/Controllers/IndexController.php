@@ -16,7 +16,7 @@ class IndexController extends MainController{
 
     public function getIndex(){
     	return view( 'index',[
-    		'products'	=> $this->prepareProducts( DB::table('products')->paginate(8) )
+    		'products'	=> $this->prepareProducts( DB::table('products')->paginate(16) )
     	]);
     }
 //______________________________________________________________________________
